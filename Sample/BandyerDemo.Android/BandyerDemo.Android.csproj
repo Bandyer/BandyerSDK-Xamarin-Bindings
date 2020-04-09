@@ -116,6 +116,14 @@
       <Project>{C4C988E6-422F-4D8E-9252-ACE2253E3D7E}</Project>
       <Name>Badoo.AndroidWeakHandler.Android</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\BandyerSdk\BandyerSdk.Android\BandyerSdk.Common.Android\BandyerSdk.Common.Android.csproj">
+      <Project>{5904DC1A-3B98-455F-A49A-D4E6FBD24F4C}</Project>
+      <Name>BandyerSdk.Common.Android</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\BandyerSdk\BandyerSdk.Android\BandyerSdk.Firecrasher.Android\BandyerSdk.Firecrasher.Android.csproj">
+      <Project>{362DFD32-FC35-4653-A6B3-3E6DE43B057D}</Project>
+      <Name>BandyerSdk.Firecrasher.Android</Name>
+    </ProjectReference>
   </ItemGroup>
  <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
 </Project>
