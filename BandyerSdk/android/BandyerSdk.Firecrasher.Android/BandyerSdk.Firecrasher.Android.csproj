@@ -56,6 +56,14 @@
   <ItemGroup>
     <LibraryProjectZip Include="Jars\firecrasher-1.0.2.aar" />
   </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Karamunting.Kotlin.Android.Extensions.Runtime">
+      <Version>1.3.50.2</Version>
+    </PackageReference>
+    <PackageReference Include="Xamarin.Kotlin.StdLib">
+      <Version>1.3.50.1</Version>
+    </PackageReference>
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.Bindings.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

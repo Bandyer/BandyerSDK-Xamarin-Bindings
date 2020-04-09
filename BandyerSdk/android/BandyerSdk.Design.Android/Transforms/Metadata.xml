@@ -1,4 +1,5 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <metadata>
     <remove-node path="/api/package[@name='com.bandyer.sdk_design.drawables']/class[@name='AnimatedRedBorderDrawable']" />
+    <remove-node path="/api/package[@name='com.bandyer.sdk_design.imageviews']/class[@name='PicassoCircularTransform']" />
 </metadata>

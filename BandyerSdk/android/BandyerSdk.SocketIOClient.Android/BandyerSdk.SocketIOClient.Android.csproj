@@ -56,6 +56,11 @@
   <ItemGroup>
     <EmbeddedJar Include="Jars\socket.io-client-1.0.9.jar" />
   </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Engine.IO.Client">
+      <Version>1.0.0</Version>
+    </PackageReference>
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.Bindings.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
