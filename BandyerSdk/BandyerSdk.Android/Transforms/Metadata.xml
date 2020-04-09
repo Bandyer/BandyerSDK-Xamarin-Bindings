@@ -15,4 +15,9 @@
     <remove-node path="/api/package[@name='com.bandyer.android_sdk.chat']/class[@name='ChatModuleImpl']/method[@name='setReconnectionAttempts' and count(parameter)=1 and parameter[1][@type='int']]" />
     
     <remove-node path="/api/package[@name='com.bandyer.android_sdk.notification']/class[@name='BandyerNotificator']" />    
+    <remove-node path="/api/package[@name='com.bandyer.core_av.utils.gson']/class[@name='AbstractSignalingMessageSerializer']" />    
+    <remove-node path="/api/package[@name='com.bandyer.core_av.utils.gson']/class[@name='AbstractSignalingMessageDeserializer']" />    
+    
+    <attr path="/api/package[@name='com.bandyer.android_sdk']/class[@name='EnvironmentImpl']/method[@name='getCallEnvironment' and count(parameter)=0]" name="managedReturn">Com.Bandyer.Communication_center.Environment</attr>
+
 </metadata>

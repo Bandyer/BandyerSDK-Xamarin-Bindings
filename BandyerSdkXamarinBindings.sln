@@ -39,6 +39,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BandyerSdk.CoreAV.Android",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BandyerSdk.CommunicationCenter.Android", "BandyerSdk\BandyerSdk.Android\BandyerSdk.CommunicationCenter.Android\BandyerSdk.CommunicationCenter.Android.csproj", "{5B1C48DF-2460-42CC-92CF-B2FEDCD53462}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Badoo.AndroidWeakHandler.Android", "BandyerSdk\BandyerSdk.Android\Badoo.AndroidWeakHandler.Android\Badoo.AndroidWeakHandler.Android.csproj", "{C4C988E6-422F-4D8E-9252-ACE2253E3D7E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -229,6 +231,18 @@ Global
 		{5B1C48DF-2460-42CC-92CF-B2FEDCD53462}.Debug|iPhone.Build.0 = Debug|Any CPU
 		{5B1C48DF-2460-42CC-92CF-B2FEDCD53462}.Release|iPhone.ActiveCfg = Release|Any CPU
 		{5B1C48DF-2460-42CC-92CF-B2FEDCD53462}.Release|iPhone.Build.0 = Release|Any CPU
+		{C4C988E6-422F-4D8E-9252-ACE2253E3D7E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C4C988E6-422F-4D8E-9252-ACE2253E3D7E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C4C988E6-422F-4D8E-9252-ACE2253E3D7E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C4C988E6-422F-4D8E-9252-ACE2253E3D7E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C4C988E6-422F-4D8E-9252-ACE2253E3D7E}.Debug|iPhoneSimulator.ActiveCfg = Debug|Any CPU
+		{C4C988E6-422F-4D8E-9252-ACE2253E3D7E}.Debug|iPhoneSimulator.Build.0 = Debug|Any CPU
+		{C4C988E6-422F-4D8E-9252-ACE2253E3D7E}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
+		{C4C988E6-422F-4D8E-9252-ACE2253E3D7E}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
+		{C4C988E6-422F-4D8E-9252-ACE2253E3D7E}.Debug|iPhone.ActiveCfg = Debug|Any CPU
+		{C4C988E6-422F-4D8E-9252-ACE2253E3D7E}.Debug|iPhone.Build.0 = Debug|Any CPU
+		{C4C988E6-422F-4D8E-9252-ACE2253E3D7E}.Release|iPhone.ActiveCfg = Release|Any CPU
+		{C4C988E6-422F-4D8E-9252-ACE2253E3D7E}.Release|iPhone.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{EC4FE49D-AB40-421D-BEF4-E1421A16E81E} = {478218E3-FFA9-496B-B670-DB647348BD22}
@@ -248,5 +262,6 @@ Global
 		{362DFD32-FC35-4653-A6B3-3E6DE43B057D} = {4F152E7D-4101-4CF1-8B6D-49EA83083BEF}
 		{BC59CE10-301E-4A14-AC86-E2275BC9C5DE} = {4F152E7D-4101-4CF1-8B6D-49EA83083BEF}
 		{5B1C48DF-2460-42CC-92CF-B2FEDCD53462} = {4F152E7D-4101-4CF1-8B6D-49EA83083BEF}
+		{C4C988E6-422F-4D8E-9252-ACE2253E3D7E} = {4F152E7D-4101-4CF1-8B6D-49EA83083BEF}
 	EndGlobalSection
 EndGlobal

@@ -108,6 +108,14 @@
       <Project>{E291FCCD-4635-4400-A586-F1E66027724E}</Project>
       <Name>Airbnb.Paris</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\BandyerSdk\BandyerSdk.Android\BandyerSdk.CoreAV.Android\BandyerSdk.CoreAV.Android.csproj">
+      <Project>{BC59CE10-301E-4A14-AC86-E2275BC9C5DE}</Project>
+      <Name>BandyerSdk.CoreAV.Android</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\BandyerSdk\BandyerSdk.Android\Badoo.AndroidWeakHandler.Android\Badoo.AndroidWeakHandler.Android.csproj">
+      <Project>{C4C988E6-422F-4D8E-9252-ACE2253E3D7E}</Project>
+      <Name>Badoo.AndroidWeakHandler.Android</Name>
+    </ProjectReference>
   </ItemGroup>
  <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
 </Project>

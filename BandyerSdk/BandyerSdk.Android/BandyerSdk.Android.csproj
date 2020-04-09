@@ -54,9 +54,6 @@
     <TransformFile Include="Transforms\EnumMethods.xml" />
   </ItemGroup>
   <ItemGroup>
-    <LibraryProjectZip Include="Jars\bandyer-android-sdk-1.5.3.aar" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="BandyerSdk.Common.Android\BandyerSdk.Common.Android.csproj">
       <Project>{5904DC1A-3B98-455F-A49A-D4E6FBD24F4C}</Project>
       <Name>BandyerSdk.Common.Android</Name>
@@ -81,6 +78,18 @@
       <Project>{E291FCCD-4635-4400-A586-F1E66027724E}</Project>
       <Name>Airbnb.Paris</Name>
     </ProjectReference>
+    <ProjectReference Include="Badoo.AndroidWeakHandler.Android\Badoo.AndroidWeakHandler.Android.csproj">
+      <Project>{C4C988E6-422F-4D8E-9252-ACE2253E3D7E}</Project>
+      <Name>Badoo.AndroidWeakHandler.Android</Name>
+    </ProjectReference>
+    <ProjectReference Include="BandyerSdk.CommunicationCenter.Android\BandyerSdk.CommunicationCenter.Android.csproj">
+      <Project>{5B1C48DF-2460-42CC-92CF-B2FEDCD53462}</Project>
+      <Name>BandyerSdk.CommunicationCenter.Android</Name>
+    </ProjectReference>
+    <ProjectReference Include="BandyerSdk.CoreAV.Android\BandyerSdk.CoreAV.Android.csproj">
+      <Project>{BC59CE10-301E-4A14-AC86-E2275BC9C5DE}</Project>
+      <Name>BandyerSdk.CoreAV.Android</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Xamarin.AndroidX.ConstraintLayout">
@@ -104,6 +113,15 @@
     <PackageReference Include="Xamarin.Kotlin.StdLib.Jdk7">
       <Version>1.3.50.1</Version>
     </PackageReference>
+    <PackageReference Include="Square.OkHttp3">
+      <Version>4.2.2</Version>
+    </PackageReference>
+    <PackageReference Include="GoogleGson">
+      <Version>2.8.5</Version>
+    </PackageReference>
+  </ItemGroup>
+  <ItemGroup>
+    <LibraryProjectZip Include="Jars\bandyer-android-sdk-1.5.3.aar" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.Bindings.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
