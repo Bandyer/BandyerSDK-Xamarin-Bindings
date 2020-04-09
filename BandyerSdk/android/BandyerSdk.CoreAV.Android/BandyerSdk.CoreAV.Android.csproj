@@ -56,6 +56,16 @@
   <ItemGroup>
     <LibraryProjectZip Include="Jars\core_av-1.5.13.aar" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BandyerSdk.Common.Android\BandyerSdk.Common.Android.csproj">
+      <Project>{5904DC1A-3B98-455F-A49A-D4E6FBD24F4C}</Project>
+      <Name>BandyerSdk.Common.Android</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BandyerSdk.SocketIOClient.Android\BandyerSdk.SocketIOClient.Android.csproj">
+      <Project>{DE5E77BF-B28D-4671-86D0-35A7D05F8DB7}</Project>
+      <Name>BandyerSdk.SocketIOClient.Android</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.Bindings.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

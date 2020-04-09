@@ -56,6 +56,16 @@
   <ItemGroup>
     <LibraryProjectZip Include="Jars\bandyer-android-chat-0.0.22.aar" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BandyerSdk.Common.Android\BandyerSdk.Common.Android.csproj">
+      <Project>{5904DC1A-3B98-455F-A49A-D4E6FBD24F4C}</Project>
+      <Name>BandyerSdk.Common.Android</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BandyerSdk.Design.Android\BandyerSdk.Design.Android.csproj">
+      <Project>{41B9F262-1C9E-4968-8502-B8CD39C11B54}</Project>
+      <Name>BandyerSdk.Design.Android</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.Bindings.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
