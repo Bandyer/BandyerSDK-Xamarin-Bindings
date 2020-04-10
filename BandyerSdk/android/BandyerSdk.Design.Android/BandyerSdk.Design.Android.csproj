@@ -65,6 +65,18 @@
       <Project>{E291FCCD-4635-4400-A586-F1E66027724E}</Project>
       <Name>Airbnb.Paris</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Mikepenz.FastAdapter.Android\Mikepenz.FastAdapter.Android.csproj">
+      <Project>{8893CFF1-DD69-4FA2-9B65-9B1DFBE6EA30}</Project>
+      <Name>Mikepenz.FastAdapter.Android</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Mikepenz.FastAdapterExtensions.Android\Mikepenz.FastAdapterExtensions.Android.csproj">
+      <Project>{22EA9AAC-0516-4FC3-967A-27F3AFCF59AB}</Project>
+      <Name>Mikepenz.FastAdapterExtensions.Android</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Mikepenz.FastAdapterCommons.Android\Mikepenz.FastAdapterCommons.Android.csproj">
+      <Project>{8126F12E-76F1-45D8-9E79-6117E2187E34}</Project>
+      <Name>Mikepenz.FastAdapterCommons.Android</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Xamarin.Kotlin.StdLib.Jdk7">
@@ -96,6 +108,9 @@
     </PackageReference>
     <PackageReference Include="Square.Picasso">
       <Version>2.5.2.2</Version>
+    </PackageReference>
+    <PackageReference Include="Xamarin.Google.Android.Material">
+      <Version>1.0.0</Version>
     </PackageReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.Bindings.targets" />

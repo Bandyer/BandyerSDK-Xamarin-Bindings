@@ -86,6 +86,18 @@
       <Project>{362DFD32-FC35-4653-A6B3-3E6DE43B057D}</Project>
       <Name>BandyerSdk.Firecrasher.Android</Name>
     </ProjectReference>
+    <ProjectReference Include="..\PermissionDispatcher.PermissionDispatcher.Android\PermissionDispatcher.PermissionDispatcher.Android.csproj">
+      <Project>{EF904CD8-1B6A-4687-8740-2AD44B079E5A}</Project>
+      <Name>PermissionDispatcher.PermissionDispatcher.Android</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Kotlinx.CoroutinesAndroid.Android\Kotlinx.CoroutinesAndroid.Android.csproj">
+      <Project>{E9604997-5171-43C6-B244-E87009C73C24}</Project>
+      <Name>Kotlinx.CoroutinesAndroid.Android</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Iceteck.Silicompressorr.Android\Iceteck.Silicompressorr.Android.csproj">
+      <Project>{84249426-3C2E-43B2-81AF-1715DCC69FF8}</Project>
+      <Name>Iceteck.Silicompressorr.Android</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <LibraryProjectZip Include="Jars\bandyer-android-sdk-1.5.3.aar" />

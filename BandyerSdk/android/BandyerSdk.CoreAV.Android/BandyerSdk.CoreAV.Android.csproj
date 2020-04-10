@@ -65,6 +65,10 @@
       <Project>{DE5E77BF-B28D-4671-86D0-35A7D05F8DB7}</Project>
       <Name>BandyerSdk.SocketIOClient.Android</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Conscrypt.ConscryptAndroid.Android\Conscrypt.ConscryptAndroid.Android.csproj">
+      <Project>{BA6DA432-D640-4F63-A280-9D21CF6C8BE4}</Project>
+      <Name>Conscrypt.ConscryptAndroid.Android</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="GoogleGson">

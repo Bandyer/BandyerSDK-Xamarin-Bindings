@@ -69,6 +69,14 @@
       <Project>{C4C988E6-422F-4D8E-9252-ACE2253E3D7E}</Project>
       <Name>Badoo.AndroidWeakHandler.Android</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Conscrypt.ConscryptAndroid.Android\Conscrypt.ConscryptAndroid.Android.csproj">
+      <Project>{BA6DA432-D640-4F63-A280-9D21CF6C8BE4}</Project>
+      <Name>Conscrypt.ConscryptAndroid.Android</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Kotlinx.CoroutinesAndroid.Android\Kotlinx.CoroutinesAndroid.Android.csproj">
+      <Project>{E9604997-5171-43C6-B244-E87009C73C24}</Project>
+      <Name>Kotlinx.CoroutinesAndroid.Android</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Karamunting.Kotlin.Android.Extensions.Runtime">
