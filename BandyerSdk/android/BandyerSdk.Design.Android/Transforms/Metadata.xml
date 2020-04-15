@@ -2,4 +2,7 @@
 <metadata>
     <remove-node path="/api/package[@name='com.bandyer.sdk_design.drawables']/class[@name='AnimatedRedBorderDrawable']" />
     <remove-node path="/api/package[@name='com.bandyer.sdk_design.imageviews']/class[@name='PicassoCircularTransform']" />
+
+    <remove-node path="/api/package[@name='com.bandyer.sdk_design.whiteboard.dialog']/class[@name='BandyerWhiteboardTextEditorDialog']" />
+    <remove-node path="/api/package[@name='com.bandyer.sdk_design.call.dialogs']/class[@name='BandyerSnapshotDialog']" />
 </metadata>

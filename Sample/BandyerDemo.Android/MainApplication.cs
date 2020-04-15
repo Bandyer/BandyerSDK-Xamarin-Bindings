@@ -14,14 +14,7 @@ namespace BandyerDemo.Droid
         public override void OnCreate()
         {
             base.OnCreate();
-            String appId = "mAppId_b78542f60f697c8a56a13e579f2e66d0378ba6b3336fa75f961c6efb0e6b";
-            BandyerSDK.Builder builder = new BandyerSDK.Builder(this, appId)
-                .UseSandbox()
-                .WithCallEnabled()
-                .WithFileSharingEnabled()
-                .WithWhiteboardEnabled()
-                .WithChatEnabled();
-            BandyerSDK.Init(builder);
+            BandyerSdkAndroid.InitSdk(this);
         }
     }
 }
