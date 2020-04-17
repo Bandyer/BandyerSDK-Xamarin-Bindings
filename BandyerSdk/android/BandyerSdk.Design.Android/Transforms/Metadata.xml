@@ -5,4 +5,9 @@
 
     <remove-node path="/api/package[@name='com.bandyer.sdk_design.whiteboard.dialog']/class[@name='BandyerWhiteboardTextEditorDialog']" />
     <remove-node path="/api/package[@name='com.bandyer.sdk_design.call.dialogs']/class[@name='BandyerSnapshotDialog']" />
+    
+    <remove-node path="/api/package[@name='com.bandyer.sdk_design.chat.adapter_items.message.abstract_message']/class[@name='BandyerBaseChatMessageViewHolder']" />
+    <remove-node path="/api/package[@name='com.bandyer.sdk_design.chat.adapter_items.message.text']/class[@name='BandyerChatTextMessageItem']" />
+    <remove-node path="/api/package[@name='com.bandyer.sdk_design.bottom_sheet.items']/class[@name='ActionItemViewHolder']" />
+    
 </metadata>
