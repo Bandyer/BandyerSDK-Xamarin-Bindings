@@ -54,9 +54,6 @@
     <TransformFile Include="Transforms\EnumMethods.xml" />
   </ItemGroup>
   <ItemGroup>
-    <LibraryProjectZip Include="Jars\bandyer-android-design-0.0.41.aar" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\BandyerSdk.Common.Android\BandyerSdk.Common.Android.csproj">
       <Project>{5904DC1A-3B98-455F-A49A-D4E6FBD24F4C}</Project>
       <Name>BandyerSdk.Common.Android</Name>
@@ -69,13 +66,9 @@
       <Project>{8893CFF1-DD69-4FA2-9B65-9B1DFBE6EA30}</Project>
       <Name>Mikepenz.FastAdapter.Android</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Mikepenz.FastAdapterExtensions.Android\Mikepenz.FastAdapterExtensions.Android.csproj">
-      <Project>{22EA9AAC-0516-4FC3-967A-27F3AFCF59AB}</Project>
-      <Name>Mikepenz.FastAdapterExtensions.Android</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Mikepenz.FastAdapterCommons.Android\Mikepenz.FastAdapterCommons.Android.csproj">
-      <Project>{8126F12E-76F1-45D8-9E79-6117E2187E34}</Project>
-      <Name>Mikepenz.FastAdapterCommons.Android</Name>
+    <ProjectReference Include="..\Mikepenz.FastAdapterExtensionsDiff.Android\Mikepenz.FastAdapterExtensionsDiff.Android.csproj">
+      <Project>{08B5EE2D-C396-4B5E-B86B-EBD43F90E6F1}</Project>
+      <Name>Mikepenz.FastAdapterExtensionsDiff.Android</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
@@ -112,6 +105,9 @@
     <PackageReference Include="Xamarin.Google.Android.Material">
       <Version>1.0.0</Version>
     </PackageReference>
+  </ItemGroup>
+  <ItemGroup>
+    <LibraryProjectZip Include="Jars\bandyer-android-design-0.0.42.aar" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.Bindings.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

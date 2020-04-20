@@ -74,6 +74,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="MainApplication.cs" />
     <Compile Include="BandyerSdkAndroid.cs" />
+    <Compile Include="BandyerSdkExceptionReceiver.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
@@ -154,21 +155,13 @@
       <Project>{8893CFF1-DD69-4FA2-9B65-9B1DFBE6EA30}</Project>
       <Name>Mikepenz.FastAdapter.Android</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\BandyerSdk\android\Mikepenz.FastAdapterCommons.Android\Mikepenz.FastAdapterCommons.Android.csproj">
-      <Project>{8126F12E-76F1-45D8-9E79-6117E2187E34}</Project>
-      <Name>Mikepenz.FastAdapterCommons.Android</Name>
+    <ProjectReference Include="..\..\BandyerSdk\android\PermissionDispatcher.PermissionDispatcher.Android\PermissionDispatcher.PermissionDispatcher.Android.csproj">
+      <Project>{EF904CD8-1B6A-4687-8740-2AD44B079E5A}</Project>
+      <Name>PermissionDispatcher.PermissionDispatcher.Android</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\BandyerSdk\android\Mikepenz.FastAdapterExtensions.Android\Mikepenz.FastAdapterExtensions.Android.csproj">
-      <Project>{22EA9AAC-0516-4FC3-967A-27F3AFCF59AB}</Project>
-      <Name>Mikepenz.FastAdapterExtensions.Android</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\BandyerSdk\android\Mikepenz.FastAdapterExtensionsExpandable.Android\Mikepenz.FastAdapterExtensionsExpandable.Android.csproj">
-      <Project>{DC34BDF6-499A-4D7B-AFCE-9E2C717DAD60}</Project>
-      <Name>Mikepenz.FastAdapterExtensionsExpandable.Android</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\BandyerSdk\android\Mikepenz.Materialize.Android\Mikepenz.Materialize.Android.csproj">
-      <Project>{2DFB446F-EA31-48D4-8A63-2AAF2DF0E403}</Project>
-      <Name>Mikepenz.Materialize.Android</Name>
+    <ProjectReference Include="..\..\BandyerSdk\android\Mikepenz.FastAdapterExtensionsDiff.Android\Mikepenz.FastAdapterExtensionsDiff.Android.csproj">
+      <Project>{08B5EE2D-C396-4B5E-B86B-EBD43F90E6F1}</Project>
+      <Name>Mikepenz.FastAdapterExtensionsDiff.Android</Name>
     </ProjectReference>
   </ItemGroup>
  <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />

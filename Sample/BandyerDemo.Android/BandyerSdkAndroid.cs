@@ -4,6 +4,9 @@ using Android.App;
 using Android.Util;
 using BandyerDemo.Droid;
 using Com.Bandyer.Android_sdk;
+using Com.Bandyer.Android_sdk.Call;
+using Com.Bandyer.Android_sdk.Call.Model;
+using Com.Bandyer.Android_sdk.Call.Notification;
 using Com.Bandyer.Android_sdk.Client;
 using Com.Bandyer.Android_sdk.Intent;
 using Com.Bandyer.Android_sdk.Intent.Call;
@@ -14,8 +17,12 @@ using Xamarin.Forms;
 [assembly: Dependency(typeof(BandyerSdkAndroid))]
 namespace BandyerDemo.Droid
 {
-    public class BandyerSdkAndroid : Java.Lang.Object, IBandyerSdk
-        , IBandyerSDKClientObserver, IBandyerModuleObserver
+    public class BandyerSdkAndroid : Java.Lang.Object
+        , IBandyerSdk
+        , IBandyerSDKClientObserver
+        , IBandyerModuleObserver
+        , ICallUIObserver
+        , ICallObserver
     {
         const string TAG = "BandyerDemo";
         private static Android.App.Application application;
@@ -68,7 +75,7 @@ namespace BandyerDemo.Droid
 
             BandyerSDK.Builder builder = new BandyerSDK.Builder(application, appId)
                 .UseSandbox()
-                .WithCallEnabled()
+                .WithCallEnabled(new BandyerSdkCallNotificationListener())
                 .WithFileSharingEnabled()
                 .WithWhiteboardEnabled()
                 .WithChatEnabled();
@@ -93,6 +100,9 @@ namespace BandyerDemo.Droid
 
         public void StartCall(string userAlias)
         {
+            BandyerSDKClient.Instance.CallModule.AddCallUIObserver(this);
+            BandyerSDKClient.Instance.CallModule.AddCallObserver(this);
+
             CallCapabilities capabilities = new CallCapabilities()
                         .WithWhiteboard()
                         .WithFileSharing()
@@ -116,5 +126,95 @@ namespace BandyerDemo.Droid
 
             application.StartActivity(bandyerCallIntent);
         }
+
+        public void OnActivityDestroyed(ICall call, Java.Lang.Ref.WeakReference activity)
+        {
+            Log.Debug(TAG, "onCallActivityDestroyed: "
+               + call.CallInfo.Caller + ", "
+               + System.String.Join(", ", call.CallInfo.Callees));
+        }
+
+        public void OnActivityError(ICall call, Java.Lang.Ref.WeakReference activity, CallException error)
+        {
+            Log.Debug(TAG, "onCallActivityDestroyed: "
+              + call.CallInfo.Caller + ", "
+              + System.String.Join(", ", call.CallInfo.Callees)
+              + "\n"
+              + "exception: " + error.Message);
+        }
+
+        public void OnActivityStarted(ICall call, Java.Lang.Ref.WeakReference activity)
+        {
+            Log.Debug(TAG, "onCallActivityStarted: "
+               + call.CallInfo.Caller + ", "
+               + System.String.Join(", ", call.CallInfo.Callees));
+        }
+
+        public void OnCallCreated(ICall call)
+        {
+            Log.Debug(TAG, "onCallCreated: "
+               + call.CallInfo.Caller + ", "
+               + System.String.Join(", ", call.CallInfo.Callees));
+        }
+
+        public void OnCallEnded(ICall call)
+        {
+            Log.Debug(TAG, "onCallEnded: "
+               + call.CallInfo.Caller + ", "
+               + System.String.Join(", ", call.CallInfo.Callees));
+        }
+
+        public void OnCallEndedWithError(ICall call, CallException callException)
+        {
+            Log.Debug(TAG, "onCallEndedWithError: "
+              + call.CallInfo.Caller + ", "
+              + System.String.Join(", ", call.CallInfo.Callees)
+              + "\n"
+              + "exception: " + callException.Message);
+        }
+
+        public void OnCallStarted(ICall call)
+        {
+            Log.Debug(TAG, "onCallStarted: "
+               + call.CallInfo.Caller + ", "
+               + System.String.Join(", ", call.CallInfo.Callees));
+        }
+
+        class BandyerSdkCallNotificationListener : Java.Lang.Object
+            , ICallNotificationListener
+        {
+            public void OnCreateNotification(ICallInfo callInfo, CallNotificationType type, ICallNotificationStyle notificationStyle)
+            {
+                notificationStyle.SetNotificationColor(Android.Graphics.Color.Red);
+            }
+
+            public void OnIncomingCall(IIncomingCall call, bool isDnd, bool isScreenLocked)
+            {
+                call.WithCapabilities(GetDefaultCallCapabilities());
+                call.WithOptions(GetDefaultIncomingCallOptions());
+                if (!isDnd || isScreenLocked)
+                {
+                    call.Show(application);
+                }
+                else
+                {
+                    call.AsNotification().Show(application);
+                }
+            }
+
+            private CallCapabilities GetDefaultCallCapabilities()
+            {
+                return new CallCapabilities()
+                        .WithChat()
+                        .WithWhiteboard()
+                        .WithScreenSharing()
+                        .WithFileSharing();
+            }
+            private IncomingCallOptions GetDefaultIncomingCallOptions()
+            {
+                return new IncomingCallOptions();
+            }
+        }
+
     }
 }

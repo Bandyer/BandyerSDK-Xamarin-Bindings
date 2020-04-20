@@ -24,4 +24,6 @@
     <remove-node path="/api/package[@name='com.mikepenz.fastadapter']/interface[@name='IAdapter']" />
     <remove-node path="/api/package[@name='com.mikepenz.fastadapter']/interface[@name='IItemAdapter']" />
 
+    <remove-node path="/api/package[@name='com.mikepenz.fastadapter.select']/class[@name='SelectExtensionFactory']" />
+    <remove-node path="/api/package[@name='com.mikepenz.fastadapter']/class[@name='MutableSubItemList']" />
 </metadata>

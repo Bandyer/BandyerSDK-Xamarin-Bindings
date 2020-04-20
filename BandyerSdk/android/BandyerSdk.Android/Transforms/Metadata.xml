@@ -4,10 +4,10 @@
     
     <attr path="/api/package[@name='com.bandyer.android_sdk']/class[@name='EnvironmentImpl']/method[@name='getChatEnvironment' and count(parameter)=0]" name="managedReturn">Com.Bandyer.Android_chat_sdk.Networking.Environment</attr>
     
-    <remove-node path="/api/package[@name='com.bandyer.android_sdk.call.model']/interface[@name='CallInfo']/method[@name='getCallees' and count(parameter)=0]" />
+<!--    <remove-node path="/api/package[@name='com.bandyer.android_sdk.call.model']/interface[@name='CallInfo']/method[@name='getCallees' and count(parameter)=0]" />-->
     
     <!--<attr path="/api/package[@name='com.bandyer.android_sdk.call.model']/class[@name='CallInfoImpl']/method[@name='getCallees' and count(parameter)=0]" name="managedReturn">Java.Lang.IIterable</attr>-->
-    <remove-node path="/api/package[@name='com.bandyer.android_sdk.call.model']/class[@name='CallInfoImpl']/method[@name='getCallees' and count(parameter)=0]" />
+<!--    <remove-node path="/api/package[@name='com.bandyer.android_sdk.call.model']/class[@name='CallInfoImpl']/method[@name='getCallees' and count(parameter)=0]" />-->
     
     <attr path="/api/package[@name='com.bandyer.android_sdk.call']/class[@name='CallModuleImpl']/method[@name='getOngoingCall' and count(parameter)=0]" name="managedReturn">Com.Bandyer.Android_sdk.Intent.Call.ICall</attr>
     <remove-node path="/api/package[@name='com.bandyer.android_sdk.call']/class[@name='CallModuleImpl']/method[@name='setReconnectionAttempts' and count(parameter)=1 and parameter[1][@type='int']]" />

@@ -102,25 +102,6 @@
       <Project>{8893CFF1-DD69-4FA2-9B65-9B1DFBE6EA30}</Project>
       <Name>Mikepenz.FastAdapter.Android</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Mikepenz.FastAdapterExtensions.Android\Mikepenz.FastAdapterExtensions.Android.csproj">
-      <Project>{22EA9AAC-0516-4FC3-967A-27F3AFCF59AB}</Project>
-      <Name>Mikepenz.FastAdapterExtensions.Android</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Mikepenz.FastAdapterCommons.Android\Mikepenz.FastAdapterCommons.Android.csproj">
-      <Project>{8126F12E-76F1-45D8-9E79-6117E2187E34}</Project>
-      <Name>Mikepenz.FastAdapterCommons.Android</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Mikepenz.FastAdapterExtensionsExpandable.Android\Mikepenz.FastAdapterExtensionsExpandable.Android.csproj">
-      <Project>{DC34BDF6-499A-4D7B-AFCE-9E2C717DAD60}</Project>
-      <Name>Mikepenz.FastAdapterExtensionsExpandable.Android</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Mikepenz.Materialize.Android\Mikepenz.Materialize.Android.csproj">
-      <Project>{2DFB446F-EA31-48D4-8A63-2AAF2DF0E403}</Project>
-      <Name>Mikepenz.Materialize.Android</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <LibraryProjectZip Include="Jars\bandyer-android-sdk-1.5.3.aar" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Karamunting.Kotlin.Android.Extensions.Runtime">
@@ -150,6 +131,9 @@
     <PackageReference Include="GoogleGson">
       <Version>2.8.5</Version>
     </PackageReference>
+  </ItemGroup>
+  <ItemGroup>
+    <LibraryProjectZip Include="Jars\bandyer-android-sdk-1.5.4.aar" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.Bindings.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
