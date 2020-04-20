@@ -163,6 +163,10 @@
       <Project>{08B5EE2D-C396-4B5E-B86B-EBD43F90E6F1}</Project>
       <Name>Mikepenz.FastAdapterExtensionsDiff.Android</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\BandyerSdk\android\Square.Picasso.Android\Square.Picasso.Android.csproj">
+      <Project>{E7FFB7BC-2E38-44DC-855B-8985DE816E73}</Project>
+      <Name>Square.Picasso.Android</Name>
+    </ProjectReference>
   </ItemGroup>
  <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
 </Project>

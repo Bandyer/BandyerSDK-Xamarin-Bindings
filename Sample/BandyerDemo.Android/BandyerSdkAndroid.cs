@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using Android.App;
 using Android.Util;
@@ -11,6 +12,7 @@ using Com.Bandyer.Android_sdk.Client;
 using Com.Bandyer.Android_sdk.Intent;
 using Com.Bandyer.Android_sdk.Intent.Call;
 using Com.Bandyer.Android_sdk.Module;
+using Com.Bandyer.Android_sdk.Utils.Provider;
 using Java.Lang;
 using Xamarin.Forms;
 
@@ -78,7 +80,8 @@ namespace BandyerDemo.Droid
                 .WithCallEnabled(new BandyerSdkCallNotificationListener())
                 .WithFileSharingEnabled()
                 .WithWhiteboardEnabled()
-                .WithChatEnabled();
+                .WithChatEnabled()
+                .WithUserDetailsProvider(new BandyerSdkUserDetailsProvider());
             BandyerSDK.Init(builder);
         }
 
@@ -213,6 +216,26 @@ namespace BandyerDemo.Droid
             private IncomingCallOptions GetDefaultIncomingCallOptions()
             {
                 return new IncomingCallOptions();
+            }
+        }
+
+        class BandyerSdkUserDetailsProvider : Java.Lang.Object
+            , IUserDetailsProvider
+        {
+            public void OnUserDetailsRequested(IList<string> userAliases, IOnUserDetailsListener onUserDetailsListener)
+            {
+                Java.Util.ArrayList details = new Java.Util.ArrayList();
+                foreach (string userAlias in userAliases)
+                {
+                    details.Add(new UserDetails.Builder(userAlias)
+                      .WithNickName("nickname")
+                      .WithFirstName("name")
+                      .WithLastName("last name")
+                      .WithEmail("email@email.com")
+                      .WithImageUri(Android.Net.Uri.Parse("https://static.bandyer.com/corporate/logos/logo_bandyer_only_name.png"))
+                      .Build());
+                }
+                onUserDetailsListener.Provide(details);
             }
         }
 
