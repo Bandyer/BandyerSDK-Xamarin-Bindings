@@ -73,3 +73,8 @@ caketools/
 .idea
 Visual Studio 2019/**
 build/packages
+Pods/
+Podfile.lock
+
+BandyerSdk/ios/Binding
+BandyerSdk/ios/build
