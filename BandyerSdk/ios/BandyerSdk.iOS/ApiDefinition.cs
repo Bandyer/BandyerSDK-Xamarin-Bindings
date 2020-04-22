@@ -1,66 +1,150 @@
-﻿using System;
-
-using ObjCRuntime;
+using System;
+using CoreFoundation;
+using CoreGraphics;
 using Foundation;
+using Intents;
+using ObjCRuntime;
+using PushKit;
 using UIKit;
 
-namespace NativeLibrary
+namespace Bandyer
 {
-    // The first step to creating a binding is to add your native library ("libNativeLibrary.a")
-    // to the project by right-clicking (or Control-clicking) the folder containing this source
-    // file and clicking "Add files..." and then simply select the native library (or libraries)
-    // that you want to bind.
-    //
-    // When you do that, you'll notice that MonoDevelop generates a code-behind file for each
-    // native library which will contain a [LinkWith] attribute. VisualStudio auto-detects the
-    // architectures that the native library supports and fills in that information for you,
-    // however, it cannot auto-detect any Frameworks or other system libraries that the
-    // native library may depend on, so you'll need to fill in that information yourself.
-    //
-    // Once you've done that, you're ready to move on to binding the API...
-    //
-    //
-    // Here is where you'd define your API definition for the native Objective-C library.
-    //
-    // For example, to bind the following Objective-C class:
-    //
-    //     @interface Widget : NSObject {
-    //     }
-    //
-    // The C# binding would look like this:
-    //
-    //     [BaseType (typeof (NSObject))]
-    //     interface Widget {
-    //     }
-    //
-    // To bind Objective-C properties, such as:
-    //
-    //     @property (nonatomic, readwrite, assign) CGPoint center;
-    //
-    // You would add a property definition in the C# interface like so:
-    //
-    //     [Export ("center")]
-    //     CGPoint Center { get; set; }
-    //
-    // To bind an Objective-C method, such as:
-    //
-    //     -(void) doSomething:(NSObject *)object atIndex:(NSInteger)index;
-    //
-    // You would add a method definition to the C# interface like so:
-    //
-    //     [Export ("doSomething:atIndex:")]
-    //     void DoSomething (NSObject object, int index);
-    //
-    // Objective-C "constructors" such as:
-    //
-    //     -(id)initWithElmo:(ElmoMuppet *)elmo;
-    //
-    // Can be bound as:
-    //
-    //     [Export ("initWithElmo:")]
-    //     IntPtr Constructor (ElmoMuppet elmo);
-    //
-    // For more information, see https://aka.ms/ios-binding
-    //
-}
+	// @interface BandyerSDK : NSObject
+	[BaseType(typeof(NSObject))]
+	[DisableDefaultCtor]
+	interface BandyerSDK
+	{
+		// @property (readonly, copy, nonatomic) BDKConfig * _Nullable config;
+		[NullAllowed, Export("config", ArgumentSemantic.Copy)]
+		BDKConfig Config { get; }
 
+		//// @property (readonly, nonatomic, strong) id<BCXCallClient> _Nonnull callClient;
+		//[Export("callClient", ArgumentSemantic.Strong)]
+		//BCXCallClient CallClient { get; }
+
+		//// @property (readonly, nonatomic, strong) id<BCHChatClient> _Nonnull chatClient;
+		//[Export("chatClient", ArgumentSemantic.Strong)]
+		//BCHChatClient ChatClient { get; }
+
+		// -(void)initializeWithApplicationId:(NSString * _Nonnull)appId;
+		[Export("initializeWithApplicationId:")]
+		void InitializeWithApplicationId(string appId);
+
+		// -(void)initializeWithApplicationId:(NSString * _Nonnull)appId config:(BDKConfig * _Nonnull)config;
+		[Export("initializeWithApplicationId:config:")]
+		void InitializeWithApplicationId(string appId, BDKConfig config);
+
+		// +(instancetype _Nonnull)instance;
+		[Static]
+		[Export("instance")]
+		BandyerSDK Instance();
+	}
+
+	// @interface BDKConfig : NSObject <NSCopying>
+	[BaseType(typeof(NSObject))]
+	interface BDKConfig : INSCopying
+	{
+		//// @property (copy, nonatomic) id<BDKUserInfoFetcher> _Null_unspecified userInfoFetcher;
+		//[Export("userInfoFetcher", ArgumentSemantic.Copy)]
+		//BDKUserInfoFetcher UserInfoFetcher { get; set; }
+
+		// @property (copy, nonatomic) BDKEnvironment * _Nonnull environment;
+		[Export("environment", ArgumentSemantic.Copy)]
+		BDKEnvironment Environment { get; set; }
+
+		// @property (getter = isCallKitEnabled, assign, nonatomic) BOOL callKitEnabled;
+		[Export("callKitEnabled")]
+		bool CallKitEnabled { [Bind("isCallKitEnabled")] get; set; }
+
+		// @property (copy, nonatomic) NSSet<NSNumber *> * _Nonnull supportedHandleTypes __attribute__((availability(ios, introduced=10.0)));
+		[iOS(10, 0)]
+		[Export("supportedHandleTypes", ArgumentSemantic.Copy)]
+		NSSet<NSNumber> SupportedHandleTypes { get; set; }
+
+		// @property (copy, nonatomic) NSString * _Nonnull nativeUILocalizedName __attribute__((availability(ios, introduced=10.0)));
+		[iOS(10, 0)]
+		[Export("nativeUILocalizedName")]
+		string NativeUILocalizedName { get; set; }
+
+		// @property (copy, nonatomic) NSString * _Nullable nativeUIRingToneSound __attribute__((availability(ios, introduced=10.0)));
+		[iOS(10, 0)]
+		[NullAllowed, Export("nativeUIRingToneSound")]
+		string NativeUIRingToneSound { get; set; }
+
+		// @property (copy, nonatomic) NSData * _Nullable nativeUITemplateIconImageData __attribute__((availability(ios, introduced=10.0)));
+		[iOS(10, 0)]
+		[NullAllowed, Export("nativeUITemplateIconImageData", ArgumentSemantic.Copy)]
+		NSData NativeUITemplateIconImageData { get; set; }
+
+		//// @property (nonatomic, strong) id<BCXHandleProvider> _Null_unspecified handleProvider __attribute__((availability(ios, introduced=10.0)));
+		//[iOS(10, 0)]
+		//[Export("handleProvider", ArgumentSemantic.Strong)]
+		//BCXHandleProvider HandleProvider { get; set; }
+
+		// @property (copy, nonatomic) NSString * _Nonnull notificationPayloadKeyPath;
+		[Export("notificationPayloadKeyPath")]
+		string NotificationPayloadKeyPath { get; set; }
+
+		[Wrap("WeakPushRegistryDelegate")]
+		PKPushRegistryDelegate PushRegistryDelegate { get; set; }
+
+		// @property (nonatomic, strong) id<PKPushRegistryDelegate> _Nonnull pushRegistryDelegate;
+		[NullAllowed, Export("pushRegistryDelegate", ArgumentSemantic.Strong)]
+		NSObject WeakPushRegistryDelegate { get; set; }
+
+		//// @property (nonatomic, class) BDFDDLogLevel logLevel;
+		//[Static]
+		//[Export("logLevel", ArgumentSemantic.Assign)]
+		//BDFDDLogLevel LogLevel { get; set; }
+
+		// @property (readonly, nonatomic, class) NSInteger logContext;
+		[Static]
+		[Export("logContext")]
+		nint LogContext { get; }
+
+		// @property (readonly, nonatomic, class) NSString * _Nonnull logTag;
+		[Static]
+		[Export("logTag")]
+		string LogTag { get; }
+
+		//// +(void)setLog:(BDFDDLog * _Nullable)log;
+		//[Static]
+		//[Export("setLog:")]
+		//void SetLog([NullAllowed] BDFDDLog log);
+
+		//// +(void)addLogger:(id<BDFDDLogger> _Nonnull)logger;
+		//[Static]
+		//[Export("addLogger:")]
+		//void AddLogger(BDFDDLogger logger);
+
+		//// +(void)removeLogger:(id<BDFDDLogger> _Nonnull)logger;
+		//[Static]
+		//[Export("removeLogger:")]
+		//void RemoveLogger(BDFDDLogger logger);
+
+		// +(instancetype _Nonnull)new;
+		[Static]
+		[Export("new")]
+		BDKConfig New();
+	}
+
+	// @interface BDKEnvironment : NSObject <NSCopying>
+	[BaseType(typeof(NSObject))]
+	[DisableDefaultCtor]
+	interface BDKEnvironment : INSCopying
+	{
+		// @property (readonly, nonatomic, class) BDKEnvironment * _Nonnull production;
+		[Static]
+		[Export("production")]
+		BDKEnvironment Production { get; }
+
+		// @property (readonly, nonatomic, class) BDKEnvironment * _Nonnull sandbox;
+		[Static]
+		[Export("sandbox")]
+		BDKEnvironment Sandbox { get; }
+
+		// @property (readonly, nonatomic, strong) NSString * _Nonnull name;
+		[Export("name", ArgumentSemantic.Strong)]
+		string Name { get; }
+	}
+}

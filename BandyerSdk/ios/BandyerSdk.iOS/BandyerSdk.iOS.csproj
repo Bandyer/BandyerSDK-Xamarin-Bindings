@@ -7,9 +7,9 @@
     <ProjectGuid>{D0448F8C-C62A-4103-B166-45C364ACD42E}</ProjectGuid>
     <TemplateGuid>{b6f3ff35-79b2-4f25-a2fc-60a7cf61013b}</TemplateGuid>
     <OutputType>Library</OutputType>
-    <RootNamespace>NativeLibrary</RootNamespace>
+    <RootNamespace>Bandyer</RootNamespace>
     <IPhoneResourcePrefix>Resources</IPhoneResourcePrefix>
-    <AssemblyName>NativeLibrary</AssemblyName>
+    <AssemblyName>BandyerSdk</AssemblyName>
     <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -49,7 +49,10 @@
   <ItemGroup>
     <NativeReference Include="..\Binding\Bandyer.framework">
       <Kind>Framework</Kind>
+      <Frameworks>Foundation UIKit AVFoundation SystemConfiguration MobileCoreServices WebKit MediaPlayer CoreGraphics CoreMedia CoreImage Photos Security Intents PushKit</Frameworks>
       <ForceLoad>True</ForceLoad>
+      <LinkerFlags>-stdlib=libc++</LinkerFlags>
+      <WeakFrameworks>CallKit CoreServices</WeakFrameworks>
     </NativeReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.ObjCBinding.CSharp.targets" />
