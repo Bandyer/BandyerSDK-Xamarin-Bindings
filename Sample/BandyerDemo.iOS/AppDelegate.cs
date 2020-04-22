@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
+using Bandyer;
 using Foundation;
 using UIKit;
 
@@ -24,6 +25,13 @@ namespace BandyerDemo.iOS
         {
             global::Xamarin.Forms.Forms.Init();
             LoadApplication(new App());
+
+            var appId = "mAppId_b78542f60f697c8a56a13e579f2e66d0378ba6b3336fa75f961c6efb0e6b";
+
+            var config = new BDKConfig();
+            config.Environment = BDKEnvironment.Sandbox;
+            config.CallKitEnabled = true;
+            BandyerSDK.Instance().InitializeWithApplicationId(appId,config);
 
             return base.FinishedLaunching(app, options);
         }
