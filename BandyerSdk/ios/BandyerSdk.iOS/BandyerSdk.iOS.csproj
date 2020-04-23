@@ -47,12 +47,28 @@
     <ObjcBindingCoreSource Include="Structs.cs" />
   </ItemGroup>
   <ItemGroup>
-    <NativeReference Include="..\Binding\Bandyer.framework">
+    <NativeReference Include="..\frameworks\Bandyer.framework">
       <Kind>Framework</Kind>
       <Frameworks>Foundation UIKit AVFoundation SystemConfiguration MobileCoreServices WebKit MediaPlayer CoreGraphics CoreMedia CoreImage Photos Security Intents PushKit</Frameworks>
       <ForceLoad>True</ForceLoad>
       <LinkerFlags>-stdlib=libc++</LinkerFlags>
       <WeakFrameworks>CallKit CoreServices</WeakFrameworks>
+    </NativeReference>
+    <NativeReference Include="..\frameworks\SocketIO.framework">
+      <Kind>Framework</Kind>
+      <ForceLoad>True</ForceLoad>
+    </NativeReference>
+    <NativeReference Include="..\frameworks\Starscream.framework">
+      <Kind>Framework</Kind>
+      <ForceLoad>True</ForceLoad>
+    </NativeReference>
+    <NativeReference Include="..\frameworks\TwilioChatClient.framework">
+      <Kind>Framework</Kind>
+      <ForceLoad>True</ForceLoad>
+    </NativeReference>
+    <NativeReference Include="..\frameworks\WebRTC.framework">
+      <Kind>Framework</Kind>
+      <ForceLoad>True</ForceLoad>
     </NativeReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.ObjCBinding.CSharp.targets" />
