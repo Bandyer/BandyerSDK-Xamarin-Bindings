@@ -9,36 +9,37 @@ using UIKit;
 
 namespace Bandyer
 {
-    //// @interface BandyerSDK : NSObject
-    //[BaseType(typeof(NSObject))]
-    //[DisableDefaultCtor]
-    //interface BandyerSDK
-    //{
-    //  // @property (readonly, copy, nonatomic) BDKConfig * _Nullable config;
-    //  [NullAllowed, Export("config", ArgumentSemantic.Copy)]
-    //  BDKConfig Config { get; }
 
-    //  // @property (readonly, nonatomic, strong) id<BCXCallClient> _Nonnull callClient;
-    //  [Export("callClient", ArgumentSemantic.Strong)]
-    //  BCXCallClient CallClient { get; }
+    // @interface BandyerSDK : NSObject
+    [BaseType(typeof(NSObject))]
+    [DisableDefaultCtor]
+    interface BandyerSDK
+    {
+        // @property (readonly, copy, nonatomic) BDKConfig * _Nullable config;
+        [NullAllowed, Export("config", ArgumentSemantic.Copy)]
+        BDKConfig Config { get; }
 
-    //  // @property (readonly, nonatomic, strong) id<BCHChatClient> _Nonnull chatClient;
-    //  [Export("chatClient", ArgumentSemantic.Strong)]
-    //  BCHChatClient ChatClient { get; }
+        // @property (readonly, nonatomic, strong) id<BCXCallClient> _Nonnull callClient;
+        [Export("callClient", ArgumentSemantic.Strong)]
+        IBCXCallClient CallClient { get; }
 
-    //  // -(void)initializeWithApplicationId:(NSString * _Nonnull)appId;
-    //  [Export("initializeWithApplicationId:")]
-    //  void InitializeWithApplicationId(string appId);
+        //// @property (readonly, nonatomic, strong) id<BCHChatClient> _Nonnull chatClient;
+        //[Export("chatClient", ArgumentSemantic.Strong)]
+        //BCHChatClient ChatClient { get; }
 
-    //  // -(void)initializeWithApplicationId:(NSString * _Nonnull)appId config:(BDKConfig * _Nonnull)config;
-    //  [Export("initializeWithApplicationId:config:")]
-    //  void InitializeWithApplicationId(string appId, BDKConfig config);
+        // -(void)initializeWithApplicationId:(NSString * _Nonnull)appId;
+        [Export("initializeWithApplicationId:")]
+        void InitializeWithApplicationId(string appId);
 
-    //  // +(instancetype _Nonnull)instance;
-    //  [Static]
-    //  [Export("instance")]
-    //  BandyerSDK Instance();
-    //}
+        // -(void)initializeWithApplicationId:(NSString * _Nonnull)appId config:(BDKConfig * _Nonnull)config;
+        [Export("initializeWithApplicationId:config:")]
+        void InitializeWithApplicationId(string appId, BDKConfig config);
+
+        // +(instancetype _Nonnull)instance;
+        [Static]
+        [Export("instance")]
+        BandyerSDK Instance();
+    }
 
     //// @protocol BDKIntent <NSObject>
     ///*
@@ -256,165 +257,167 @@ namespace Bandyer
     //  IntPtr Constructor(string alias);
     //}
 
-    //// @protocol BCXCallClientObserver <NSObject>
-    ///*
-    //  Check whether adding [Model] to this declaration is appropriate.
-    //  [Model] is used to generate a C# class that implements this protocol,
-    //  and might be useful for protocols that consumers are supposed to implement,
-    //  since consumers can subclass the generated class instead of implementing
-    //  the generated interface. If consumers are not supposed to implement this
-    //  protocol, then [Model] is redundant and will generate code that will never
-    //  be used.
-    //*/
-    //[Protocol]
-    //[BaseType(typeof(NSObject))]
-    //interface BCXCallClientObserver
-    //{
-    //  // @optional -(void)callClient:(id<BCXCallClient> _Nonnull)client didReceiveIncomingCall:(id<BCXCall> _Nonnull)call;
-    //  [Export("callClient:didReceiveIncomingCall:")]
-    //  void CallClient(BCXCallClient client, BCXCall call);
+    // @protocol BCXCallClientObserver <NSObject>
+    /*
+      Check whether adding [Model] to this declaration is appropriate.
+      [Model] is used to generate a C# class that implements this protocol,
+      and might be useful for protocols that consumers are supposed to implement,
+      since consumers can subclass the generated class instead of implementing
+      the generated interface. If consumers are not supposed to implement this
+      protocol, then [Model] is redundant and will generate code that will never
+      be used.
+    */
+    [Protocol]
+    [BaseType(typeof(NSObject))]
+    interface BCXCallClientObserver
+    {
+        //// @optional -(void)callClient:(id<BCXCallClient> _Nonnull)client didReceiveIncomingCall:(id<BCXCall> _Nonnull)call;
+        //[Export("callClient:didReceiveIncomingCall:")]
+        //void CallClient(BCXCallClient client, BCXCall call);
 
-    //  // @optional -(void)callClientWillStart:(id<BCXCallClient> _Nonnull)client;
-    //  [Export("callClientWillStart:")]
-    //  void CallClientWillStart(BCXCallClient client);
+        // @optional -(void)callClientWillStart:(id<BCXCallClient> _Nonnull)client;
+        [Export("callClientWillStart:")]
+        void CallClientWillStart(BCXCallClient client);
 
-    //  // @optional -(void)callClientDidStart:(id<BCXCallClient> _Nonnull)client;
-    //  [Export("callClientDidStart:")]
-    //  void CallClientDidStart(BCXCallClient client);
+        // @optional -(void)callClientDidStart:(id<BCXCallClient> _Nonnull)client;
+        [Export("callClientDidStart:")]
+        void CallClientDidStart(BCXCallClient client);
 
-    //  // @optional -(void)callClientDidStartReconnecting:(id<BCXCallClient> _Nonnull)client;
-    //  [Export("callClientDidStartReconnecting:")]
-    //  void CallClientDidStartReconnecting(BCXCallClient client);
+        // @optional -(void)callClientDidStartReconnecting:(id<BCXCallClient> _Nonnull)client;
+        [Export("callClientDidStartReconnecting:")]
+        void CallClientDidStartReconnecting(BCXCallClient client);
 
-    //  // @optional -(void)callClientWillPause:(id<BCXCallClient> _Nonnull)client;
-    //  [Export("callClientWillPause:")]
-    //  void CallClientWillPause(BCXCallClient client);
+        // @optional -(void)callClientWillPause:(id<BCXCallClient> _Nonnull)client;
+        [Export("callClientWillPause:")]
+        void CallClientWillPause(BCXCallClient client);
 
-    //  // @optional -(void)callClientDidPause:(id<BCXCallClient> _Nonnull)client;
-    //  [Export("callClientDidPause:")]
-    //  void CallClientDidPause(BCXCallClient client);
+        // @optional -(void)callClientDidPause:(id<BCXCallClient> _Nonnull)client;
+        [Export("callClientDidPause:")]
+        void CallClientDidPause(BCXCallClient client);
 
-    //  // @optional -(void)callClientWillStop:(id<BCXCallClient> _Nonnull)client;
-    //  [Export("callClientWillStop:")]
-    //  void CallClientWillStop(BCXCallClient client);
+        // @optional -(void)callClientWillStop:(id<BCXCallClient> _Nonnull)client;
+        [Export("callClientWillStop:")]
+        void CallClientWillStop(BCXCallClient client);
 
-    //  // @optional -(void)callClientDidStop:(id<BCXCallClient> _Nonnull)client;
-    //  [Export("callClientDidStop:")]
-    //  void CallClientDidStop(BCXCallClient client);
+        // @optional -(void)callClientDidStop:(id<BCXCallClient> _Nonnull)client;
+        [Export("callClientDidStop:")]
+        void CallClientDidStop(BCXCallClient client);
 
-    //  // @optional -(void)callClientWillResume:(id<BCXCallClient> _Nonnull)client;
-    //  [Export("callClientWillResume:")]
-    //  void CallClientWillResume(BCXCallClient client);
+        // @optional -(void)callClientWillResume:(id<BCXCallClient> _Nonnull)client;
+        [Export("callClientWillResume:")]
+        void CallClientWillResume(BCXCallClient client);
 
-    //  // @optional -(void)callClientDidResume:(id<BCXCallClient> _Nonnull)client;
-    //  [Export("callClientDidResume:")]
-    //  void CallClientDidResume(BCXCallClient client);
+        // @optional -(void)callClientDidResume:(id<BCXCallClient> _Nonnull)client;
+        [Export("callClientDidResume:")]
+        void CallClientDidResume(BCXCallClient client);
 
-    //  // @optional -(void)callClient:(id<BCXCallClient> _Nonnull)client didFailWithError:(NSError * _Nonnull)error;
-    //  [Export("callClient:didFailWithError:")]
-    //  void CallClient(BCXCallClient client, NSError error);
-    //}
+        // @optional -(void)callClient:(id<BCXCallClient> _Nonnull)client didFailWithError:(NSError * _Nonnull)error;
+        [Export("callClient:didFailWithError:")]
+        void CallClient(BCXCallClient client, NSError error);
+    }
 
-    //// @protocol BCXCallClient <NSObject>
-    ///*
-    //  Check whether adding [Model] to this declaration is appropriate.
-    //  [Model] is used to generate a C# class that implements this protocol,
-    //  and might be useful for protocols that consumers are supposed to implement,
-    //  since consumers can subclass the generated class instead of implementing
-    //  the generated interface. If consumers are not supposed to implement this
-    //  protocol, then [Model] is redundant and will generate code that will never
-    //  be used.
-    //*/
-    //[Protocol]
-    //[BaseType(typeof(NSObject))]
-    //interface BCXCallClient
-    //{
-    //  // @required @property (readonly, nonatomic, strong) id<BCXUser> _Nullable user;
-    //  [Abstract]
-    //  [NullAllowed, Export("user", ArgumentSemantic.Strong)]
-    //  BCXUser User { get; }
+    // @protocol BCXCallClient <NSObject>
+    /*
+      Check whether adding [Model] to this declaration is appropriate.
+      [Model] is used to generate a C# class that implements this protocol,
+      and might be useful for protocols that consumers are supposed to implement,
+      since consumers can subclass the generated class instead of implementing
+      the generated interface. If consumers are not supposed to implement this
+      protocol, then [Model] is redundant and will generate code that will never
+      be used.
+    */
+    [Protocol, Model]
+    [BaseType(typeof(NSObject))]
+    interface BCXCallClient
+    {
+        //// @required @property (readonly, nonatomic, strong) id<BCXUser> _Nullable user;
+        //[Abstract]
+        //[NullAllowed, Export("user", ArgumentSemantic.Strong)]
+        //BCXUser User { get; }
 
-    //  // @required @property (readonly, assign, nonatomic) BCXCallClientState state;
-    //  [Abstract]
-    //  [Export("state", ArgumentSemantic.Assign)]
-    //  BCXCallClientState State { get; }
+        //// @required @property (readonly, assign, nonatomic) BCXCallClientState state;
+        //[Abstract]
+        //[Export("state", ArgumentSemantic.Assign)]
+        //BCXCallClientState State { get; }
 
-    //  // @required -(BOOL)isStopped;
-    //  [Abstract]
-    //  [Export("isStopped")]
-    //  [Verify(MethodToProperty)]
-    //  bool IsStopped { get; }
+        //// @required -(BOOL)isStopped;
+        //[Abstract]
+        //[Export("isStopped")]
+        //[Verify(MethodToProperty)]
+        //bool IsStopped { get; }
 
-    //  // @required -(BOOL)isStarting;
-    //  [Abstract]
-    //  [Export("isStarting")]
-    //  [Verify(MethodToProperty)]
-    //  bool IsStarting { get; }
+        //// @required -(BOOL)isStarting;
+        //[Abstract]
+        //[Export("isStarting")]
+        //[Verify(MethodToProperty)]
+        //bool IsStarting { get; }
 
-    //  // @required -(BOOL)isRunning;
-    //  [Abstract]
-    //  [Export("isRunning")]
-    //  [Verify(MethodToProperty)]
-    //  bool IsRunning { get; }
+        //// @required -(BOOL)isRunning;
+        //[Abstract]
+        //[Export("isRunning")]
+        //[Verify(MethodToProperty)]
+        //bool IsRunning { get; }
 
-    //  // @required -(BOOL)isPaused;
-    //  [Abstract]
-    //  [Export("isPaused")]
-    //  [Verify(MethodToProperty)]
-    //  bool IsPaused { get; }
+        //// @required -(BOOL)isPaused;
+        //[Abstract]
+        //[Export("isPaused")]
+        //[Verify(MethodToProperty)]
+        //bool IsPaused { get; }
 
-    //  // @required -(BOOL)isResuming;
-    //  [Abstract]
-    //  [Export("isResuming")]
-    //  [Verify(MethodToProperty)]
-    //  bool IsResuming { get; }
+        //// @required -(BOOL)isResuming;
+        //[Abstract]
+        //[Export("isResuming")]
+        //[Verify(MethodToProperty)]
+        //bool IsResuming { get; }
 
-    //  // @required -(BOOL)isReconnecting;
-    //  [Abstract]
-    //  [Export("isReconnecting")]
-    //  [Verify(MethodToProperty)]
-    //  bool IsReconnecting { get; }
+        //// @required -(BOOL)isReconnecting;
+        //[Abstract]
+        //[Export("isReconnecting")]
+        //[Verify(MethodToProperty)]
+        //bool IsReconnecting { get; }
 
-    //  // @required -(void)addObserver:(id<BCXCallClientObserver> _Nonnull)observer __attribute__((swift_name("add(observer:)")));
-    //  [Abstract]
-    //  [Export("addObserver:")]
-    //  void AddObserver(BCXCallClientObserver observer);
+        // @required -(void)addObserver:(id<BCXCallClientObserver> _Nonnull)observer __attribute__((swift_name("add(observer:)")));
+        [Abstract]
+        [Export("addObserver:")]
+        void AddObserver(BCXCallClientObserver observer);
 
-    //  // @required -(void)addObserver:(id<BCXCallClientObserver> _Nonnull)observer queue:(dispatch_queue_t _Nullable)queue __attribute__((swift_name("add(observer:queue:)")));
-    //  [Abstract]
-    //  [Export("addObserver:queue:")]
-    //  void AddObserver(BCXCallClientObserver observer, [NullAllowed] DispatchQueue queue);
+        // @required -(void)addObserver:(id<BCXCallClientObserver> _Nonnull)observer queue:(dispatch_queue_t _Nullable)queue __attribute__((swift_name("add(observer:queue:)")));
+        [Abstract]
+        [Export("addObserver:queue:")]
+        void AddObserver(BCXCallClientObserver observer, [NullAllowed] DispatchQueue queue);
 
-    //  // @required -(void)removeObserver:(id<BCXCallClientObserver> _Nonnull)observer __attribute__((swift_name("remove(observer:)")));
-    //  [Abstract]
-    //  [Export("removeObserver:")]
-    //  void RemoveObserver(BCXCallClientObserver observer);
+        // @required -(void)removeObserver:(id<BCXCallClientObserver> _Nonnull)observer __attribute__((swift_name("remove(observer:)")));
+        [Abstract]
+        [Export("removeObserver:")]
+        void RemoveObserver(BCXCallClientObserver observer);
 
-    //  // @required -(void)start:(NSString * _Nonnull)userId;
-    //  [Abstract]
-    //  [Export("start:")]
-    //  void Start(string userId);
+        // @required -(void)start:(NSString * _Nonnull)userId;
+        [Abstract]
+        [Export("start:")]
+        void Start(string userId);
 
-    //  // @required -(void)resume;
-    //  [Abstract]
-    //  [Export("resume")]
-    //  void Resume();
+        // @required -(void)resume;
+        [Abstract]
+        [Export("resume")]
+        void Resume();
 
-    //  // @required -(void)pause;
-    //  [Abstract]
-    //  [Export("pause")]
-    //  void Pause();
+        // @required -(void)pause;
+        [Abstract]
+        [Export("pause")]
+        void Pause();
 
-    //  // @required -(void)stop;
-    //  [Abstract]
-    //  [Export("stop")]
-    //  void Stop();
+        // @required -(void)stop;
+        [Abstract]
+        [Export("stop")]
+        void Stop();
 
-    //  // @required -(void)performAction:(id<BCXAction> _Nonnull)action;
-    //  [Abstract]
-    //  [Export("performAction:")]
-    //  void PerformAction(BCXAction action);
-    //}
+        //// @required -(void)performAction:(id<BCXAction> _Nonnull)action;
+        //[Abstract]
+        //[Export("performAction:")]
+        //void PerformAction(BCXAction action);
+    }
+
+    interface IBCXCallClient { }
 
     //// @interface BCXCallOptions : NSObject <NSCopying>
     //[BaseType(typeof(NSObject))]
@@ -1341,25 +1344,25 @@ namespace Bandyer
     //  string Bcx_tokenAsString { get; }
     //}
 
-    //// @interface BDKEnvironment : NSObject <NSCopying>
-    //[BaseType(typeof(NSObject))]
-    //[DisableDefaultCtor]
-    //interface BDKEnvironment : INSCopying
-    //{
-    //  // @property (readonly, nonatomic, class) BDKEnvironment * _Nonnull production;
-    //  [Static]
-    //  [Export("production")]
-    //  BDKEnvironment Production { get; }
+    // @interface BDKEnvironment : NSObject <NSCopying>
+    [BaseType(typeof(NSObject))]
+    [DisableDefaultCtor]
+    interface BDKEnvironment : INSCopying
+    {
+        // @property (readonly, nonatomic, class) BDKEnvironment * _Nonnull production;
+        [Static]
+        [Export("production")]
+        BDKEnvironment Production { get; }
 
-    //  // @property (readonly, nonatomic, class) BDKEnvironment * _Nonnull sandbox;
-    //  [Static]
-    //  [Export("sandbox")]
-    //  BDKEnvironment Sandbox { get; }
+        // @property (readonly, nonatomic, class) BDKEnvironment * _Nonnull sandbox;
+        [Static]
+        [Export("sandbox")]
+        BDKEnvironment Sandbox { get; }
 
-    //  // @property (readonly, nonatomic, strong) NSString * _Nonnull name;
-    //  [Export("name", ArgumentSemantic.Strong)]
-    //  string Name { get; }
-    //}
+        // @property (readonly, nonatomic, strong) NSString * _Nonnull name;
+        [Export("name", ArgumentSemantic.Strong)]
+        string Name { get; }
+    }
 
     //// @interface BDFDDLog : NSObject
     //[BaseType(typeof(NSObject))]
@@ -2075,93 +2078,93 @@ namespace Bandyer
     //  BDFDDOSLogger SharedInstance { get; }
     //}
 
-    //// @interface BDKConfig : NSObject <NSCopying>
-    //[BaseType(typeof(NSObject))]
-    //interface BDKConfig : INSCopying
-    //{
-    //  // @property (copy, nonatomic) id<BDKUserInfoFetcher> _Null_unspecified userInfoFetcher;
-    //  [Export("userInfoFetcher", ArgumentSemantic.Copy)]
-    //  BDKUserInfoFetcher UserInfoFetcher { get; set; }
+    // @interface BDKConfig : NSObject <NSCopying>
+    [BaseType(typeof(NSObject))]
+    interface BDKConfig : INSCopying
+    {
+        //// @property (copy, nonatomic) id<BDKUserInfoFetcher> _Null_unspecified userInfoFetcher;
+        //[Export("userInfoFetcher", ArgumentSemantic.Copy)]
+        //BDKUserInfoFetcher UserInfoFetcher { get; set; }
 
-    //  // @property (copy, nonatomic) BDKEnvironment * _Nonnull environment;
-    //  [Export("environment", ArgumentSemantic.Copy)]
-    //  BDKEnvironment Environment { get; set; }
+        // @property (copy, nonatomic) BDKEnvironment * _Nonnull environment;
+        [Export("environment", ArgumentSemantic.Copy)]
+        BDKEnvironment Environment { get; set; }
 
-    //  // @property (getter = isCallKitEnabled, assign, nonatomic) BOOL callKitEnabled;
-    //  [Export("callKitEnabled")]
-    //  bool CallKitEnabled { [Bind("isCallKitEnabled")] get; set; }
+        // @property (getter = isCallKitEnabled, assign, nonatomic) BOOL callKitEnabled;
+        [Export("callKitEnabled")]
+        bool CallKitEnabled { [Bind("isCallKitEnabled")] get; set; }
 
-    //  // @property (copy, nonatomic) NSSet<NSNumber *> * _Nonnull supportedHandleTypes __attribute__((availability(ios, introduced=10.0)));
-    //  [iOS(10, 0)]
-    //  [Export("supportedHandleTypes", ArgumentSemantic.Copy)]
-    //  NSSet<NSNumber> SupportedHandleTypes { get; set; }
+        // @property (copy, nonatomic) NSSet<NSNumber *> * _Nonnull supportedHandleTypes __attribute__((availability(ios, introduced=10.0)));
+        [iOS(10, 0)]
+        [Export("supportedHandleTypes", ArgumentSemantic.Copy)]
+        NSSet<NSNumber> SupportedHandleTypes { get; set; }
 
-    //  // @property (copy, nonatomic) NSString * _Nonnull nativeUILocalizedName __attribute__((availability(ios, introduced=10.0)));
-    //  [iOS(10, 0)]
-    //  [Export("nativeUILocalizedName")]
-    //  string NativeUILocalizedName { get; set; }
+        // @property (copy, nonatomic) NSString * _Nonnull nativeUILocalizedName __attribute__((availability(ios, introduced=10.0)));
+        [iOS(10, 0)]
+        [Export("nativeUILocalizedName")]
+        string NativeUILocalizedName { get; set; }
 
-    //  // @property (copy, nonatomic) NSString * _Nullable nativeUIRingToneSound __attribute__((availability(ios, introduced=10.0)));
-    //  [iOS(10, 0)]
-    //  [NullAllowed, Export("nativeUIRingToneSound")]
-    //  string NativeUIRingToneSound { get; set; }
+        // @property (copy, nonatomic) NSString * _Nullable nativeUIRingToneSound __attribute__((availability(ios, introduced=10.0)));
+        [iOS(10, 0)]
+        [NullAllowed, Export("nativeUIRingToneSound")]
+        string NativeUIRingToneSound { get; set; }
 
-    //  // @property (copy, nonatomic) NSData * _Nullable nativeUITemplateIconImageData __attribute__((availability(ios, introduced=10.0)));
-    //  [iOS(10, 0)]
-    //  [NullAllowed, Export("nativeUITemplateIconImageData", ArgumentSemantic.Copy)]
-    //  NSData NativeUITemplateIconImageData { get; set; }
+        // @property (copy, nonatomic) NSData * _Nullable nativeUITemplateIconImageData __attribute__((availability(ios, introduced=10.0)));
+        [iOS(10, 0)]
+        [NullAllowed, Export("nativeUITemplateIconImageData", ArgumentSemantic.Copy)]
+        NSData NativeUITemplateIconImageData { get; set; }
 
-    //  // @property (nonatomic, strong) id<BCXHandleProvider> _Null_unspecified handleProvider __attribute__((availability(ios, introduced=10.0)));
-    //  [iOS(10, 0)]
-    //  [Export("handleProvider", ArgumentSemantic.Strong)]
-    //  BCXHandleProvider HandleProvider { get; set; }
+        //// @property (nonatomic, strong) id<BCXHandleProvider> _Null_unspecified handleProvider __attribute__((availability(ios, introduced=10.0)));
+        //[iOS(10, 0)]
+        //[Export("handleProvider", ArgumentSemantic.Strong)]
+        //BCXHandleProvider HandleProvider { get; set; }
 
-    //  // @property (copy, nonatomic) NSString * _Nonnull notificationPayloadKeyPath;
-    //  [Export("notificationPayloadKeyPath")]
-    //  string NotificationPayloadKeyPath { get; set; }
+        // @property (copy, nonatomic) NSString * _Nonnull notificationPayloadKeyPath;
+        [Export("notificationPayloadKeyPath")]
+        string NotificationPayloadKeyPath { get; set; }
 
-    //  [Wrap("WeakPushRegistryDelegate")]
-    //  PKPushRegistryDelegate PushRegistryDelegate { get; set; }
+        [Wrap("WeakPushRegistryDelegate")]
+        PKPushRegistryDelegate PushRegistryDelegate { get; set; }
 
-    //  // @property (nonatomic, strong) id<PKPushRegistryDelegate> _Nonnull pushRegistryDelegate;
-    //  [NullAllowed, Export("pushRegistryDelegate", ArgumentSemantic.Strong)]
-    //  NSObject WeakPushRegistryDelegate { get; set; }
+        // @property (nonatomic, strong) id<PKPushRegistryDelegate> _Nonnull pushRegistryDelegate;
+        [NullAllowed, Export("pushRegistryDelegate", ArgumentSemantic.Strong)]
+        NSObject WeakPushRegistryDelegate { get; set; }
 
-    //  // @property (nonatomic, class) BDFDDLogLevel logLevel;
-    //  [Static]
-    //  [Export("logLevel", ArgumentSemantic.Assign)]
-    //  BDFDDLogLevel LogLevel { get; set; }
+        //// @property (nonatomic, class) BDFDDLogLevel logLevel;
+        //[Static]
+        //[Export("logLevel", ArgumentSemantic.Assign)]
+        //BDFDDLogLevel LogLevel { get; set; }
 
-    //  // @property (readonly, nonatomic, class) NSInteger logContext;
-    //  [Static]
-    //  [Export("logContext")]
-    //  nint LogContext { get; }
+        // @property (readonly, nonatomic, class) NSInteger logContext;
+        [Static]
+        [Export("logContext")]
+        nint LogContext { get; }
 
-    //  // @property (readonly, nonatomic, class) NSString * _Nonnull logTag;
-    //  [Static]
-    //  [Export("logTag")]
-    //  string LogTag { get; }
+        // @property (readonly, nonatomic, class) NSString * _Nonnull logTag;
+        [Static]
+        [Export("logTag")]
+        string LogTag { get; }
 
-    //  // +(void)setLog:(BDFDDLog * _Nullable)log;
-    //  [Static]
-    //  [Export("setLog:")]
-    //  void SetLog([NullAllowed] BDFDDLog log);
+        //// +(void)setLog:(BDFDDLog * _Nullable)log;
+        //[Static]
+        //[Export("setLog:")]
+        //void SetLog([NullAllowed] BDFDDLog log);
 
-    //  // +(void)addLogger:(id<BDFDDLogger> _Nonnull)logger;
-    //  [Static]
-    //  [Export("addLogger:")]
-    //  void AddLogger(BDFDDLogger logger);
+        //// +(void)addLogger:(id<BDFDDLogger> _Nonnull)logger;
+        //[Static]
+        //[Export("addLogger:")]
+        //void AddLogger(BDFDDLogger logger);
 
-    //  // +(void)removeLogger:(id<BDFDDLogger> _Nonnull)logger;
-    //  [Static]
-    //  [Export("removeLogger:")]
-    //  void RemoveLogger(BDFDDLogger logger);
+        //// +(void)removeLogger:(id<BDFDDLogger> _Nonnull)logger;
+        //[Static]
+        //[Export("removeLogger:")]
+        //void RemoveLogger(BDFDDLogger logger);
 
-    //  // +(instancetype _Nonnull)new;
-    //  [Static]
-    //  [Export("new")]
-    //  BDKConfig New();
-    //}
+        // +(instancetype _Nonnull)new;
+        [Static]
+        [Export("new")]
+        BDKConfig New();
+    }
 
     //[Static]
     //[Verify(ConstantsInterfaceAssociation)]
