@@ -6,6 +6,7 @@ using Intents;
 using ObjCRuntime;
 using PushKit;
 using UIKit;
+using Bandyer;
 
 namespace Bandyer
 {
@@ -41,72 +42,74 @@ namespace Bandyer
         BandyerSDK Instance();
     }
 
-    //// @protocol BDKIntent <NSObject>
-    ///*
-    //  Check whether adding [Model] to this declaration is appropriate.
-    //  [Model] is used to generate a C# class that implements this protocol,
-    //  and might be useful for protocols that consumers are supposed to implement,
-    //  since consumers can subclass the generated class instead of implementing
-    //  the generated interface. If consumers are not supposed to implement this
-    //  protocol, then [Model] is redundant and will generate code that will never
-    //  be used.
-    //*/
-    //[Protocol]
-    //[BaseType(typeof(NSObject))]
-    //interface BDKIntent
-    //{
-    //  // @required @property (readonly, copy, nonatomic) NSUUID * _Nonnull UUID;
-    //  [Abstract]
-    //  [Export("UUID", ArgumentSemantic.Copy)]
-    //  NSUuid UUID { get; }
-    //}
+    // @protocol BDKIntent <NSObject>
+    /*
+      Check whether adding [Model] to this declaration is appropriate.
+      [Model] is used to generate a C# class that implements this protocol,
+      and might be useful for protocols that consumers are supposed to implement,
+      since consumers can subclass the generated class instead of implementing
+      the generated interface. If consumers are not supposed to implement this
+      protocol, then [Model] is redundant and will generate code that will never
+      be used.
+    */
+    [Protocol]
+    [BaseType(typeof(NSObject))]
+    interface BDKIntent
+    {
+        // @required @property (readonly, copy, nonatomic) NSUUID * _Nonnull UUID;
+        [Abstract]
+        [Export("UUID", ArgumentSemantic.Copy)]
+        NSUuid UUID { get; }
+    }
 
-    //// @interface BDKMakeCallIntent : NSObject <BDKIntent>
-    //[BaseType(typeof(NSObject))]
-    //[DisableDefaultCtor]
-    //interface BDKMakeCallIntent : IBDKIntent
-    //{
-    //  // @property (readonly, copy, nonatomic) NSArray<NSString *> * _Nonnull callee;
-    //  [Export("callee", ArgumentSemantic.Copy)]
-    //  string[] Callee { get; }
+    interface IBDKIntent { }
 
-    //  // @property (readonly, getter = shouldRecord, assign, nonatomic) BOOL record;
-    //  [Export("record")]
-    //  bool Record { [Bind("shouldRecord")] get; }
+    // @interface BDKMakeCallIntent : NSObject <BDKIntent>
+    [BaseType(typeof(NSObject))]
+    [DisableDefaultCtor]
+    interface BDKMakeCallIntent : BDKIntent
+    {
+        // @property (readonly, copy, nonatomic) NSArray<NSString *> * _Nonnull callee;
+        [Export("callee", ArgumentSemantic.Copy)]
+        string[] Callee { get; }
 
-    //  // @property (readonly, assign, nonatomic) NSUInteger maximumDuration;
-    //  [Export("maximumDuration")]
-    //  nuint MaximumDuration { get; }
+        // @property (readonly, getter = shouldRecord, assign, nonatomic) BOOL record;
+        [Export("record")]
+        bool Record { [Bind("shouldRecord")] get; }
 
-    //  // @property (readonly, assign, nonatomic) BDKCallType callType;
-    //  [Export("callType", ArgumentSemantic.Assign)]
-    //  BDKCallType CallType { get; }
+        // @property (readonly, assign, nonatomic) NSUInteger maximumDuration;
+        [Export("maximumDuration")]
+        nuint MaximumDuration { get; }
 
-    //  // +(instancetype _Nonnull)intentWithCallee:(NSArray<NSString *> * _Nonnull)callee;
-    //  [Static]
-    //  [Export("intentWithCallee:")]
-    //  BDKMakeCallIntent IntentWithCallee(string[] callee);
+        // @property (readonly, assign, nonatomic) BDKCallType callType;
+        [Export("callType", ArgumentSemantic.Assign)]
+        BDKCallType CallType { get; }
 
-    //  // +(instancetype _Nonnull)intentWithCallee:(NSArray<NSString *> * _Nonnull)callee type:(BDKCallType)type;
-    //  [Static]
-    //  [Export("intentWithCallee:type:")]
-    //  BDKMakeCallIntent IntentWithCallee(string[] callee, BDKCallType type);
+        // +(instancetype _Nonnull)intentWithCallee:(NSArray<NSString *> * _Nonnull)callee;
+        [Static]
+        [Export("intentWithCallee:")]
+        BDKMakeCallIntent IntentWithCallee(string[] callee);
 
-    //  // +(instancetype _Nonnull)intentWithCallee:(NSArray<NSString *> * _Nonnull)callee type:(BDKCallType)type record:(BOOL)record;
-    //  [Static]
-    //  [Export("intentWithCallee:type:record:")]
-    //  BDKMakeCallIntent IntentWithCallee(string[] callee, BDKCallType type, bool record);
+        // +(instancetype _Nonnull)intentWithCallee:(NSArray<NSString *> * _Nonnull)callee type:(BDKCallType)type;
+        [Static]
+        [Export("intentWithCallee:type:")]
+        BDKMakeCallIntent IntentWithCallee(string[] callee, BDKCallType type);
 
-    //  // +(instancetype _Nonnull)intentWithCallee:(NSArray<NSString *> * _Nonnull)callee type:(BDKCallType)type maximumDuration:(NSUInteger)duration;
-    //  [Static]
-    //  [Export("intentWithCallee:type:maximumDuration:")]
-    //  BDKMakeCallIntent IntentWithCallee(string[] callee, BDKCallType type, nuint duration);
+        // +(instancetype _Nonnull)intentWithCallee:(NSArray<NSString *> * _Nonnull)callee type:(BDKCallType)type record:(BOOL)record;
+        [Static]
+        [Export("intentWithCallee:type:record:")]
+        BDKMakeCallIntent IntentWithCallee(string[] callee, BDKCallType type, bool record);
 
-    //  // +(instancetype _Nonnull)intentWithCallee:(NSArray<NSString *> * _Nonnull)callee type:(BDKCallType)type record:(BOOL)record maximumDuration:(NSUInteger)duration;
-    //  [Static]
-    //  [Export("intentWithCallee:type:record:maximumDuration:")]
-    //  BDKMakeCallIntent IntentWithCallee(string[] callee, BDKCallType type, bool record, nuint duration);
-    //}
+        // +(instancetype _Nonnull)intentWithCallee:(NSArray<NSString *> * _Nonnull)callee type:(BDKCallType)type maximumDuration:(NSUInteger)duration;
+        [Static]
+        [Export("intentWithCallee:type:maximumDuration:")]
+        BDKMakeCallIntent IntentWithCallee(string[] callee, BDKCallType type, nuint duration);
+
+        // +(instancetype _Nonnull)intentWithCallee:(NSArray<NSString *> * _Nonnull)callee type:(BDKCallType)type record:(BOOL)record maximumDuration:(NSUInteger)duration;
+        [Static]
+        [Export("intentWithCallee:type:record:maximumDuration:")]
+        BDKMakeCallIntent IntentWithCallee(string[] callee, BDKCallType type, bool record, nuint duration);
+    }
 
     //// @interface BDKJoinURLIntent : NSObject <BDKIntent>
     //[BaseType(typeof(NSObject))]
@@ -182,22 +185,22 @@ namespace Bandyer
     //  void HandleINStartCallIntent(INStartCallIntent intent);
     //}
 
-    //// @interface BDKCallViewControllerConfiguration : NSObject <NSCopying>
-    //[BaseType(typeof(NSObject))]
-    //interface BDKCallViewControllerConfiguration : INSCopying
-    //{
-    //  // @property (copy, nonatomic) id<BDKUserInfoFetcher> _Null_unspecified userInfoFetcher;
-    //  [Export("userInfoFetcher", ArgumentSemantic.Copy)]
-    //  BDKUserInfoFetcher UserInfoFetcher { get; set; }
+    // @interface BDKCallViewControllerConfiguration : NSObject <NSCopying>
+    [BaseType(typeof(NSObject))]
+    interface BDKCallViewControllerConfiguration : INSCopying
+    {
+        //// @property (copy, nonatomic) id<BDKUserInfoFetcher> _Null_unspecified userInfoFetcher;
+        //[Export("userInfoFetcher", ArgumentSemantic.Copy)]
+        //BDKUserInfoFetcher UserInfoFetcher { get; set; }
 
-    //  // @property (copy, nonatomic) NSFormatter * _Null_unspecified callInfoTitleFormatter;
-    //  [Export("callInfoTitleFormatter", ArgumentSemantic.Copy)]
-    //  NSFormatter CallInfoTitleFormatter { get; set; }
+        // @property (copy, nonatomic) NSFormatter * _Null_unspecified callInfoTitleFormatter;
+        [Export("callInfoTitleFormatter", ArgumentSemantic.Copy)]
+        NSFormatter CallInfoTitleFormatter { get; set; }
 
-    //  // @property (copy, nonatomic) NSURL * _Nullable fakeCapturerFileURL;
-    //  [NullAllowed, Export("fakeCapturerFileURL", ArgumentSemantic.Copy)]
-    //  NSUrl FakeCapturerFileURL { get; set; }
-    //}
+        // @property (copy, nonatomic) NSURL * _Nullable fakeCapturerFileURL;
+        [NullAllowed, Export("fakeCapturerFileURL", ArgumentSemantic.Copy)]
+        NSUrl FakeCapturerFileURL { get; set; }
+    }
 
     //// @protocol BDKUserInfoFetcher <NSObject, NSCopying>
     ///*
@@ -267,7 +270,7 @@ namespace Bandyer
       protocol, then [Model] is redundant and will generate code that will never
       be used.
     */
-    [Protocol]
+    [Protocol, Model]
     [BaseType(typeof(NSObject))]
     interface BCXCallClientObserver
     {
@@ -313,8 +316,10 @@ namespace Bandyer
 
         // @optional -(void)callClient:(id<BCXCallClient> _Nonnull)client didFailWithError:(NSError * _Nonnull)error;
         [Export("callClient:didFailWithError:")]
-        void CallClient(BCXCallClient client, NSError error);
+        void CallClientDidFailWithError(BCXCallClient client, NSError error);
     }
+
+    interface IBCXCallClientObserver { }
 
     // @protocol BCXCallClient <NSObject>
     /*
@@ -379,17 +384,17 @@ namespace Bandyer
         // @required -(void)addObserver:(id<BCXCallClientObserver> _Nonnull)observer __attribute__((swift_name("add(observer:)")));
         [Abstract]
         [Export("addObserver:")]
-        void AddObserver(BCXCallClientObserver observer);
+        void AddObserver(IBCXCallClientObserver observer);
 
         // @required -(void)addObserver:(id<BCXCallClientObserver> _Nonnull)observer queue:(dispatch_queue_t _Nullable)queue __attribute__((swift_name("add(observer:queue:)")));
         [Abstract]
         [Export("addObserver:queue:")]
-        void AddObserver(BCXCallClientObserver observer, [NullAllowed] DispatchQueue queue);
+        void AddObserver(IBCXCallClientObserver observer, [NullAllowed] DispatchQueue queue);
 
         // @required -(void)removeObserver:(id<BCXCallClientObserver> _Nonnull)observer __attribute__((swift_name("remove(observer:)")));
         [Abstract]
         [Export("removeObserver:")]
-        void RemoveObserver(BCXCallClientObserver observer);
+        void RemoveObserver(IBCXCallClientObserver observer);
 
         // @required -(void)start:(NSString * _Nonnull)userId;
         [Abstract]
@@ -2130,10 +2135,10 @@ namespace Bandyer
         [NullAllowed, Export("pushRegistryDelegate", ArgumentSemantic.Strong)]
         NSObject WeakPushRegistryDelegate { get; set; }
 
-        //// @property (nonatomic, class) BDFDDLogLevel logLevel;
-        //[Static]
-        //[Export("logLevel", ArgumentSemantic.Assign)]
-        //BDFDDLogLevel LogLevel { get; set; }
+        // @property (nonatomic, class) BDFDDLogLevel logLevel;
+        [Static]
+        [Export("logLevel", ArgumentSemantic.Assign)]
+        BDFDDLogLevel LogLevel { get; set; }
 
         // @property (readonly, nonatomic, class) NSInteger logContext;
         [Static]
@@ -2628,50 +2633,50 @@ namespace Bandyer
     //{
     //}
 
-    //// @interface BDKCallWindow : UIWindow
-    //[BaseType(typeof(UIWindow))]
-    //interface BDKCallWindow
-    //{
-    //  // @property (readonly, nonatomic, strong, class) BDKCallWindow * _Nullable instance;
-    //  [Static]
-    //  [NullAllowed, Export("instance", ArgumentSemantic.Strong)]
-    //  BDKCallWindow Instance { get; }
+    // @interface BDKCallWindow : UIWindow
+    [BaseType(typeof(UIWindow))]
+    interface BDKCallWindow
+    {
+      // @property (readonly, nonatomic, strong, class) BDKCallWindow * _Nullable instance;
+      [Static]
+      [NullAllowed, Export("instance", ArgumentSemantic.Strong)]
+      BDKCallWindow Instance { get; }
 
-    //  [Wrap("WeakCallDelegate")]
-    //  [NullAllowed]
-    //  BDKCallWindowDelegate CallDelegate { get; set; }
+      //[Wrap("WeakCallDelegate")]
+      //[NullAllowed]
+      //BDKCallWindowDelegate CallDelegate { get; set; }
 
-    //  // @property (nonatomic, weak) id<BDKCallWindowDelegate> _Nullable callDelegate;
-    //  [NullAllowed, Export("callDelegate", ArgumentSemantic.Weak)]
-    //  NSObject WeakCallDelegate { get; set; }
+      // @property (nonatomic, weak) id<BDKCallWindowDelegate> _Nullable callDelegate;
+      [NullAllowed, Export("callDelegate", ArgumentSemantic.Weak)]
+      NSObject WeakCallDelegate { get; set; }
 
-    //  // @property (readonly, nonatomic, strong) id<BDKIntent> _Nullable intent;
-    //  [NullAllowed, Export("intent", ArgumentSemantic.Strong)]
-    //  BDKIntent Intent { get; }
+      // @property (readonly, nonatomic, strong) id<BDKIntent> _Nullable intent;
+      [NullAllowed, Export("intent", ArgumentSemantic.Strong)]
+      BDKIntent Intent { get; }
 
-    //  // -(void)shouldPresentCallViewControllerWithIntent:(id<BDKIntent> _Nullable)intent completion:(void (^ _Nonnull)(BOOL))completion;
-    //  [Export("shouldPresentCallViewControllerWithIntent:completion:")]
-    //  void ShouldPresentCallViewControllerWithIntent([NullAllowed] BDKIntent intent, Action<bool> completion);
+      // -(void)shouldPresentCallViewControllerWithIntent:(id<BDKIntent> _Nullable)intent completion:(void (^ _Nonnull)(BOOL))completion;
+      [Export("shouldPresentCallViewControllerWithIntent:completion:")]
+      void ShouldPresentCallViewControllerWithIntent([NullAllowed] IBDKIntent intent, Action<bool> completion);
 
-    //  // -(void)dismissCallViewControllerWithCompletion:(void (^ _Nonnull)(void))completion;
-    //  [Export("dismissCallViewControllerWithCompletion:")]
-    //  void DismissCallViewControllerWithCompletion(Action completion);
+      // -(void)dismissCallViewControllerWithCompletion:(void (^ _Nonnull)(void))completion;
+      [Export("dismissCallViewControllerWithCompletion:")]
+      void DismissCallViewControllerWithCompletion(Action completion);
 
-    //  // -(void)setConfiguration:(BDKCallViewControllerConfiguration * _Nullable)configuration;
-    //  [Export("setConfiguration:")]
-    //  void SetConfiguration([NullAllowed] BDKCallViewControllerConfiguration configuration);
+      // -(void)setConfiguration:(BDKCallViewControllerConfiguration * _Nullable)configuration;
+      [Export("setConfiguration:")]
+      void SetConfiguration([NullAllowed] BDKCallViewControllerConfiguration configuration);
 
-    //  // -(void)handleINStartVideoCallIntent:(INStartVideoCallIntent * _Nonnull)intent __attribute__((availability(ios, introduced=10.0, deprecated=13.0)));
-    //  [Introduced(PlatformName.iOS, 10, 0, message: "handle(startVideoCallIntent:) is deprecated. Please use handle(startCallIntent:) instead")]
-    //  [Deprecated(PlatformName.iOS, 13, 0, message: "handle(startVideoCallIntent:) is deprecated. Please use handle(startCallIntent:) instead")]
-    //  [Export("handleINStartVideoCallIntent:")]
-    //  void HandleINStartVideoCallIntent(INStartVideoCallIntent intent);
+      // -(void)handleINStartVideoCallIntent:(INStartVideoCallIntent * _Nonnull)intent __attribute__((availability(ios, introduced=10.0, deprecated=13.0)));
+      [Introduced(PlatformName.iOS, 10, 0, message: "handle(startVideoCallIntent:) is deprecated. Please use handle(startCallIntent:) instead")]
+      [Deprecated(PlatformName.iOS, 13, 0, message: "handle(startVideoCallIntent:) is deprecated. Please use handle(startCallIntent:) instead")]
+      [Export("handleINStartVideoCallIntent:")]
+      void HandleINStartVideoCallIntent(INStartVideoCallIntent intent);
 
-    //  // -(void)handleINStartCallIntent:(INStartCallIntent * _Nonnull)intent __attribute__((availability(ios, introduced=13.0)));
-    //  [iOS(13, 0)]
-    //  [Export("handleINStartCallIntent:")]
-    //  void HandleINStartCallIntent(INStartCallIntent intent);
-    //}
+      // -(void)handleINStartCallIntent:(INStartCallIntent * _Nonnull)intent __attribute__((availability(ios, introduced=13.0)));
+      [iOS(13, 0)]
+      [Export("handleINStartCallIntent:")]
+      void HandleINStartCallIntent(INStartCallIntent intent);
+    }
 
     //// @protocol BCHMessageNotificationControllerDelegate
     //[Protocol, Model(AutoGeneratedName = true)]

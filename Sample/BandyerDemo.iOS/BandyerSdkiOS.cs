@@ -4,6 +4,7 @@ using Bandyer;
 using BandyerDemo.iOS;
 using CoreFoundation;
 using Foundation;
+using ObjCRuntime;
 using PushKit;
 using Xamarin.Forms;
 
@@ -12,14 +13,18 @@ namespace BandyerDemo.iOS
 {
     public class BandyerSdkiOS : NSObject
         , IBandyerSdk
+        , IBCXCallClientObserver
     {
         private static BandyerSdkPKPushRegistryDelegate pushDel;
+        private BDKCallWindow window = null;
+
         //private BandyerSdkBCXCallClientObserver observer;
 
         public static void InitSdk()
         {
             var appId = "mAppId_b78542f60f697c8a56a13e579f2e66d0378ba6b3336fa75f961c6efb0e6b";
 
+            BDKConfig.LogLevel = BDFDDLogLevel.Verbose;
             pushDel = new BandyerSdkPKPushRegistryDelegate();
             var config = new BDKConfig();
             config.NotificationPayloadKeyPath = "data";
@@ -33,12 +38,33 @@ namespace BandyerDemo.iOS
         {
         }
 
+        int i = 0;
         public void StartCall(string userAlias)
         {
-            //observer = new BandyerSdkBCXCallClientObserver();
-            //BandyerSDK.Instance().CallClient.AddObserver(observer, DispatchQueue.GetGlobalQueue(DispatchQueuePriority.Default));
-            BandyerSDK.Instance().CallClient.Start(userAlias);
-
+            i++;
+            if (i == 1)
+            {
+                //BandyerSDK.Instance().CallClient.AddObserver(this, DispatchQueue.GetGlobalQueue(DispatchQueuePriority.Default));
+                BandyerSDK.Instance().CallClient.Start(userAlias);
+            }
+            if (i == 2)
+            {
+                if (window == null)
+                {
+                    window = new BDKCallWindow();
+                    window.WeakCallDelegate = this;
+                    var config = new BDKCallViewControllerConfiguration();
+                    var url = new NSUrl(NSBundle.MainBundle.PathForResource("video", "mp4"));
+                    config.FakeCapturerFileURL = url;
+                    window.SetConfiguration(config);
+                }
+                var callee = new string[] { userAlias };
+                var intent = BDKMakeCallIntent.IntentWithCallee(callee, BDKCallType.AudioVideoCallType);
+                window.ShouldPresentCallViewControllerWithIntent(intent, (success) =>
+                {
+                    Debug.Print("ShouldPresentCallViewControllerWithIntent success " + success);
+                });
+            }
         }
 
         public class BandyerSdkPKPushRegistryDelegate : PKPushRegistryDelegate
@@ -51,55 +77,6 @@ namespace BandyerDemo.iOS
             public override void DidUpdatePushCredentials(PKPushRegistry registry, PKPushCredentials credentials, string type)
             {
                 Debug.Print("DidUpdatePushCredentials");
-            }
-        }
-
-        public class BandyerSdkBCXCallClientObserver : BCXCallClientObserver
-        {
-            public override void CallClientDidPause(BCXCallClient client)
-            {
-                base.CallClientDidPause(client);
-                Debug.Print("CallClientDidPause " + client);
-            }
-            public override void CallClientDidResume(BCXCallClient client)
-            {
-                base.CallClientDidResume(client);
-                Debug.Print("CallClientDidResume " + client);
-            }
-            public override void CallClientDidStart(BCXCallClient client)
-            {
-                base.CallClientDidStart(client);
-                Debug.Print("CallClientDidStart " + client);
-            }
-            public override void CallClientDidStartReconnecting(BCXCallClient client)
-            {
-                base.CallClientDidStartReconnecting(client);
-                Debug.Print("CallClientDidStartReconnecting " + client);
-            }
-            public override void CallClientDidStop(BCXCallClient client)
-            {
-                base.CallClientDidStop(client);
-                Debug.Print("CallClientDidStop " + client);
-            }
-            public override void CallClientWillPause(BCXCallClient client)
-            {
-                base.CallClientWillPause(client);
-                Debug.Print("CallClientWillPause " + client);
-            }
-            public override void CallClientWillResume(BCXCallClient client)
-            {
-                base.CallClientWillResume(client);
-                Debug.Print("CallClientWillResume " + client);
-            }
-            public override void CallClientWillStart(BCXCallClient client)
-            {
-                base.CallClientWillStart(client);
-                Debug.Print("CallClientWillStart " + client);
-            }
-            public override void CallClientWillStop(BCXCallClient client)
-            {
-                base.CallClientWillStop(client);
-                Debug.Print("CallClientWillStop " + client);
             }
         }
     }

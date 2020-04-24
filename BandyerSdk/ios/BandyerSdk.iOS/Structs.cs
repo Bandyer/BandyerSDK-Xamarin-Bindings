@@ -1,16 +1,18 @@
 ﻿using System;
+using CoreFoundation;
+using Foundation;
 
 namespace Bandyer
 {
-    //public enum BDKCallType : byte
-    //{
-    //  CallTypeAudioVideo = 0,
-    //  CallTypeAudioUpgradable,
-    //  CallTypeAudioOnly,
-    //  AudioVideoCallType = CallTypeAudioVideo,
-    //  AudioUpgradableCallType = CallTypeAudioUpgradable,
-    //  AudioOnlyCallType = CallTypeAudioOnly
-    //}
+    public enum BDKCallType : byte
+    {
+        CallTypeAudioVideo = 0,
+        CallTypeAudioUpgradable,
+        CallTypeAudioOnly,
+        AudioVideoCallType = CallTypeAudioVideo,
+        AudioUpgradableCallType = CallTypeAudioUpgradable,
+        AudioOnlyCallType = CallTypeAudioOnly
+    }
 
     //[Native]
     //public enum BCXCallClientState : long
@@ -202,28 +204,28 @@ namespace Bandyer
     //  Failed
     //}
 
-    //[Flags]
+    [Flags]
     //[Native]
-    //public enum BDFDDLogFlag : ulong
-    //{
-    //  Error = (1uL << 0),
-    //  Warning = (1uL << 1),
-    //  Info = (1uL << 2),
-    //  Debug = (1uL << 3),
-    //  Verbose = (1uL << 4)
-    //}
+    public enum BDFDDLogFlag : ulong
+    {
+        Error = (1uL << 0),
+        Warning = (1uL << 1),
+        Info = (1uL << 2),
+        Debug = (1uL << 3),
+        Verbose = (1uL << 4)
+    }
 
     //[Native]
-    //public enum BDFDDLogLevel : ulong
-    //{
-    //  Off = 0,
-    //  Error = (BDFDDLogFlagError),
-    //  Warning = (Error | BDFDDLogFlagWarning),
-    //  Info = (Warning | BDFDDLogFlagInfo),
-    //  Debug = (Info | BDFDDLogFlagDebug),
-    //  Verbose = (Debug | BDFDDLogFlagVerbose),
-    //  All = (9223372036854775807L * 2 + 1)
-    //}
+    public enum BDFDDLogLevel : ulong
+    {
+        Off = 0,
+        Error = (BDFDDLogFlag.Error),
+        Warning = (Error | BDFDDLogFlag.Warning),
+        Info = (Warning | BDFDDLogFlag.Info),
+        Debug = (Info | BDFDDLogFlag.Debug),
+        Verbose = (Debug | BDFDDLogFlag.Verbose),
+        //All = NSUIntegerMax
+    }
 
     //[Flags]
     //[Native]
