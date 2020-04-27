@@ -1,0 +1,18 @@
+{
+  "comment" : "Screen share information",
+  "fields" : {
+    "width" : {
+      "comment" : "screen width",
+      "tags" : {
+        "property" : "screen width"
+      }
+    },
+    "height" : {
+      "comment" : "screen height",
+      "tags" : {
+        "property" : "screen height"
+      }
+    }
+  },
+  "methods" : { }
+}

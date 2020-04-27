@@ -1,0 +1,34 @@
+{
+  "comment" : "BaseCallOptions is an object to personalize how a call should behave",
+  "fields" : {
+    "backCameraAsDefault" : {
+      "comment" : "if back camera should be the default",
+      "tags" : {
+        "property" : "if back camera should be the default"
+      }
+    },
+    "disableProximitySensor" : {
+      "comment" : "if proximity should be disabled",
+      "tags" : {
+        "property" : "if proximity should be disabled",
+        "author" : "kristiyan"
+      }
+    }
+  },
+  "methods" : {
+    "withBackCameraAsDefault" : {
+      "comment" : "This functions adds the option to use back camera as default.",
+      "parameters" : { },
+      "tags" : {
+        "return" : "CallOptions"
+      }
+    },
+    "withProximitySensorDisabled" : {
+      "comment" : "This functions disables the usage of proximity sensor during calls.\nIt can be useful for custom devices such as smartglasses.",
+      "parameters" : { },
+      "tags" : {
+        "return" : "CallOptions"
+      }
+    }
+  }
+}

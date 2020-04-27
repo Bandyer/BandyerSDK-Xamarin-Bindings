@@ -1,0 +1,17 @@
+{
+  "comment" : "UserDetailsFormatter default Implementation",
+  "fields" : { },
+  "methods" : {
+    "format" : {
+      "comment" : "Customize how to print and display user info returning desired string concatenation as the following example:\nreturn userDetails.getFirstName() + \" \" + userDetails.getLastName();",
+      "parameters" : {
+        "userDetails" : "UserDetails",
+        "context" : "Context which is requesting to format the userDetails"
+      },
+      "tags" : {
+        "parameters" : "Context which is requesting to format the userDetails",
+        "return" : "String the formatted user"
+      }
+    }
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "comment" : "This custom Intent class is used to start a chat or a call in the Bandyer Environment and needs to be created with\nBuilder class provided.",
+  "fields" : { },
+  "methods" : {
+    "addExtras" : {
+      "comment" : "Add missing extras from the bundle passed",
+      "parameters" : {
+        "bundle" : "Bundle extras to add"
+      },
+      "tags" : {
+        "parameters" : "Bundle extras to add"
+      }
+    }
+  }
+}

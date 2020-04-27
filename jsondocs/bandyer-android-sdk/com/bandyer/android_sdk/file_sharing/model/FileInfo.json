@@ -1,0 +1,37 @@
+{
+  "comment" : "File information",
+  "fields" : {
+    "fileName" : {
+      "comment" : "name of file",
+      "tags" : {
+        "property" : "name of file"
+      }
+    },
+    "fileType" : {
+      "comment" : "type of file",
+      "tags" : {
+        "property" : "type of file"
+      }
+    },
+    "fileSize" : {
+      "comment" : "size of file",
+      "tags" : {
+        "property" : "size of file"
+      }
+    },
+    "fileUrl" : {
+      "comment" : "url of file",
+      "tags" : {
+        "property" : "url of file"
+      }
+    },
+    "sender" : {
+      "comment" : "sender userAlias",
+      "tags" : {
+        "property" : "sender userAlias",
+        "author" : "kristiyan"
+      }
+    }
+  },
+  "methods" : { }
+}

@@ -1,0 +1,26 @@
+{
+  "comment" : "This is an utility class useful to setup a cache and re-use the details provided per user.\nYou may invalidate the single user details, all or some.\nThe cache provided by this class will be valid per App session.\nIf you wish for more advanced cache types you may implement your own by implementing and customizing the interface of UserDetailsProvider.",
+  "fields" : {
+    "cachedUserDetails" : {
+      "comment" : "Cached user details",
+      "tags" : { }
+    }
+  },
+  "methods" : {
+    "onUserDetailsRequested" : {
+      "comment" : "Load your user synchronously or asynchronously and return result on the OnUserDetailsListener provided interface.",
+      "parameters" : {
+        "userAliases" : "user aliases.",
+        "onUserDetailsListener" : "Use to return loaded details."
+      },
+      "tags" : {
+        "parameters" : "Use to return loaded details."
+      }
+    },
+    "invalidate" : {
+      "comment" : "Method used to invalidate the cache",
+      "parameters" : { },
+      "tags" : { }
+    }
+  }
+}

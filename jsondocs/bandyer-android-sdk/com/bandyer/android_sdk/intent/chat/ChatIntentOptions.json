@@ -1,0 +1,41 @@
+{
+  "comment" : "Builder class for custom chat or chat intent.",
+  "fields" : { },
+  "methods" : {
+    "withAudioCallCapability" : {
+      "comment" : "Audio call capability means that you can initialize an audio call from chat activity.",
+      "parameters" : {
+        "callOptions" : "call options for the call from the chat UI such as recording,...",
+        "callCapabilities" : "call capabilities such as whiteboard,file sharing, ...     * @return ChatIntentOptions"
+      },
+      "tags" : {
+        "parameters" : "call capabilities such as whiteboard,file sharing, ...     * @return ChatIntentOptions",
+        "since" : "1.3.0 changed"
+      }
+    },
+    "withAudioUpgradableCallCapability" : {
+      "comment" : "Audio call capability means that you can initialize an audio/video call from chat activity.\nUpgradable means that the call will be initialized as audio call but can be\nupgraded to video if selected camera button from call action items.",
+      "parameters" : {
+        "callOptions" : "call options for the call from the chat UI such as recording,...",
+        "callCapabilities" : "call capabilities such as whiteboard,file sharing, ..."
+      },
+      "tags" : {
+        "parameters" : "call capabilities such as whiteboard,file sharing, ...",
+        "return" : "ChatIntentOptions",
+        "since" : "v1.3.0 changed"
+      }
+    },
+    "withAudioVideoCallCapability" : {
+      "comment" : "Audio video call capability means that you can initialize a video call from chat activity.",
+      "parameters" : {
+        "callOptions" : "call options for the call from the chat UI such as recording,...",
+        "callCapabilities" : "call capabilities such as whiteboard,file sharing, ..."
+      },
+      "tags" : {
+        "parameters" : "call capabilities such as whiteboard,file sharing, ...",
+        "return" : "ChatIntentOptions",
+        "since" : "v1.3.0 changed"
+      }
+    }
+  }
+}

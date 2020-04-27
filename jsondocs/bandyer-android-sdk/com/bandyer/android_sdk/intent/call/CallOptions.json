@@ -1,0 +1,21 @@
+{
+  "comment" : "CallOptions all properties that can be enabled for a Outgoing call",
+  "fields" : {
+    "recordingEnabled" : {
+      "comment" : "Boolean true record call,false otherwise",
+      "tags" : {
+        "property" : "Boolean true record call,false otherwise",
+        "since" : "1.3.0"
+      }
+    }
+  },
+  "methods" : {
+    "withRecordingEnabled" : {
+      "comment" : "This function enable recording for the upcoming call.",
+      "parameters" : { },
+      "tags" : {
+        "return" : "CallOptions"
+      }
+    }
+  }
+}

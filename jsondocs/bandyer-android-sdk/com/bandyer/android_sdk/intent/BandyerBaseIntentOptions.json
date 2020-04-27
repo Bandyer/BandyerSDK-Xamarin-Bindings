@@ -1,0 +1,13 @@
+{
+  "comment" : "BandyerBaseIntentOptions of Type T",
+  "fields" : { },
+  "methods" : {
+    "build" : {
+      "comment" : "Create the intent instance.",
+      "parameters" : { },
+      "tags" : {
+        "return" : "BandyerIntent"
+      }
+    }
+  }
+}

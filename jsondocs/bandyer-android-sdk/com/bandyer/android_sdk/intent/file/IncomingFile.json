@@ -1,0 +1,23 @@
+{
+  "comment" : "Incoming File received",
+  "fields" : {
+    "fileInfo" : {
+      "comment" : "File details",
+      "tags" : {
+        "property" : "File details"
+      }
+    }
+  },
+  "methods" : {
+    "asNotification" : {
+      "comment" : "Display the incoming file shared as notification",
+      "parameters" : {
+        "context" : "Context"
+      },
+      "tags" : {
+        "parameters" : "Context",
+        "return" : "ChatNotification to be shown"
+      }
+    }
+  }
+}

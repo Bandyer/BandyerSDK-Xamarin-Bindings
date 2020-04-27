@@ -1,0 +1,17 @@
+{
+  "comment" : "ChatIntentBuilder",
+  "fields" : { },
+  "methods" : {
+    "with" : {
+      "comment" : "A valid user userAlias is needed by Bandyer SDK to retrieve the user to chat with.",
+      "parameters" : {
+        "userAlias" : "String"
+      },
+      "tags" : {
+        "parameters" : "String",
+        "return" : "ChatIntentOptions",
+        "since" : "v1.1.0"
+      }
+    }
+  }
+}

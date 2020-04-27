@@ -1,0 +1,14 @@
+{
+  "comment" : "Context of the formatter.\nThis context may be used to customize an incoming event, based on the component and/or if is a notification",
+  "fields" : {
+    "component" : {
+      "comment" : "Bandyer component requiring formatting",
+      "tags" : { }
+    },
+    "isNotification" : {
+      "comment" : "boolean indicating if a notification required the format",
+      "tags" : { }
+    }
+  },
+  "methods" : { }
+}
