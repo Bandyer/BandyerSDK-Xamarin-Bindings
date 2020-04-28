@@ -24,9 +24,9 @@ namespace Bandyer
         [Export("callClient", ArgumentSemantic.Strong)]
         IBCXCallClient CallClient { get; }
 
-        //// @property (readonly, nonatomic, strong) id<BCHChatClient> _Nonnull chatClient;
-        //[Export("chatClient", ArgumentSemantic.Strong)]
-        //BCHChatClient ChatClient { get; }
+        // @property (readonly, nonatomic, strong) id<BCHChatClient> _Nonnull chatClient;
+        [Export("chatClient", ArgumentSemantic.Strong)]
+        IBCHChatClient ChatClient { get; }
 
         // -(void)initializeWithApplicationId:(NSString * _Nonnull)appId;
         [Export("initializeWithApplicationId:")]
@@ -1205,111 +1205,115 @@ namespace Bandyer
     //{
     //}
 
-    //// @protocol BCHChatClientObserver <NSObject>
-    ///*
-    //  Check whether adding [Model] to this declaration is appropriate.
-    //  [Model] is used to generate a C# class that implements this protocol,
-    //  and might be useful for protocols that consumers are supposed to implement,
-    //  since consumers can subclass the generated class instead of implementing
-    //  the generated interface. If consumers are not supposed to implement this
-    //  protocol, then [Model] is redundant and will generate code that will never
-    //  be used.
-    //*/
-    //[Protocol]
-    //[BaseType(typeof(NSObject))]
-    //interface BCHChatClientObserver
-    //{
-    //  // @optional -(void)chatClientWillStart:(id<BCHChatClient> _Nonnull)client;
-    //  [Export("chatClientWillStart:")]
-    //  void ChatClientWillStart(BCHChatClient client);
+    // @protocol BCHChatClientObserver <NSObject>
+    /*
+      Check whether adding [Model] to this declaration is appropriate.
+      [Model] is used to generate a C# class that implements this protocol,
+      and might be useful for protocols that consumers are supposed to implement,
+      since consumers can subclass the generated class instead of implementing
+      the generated interface. If consumers are not supposed to implement this
+      protocol, then [Model] is redundant and will generate code that will never
+      be used.
+    */
+    [Protocol]
+    [BaseType(typeof(NSObject))]
+    interface BCHChatClientObserver
+    {
+        // @optional -(void)chatClientWillStart:(id<BCHChatClient> _Nonnull)client;
+        [Export("chatClientWillStart:")]
+        void ChatClientWillStart(BCHChatClient client);
 
-    //  // @optional -(void)chatClientDidStart:(id<BCHChatClient> _Nonnull)client;
-    //  [Export("chatClientDidStart:")]
-    //  void ChatClientDidStart(BCHChatClient client);
+        // @optional -(void)chatClientDidStart:(id<BCHChatClient> _Nonnull)client;
+        [Export("chatClientDidStart:")]
+        void ChatClientDidStart(BCHChatClient client);
 
-    //  // @optional -(void)chatClientWillPause:(id<BCHChatClient> _Nonnull)client;
-    //  [Export("chatClientWillPause:")]
-    //  void ChatClientWillPause(BCHChatClient client);
+        // @optional -(void)chatClientWillPause:(id<BCHChatClient> _Nonnull)client;
+        [Export("chatClientWillPause:")]
+        void ChatClientWillPause(BCHChatClient client);
 
-    //  // @optional -(void)chatClientDidPause:(id<BCHChatClient> _Nonnull)client;
-    //  [Export("chatClientDidPause:")]
-    //  void ChatClientDidPause(BCHChatClient client);
+        // @optional -(void)chatClientDidPause:(id<BCHChatClient> _Nonnull)client;
+        [Export("chatClientDidPause:")]
+        void ChatClientDidPause(BCHChatClient client);
 
-    //  // @optional -(void)chatClientWillStop:(id<BCHChatClient> _Nonnull)client;
-    //  [Export("chatClientWillStop:")]
-    //  void ChatClientWillStop(BCHChatClient client);
+        // @optional -(void)chatClientWillStop:(id<BCHChatClient> _Nonnull)client;
+        [Export("chatClientWillStop:")]
+        void ChatClientWillStop(BCHChatClient client);
 
-    //  // @optional -(void)chatClientDidStop:(id<BCHChatClient> _Nonnull)client;
-    //  [Export("chatClientDidStop:")]
-    //  void ChatClientDidStop(BCHChatClient client);
+        // @optional -(void)chatClientDidStop:(id<BCHChatClient> _Nonnull)client;
+        [Export("chatClientDidStop:")]
+        void ChatClientDidStop(BCHChatClient client);
 
-    //  // @optional -(void)chatClientWillResume:(id<BCHChatClient> _Nonnull)client;
-    //  [Export("chatClientWillResume:")]
-    //  void ChatClientWillResume(BCHChatClient client);
+        // @optional -(void)chatClientWillResume:(id<BCHChatClient> _Nonnull)client;
+        [Export("chatClientWillResume:")]
+        void ChatClientWillResume(BCHChatClient client);
 
-    //  // @optional -(void)chatClientDidResume:(id<BCHChatClient> _Nonnull)client;
-    //  [Export("chatClientDidResume:")]
-    //  void ChatClientDidResume(BCHChatClient client);
+        // @optional -(void)chatClientDidResume:(id<BCHChatClient> _Nonnull)client;
+        [Export("chatClientDidResume:")]
+        void ChatClientDidResume(BCHChatClient client);
 
-    //  // @optional -(void)chatClient:(id<BCHChatClient> _Nonnull)client didFailWithError:(NSError * _Nonnull)error;
-    //  [Export("chatClient:didFailWithError:")]
-    //  void ChatClient(BCHChatClient client, NSError error);
-    //}
+        // @optional -(void)chatClient:(id<BCHChatClient> _Nonnull)client didFailWithError:(NSError * _Nonnull)error;
+        [Export("chatClient:didFailWithError:")]
+        void ChatClientDidFailWithError(BCHChatClient client, NSError error);
+    }
 
-    //// @protocol BCHChatClient <NSObject>
-    ///*
-    //  Check whether adding [Model] to this declaration is appropriate.
-    //  [Model] is used to generate a C# class that implements this protocol,
-    //  and might be useful for protocols that consumers are supposed to implement,
-    //  since consumers can subclass the generated class instead of implementing
-    //  the generated interface. If consumers are not supposed to implement this
-    //  protocol, then [Model] is redundant and will generate code that will never
-    //  be used.
-    //*/
-    //[Protocol]
-    //[BaseType(typeof(NSObject))]
-    //interface BCHChatClient
-    //{
-    //  // @required @property (readonly, assign, nonatomic) BCHChatClientState state;
-    //  [Abstract]
-    //  [Export("state", ArgumentSemantic.Assign)]
-    //  BCHChatClientState State { get; }
+    interface IBCHChatClientObserver { }
 
-    //  // @required -(void)addObserver:(id<BCHChatClientObserver> _Nonnull)observer __attribute__((swift_name("add(observer:)")));
-    //  [Abstract]
-    //  [Export("addObserver:")]
-    //  void AddObserver(BCHChatClientObserver observer);
+    // @protocol BCHChatClient <NSObject>
+    /*
+      Check whether adding [Model] to this declaration is appropriate.
+      [Model] is used to generate a C# class that implements this protocol,
+      and might be useful for protocols that consumers are supposed to implement,
+      since consumers can subclass the generated class instead of implementing
+      the generated interface. If consumers are not supposed to implement this
+      protocol, then [Model] is redundant and will generate code that will never
+      be used.
+    */
+    [Protocol]
+    [BaseType(typeof(NSObject))]
+    interface BCHChatClient
+    {
+        // @required @property (readonly, assign, nonatomic) BCHChatClientState state;
+        [Abstract]
+        [Export("state", ArgumentSemantic.Assign)]
+        BCHChatClientState State { get; }
 
-    //  // @required -(void)addObserver:(id<BCHChatClientObserver> _Nonnull)observer queue:(dispatch_queue_t _Nullable)queue __attribute__((swift_name("add(observer:queue:)")));
-    //  [Abstract]
-    //  [Export("addObserver:queue:")]
-    //  void AddObserver(BCHChatClientObserver observer, [NullAllowed] DispatchQueue queue);
+        // @required -(void)addObserver:(id<BCHChatClientObserver> _Nonnull)observer __attribute__((swift_name("add(observer:)")));
+        [Abstract]
+        [Export("addObserver:")]
+        void AddObserver(IBCHChatClientObserver observer);
 
-    //  // @required -(void)removeObserver:(id<BCHChatClientObserver> _Nonnull)observer __attribute__((swift_name("remove(observer:)")));
-    //  [Abstract]
-    //  [Export("removeObserver:")]
-    //  void RemoveObserver(BCHChatClientObserver observer);
+        // @required -(void)addObserver:(id<BCHChatClientObserver> _Nonnull)observer queue:(dispatch_queue_t _Nullable)queue __attribute__((swift_name("add(observer:queue:)")));
+        [Abstract]
+        [Export("addObserver:queue:")]
+        void AddObserver(IBCHChatClientObserver observer, [NullAllowed] DispatchQueue queue);
 
-    //  // @required -(void)start:(NSString * _Nonnull)userId __attribute__((swift_name("start(userId:)")));
-    //  [Abstract]
-    //  [Export("start:")]
-    //  void Start(string userId);
+        // @required -(void)removeObserver:(id<BCHChatClientObserver> _Nonnull)observer __attribute__((swift_name("remove(observer:)")));
+        [Abstract]
+        [Export("removeObserver:")]
+        void RemoveObserver(IBCHChatClientObserver observer);
 
-    //  // @required -(void)resume;
-    //  [Abstract]
-    //  [Export("resume")]
-    //  void Resume();
+        // @required -(void)start:(NSString * _Nonnull)userId __attribute__((swift_name("start(userId:)")));
+        [Abstract]
+        [Export("start:")]
+        void Start(string userId);
 
-    //  // @required -(void)pause;
-    //  [Abstract]
-    //  [Export("pause")]
-    //  void Pause();
+        // @required -(void)resume;
+        [Abstract]
+        [Export("resume")]
+        void Resume();
 
-    //  // @required -(void)stop;
-    //  [Abstract]
-    //  [Export("stop")]
-    //  void Stop();
-    //}
+        // @required -(void)pause;
+        [Abstract]
+        [Export("pause")]
+        void Pause();
+
+        // @required -(void)stop;
+        [Abstract]
+        [Export("stop")]
+        void Stop();
+    }
+
+    interface IBCHChatClient { }
 
     //// @interface BCHChatNotification : NSObject
     //[BaseType(typeof(NSObject))]

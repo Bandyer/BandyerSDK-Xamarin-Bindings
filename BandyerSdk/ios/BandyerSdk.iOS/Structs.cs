@@ -194,15 +194,15 @@ namespace Bandyer
     //}
 
     //[Native]
-    //public enum BCHChatClientState : long
-    //{
-    //  Stopped = 0,
-    //  Starting,
-    //  Running,
-    //  Resuming,
-    //  Paused,
-    //  Failed
-    //}
+    public enum BCHChatClientState : long
+    {
+        Stopped = 0,
+        Starting,
+        Running,
+        Resuming,
+        Paused,
+        Failed
+    }
 
     [Flags]
     //[Native]

@@ -14,12 +14,11 @@ namespace BandyerDemo.iOS
     public class BandyerSdkiOS : NSObject
         , IBandyerSdk
         , IBCXCallClientObserver
+        , IBCHChatClientObserver
     {
         private static BandyerSdkPKPushRegistryDelegate pushDel;
         private BDKCallWindow window = null;
         private string callUserAlias;
-
-        //private BandyerSdkBCXCallClientObserver observer;
 
         public static void InitSdk()
         {
@@ -48,6 +47,8 @@ namespace BandyerDemo.iOS
 
         public void StartChat(string userAlias)
         {
+            BandyerSDK.Instance().ChatClient.AddObserver(this, DispatchQueue.MainQueue);
+            BandyerSDK.Instance().ChatClient.Start(userAlias);
         }
 
         public class BandyerSdkPKPushRegistryDelegate : PKPushRegistryDelegate
@@ -132,6 +133,52 @@ namespace BandyerDemo.iOS
         public void CallClientDidFailWithError(IBCXCallClient client, NSError error)
         {
             Debug.Print("CallClientDidFailWithError " + client + " " + error);
+        }
+
+        [Export("chatClientWillStart:")]
+        public void ChatClientWillStart(IBCHChatClient client)
+        {
+            Debug.Print("ChatClientWillStart " + client);
+        }
+        [Export("chatClientDidStart:")]
+        public void ChatClientDidStart(IBCHChatClient client)
+        {
+            Debug.Print("ChatClientDidStart " + client);
+        }
+        [Export("chatClientWillPause:")]
+        public void ChatClientWillPause(IBCHChatClient client)
+        {
+            Debug.Print("ChatClientWillPause " + client);
+        }
+        [Export("chatClientDidPause:")]
+        public void ChatClientDidPause(IBCHChatClient client)
+        {
+            Debug.Print("ChatClientDidPause " + client);
+        }
+        [Export("chatClientWillStop:")]
+        public void ChatClientWillStop(IBCHChatClient client)
+        {
+            Debug.Print("ChatClientWillStop " + client);
+        }
+        [Export("chatClientDidStop:")]
+        public void ChatClientDidStop(IBCHChatClient client)
+        {
+            Debug.Print("ChatClientDidStop " + client);
+        }
+        [Export("chatClientWillResume:")]
+        public void ChatClientWillResume(IBCHChatClient client)
+        {
+            Debug.Print("ChatClientWillResume " + client);
+        }
+        [Export("chatClientDidResume:")]
+        public void ChatClientDidResume(IBCHChatClient client)
+        {
+            Debug.Print("ChatClientDidResume " + client);
+        }
+        [Export("chatClient:didFailWithError:")]
+        public void ChatClientDidFailWithError(IBCHChatClient client, NSError error)
+        {
+            Debug.Print("ChatClientDidFailWithError " + client + " " + error);
         }
     }
 }
