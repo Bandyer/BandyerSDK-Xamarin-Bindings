@@ -46,6 +46,10 @@ namespace BandyerDemo.iOS
             BandyerSDK.Instance().CallClient.Start(userAlias);
         }
 
+        public void StartChat(string userAlias)
+        {
+        }
+
         public class BandyerSdkPKPushRegistryDelegate : PKPushRegistryDelegate
         {
             public override void DidReceiveIncomingPush(PKPushRegistry registry, PKPushPayload payload, string type)

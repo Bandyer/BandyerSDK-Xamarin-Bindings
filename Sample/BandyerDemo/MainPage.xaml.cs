@@ -20,9 +20,14 @@ namespace BandyerDemo
             bandyerSdk.Init(userAlias);
         }
 
-        void Button_Clicked(System.Object sender, System.EventArgs e)
+        void Button_StartCall(System.Object sender, System.EventArgs e)
         {
             bandyerSdk.StartCall("web");
+        }
+
+        void Button_StartChat(System.Object sender, System.EventArgs e)
+        {
+            bandyerSdk.StartChat("web");
         }
     }
 }
