@@ -1,5 +1,0 @@
-{
-  "comment" : "A broadcast receiver that receive broadcast when a chat starts, ends or ends with error.",
-  "fields" : { },
-  "methods" : { }
-}
