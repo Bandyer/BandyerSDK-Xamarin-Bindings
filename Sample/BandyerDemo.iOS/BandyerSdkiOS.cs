@@ -17,6 +17,7 @@ namespace BandyerDemo.iOS
     {
         private static BandyerSdkPKPushRegistryDelegate pushDel;
         private BDKCallWindow window = null;
+        private string callUserAlias;
 
         //private BandyerSdkBCXCallClientObserver observer;
 
@@ -38,33 +39,11 @@ namespace BandyerDemo.iOS
         {
         }
 
-        int i = 0;
         public void StartCall(string userAlias)
         {
-            i++;
-            if (i == 1)
-            {
-                //BandyerSDK.Instance().CallClient.AddObserver(this, DispatchQueue.GetGlobalQueue(DispatchQueuePriority.Default));
-                BandyerSDK.Instance().CallClient.Start(userAlias);
-            }
-            if (i == 2)
-            {
-                if (window == null)
-                {
-                    window = new BDKCallWindow();
-                    window.WeakCallDelegate = this;
-                    var config = new BDKCallViewControllerConfiguration();
-                    var url = new NSUrl(NSBundle.MainBundle.PathForResource("video", "mp4"));
-                    config.FakeCapturerFileURL = url;
-                    window.SetConfiguration(config);
-                }
-                var callee = new string[] { userAlias };
-                var intent = BDKMakeCallIntent.IntentWithCallee(callee, BDKCallType.AudioVideoCallType);
-                window.ShouldPresentCallViewControllerWithIntent(intent, (success) =>
-                {
-                    Debug.Print("ShouldPresentCallViewControllerWithIntent success " + success);
-                });
-            }
+            this.callUserAlias = userAlias;
+            BandyerSDK.Instance().CallClient.AddObserver(this, DispatchQueue.MainQueue);
+            BandyerSDK.Instance().CallClient.Start(userAlias);
         }
 
         public class BandyerSdkPKPushRegistryDelegate : PKPushRegistryDelegate
@@ -78,6 +57,77 @@ namespace BandyerDemo.iOS
             {
                 Debug.Print("DidUpdatePushCredentials");
             }
+        }
+
+        void startWindowCall()
+        {
+            if (window == null)
+            {
+                window = new BDKCallWindow();
+                //window.WeakCallDelegate = this;
+                var config = new BDKCallViewControllerConfiguration();
+                var url = new NSUrl(NSBundle.MainBundle.PathForResource("video", "mp4"));
+                config.FakeCapturerFileURL = url;
+                window.SetConfiguration(config);
+            }
+            var callee = new string[] { callUserAlias };
+            var intent = BDKMakeCallIntent.IntentWithCallee(callee, BDKCallType.AudioVideoCallType);
+            window.ShouldPresentCallViewControllerWithIntent(intent, (success) =>
+            {
+                Debug.Print("ShouldPresentCallViewControllerWithIntent success " + success);
+            });
+        }
+
+        [Export("callClientDidPause:")]
+        public void CallClientDidPause(IBCXCallClient client)
+        {
+            Debug.Print("CallClientDidPause " + client);
+        }
+        [Export("callClientDidResume:")]
+        public void CallClientDidResume(IBCXCallClient client)
+        {
+            Debug.Print("CallClientDidResume " + client);
+        }
+        [Export("callClientDidStart:")]
+        public void CallClientDidStart(IBCXCallClient client)
+        {
+            Debug.Print("CallClientDidStart " + client);
+            startWindowCall();
+        }
+        [Export("callClientDidStartReconnecting:")]
+        public void CallClientDidStartReconnecting(IBCXCallClient client)
+        {
+            Debug.Print("CallClientDidStartReconnecting " + client);
+        }
+        [Export("callClientDidStop:")]
+        public void CallClientDidStop(IBCXCallClient client)
+        {
+            Debug.Print("CallClientDidStop " + client);
+        }
+        [Export("callClientWillPause:")]
+        public void CallClientWillPause(IBCXCallClient client)
+        {
+            Debug.Print("CallClientWillPause " + client);
+        }
+        [Export("callClientWillResume:")]
+        public void CallClientWillResume(IBCXCallClient client)
+        {
+            Debug.Print("CallClientWillResume " + client);
+        }
+        [Export("callClientWillStart:")]
+        public void CallClientWillStart(IBCXCallClient client)
+        {
+            Debug.Print("CallClientWillStart " + client);
+        }
+        [Export("callClientWillStop:")]
+        public void CallClientWillStop(IBCXCallClient client)
+        {
+            Debug.Print("CallClientWillStop " + client);
+        }
+        [Export("callClient:didFailWithError:")]
+        public void CallClientDidFailWithError(IBCXCallClient client, NSError error)
+        {
+            Debug.Print("CallClientDidFailWithError " + client + " " + error);
         }
     }
 }
