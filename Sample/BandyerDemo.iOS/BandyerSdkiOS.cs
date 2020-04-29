@@ -6,6 +6,7 @@ using CoreFoundation;
 using Foundation;
 using ObjCRuntime;
 using PushKit;
+using UIKit;
 using Xamarin.Forms;
 
 [assembly: Dependency(typeof(BandyerSdkiOS))]
@@ -15,10 +16,12 @@ namespace BandyerDemo.iOS
         , IBandyerSdk
         , IBCXCallClientObserver
         , IBCHChatClientObserver
+        , IBCHChannelViewControllerDelegate
     {
         private static BandyerSdkPKPushRegistryDelegate pushDel;
-        private BDKCallWindow window = null;
+        private BDKCallWindow callWindow = null;
         private string callUserAlias;
+        private string chatUserAlias;
 
         public static void InitSdk()
         {
@@ -47,6 +50,7 @@ namespace BandyerDemo.iOS
 
         public void StartChat(string userAlias)
         {
+            this.chatUserAlias = userAlias;
             BandyerSDK.Instance().ChatClient.AddObserver(this, DispatchQueue.MainQueue);
             BandyerSDK.Instance().ChatClient.Start(userAlias);
         }
@@ -66,21 +70,34 @@ namespace BandyerDemo.iOS
 
         void startWindowCall()
         {
-            if (window == null)
+            if (callWindow == null)
             {
-                window = new BDKCallWindow();
+                callWindow = new BDKCallWindow();
                 //window.WeakCallDelegate = this;
                 var config = new BDKCallViewControllerConfiguration();
                 var url = new NSUrl(NSBundle.MainBundle.PathForResource("video", "mp4"));
                 config.FakeCapturerFileURL = url;
-                window.SetConfiguration(config);
+                callWindow.SetConfiguration(config);
             }
             var callee = new string[] { callUserAlias };
             var intent = BDKMakeCallIntent.IntentWithCallee(callee, BDKCallType.AudioVideoCallType);
-            window.ShouldPresentCallViewControllerWithIntent(intent, (success) =>
+            callWindow.ShouldPresentCallViewControllerWithIntent(intent, (success) =>
             {
                 Debug.Print("ShouldPresentCallViewControllerWithIntent success " + success);
             });
+        }
+
+        void startChatController(IBCHChatClient client)
+        {
+            client.Start(chatUserAlias);
+            var intent = BCHOpenChatIntent.OpenChatWith(chatUserAlias);
+            var rootVC = UIApplication.SharedApplication.KeyWindow.RootViewController;
+            var configuration = new BCHChannelViewControllerConfiguration(audioButton: true, videoButton: true, userInfoFetcher: null);
+            var channelVC = new BCHChannelViewController();
+            channelVC.Delegate = this;
+            channelVC.Configuration = configuration;
+            channelVC.Intent = intent;
+            rootVC.PresentViewController(channelVC, true, null);
         }
 
         [Export("callClientDidPause:")]
@@ -144,6 +161,7 @@ namespace BandyerDemo.iOS
         public void ChatClientDidStart(IBCHChatClient client)
         {
             Debug.Print("ChatClientDidStart " + client);
+            startChatController(client);
         }
         [Export("chatClientWillPause:")]
         public void ChatClientWillPause(IBCHChatClient client)
@@ -179,6 +197,23 @@ namespace BandyerDemo.iOS
         public void ChatClientDidFailWithError(IBCHChatClient client, NSError error)
         {
             Debug.Print("ChatClientDidFailWithError " + client + " " + error);
+        }
+
+        public void ChannelViewControllerDidFinish(BCHChannelViewController controller)
+        {
+            Debug.Print("ChannelViewControllerDidFinish " + controller);
+        }
+        public void ChannelViewControllerDidTouchBanner(BCHChannelViewController controller, BDKCallBannerView banner)
+        {
+            Debug.Print("ChannelViewControllerDidTouchBanner " + controller + " " + banner);
+        }
+        public void ChannelViewControllerDidTapAudioCallWith(BCHChannelViewController controller, string[] users)
+        {
+            Debug.Print("ChannelViewControllerDidTapAudioCallWith " + controller + " " + users);
+        }
+        public void ChannelViewControllerDidTapVideoCallWith(BCHChannelViewController controller, string[] users)
+        {
+            Debug.Print("ChannelViewControllerDidTapVideoCallWith " + controller + " " + users);
         }
     }
 }

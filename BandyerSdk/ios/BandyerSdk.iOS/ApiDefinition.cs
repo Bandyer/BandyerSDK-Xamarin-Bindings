@@ -7,6 +7,7 @@ using ObjCRuntime;
 using PushKit;
 using UIKit;
 using Bandyer;
+using CallKit;
 
 namespace Bandyer
 {
@@ -202,63 +203,63 @@ namespace Bandyer
         NSUrl FakeCapturerFileURL { get; set; }
     }
 
-    //// @protocol BDKUserInfoFetcher <NSObject, NSCopying>
-    ///*
-    //  Check whether adding [Model] to this declaration is appropriate.
-    //  [Model] is used to generate a C# class that implements this protocol,
-    //  and might be useful for protocols that consumers are supposed to implement,
-    //  since consumers can subclass the generated class instead of implementing
-    //  the generated interface. If consumers are not supposed to implement this
-    //  protocol, then [Model] is redundant and will generate code that will never
-    //  be used.
-    //*/
-    //[Protocol]
-    //[BaseType(typeof(NSObject))]
-    //interface BDKUserInfoFetcher : INSCopying
-    //{
-    //  // @required -(void)fetchUsers:(NSArray<NSString *> * _Nonnull)aliases completion:(void (^ _Nonnull)(NSArray<BDKUserInfoDisplayItem *> * _Nullable))completion;
-    //  [Abstract]
-    //  [Export("fetchUsers:completion:")]
-    //  void Completion(string[] aliases, Action<NSArray<BDKUserInfoDisplayItem>> completion);
-    //}
+    // @protocol BDKUserInfoFetcher <NSObject, NSCopying>
+    /*
+      Check whether adding [Model] to this declaration is appropriate.
+      [Model] is used to generate a C# class that implements this protocol,
+      and might be useful for protocols that consumers are supposed to implement,
+      since consumers can subclass the generated class instead of implementing
+      the generated interface. If consumers are not supposed to implement this
+      protocol, then [Model] is redundant and will generate code that will never
+      be used.
+    */
+    [Protocol]
+    [BaseType(typeof(NSObject))]
+    interface BDKUserInfoFetcher : INSCopying
+    {
+        // @required -(void)fetchUsers:(NSArray<NSString *> * _Nonnull)aliases completion:(void (^ _Nonnull)(NSArray<BDKUserInfoDisplayItem *> * _Nullable))completion;
+        [Abstract]
+        [Export("fetchUsers:completion:")]
+        void FetchUsersCompletion(string[] aliases, Action<NSArray<BDKUserInfoDisplayItem>> completion);
+    }
 
-    //// @interface BDKUserInfoDisplayItem : NSObject <NSCopying>
-    //[BaseType(typeof(NSObject))]
-    //[DisableDefaultCtor]
-    //interface BDKUserInfoDisplayItem : INSCopying
-    //{
-    //  // @property (readonly, copy, nonatomic) NSString * _Nonnull alias;
-    //  [Export("alias")]
-    //  string Alias { get; }
+    // @interface BDKUserInfoDisplayItem : NSObject <NSCopying>
+    [BaseType(typeof(NSObject))]
+    [DisableDefaultCtor]
+    interface BDKUserInfoDisplayItem : INSCopying
+    {
+        // @property (readonly, copy, nonatomic) NSString * _Nonnull alias;
+        [Export("alias")]
+        string Alias { get; }
 
-    //  // @property (copy, nonatomic) NSString * _Nullable firstName;
-    //  [NullAllowed, Export("firstName")]
-    //  string FirstName { get; set; }
+        // @property (copy, nonatomic) NSString * _Nullable firstName;
+        [NullAllowed, Export("firstName")]
+        string FirstName { get; set; }
 
-    //  // @property (copy, nonatomic) NSString * _Nullable lastName;
-    //  [NullAllowed, Export("lastName")]
-    //  string LastName { get; set; }
+        // @property (copy, nonatomic) NSString * _Nullable lastName;
+        [NullAllowed, Export("lastName")]
+        string LastName { get; set; }
 
-    //  // @property (copy, nonatomic) NSString * _Nullable email;
-    //  [NullAllowed, Export("email")]
-    //  string Email { get; set; }
+        // @property (copy, nonatomic) NSString * _Nullable email;
+        [NullAllowed, Export("email")]
+        string Email { get; set; }
 
-    //  // @property (copy, nonatomic) NSString * _Nullable nickname;
-    //  [NullAllowed, Export("nickname")]
-    //  string Nickname { get; set; }
+        // @property (copy, nonatomic) NSString * _Nullable nickname;
+        [NullAllowed, Export("nickname")]
+        string Nickname { get; set; }
 
-    //  // @property (copy, nonatomic) NSURL * _Nullable imageURL;
-    //  [NullAllowed, Export("imageURL", ArgumentSemantic.Copy)]
-    //  NSUrl ImageURL { get; set; }
+        // @property (copy, nonatomic) NSURL * _Nullable imageURL;
+        [NullAllowed, Export("imageURL", ArgumentSemantic.Copy)]
+        NSUrl ImageURL { get; set; }
 
-    //  // @property (readonly, copy, nonatomic) UIImage * _Nullable image;
-    //  [NullAllowed, Export("image", ArgumentSemantic.Copy)]
-    //  UIImage Image { get; }
+        // @property (readonly, copy, nonatomic) UIImage * _Nullable image;
+        [NullAllowed, Export("image", ArgumentSemantic.Copy)]
+        UIImage Image { get; }
 
-    //  // -(instancetype _Nonnull)initWithAlias:(NSString * _Nonnull)alias;
-    //  [Export("initWithAlias:")]
-    //  IntPtr Constructor(string alias);
-    //}
+        // -(instancetype _Nonnull)initWithAlias:(NSString * _Nonnull)alias;
+        [Export("initWithAlias:")]
+        IntPtr Constructor(string alias);
+    }
 
     // @protocol BCXCallClientObserver <NSObject>
     /*
@@ -1315,33 +1316,33 @@ namespace Bandyer
 
     interface IBCHChatClient { }
 
-    //// @interface BCHChatNotification : NSObject
-    //[BaseType(typeof(NSObject))]
-    //[DisableDefaultCtor]
-    //interface BCHChatNotification
-    //{
-    //}
+    // @interface BCHChatNotification : NSObject
+    [BaseType(typeof(NSObject))]
+    [DisableDefaultCtor]
+    interface BCHChatNotification
+    {
+    }
 
-    //// @protocol BCXHandleProvider <NSObject, NSCopying>
-    ///*
-    //  Check whether adding [Model] to this declaration is appropriate.
-    //  [Model] is used to generate a C# class that implements this protocol,
-    //  and might be useful for protocols that consumers are supposed to implement,
-    //  since consumers can subclass the generated class instead of implementing
-    //  the generated interface. If consumers are not supposed to implement this
-    //  protocol, then [Model] is redundant and will generate code that will never
-    //  be used.
-    //*/
-    //[Protocol]
-    //[BaseType(typeof(NSObject))]
-    //interface BCXHandleProvider : INSCopying
-    //{
-    //  // @required -(void)handleForAliases:(NSArray<NSString *> * _Nullable)aliases completion:(void (^ _Nonnull)(CXHandle * _Nonnull))completion __attribute__((availability(ios, introduced=10.0)));
-    //  [iOS(10, 0)]
-    //  [Abstract]
-    //  [Export("handleForAliases:completion:")]
-    //  void Completion([NullAllowed] string[] aliases, Action<CXHandle> completion);
-    //}
+    // @protocol BCXHandleProvider <NSObject, NSCopying>
+    /*
+      Check whether adding [Model] to this declaration is appropriate.
+      [Model] is used to generate a C# class that implements this protocol,
+      and might be useful for protocols that consumers are supposed to implement,
+      since consumers can subclass the generated class instead of implementing
+      the generated interface. If consumers are not supposed to implement this
+      protocol, then [Model] is redundant and will generate code that will never
+      be used.
+    */
+    [Protocol]
+    [BaseType(typeof(NSObject))]
+    interface BCXHandleProvider : INSCopying
+    {
+        // @required -(void)handleForAliases:(NSArray<NSString *> * _Nullable)aliases completion:(void (^ _Nonnull)(CXHandle * _Nonnull))completion __attribute__((availability(ios, introduced=10.0)));
+        [iOS(10, 0)]
+        [Abstract]
+        [Export("handleForAliases:completion:")]
+        void Completion([NullAllowed] string[] aliases, Action<CXHandle> completion);
+    }
 
     //// @interface BCXAdditions (PKPushCredentials)
     //[Category]
@@ -2608,9 +2609,9 @@ namespace Bandyer
     //  [Export("hide")]
     //  void Hide();
 
-    //  // -(void)viewWillTransitionTo:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator> _Nonnull)coordinator;
+    //  // -(void)viewWillTransitionTo:(CGSize)size withTransitionCoordinator:(id<IUIViewControllerTransitionCoordinator> _Nonnull)coordinator;
     //  [Export("viewWillTransitionTo:withTransitionCoordinator:")]
-    //  void ViewWillTransitionTo(CGSize size, UIViewControllerTransitionCoordinator coordinator);
+    //  void ViewWillTransitionTo(CGSize size, IUIViewControllerTransitionCoordinator coordinator);
     //}
 
     //// @protocol BDKCallBannerControllerDelegate
@@ -2631,55 +2632,55 @@ namespace Bandyer
     //  void WillHide(BDKCallBannerController controller, BDKCallBannerView banner);
     //}
 
-    //// @interface BDKCallBannerView : UIView
-    //[BaseType(typeof(UIView))]
-    //interface BDKCallBannerView
-    //{
-    //}
+    // @interface BDKCallBannerView : UIView
+    [BaseType(typeof(UIView))]
+    interface BDKCallBannerView
+    {
+    }
 
     // @interface BDKCallWindow : UIWindow
     [BaseType(typeof(UIWindow))]
     interface BDKCallWindow
     {
-      // @property (readonly, nonatomic, strong, class) BDKCallWindow * _Nullable instance;
-      [Static]
-      [NullAllowed, Export("instance", ArgumentSemantic.Strong)]
-      BDKCallWindow Instance { get; }
+        // @property (readonly, nonatomic, strong, class) BDKCallWindow * _Nullable instance;
+        [Static]
+        [NullAllowed, Export("instance", ArgumentSemantic.Strong)]
+        BDKCallWindow Instance { get; }
 
-      //[Wrap("WeakCallDelegate")]
-      //[NullAllowed]
-      //BDKCallWindowDelegate CallDelegate { get; set; }
+        //[Wrap("WeakCallDelegate")]
+        //[NullAllowed]
+        //BDKCallWindowDelegate CallDelegate { get; set; }
 
-      // @property (nonatomic, weak) id<BDKCallWindowDelegate> _Nullable callDelegate;
-      [NullAllowed, Export("callDelegate", ArgumentSemantic.Weak)]
-      NSObject WeakCallDelegate { get; set; }
+        // @property (nonatomic, weak) id<BDKCallWindowDelegate> _Nullable callDelegate;
+        [NullAllowed, Export("callDelegate", ArgumentSemantic.Weak)]
+        NSObject WeakCallDelegate { get; set; }
 
-      // @property (readonly, nonatomic, strong) id<BDKIntent> _Nullable intent;
-      [NullAllowed, Export("intent", ArgumentSemantic.Strong)]
-      BDKIntent Intent { get; }
+        // @property (readonly, nonatomic, strong) id<BDKIntent> _Nullable intent;
+        [NullAllowed, Export("intent", ArgumentSemantic.Strong)]
+        BDKIntent Intent { get; }
 
-      // -(void)shouldPresentCallViewControllerWithIntent:(id<BDKIntent> _Nullable)intent completion:(void (^ _Nonnull)(BOOL))completion;
-      [Export("shouldPresentCallViewControllerWithIntent:completion:")]
-      void ShouldPresentCallViewControllerWithIntent([NullAllowed] IBDKIntent intent, Action<bool> completion);
+        // -(void)shouldPresentCallViewControllerWithIntent:(id<BDKIntent> _Nullable)intent completion:(void (^ _Nonnull)(BOOL))completion;
+        [Export("shouldPresentCallViewControllerWithIntent:completion:")]
+        void ShouldPresentCallViewControllerWithIntent([NullAllowed] IBDKIntent intent, Action<bool> completion);
 
-      // -(void)dismissCallViewControllerWithCompletion:(void (^ _Nonnull)(void))completion;
-      [Export("dismissCallViewControllerWithCompletion:")]
-      void DismissCallViewControllerWithCompletion(Action completion);
+        // -(void)dismissCallViewControllerWithCompletion:(void (^ _Nonnull)(void))completion;
+        [Export("dismissCallViewControllerWithCompletion:")]
+        void DismissCallViewControllerWithCompletion(Action completion);
 
-      // -(void)setConfiguration:(BDKCallViewControllerConfiguration * _Nullable)configuration;
-      [Export("setConfiguration:")]
-      void SetConfiguration([NullAllowed] BDKCallViewControllerConfiguration configuration);
+        // -(void)setConfiguration:(BDKCallViewControllerConfiguration * _Nullable)configuration;
+        [Export("setConfiguration:")]
+        void SetConfiguration([NullAllowed] BDKCallViewControllerConfiguration configuration);
 
-      // -(void)handleINStartVideoCallIntent:(INStartVideoCallIntent * _Nonnull)intent __attribute__((availability(ios, introduced=10.0, deprecated=13.0)));
-      [Introduced(PlatformName.iOS, 10, 0, message: "handle(startVideoCallIntent:) is deprecated. Please use handle(startCallIntent:) instead")]
-      [Deprecated(PlatformName.iOS, 13, 0, message: "handle(startVideoCallIntent:) is deprecated. Please use handle(startCallIntent:) instead")]
-      [Export("handleINStartVideoCallIntent:")]
-      void HandleINStartVideoCallIntent(INStartVideoCallIntent intent);
+        // -(void)handleINStartVideoCallIntent:(INStartVideoCallIntent * _Nonnull)intent __attribute__((availability(ios, introduced=10.0, deprecated=13.0)));
+        [Introduced(PlatformName.iOS, 10, 0, message: "handle(startVideoCallIntent:) is deprecated. Please use handle(startCallIntent:) instead")]
+        [Deprecated(PlatformName.iOS, 13, 0, message: "handle(startVideoCallIntent:) is deprecated. Please use handle(startCallIntent:) instead")]
+        [Export("handleINStartVideoCallIntent:")]
+        void HandleINStartVideoCallIntent(INStartVideoCallIntent intent);
 
-      // -(void)handleINStartCallIntent:(INStartCallIntent * _Nonnull)intent __attribute__((availability(ios, introduced=13.0)));
-      [iOS(13, 0)]
-      [Export("handleINStartCallIntent:")]
-      void HandleINStartCallIntent(INStartCallIntent intent);
+        // -(void)handleINStartCallIntent:(INStartCallIntent * _Nonnull)intent __attribute__((availability(ios, introduced=13.0)));
+        [iOS(13, 0)]
+        [Export("handleINStartCallIntent:")]
+        void HandleINStartCallIntent(INStartCallIntent intent);
     }
 
     //// @protocol BCHMessageNotificationControllerDelegate
@@ -2734,72 +2735,72 @@ namespace Bandyer
     //  void CallWindow(BDKCallWindow window, BCHOpenChatIntent intent);
     //}
 
-    //// @interface BCHChannelViewController : UIViewController
-    //[BaseType(typeof(UIViewController))]
-    //interface BCHChannelViewController
-    //{
-    //  // @property (nonatomic, strong) BCHChannelViewControllerConfiguration * _Nullable configuration;
-    //  [NullAllowed, Export("configuration", ArgumentSemantic.Strong)]
-    //  BCHChannelViewControllerConfiguration Configuration { get; set; }
+    // @interface BCHChannelViewController : UIViewController
+    [BaseType(typeof(UIViewController))]
+    interface BCHChannelViewController
+    {
+        // @property (nonatomic, strong) BCHChannelViewControllerConfiguration * _Nullable configuration;
+        [NullAllowed, Export("configuration", ArgumentSemantic.Strong)]
+        BCHChannelViewControllerConfiguration Configuration { get; set; }
 
-    //  [Wrap("WeakDelegate")]
-    //  [NullAllowed]
-    //  BCHChannelViewControllerDelegate Delegate { get; set; }
+        [Wrap("WeakDelegate")]
+        [NullAllowed]
+        IBCHChannelViewControllerDelegate Delegate { get; set; }
 
-    //  // @property (nonatomic, weak) id<BCHChannelViewControllerDelegate> _Nullable delegate;
-    //  [NullAllowed, Export("delegate", ArgumentSemantic.Weak)]
-    //  NSObject WeakDelegate { get; set; }
+        // @property (nonatomic, weak) id<BCHChannelViewControllerDelegate> _Nullable delegate;
+        [NullAllowed, Export("delegate", ArgumentSemantic.Weak)]
+        NSObject WeakDelegate { get; set; }
 
-    //  // @property (nonatomic, strong) BCHOpenChatIntent * _Nullable intent;
-    //  [NullAllowed, Export("intent", ArgumentSemantic.Strong)]
-    //  BCHOpenChatIntent Intent { get; set; }
+        // @property (nonatomic, strong) BCHOpenChatIntent * _Nullable intent;
+        [NullAllowed, Export("intent", ArgumentSemantic.Strong)]
+        BCHOpenChatIntent Intent { get; set; }
 
-    //  // -(instancetype _Nonnull)initWithNibName:(NSString * _Nullable)nibNameOrNil bundle:(NSBundle * _Nullable)nibBundleOrNil __attribute__((objc_designated_initializer));
-    //  [Export("initWithNibName:bundle:")]
-    //  [DesignatedInitializer]
-    //  IntPtr Constructor([NullAllowed] string nibNameOrNil, [NullAllowed] NSBundle nibBundleOrNil);
+        // -(instancetype _Nonnull)initWithNibName:(NSString * _Nullable)nibNameOrNil bundle:(NSBundle * _Nullable)nibBundleOrNil __attribute__((objc_designated_initializer));
+        [Export("initWithNibName:bundle:")]
+        [DesignatedInitializer]
+        IntPtr Constructor([NullAllowed] string nibNameOrNil, [NullAllowed] NSBundle nibBundleOrNil);
 
-    //  // -(instancetype _Nullable)initWithCoder:(NSCoder * _Nonnull)coder __attribute__((objc_designated_initializer));
-    //  [Export("initWithCoder:")]
-    //  [DesignatedInitializer]
-    //  IntPtr Constructor(NSCoder coder);
+        //// -(instancetype _Nullable)initWithCoder:(NSCoder * _Nonnull)coder __attribute__((objc_designated_initializer));
+        //[Export("initWithCoder:")]
+        //[DesignatedInitializer]
+        //IntPtr Constructor(NSCoder coder);
 
-    //  // -(void)viewDidLoad;
-    //  [Export("viewDidLoad")]
-    //  void ViewDidLoad();
+        // -(void)viewDidLoad;
+        [Export("viewDidLoad")]
+        void ViewDidLoad();
 
-    //  // -(void)viewWillLayoutSubviews;
-    //  [Export("viewWillLayoutSubviews")]
-    //  void ViewWillLayoutSubviews();
+        // -(void)viewWillLayoutSubviews;
+        [Export("viewWillLayoutSubviews")]
+        void ViewWillLayoutSubviews();
 
-    //  // -(void)viewWillAppear:(BOOL)animated;
-    //  [Export("viewWillAppear:")]
-    //  void ViewWillAppear(bool animated);
+        // -(void)viewWillAppear:(BOOL)animated;
+        [Export("viewWillAppear:")]
+        void ViewWillAppear(bool animated);
 
-    //  // -(void)viewWillDisappear:(BOOL)animated;
-    //  [Export("viewWillDisappear:")]
-    //  void ViewWillDisappear(bool animated);
+        // -(void)viewWillDisappear:(BOOL)animated;
+        [Export("viewWillDisappear:")]
+        void ViewWillDisappear(bool animated);
 
-    //  // -(void)viewDidAppear:(BOOL)animated;
-    //  [Export("viewDidAppear:")]
-    //  void ViewDidAppear(bool animated);
+        // -(void)viewDidAppear:(BOOL)animated;
+        [Export("viewDidAppear:")]
+        void ViewDidAppear(bool animated);
 
-    //  // -(void)viewDidDisappear:(BOOL)animated;
-    //  [Export("viewDidDisappear:")]
-    //  void ViewDidDisappear(bool animated);
+        // -(void)viewDidDisappear:(BOOL)animated;
+        [Export("viewDidDisappear:")]
+        void ViewDidDisappear(bool animated);
 
-    //  // -(void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator> _Nonnull)coordinator;
-    //  [Export("viewWillTransitionToSize:withTransitionCoordinator:")]
-    //  void ViewWillTransitionToSize(CGSize size, UIViewControllerTransitionCoordinator coordinator);
+        // -(void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<IUIViewControllerTransitionCoordinator> _Nonnull)coordinator;
+        [Export("viewWillTransitionToSize:withTransitionCoordinator:")]
+        void ViewWillTransitionToSize(CGSize size, IUIViewControllerTransitionCoordinator coordinator);
 
-    //  // @property (readonly, nonatomic) BOOL canBecomeFirstResponder;
-    //  [Export("canBecomeFirstResponder")]
-    //  bool CanBecomeFirstResponder { get; }
+        // @property (readonly, nonatomic) BOOL canBecomeFirstResponder;
+        [Export("canBecomeFirstResponder")]
+        bool CanBecomeFirstResponder { get; }
 
-    //  // @property (readonly, nonatomic, strong) UIView * _Nullable inputAccessoryView;
-    //  [NullAllowed, Export("inputAccessoryView", ArgumentSemantic.Strong)]
-    //  UIView InputAccessoryView { get; }
-    //}
+        // @property (readonly, nonatomic, strong) UIView * _Nullable inputAccessoryView;
+        [NullAllowed, Export("inputAccessoryView", ArgumentSemantic.Strong)]
+        UIView InputAccessoryView { get; }
+    }
 
     //// @interface Bandyer_Swift_1720 (BCHChannelViewController) <UIAdaptivePresentationControllerDelegate>
     //[Category]
@@ -2889,56 +2890,59 @@ namespace Bandyer
     //  void CallClient(BCXCallClient client, NSError didFailWithError);
     //}
 
-    //// @interface BCHChannelViewControllerConfiguration : NSObject
-    //[BaseType(typeof(NSObject))]
-    //interface BCHChannelViewControllerConfiguration
-    //{
-    //  // -(instancetype _Nonnull)initWithUserInfoFetcher:(id<BDKUserInfoFetcher> _Nonnull)userInfoFetcher;
-    //  [Export("initWithUserInfoFetcher:")]
-    //  IntPtr Constructor(BDKUserInfoFetcher userInfoFetcher);
+    // @interface BCHChannelViewControllerConfiguration : NSObject
+    [BaseType(typeof(NSObject))]
+    interface BCHChannelViewControllerConfiguration
+    {
+        //// -(instancetype _Nonnull)initWithUserInfoFetcher:(id<BDKUserInfoFetcher> _Nonnull)userInfoFetcher;
+        //[Export("initWithUserInfoFetcher:")]
+        //IntPtr InitWithUserInfoFetcher(BDKUserInfoFetcher userInfoFetcher);
 
-    //  // -(instancetype _Nonnull)initWithAudioButton:(BOOL)audioButton videoButton:(BOOL)videoButton userInfoFetcher:(id<BDKUserInfoFetcher> _Nullable)userInfoFetcher __attribute__((objc_designated_initializer));
-    //  [Export("initWithAudioButton:videoButton:userInfoFetcher:")]
-    //  [DesignatedInitializer]
-    //  IntPtr Constructor(bool audioButton, bool videoButton, [NullAllowed] BDKUserInfoFetcher userInfoFetcher);
-    //}
+        // -(instancetype _Nonnull)initWithAudioButton:(BOOL)audioButton videoButton:(BOOL)videoButton userInfoFetcher:(id<BDKUserInfoFetcher> _Nullable)userInfoFetcher __attribute__((objc_designated_initializer));
+        [Export("initWithAudioButton:videoButton:userInfoFetcher:")]
+        [DesignatedInitializer]
+        IntPtr Constructor(bool audioButton, bool videoButton, [NullAllowed] BDKUserInfoFetcher userInfoFetcher);
+    }
 
-    //// @protocol BCHChannelViewControllerDelegate
-    //[Protocol, Model(AutoGeneratedName = true)]
-    //interface BCHChannelViewControllerDelegate
-    //{
-    //  // @required -(void)channelViewControllerDidFinish:(BCHChannelViewController * _Nonnull)controller;
-    //  [Abstract]
-    //  [Export("channelViewControllerDidFinish:")]
-    //  void ChannelViewControllerDidFinish(BCHChannelViewController controller);
+    // @protocol BCHChannelViewControllerDelegate
+    [Protocol]
+    [BaseType(typeof(NSObject))]
+    interface BCHChannelViewControllerDelegate
+    {
+        // @required -(void)channelViewControllerDidFinish:(BCHChannelViewController * _Nonnull)controller;
+        [Abstract]
+        [Export("channelViewControllerDidFinish:")]
+        void ChannelViewControllerDidFinish(BCHChannelViewController controller);
 
-    //  // @optional -(void)channelViewController:(BCHChannelViewController * _Nonnull)controller didTouchNotification:(BCHChatNotification * _Nonnull)notification;
-    //  [Export("channelViewController:didTouchNotification:")]
-    //  void ChannelViewController(BCHChannelViewController controller, BCHChatNotification notification);
+        // @optional -(void)channelViewController:(BCHChannelViewController * _Nonnull)controller didTouchNotification:(BCHChatNotification * _Nonnull)notification;
+        [Export("channelViewController:didTouchNotification:")]
+        void ChannelViewControllerDidTouchNotification(BCHChannelViewController controller, BCHChatNotification notification);
 
-    //  // @required -(void)channelViewController:(BCHChannelViewController * _Nonnull)controller didTouchBanner:(BDKCallBannerView * _Nonnull)banner;
-    //  [Abstract]
-    //  [Export("channelViewController:didTouchBanner:")]
-    //  void ChannelViewController(BCHChannelViewController controller, BDKCallBannerView banner);
+        // @required -(void)channelViewController:(BCHChannelViewController * _Nonnull)controller didTouchBanner:(BDKCallBannerView * _Nonnull)banner;
+        [Abstract]
+        [Export("channelViewController:didTouchBanner:")]
+        void ChannelViewControllerDidTouchBanner(BCHChannelViewController controller, BDKCallBannerView banner);
 
-    //  // @optional -(void)channelViewController:(BCHChannelViewController * _Nonnull)controller willHide:(BDKCallBannerView * _Nonnull)banner;
-    //  [Export("channelViewController:willHide:")]
-    //  void ChannelViewController(BCHChannelViewController controller, BDKCallBannerView banner);
+        // @optional -(void)channelViewController:(BCHChannelViewController * _Nonnull)controller willHide:(BDKCallBannerView * _Nonnull)banner;
+        [Export("channelViewController:willHide:")]
+        void ChannelViewControllerWillHide(BCHChannelViewController controller, BDKCallBannerView banner);
 
-    //  // @optional -(void)channelViewController:(BCHChannelViewController * _Nonnull)controller willShow:(BDKCallBannerView * _Nonnull)banner;
-    //  [Export("channelViewController:willShow:")]
-    //  void ChannelViewController(BCHChannelViewController controller, BDKCallBannerView banner);
+        // @optional -(void)channelViewController:(BCHChannelViewController * _Nonnull)controller willShow:(BDKCallBannerView * _Nonnull)banner;
+        [Export("channelViewController:willShow:")]
+        void ChannelViewControllerWillShow(BCHChannelViewController controller, BDKCallBannerView banner);
 
-    //  // @required -(void)channelViewController:(BCHChannelViewController * _Nonnull)controller didTapAudioCallWith:(NSArray<NSString *> * _Nonnull)users;
-    //  [Abstract]
-    //  [Export("channelViewController:didTapAudioCallWith:")]
-    //  void ChannelViewController(BCHChannelViewController controller, string[] users);
+        // @required -(void)channelViewController:(BCHChannelViewController * _Nonnull)controller didTapAudioCallWith:(NSArray<NSString *> * _Nonnull)users;
+        [Abstract]
+        [Export("channelViewController:didTapAudioCallWith:")]
+        void ChannelViewControllerDidTapAudioCallWith(BCHChannelViewController controller, string[] users);
 
-    //  // @required -(void)channelViewController:(BCHChannelViewController * _Nonnull)controller didTapVideoCallWith:(NSArray<NSString *> * _Nonnull)users;
-    //  [Abstract]
-    //  [Export("channelViewController:didTapVideoCallWith:")]
-    //  void ChannelViewController(BCHChannelViewController controller, string[] users);
-    //}
+        // @required -(void)channelViewController:(BCHChannelViewController * _Nonnull)controller didTapVideoCallWith:(NSArray<NSString *> * _Nonnull)users;
+        [Abstract]
+        [Export("channelViewController:didTapVideoCallWith:")]
+        void ChannelViewControllerDidTapVideoCallWith(BCHChannelViewController controller, string[] users);
+    }
+
+    interface IBCHChannelViewControllerDelegate { }
 
     //// @interface BCHMessageNotificationController : NSObject
     //[BaseType(typeof(NSObject))]
@@ -2968,9 +2972,9 @@ namespace Bandyer
     //  [Export("hide")]
     //  void Hide();
 
-    //  // -(void)viewWillTransitionTo:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator> _Nonnull)coordinator;
+    //  // -(void)viewWillTransitionTo:(CGSize)size withTransitionCoordinator:(id<IUIViewControllerTransitionCoordinator> _Nonnull)coordinator;
     //  [Export("viewWillTransitionTo:withTransitionCoordinator:")]
-    //  void ViewWillTransitionTo(CGSize size, UIViewControllerTransitionCoordinator coordinator);
+    //  void ViewWillTransitionTo(CGSize size, IUIViewControllerTransitionCoordinator coordinator);
     //}
 
     //// @interface BCHMessageNotificationControllerConfiguration : NSObject
@@ -2983,24 +2987,24 @@ namespace Bandyer
     //  IntPtr Constructor([NullAllowed] BDKUserInfoFetcher userInfoFetcher);
     //}
 
-    //// @interface BCHOpenChatIntent : NSObject <BDKIntent>
-    //[BaseType(typeof(NSObject))]
-    //[DisableDefaultCtor]
-    //interface BCHOpenChatIntent : IBDKIntent
-    //{
-    //  // @property (readonly, copy, nonatomic) NSUUID * _Nonnull UUID;
-    //  [Export("UUID", ArgumentSemantic.Copy)]
-    //  NSUuid UUID { get; }
+    // @interface BCHOpenChatIntent : NSObject <BDKIntent>
+    [BaseType(typeof(NSObject))]
+    [DisableDefaultCtor]
+    interface BCHOpenChatIntent : IBDKIntent
+    {
+        // @property (readonly, copy, nonatomic) NSUUID * _Nonnull UUID;
+        [Export("UUID", ArgumentSemantic.Copy)]
+        NSUuid UUID { get; }
 
-    //  // +(BCHOpenChatIntent * _Nonnull)openChatWith:(NSString * _Nonnull)participant __attribute__((warn_unused_result));
-    //  [Static]
-    //  [Export("openChatWith:")]
-    //  BCHOpenChatIntent OpenChatWith(string participant);
+        // +(BCHOpenChatIntent * _Nonnull)openChatWith:(NSString * _Nonnull)participant __attribute__((warn_unused_result));
+        [Static]
+        [Export("openChatWith:")]
+        BCHOpenChatIntent OpenChatWith(string participant);
 
-    //  // +(BCHOpenChatIntent * _Nullable)openChatFrom:(BCHChatNotification * _Nonnull)notification __attribute__((warn_unused_result));
-    //  [Static]
-    //  [Export("openChatFrom:")]
-    //  [return: NullAllowed]
-    //  BCHOpenChatIntent OpenChatFrom(BCHChatNotification notification);
-    //}
+        // +(BCHOpenChatIntent * _Nullable)openChatFrom:(BCHChatNotification * _Nonnull)notification __attribute__((warn_unused_result));
+        [Static]
+        [Export("openChatFrom:")]
+        [return: NullAllowed]
+        BCHOpenChatIntent OpenChatFrom(BCHChatNotification notification);
+    }
 }
