@@ -15,6 +15,7 @@ namespace BandyerDemo.iOS
     public class BandyerSdkiOS : NSObject
         , IBandyerSdk
         , IBCXCallClientObserver
+        , IBDKCallWindowDelegate
         , IBCHChatClientObserver
         , IBCHChannelViewControllerDelegate
     {
@@ -22,6 +23,7 @@ namespace BandyerDemo.iOS
         private BDKCallWindow callWindow = null;
         private string callUserAlias;
         private string chatUserAlias;
+        private string currentUserAlias;
 
         public static void InitSdk()
         {
@@ -39,20 +41,21 @@ namespace BandyerDemo.iOS
 
         public void Init(string userAlias)
         {
+            this.currentUserAlias = userAlias;
         }
 
         public void StartCall(string userAlias)
         {
             this.callUserAlias = userAlias;
             BandyerSDK.Instance().CallClient.AddObserver(this, DispatchQueue.MainQueue);
-            BandyerSDK.Instance().CallClient.Start(userAlias);
+            BandyerSDK.Instance().CallClient.Start(currentUserAlias);
         }
 
         public void StartChat(string userAlias)
         {
             this.chatUserAlias = userAlias;
             BandyerSDK.Instance().ChatClient.AddObserver(this, DispatchQueue.MainQueue);
-            BandyerSDK.Instance().ChatClient.Start(userAlias);
+            BandyerSDK.Instance().ChatClient.Start(currentUserAlias);
         }
 
         public class BandyerSdkPKPushRegistryDelegate : PKPushRegistryDelegate
@@ -73,7 +76,7 @@ namespace BandyerDemo.iOS
             if (callWindow == null)
             {
                 callWindow = new BDKCallWindow();
-                //window.WeakCallDelegate = this;
+                callWindow.CallDelegate = this;
                 var config = new BDKCallViewControllerConfiguration();
                 var url = new NSUrl(NSBundle.MainBundle.PathForResource("video", "mp4"));
                 config.FakeCapturerFileURL = url;
@@ -202,6 +205,7 @@ namespace BandyerDemo.iOS
         public void ChannelViewControllerDidFinish(BCHChannelViewController controller)
         {
             Debug.Print("ChannelViewControllerDidFinish " + controller);
+            UIApplication.SharedApplication.KeyWindow.RootViewController.DismissViewController(true, null);
         }
         public void ChannelViewControllerDidTouchBanner(BCHChannelViewController controller, BDKCallBannerView banner)
         {
@@ -214,6 +218,13 @@ namespace BandyerDemo.iOS
         public void ChannelViewControllerDidTapVideoCallWith(BCHChannelViewController controller, string[] users)
         {
             Debug.Print("ChannelViewControllerDidTapVideoCallWith " + controller + " " + users);
+        }
+
+        public void CallWindowDidFinish(BDKCallWindow window)
+        {
+            Debug.Print("CallWindowDidFinish " + window);
+            window.DismissCallViewControllerWithCompletion(() => { });
+            window.Hidden = true;
         }
     }
 }
