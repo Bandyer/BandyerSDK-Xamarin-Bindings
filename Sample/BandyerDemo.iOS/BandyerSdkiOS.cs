@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using Bandyer;
 using BandyerDemo.iOS;
@@ -18,8 +19,14 @@ namespace BandyerDemo.iOS
         , IBDKCallWindowDelegate
         , IBCHChatClientObserver
         , IBCHChannelViewControllerDelegate
+        , IPKPushRegistryDelegate
     {
-        private static BandyerSdkPKPushRegistryDelegate pushDel;
+        private static BandyerSdkiOS instance = null;
+        public BandyerSdkiOS()
+        {
+            instance = this;
+        }
+
         private BDKCallWindow callWindow = null;
         private string callUserAlias;
         private string chatUserAlias;
@@ -27,13 +34,17 @@ namespace BandyerDemo.iOS
 
         public static void InitSdk()
         {
+            instance.InitSdkInt();
+        }
+
+        void InitSdkInt()
+        {
             var appId = "mAppId_b78542f60f697c8a56a13e579f2e66d0378ba6b3336fa75f961c6efb0e6b";
 
             BDKConfig.LogLevel = BDFDDLogLevel.Verbose;
-            pushDel = new BandyerSdkPKPushRegistryDelegate();
             var config = new BDKConfig();
             config.NotificationPayloadKeyPath = "data";
-            config.PushRegistryDelegate = pushDel;
+            config.PushRegistryDelegate = this;
             config.Environment = BDKEnvironment.Sandbox;
             config.CallKitEnabled = true;
             BandyerSDK.Instance().InitializeWithApplicationId(appId, config);
@@ -58,16 +69,25 @@ namespace BandyerDemo.iOS
             BandyerSDK.Instance().ChatClient.Start(currentUserAlias);
         }
 
-        public class BandyerSdkPKPushRegistryDelegate : PKPushRegistryDelegate
+        public class BandyerSdkBDKUserInfoFetcher : NSObject, IBDKUserInfoFetcher
         {
-            public override void DidReceiveIncomingPush(PKPushRegistry registry, PKPushPayload payload, string type)
+            public List<BDKUserInfoDisplayItem> Items { get; set; }
+
+            public BandyerSdkBDKUserInfoFetcher(List<BDKUserInfoDisplayItem> items)
             {
-                Debug.Print("DidReceiveIncomingPush");
+                this.Items = items;
             }
 
-            public override void DidUpdatePushCredentials(PKPushRegistry registry, PKPushCredentials credentials, string type)
+            [return: Release]
+            public NSObject Copy(NSZone zone)
             {
-                Debug.Print("DidUpdatePushCredentials");
+                return new BandyerSdkBDKUserInfoFetcher(items: Items);
+            }
+
+            public void FetchUsersCompletion(string[] aliases, Action<NSArray<BDKUserInfoDisplayItem>> completion)
+            {
+                var arr = NSArray<BDKUserInfoDisplayItem>.FromNSObjects(Items.ToArray());
+                completion(arr);
             }
         }
 
@@ -78,8 +98,8 @@ namespace BandyerDemo.iOS
                 callWindow = new BDKCallWindow();
                 callWindow.CallDelegate = this;
                 var config = new BDKCallViewControllerConfiguration();
-                var url = new NSUrl(NSBundle.MainBundle.PathForResource("video", "mp4"));
-                config.FakeCapturerFileURL = url;
+                //var url = new NSUrl(NSBundle.MainBundle.PathForResource("video", "mp4"));
+                //config.FakeCapturerFileURL = url;
                 callWindow.SetConfiguration(config);
             }
             var callee = new string[] { callUserAlias };
@@ -95,12 +115,26 @@ namespace BandyerDemo.iOS
             client.Start(chatUserAlias);
             var intent = BCHOpenChatIntent.OpenChatWith(chatUserAlias);
             var rootVC = UIApplication.SharedApplication.KeyWindow.RootViewController;
-            var configuration = new BCHChannelViewControllerConfiguration(audioButton: true, videoButton: true, userInfoFetcher: null);
+            var items = userInfoFetcherItems();
+            var userInfoFetcher = new BandyerSdkBDKUserInfoFetcher(items);
+            var configuration = new BCHChannelViewControllerConfiguration(audioButton: true, videoButton: true, userInfoFetcher: userInfoFetcher);
             var channelVC = new BCHChannelViewController();
             channelVC.Delegate = this;
             channelVC.Configuration = configuration;
             channelVC.Intent = intent;
             rootVC.PresentViewController(channelVC, true, null);
+        }
+
+        List<BDKUserInfoDisplayItem> userInfoFetcherItems()
+        {
+            var items = new List<BDKUserInfoDisplayItem>();
+            var item = new BDKUserInfoDisplayItem("alias");
+            item.FirstName = "firstName";
+            item.LastName = "lastName";
+            item.Email = "email@email.com";
+            item.ImageURL = new NSUrl("https://static.bandyer.com/corporate/logos/logo_bandyer_only_name.png");
+            items.Add(item);
+            return items;
         }
 
         [Export("callClientDidPause:")]
@@ -225,6 +259,15 @@ namespace BandyerDemo.iOS
             Debug.Print("CallWindowDidFinish " + window);
             window.DismissCallViewControllerWithCompletion(() => { });
             window.Hidden = true;
+        }
+
+        public void DidUpdatePushCredentials(PKPushRegistry registry, PKPushCredentials credentials, string type)
+        {
+            Debug.Print("DidReceiveIncomingPush");
+        }
+        public void DidReceiveIncomingPush(PKPushRegistry registry, PKPushPayload payload, string type)
+        {
+            Debug.Print("DidUpdatePushCredentials");
         }
     }
 }

@@ -190,9 +190,9 @@ namespace Bandyer
     [BaseType(typeof(NSObject))]
     interface BDKCallViewControllerConfiguration : INSCopying
     {
-        //// @property (copy, nonatomic) id<BDKUserInfoFetcher> _Null_unspecified userInfoFetcher;
-        //[Export("userInfoFetcher", ArgumentSemantic.Copy)]
-        //BDKUserInfoFetcher UserInfoFetcher { get; set; }
+        // @property (copy, nonatomic) id<BDKUserInfoFetcher> _Null_unspecified userInfoFetcher;
+        [Export("userInfoFetcher", ArgumentSemantic.Copy)]
+        BDKUserInfoFetcher UserInfoFetcher { get; set; }
 
         // @property (copy, nonatomic) NSFormatter * _Null_unspecified callInfoTitleFormatter;
         [Export("callInfoTitleFormatter", ArgumentSemantic.Copy)]
@@ -213,7 +213,7 @@ namespace Bandyer
       protocol, then [Model] is redundant and will generate code that will never
       be used.
     */
-    [Protocol]
+    [Protocol, Model]
     [BaseType(typeof(NSObject))]
     interface BDKUserInfoFetcher : INSCopying
     {
@@ -222,6 +222,8 @@ namespace Bandyer
         [Export("fetchUsers:completion:")]
         void FetchUsersCompletion(string[] aliases, Action<NSArray<BDKUserInfoDisplayItem>> completion);
     }
+
+    interface IBDKUserInfoFetcher { }
 
     // @interface BDKUserInfoDisplayItem : NSObject <NSCopying>
     [BaseType(typeof(NSObject))]
@@ -2134,7 +2136,7 @@ namespace Bandyer
         string NotificationPayloadKeyPath { get; set; }
 
         [Wrap("WeakPushRegistryDelegate")]
-        PKPushRegistryDelegate PushRegistryDelegate { get; set; }
+        IPKPushRegistryDelegate PushRegistryDelegate { get; set; }
 
         // @property (nonatomic, strong) id<PKPushRegistryDelegate> _Nonnull pushRegistryDelegate;
         [NullAllowed, Export("pushRegistryDelegate", ArgumentSemantic.Strong)]
@@ -2904,7 +2906,7 @@ namespace Bandyer
         // -(instancetype _Nonnull)initWithAudioButton:(BOOL)audioButton videoButton:(BOOL)videoButton userInfoFetcher:(id<BDKUserInfoFetcher> _Nullable)userInfoFetcher __attribute__((objc_designated_initializer));
         [Export("initWithAudioButton:videoButton:userInfoFetcher:")]
         [DesignatedInitializer]
-        IntPtr Constructor(bool audioButton, bool videoButton, [NullAllowed] BDKUserInfoFetcher userInfoFetcher);
+        IntPtr Constructor(bool audioButton, bool videoButton, [NullAllowed] IBDKUserInfoFetcher userInfoFetcher);
     }
 
     // @protocol BCHChannelViewControllerDelegate
