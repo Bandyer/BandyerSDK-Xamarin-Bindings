@@ -31,6 +31,7 @@ namespace BandyerDemo.iOS
         private string callUserAlias;
         private string chatUserAlias;
         private string currentUserAlias;
+        private IBCHChatClient chatClient;
 
         public static void InitSdk()
         {
@@ -58,6 +59,11 @@ namespace BandyerDemo.iOS
         public void StartCall(string userAlias)
         {
             this.callUserAlias = userAlias;
+            startCall();
+        }
+
+        void startCall()
+        {
             BandyerSDK.Instance().CallClient.AddObserver(this, DispatchQueue.MainQueue);
             BandyerSDK.Instance().CallClient.Start(currentUserAlias);
         }
@@ -65,8 +71,27 @@ namespace BandyerDemo.iOS
         public void StartChat(string userAlias)
         {
             this.chatUserAlias = userAlias;
+            startChat();
+        }
+
+        void startChat()
+        {
             BandyerSDK.Instance().ChatClient.AddObserver(this, DispatchQueue.MainQueue);
             BandyerSDK.Instance().ChatClient.Start(currentUserAlias);
+        }
+
+        public void StartChatAndCall(string userAlias)
+        {
+            this.callUserAlias = userAlias;
+            this.chatUserAlias = userAlias;
+            startChat();
+            startCall();
+        }
+
+        void startChatAndCall()
+        {
+            startChat();
+            startCall();
         }
 
         public class BandyerSdkBDKUserInfoFetcher : NSObject, IBDKUserInfoFetcher
@@ -198,7 +223,8 @@ namespace BandyerDemo.iOS
         public void ChatClientDidStart(IBCHChatClient client)
         {
             Debug.Print("ChatClientDidStart " + client);
-            startChatController(client);
+            this.chatClient = client;
+            startChatController(this.chatClient);
         }
         [Export("chatClientWillPause:")]
         public void ChatClientWillPause(IBCHChatClient client)
@@ -259,6 +285,14 @@ namespace BandyerDemo.iOS
             Debug.Print("CallWindowDidFinish " + window);
             window.DismissCallViewControllerWithCompletion(() => { });
             window.Hidden = true;
+        }
+        [Export("callWindow:openChatWith:")]
+        public void CallWindowOpenChatWith(BDKCallWindow window, BCHOpenChatIntent intent)
+        {
+            Debug.Print("CallWindowOpenChatWith " + window + " " + intent);
+            window.DismissCallViewControllerWithCompletion(() => { });
+            window.Hidden = true;
+            startChatController(this.chatClient);
         }
 
         public void DidUpdatePushCredentials(PKPushRegistry registry, PKPushCredentials credentials, string type)

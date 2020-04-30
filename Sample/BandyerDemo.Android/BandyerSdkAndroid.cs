@@ -183,6 +183,14 @@ namespace BandyerDemo.Droid
                + System.String.Join(", ", call.CallInfo.Callees));
         }
 
+        public void StartChat(string userAlias)
+        {
+        }
+
+        public void StartChatAndCall(string userAlias)
+        {
+        }
+
         class BandyerSdkCallNotificationListener : Java.Lang.Object
             , ICallNotificationListener
         {

@@ -3,5 +3,6 @@
     <StackLayout Orientation="Vertical " VerticalOptions="CenterAndExpand">
         <Button Text="Start call" Clicked="Button_StartCall"></Button>
         <Button Text="Start chat" Clicked="Button_StartChat"></Button>
+        <Button Text="Start chat and call" Clicked="Button_StartChatAndCall"></Button>
     </StackLayout>
 </ContentPage>

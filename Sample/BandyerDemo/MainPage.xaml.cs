@@ -29,5 +29,10 @@ namespace BandyerDemo
         {
             bandyerSdk.StartChat("web");
         }
+
+        void Button_StartChatAndCall(System.Object sender, System.EventArgs e)
+        {
+            bandyerSdk.StartChatAndCall("web");
+        }
     }
 }
