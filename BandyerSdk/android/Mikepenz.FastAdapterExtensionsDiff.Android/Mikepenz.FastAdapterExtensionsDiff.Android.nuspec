@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<package >
+    <metadata>
+    <id>Mikepenz.FastAdapterExtensionsDiff.Android</id>
+    <version>5.0.0</version>
+    <title>Mikepenz.FastAdapterExtensionsDiff.Android</title>
+    <authors>Mikepenz</authors>
+    <owners>Mikepenz</owners>
+    <description>Mikepenz.FastAdapterExtensionsDiff.Android</description>
+    <dependencies>
+        <group targetFramework="MonoAndroid">
+        </group>
+    </dependencies>
+    </metadata>
+    <files>
+        <file src="./bin/Release/Mikepenz.FastAdapterExtensionsDiff.Android.*" target="lib/MonoAndroid" />
+    </files>
+</package>

@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<package >
+    <metadata>
+    <id>Iceteck.Silicompressorr.Android</id>
+    <version>2.2.2</version>
+    <title>Iceteck.Silicompressorr.Android</title>
+    <authors>Iceteck</authors>
+    <owners>Iceteck</owners>
+    <description>Iceteck.Silicompressorr.Android</description>
+    <dependencies>
+        <group targetFramework="MonoAndroid">
+        </group>
+    </dependencies>
+    </metadata>
+    <files>
+        <file src="./bin/Release/Iceteck.Silicompressorr.Android.*" target="lib/MonoAndroid" />
+    </files>
+</package>

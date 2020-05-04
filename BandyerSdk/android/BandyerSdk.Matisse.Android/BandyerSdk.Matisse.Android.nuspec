@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<package >
+    <metadata>
+    <id>BandyerSdk.Matisse.Android</id>
+    <version>0.0.1</version>
+    <title>BandyerSdk.Matisse.Android</title>
+    <authors>Bandyer</authors>
+    <owners>Bandyer</owners>
+    <description>BandyerSdk.Matisse.Android</description>
+    <dependencies>
+        <group targetFramework="MonoAndroid">
+        </group>
+    </dependencies>
+    </metadata>
+    <files>
+        <file src="./bin/Release/BandyerSdk.Matisse.Android.*" target="lib/MonoAndroid" />
+    </files>
+</package>

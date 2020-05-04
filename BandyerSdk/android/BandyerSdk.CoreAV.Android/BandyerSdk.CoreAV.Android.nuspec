@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<package >
+    <metadata>
+    <id>BandyerSdk.CoreAV.Android</id>
+    <version>1.5.13</version>
+    <title>BandyerSdk.CoreAV.Android</title>
+    <authors>Bandyer</authors>
+    <owners>Bandyer</owners>
+    <description>BandyerSdk.CoreAV.Android</description>
+    <dependencies>
+        <group targetFramework="MonoAndroid">
+        </group>
+    </dependencies>
+    </metadata>
+    <files>
+        <file src="./bin/Release/BandyerSdk.CoreAV.Android.*" target="lib/MonoAndroid" />
+    </files>
+</package>

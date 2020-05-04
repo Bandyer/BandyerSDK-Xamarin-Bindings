@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<package >
+    <metadata>
+    <id>BandyerSdk.Firecrasher.Android</id>
+    <version>1.0.2</version>
+    <title>BandyerSdk.Firecrasher.Android</title>
+    <authors>Bandyer</authors>
+    <owners>Bandyer</owners>
+    <description>BandyerSdk.Firecrasher.Android</description>
+    <dependencies>
+        <group targetFramework="MonoAndroid">
+        </group>
+    </dependencies>
+    </metadata>
+    <files>
+        <file src="./bin/Release/BandyerSdk.Firecrasher.Android.*" target="lib/MonoAndroid" />
+    </files>
+</package>

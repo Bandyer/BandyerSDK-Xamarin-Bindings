@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<package >
+    <metadata>
+    <id>BandyerSdk.AudioSession.Android</id>
+    <version>1.0.6</version>
+    <title>BandyerSdk.AudioSession.Android</title>
+    <authors>Bandyer</authors>
+    <owners>Bandyer</owners>
+    <description>BandyerSdk.AudioSession.Android</description>
+    <dependencies>
+        <group targetFramework="MonoAndroid">
+        </group>
+    </dependencies>
+    </metadata>
+    <files>
+        <file src="./bin/Release/BandyerSdk.AudioSession.Android.*" target="lib/MonoAndroid" />
+    </files>
+</package>

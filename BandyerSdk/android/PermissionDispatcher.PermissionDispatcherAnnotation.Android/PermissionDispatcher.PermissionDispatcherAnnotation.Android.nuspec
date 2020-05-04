@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<package >
+    <metadata>
+    <id>PermissionDispatcher.PermissionDispatcherAnnotation.Android</id>
+    <version>4.6.0</version>
+    <title>PermissionDispatcher.PermissionDispatcherAnnotation.Android</title>
+    <authors>PermissionDispatcher</authors>
+    <owners>PermissionDispatcher</owners>
+    <description>PermissionDispatcher.PermissionDispatcherAnnotation.Android</description>
+    <dependencies>
+        <group targetFramework="MonoAndroid">
+        </group>
+    </dependencies>
+    </metadata>
+    <files>
+        <file src="./bin/Release/PermissionDispatcher.PermissionDispatcherAnnotation.Android.*" target="lib/MonoAndroid" />
+    </files>
+</package>

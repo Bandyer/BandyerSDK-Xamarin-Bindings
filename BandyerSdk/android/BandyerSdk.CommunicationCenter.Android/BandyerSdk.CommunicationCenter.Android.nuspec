@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<package >
+    <metadata>
+    <id>BandyerSdk.CommunicationCenter.Android</id>
+    <version>1.2.8</version>
+    <title>BandyerSdk.CommunicationCenter.Android</title>
+    <authors>Bandyer</authors>
+    <owners>Bandyer</owners>
+    <description>BandyerSdk.CommunicationCenter.Android</description>
+    <dependencies>
+        <group targetFramework="MonoAndroid">
+        </group>
+    </dependencies>
+    </metadata>
+    <files>
+        <file src="./bin/Release/BandyerSdk.CommunicationCenter.Android.*" target="lib/MonoAndroid" />
+    </files>
+</package>

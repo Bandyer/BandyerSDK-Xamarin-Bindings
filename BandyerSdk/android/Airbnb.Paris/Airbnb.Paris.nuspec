@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<package >
+    <metadata>
+    <id>Airbnb.Paris</id>
+    <version>1.4.0</version>
+    <title>Airbnb.Paris</title>
+    <authors>Airbnb</authors>
+    <owners>Airbnb</owners>
+    <description>Airbnb.Paris</description>
+    <dependencies>
+        <group targetFramework="MonoAndroid">
+        </group>
+    </dependencies>
+    </metadata>
+    <files>
+        <file src="./bin/Release/Airbnb.Paris.*" target="lib/MonoAndroid" />
+    </files>
+</package>

@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<package >
+    <metadata>
+    <id>Square.Picasso.Android</id>
+    <version>2.71828</version>
+    <title>Square.Picasso.Android</title>
+    <authors>Square</authors>
+    <owners>Square</owners>
+    <description>Square.Picasso.Android</description>
+    <dependencies>
+        <group targetFramework="MonoAndroid">
+        </group>
+    </dependencies>
+    </metadata>
+    <files>
+        <file src="./bin/Release/Square.Picasso.Android.*" target="lib/MonoAndroid" />
+    </files>
+</package>

@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<package >
+    <metadata>
+    <id>BandyerSdk.SocketIOClient.Android</id>
+    <version>1.0.9</version>
+    <title>BandyerSdk.SocketIOClient.Android</title>
+    <authors>Bandyer</authors>
+    <owners>Bandyer</owners>
+    <description>BandyerSdk.SocketIOClient.Android</description>
+    <dependencies>
+        <group targetFramework="MonoAndroid">
+        </group>
+    </dependencies>
+    </metadata>
+    <files>
+        <file src="./bin/Release/BandyerSdk.SocketIOClient.Android.*" target="lib/MonoAndroid" />
+    </files>
+</package>
