@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<package >
+    <metadata>
+    <id>Kotlinx.CoroutinesCore.Android</id>
+    <version>1.3.3</version>
+    <title>Kotlinx.CoroutinesCore.Android</title>
+    <authors>Kotlinx</authors>
+    <owners>Kotlinx</owners>
+    <description>Kotlinx.CoroutinesCore.Android</description>
+    <dependencies>
+        <group targetFramework="MonoAndroid">
+            <dependency id="Xamarin.Kotlin.StdLib" version="1.3.50.1" />
+            <dependency id="Xamarin.Kotlin.StdLib.Common" version="1.3.50.1" />
+        </group>
+    </dependencies>
+    </metadata>
+    <files>
+        <file src="./bin/Release/Kotlinx.CoroutinesCore.Android.*" target="lib/MonoAndroid" />
+    </files>
+</package>

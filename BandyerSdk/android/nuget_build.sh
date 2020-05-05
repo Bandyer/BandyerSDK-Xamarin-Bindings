@@ -28,6 +28,8 @@ msbuild /p:Configuration=Release /t:Clean /target:Build Conscrypt.ConscryptAndro
 nuget pack Conscrypt.ConscryptAndroid.Android/Conscrypt.ConscryptAndroid.Android.nuspec -Verbosity detailed
 msbuild /p:Configuration=Release /t:Clean /target:Build Iceteck.Silicompressorr.Android/Iceteck.Silicompressorr.Android.csproj
 nuget pack Iceteck.Silicompressorr.Android/Iceteck.Silicompressorr.Android.nuspec -Verbosity detailed
+msbuild /p:Configuration=Release /t:Clean /target:Build Kotlinx.CoroutinesCore.Android/Kotlinx.CoroutinesCore.Android.csproj
+nuget pack Kotlinx.CoroutinesCore.Android/Kotlinx.CoroutinesCore.Android.nuspec -Verbosity detailed
 msbuild /p:Configuration=Release /t:Clean /target:Build Kotlinx.CoroutinesAndroid.Android/Kotlinx.CoroutinesAndroid.Android.csproj
 nuget pack Kotlinx.CoroutinesAndroid.Android/Kotlinx.CoroutinesAndroid.Android.nuspec -Verbosity detailed
 msbuild /p:Configuration=Release /t:Clean /target:Build Mikepenz.FastAdapter.Android/Mikepenz.FastAdapter.Android.csproj
