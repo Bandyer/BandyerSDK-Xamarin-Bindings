@@ -8,14 +8,31 @@ using Xamarin.Forms;
 
 namespace BandyerDemoNuget
 {
-    // Learn more about making custom code visible in the Xamarin.Forms previewer
-    // by visiting https://aka.ms/xamarinforms-previewer
-    [DesignTimeVisible(false)]
     public partial class MainPage : ContentPage
     {
+        private IBandyerSdk bandyerSdk;
+
         public MainPage()
         {
             InitializeComponent();
+            bandyerSdk = DependencyService.Get<IBandyerSdk>();
+            var userAlias = "client";
+            bandyerSdk.Init(userAlias);
+        }
+
+        void Button_StartCall(System.Object sender, System.EventArgs e)
+        {
+            bandyerSdk.StartCall("web");
+        }
+
+        void Button_StartChat(System.Object sender, System.EventArgs e)
+        {
+            bandyerSdk.StartChat("web");
+        }
+
+        void Button_StartChatAndCall(System.Object sender, System.EventArgs e)
+        {
+            bandyerSdk.StartChatAndCall("web");
         }
     }
 }
