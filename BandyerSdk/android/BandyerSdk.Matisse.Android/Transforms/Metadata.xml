@@ -4,4 +4,5 @@
     <remove-node path="/api/package[@name='com.zhihu.matisse.internal.model']/class[@name='AlbumMediaCollection']" />
     <remove-node path="/api/package[@name='com.zhihu.matisse.internal.ui.adapter']/class[@name='AlbumMediaAdapter']" />
     <remove-node path="/api/package[@name='com.zhihu.matisse.internal.ui.adapter']/class[@name='RecyclerViewCursorAdapter']" />
+    <remove-node path="/api/package[@name='com.zhihu.matisse.internal.ui.adapter']/class[@name='PreviewPagerAdapter']" />
 </metadata>
