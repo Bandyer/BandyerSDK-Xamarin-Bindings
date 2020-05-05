@@ -29,6 +29,7 @@
             <dependency id="BandyerSdk.Common.Android" version="1.0.10" />
             <dependency id="BandyerSdk.Design.Android" version="0.0.42" />
             <dependency id="Badoo.AndroidWeakHandler.Android" version="1.1" />
+            <dependency id="Twilio.ChatAndroid.Android" version="4.2.9" />
         </group>
     </dependencies>
     </metadata>
