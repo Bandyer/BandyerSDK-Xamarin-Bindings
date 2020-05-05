@@ -9,6 +9,10 @@
     <description>BandyerSdk.Matisse.Android</description>
     <dependencies>
         <group targetFramework="MonoAndroid">
+            <dependency id="Xamarin.AndroidX.AppCompat" version="1.1.0" />
+            <dependency id="Xamarin.AndroidX.Annotation" version="1.1.0" />
+            <dependency id="Xamarin.AndroidX.RecyclerView" version="1.1.0" />
+            <dependency id="Naxam.Sephiroth.ImageZoom.Droid" version="1.0.4.1" />
         </group>
     </dependencies>
     </metadata>
