@@ -5,13 +5,13 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{E9604997-5171-43C6-B244-E87009C73C24}</ProjectGuid>
+    <ProjectGuid>{722AD934-8E19-4B61-847E-9418AB87360E}</ProjectGuid>
     <ProjectTypeGuids>{10368E6C-D01B-4462-8E8B-01FC667A7035};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <TemplateGuid>{77efb91c-a7e9-4b0e-a7c5-31eeec3c6d46}</TemplateGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Kotlinx.CoroutinesAndroid.Android</RootNamespace>
-    <AssemblyName>Kotlinx.CoroutinesAndroid.Android</AssemblyName>
+    <RootNamespace>Kotlinx.CoroutinesCore.Android</RootNamespace>
+    <AssemblyName>Kotlinx.CoroutinesCore.Android</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <Deterministic>True</Deterministic>
     <TargetFrameworkVersion>v9.0</TargetFrameworkVersion>
@@ -56,18 +56,15 @@
     <TransformFile Include="Transforms\EnumMethods.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedJar Include="Jars\kotlinx-coroutines-android-1.3.3.jar" />
+    <EmbeddedJar Include="Jars\kotlinx-coroutines-core-1.3.3.jar" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Xamarin.Kotlin.StdLib">
       <Version>1.3.50.1</Version>
     </PackageReference>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Kotlinx.CoroutinesCore.Android\Kotlinx.CoroutinesCore.Android.csproj">
-      <Project>{722AD934-8E19-4B61-847E-9418AB87360E}</Project>
-      <Name>Kotlinx.CoroutinesCore.Android</Name>
-    </ProjectReference>
+    <PackageReference Include="Xamarin.Kotlin.StdLib.Common">
+      <Version>1.3.50.1</Version>
+    </PackageReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.Bindings.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

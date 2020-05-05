@@ -9,7 +9,7 @@
     <description>Kotlinx.CoroutinesAndroid.Android</description>
     <dependencies>
         <group targetFramework="MonoAndroid">
-            <dependency id="Karamunting.KotlinX.Coroutines.Core" version="1.3.2" />
+            <dependency id="Kotlinx.CoroutinesCore.Android" version="1.3.3" />
             <dependency id="Xamarin.Kotlin.StdLib" version="1.3.50.1" />
         </group>
     </dependencies>

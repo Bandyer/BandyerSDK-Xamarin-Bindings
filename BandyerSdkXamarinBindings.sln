@@ -61,6 +61,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Square.Picasso.Android", "B
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BandyerSdk.iOS", "BandyerSdk\ios\BandyerSdk.iOS\BandyerSdk.iOS.csproj", "{D0448F8C-C62A-4103-B166-45C364ACD42E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kotlinx.CoroutinesCore.Android", "BandyerSdk\android\Kotlinx.CoroutinesCore.Android\Kotlinx.CoroutinesCore.Android.csproj", "{722AD934-8E19-4B61-847E-9418AB87360E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -383,6 +385,18 @@ Global
 		{D0448F8C-C62A-4103-B166-45C364ACD42E}.Debug|iPhone.Build.0 = Debug|Any CPU
 		{D0448F8C-C62A-4103-B166-45C364ACD42E}.Release|iPhone.ActiveCfg = Release|Any CPU
 		{D0448F8C-C62A-4103-B166-45C364ACD42E}.Release|iPhone.Build.0 = Release|Any CPU
+		{722AD934-8E19-4B61-847E-9418AB87360E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{722AD934-8E19-4B61-847E-9418AB87360E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{722AD934-8E19-4B61-847E-9418AB87360E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{722AD934-8E19-4B61-847E-9418AB87360E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{722AD934-8E19-4B61-847E-9418AB87360E}.Debug|iPhoneSimulator.ActiveCfg = Debug|Any CPU
+		{722AD934-8E19-4B61-847E-9418AB87360E}.Debug|iPhoneSimulator.Build.0 = Debug|Any CPU
+		{722AD934-8E19-4B61-847E-9418AB87360E}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
+		{722AD934-8E19-4B61-847E-9418AB87360E}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
+		{722AD934-8E19-4B61-847E-9418AB87360E}.Debug|iPhone.ActiveCfg = Debug|Any CPU
+		{722AD934-8E19-4B61-847E-9418AB87360E}.Debug|iPhone.Build.0 = Debug|Any CPU
+		{722AD934-8E19-4B61-847E-9418AB87360E}.Release|iPhone.ActiveCfg = Release|Any CPU
+		{722AD934-8E19-4B61-847E-9418AB87360E}.Release|iPhone.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{EC4FE49D-AB40-421D-BEF4-E1421A16E81E} = {478218E3-FFA9-496B-B670-DB647348BD22}
@@ -413,5 +427,6 @@ Global
 		{08B5EE2D-C396-4B5E-B86B-EBD43F90E6F1} = {4F152E7D-4101-4CF1-8B6D-49EA83083BEF}
 		{E7FFB7BC-2E38-44DC-855B-8985DE816E73} = {4F152E7D-4101-4CF1-8B6D-49EA83083BEF}
 		{D0448F8C-C62A-4103-B166-45C364ACD42E} = {116DCDDE-3127-4978-87B6-7A4B153B21B4}
+		{722AD934-8E19-4B61-847E-9418AB87360E} = {4F152E7D-4101-4CF1-8B6D-49EA83083BEF}
 	EndGlobalSection
 EndGlobal

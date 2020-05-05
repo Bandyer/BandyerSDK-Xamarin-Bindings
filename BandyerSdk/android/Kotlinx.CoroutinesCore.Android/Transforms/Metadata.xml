@@ -1,0 +1,5 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<metadata>
+    <remove-node path="/api/package[@name='kotlinx.coroutines.internal']/class[@name='AtomicOp']" />
+    <remove-node path="/api/package[@name='kotlinx.coroutines.channels']/class[@name='ChannelsKt']" />
+</metadata>
