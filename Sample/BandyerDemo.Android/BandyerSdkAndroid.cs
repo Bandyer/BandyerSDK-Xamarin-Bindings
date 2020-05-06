@@ -106,26 +106,25 @@ namespace BandyerDemo.Droid
             BandyerSDKClient.Instance.CallModule.AddCallUIObserver(this);
             BandyerSDKClient.Instance.CallModule.AddCallObserver(this);
 
-            CallCapabilities capabilities = new CallCapabilities()
-                        .WithWhiteboard()
-                        .WithFileSharing()
-                        .WithChat()
-                        .WithScreenSharing();
+            CallCapabilities capabilities = new CallCapabilities();
+            capabilities.WithWhiteboard();
+            capabilities.WithFileSharing();
+            capabilities.WithChat();
+            capabilities.WithScreenSharing();
 
-            CallOptions options = new CallOptions()
-                        //.WithRecordingEnabled() // if the call started should be recorded
-                        //.WithBackCameraAsDefault() // if the call should start with back camera
-                        //.WithProximitySensorDisabled() // if the proximity sensor should be disabled during calls
-                        ;
+            CallOptions options = new CallOptions();
+            options.WithRecordingEnabled(); // if the call started should be recorded
+            options.WithBackCameraAsDefault(); // if the call should start with back camera
+            options.WithProximitySensorDisabled(); // if the proximity sensor should be disabled during calls
 
-            BandyerIntent bandyerCallIntent = new BandyerIntent.Builder()
-                    .StartWithAudioVideoCall(application /* context */ )
-                /* .startWithAudioUpgradableCall(this) */ // audio call that may upgrade into audio&video call
-                /* .startWithAudioCall(this) */  // audio only call
-                .With(new List<string>() { "web" })
-                //.WithCapabilities(capabilities) // optional
-                //.WithOptions(options) // optional
-                .Build();
+            BandyerIntent.Builder builder = new BandyerIntent.Builder();
+            CallIntentBuilder callIntentBuilder = builder.StartWithAudioVideoCall(application /* context */ );
+            //builder.StartWithAudioUpgradableCall(application); // audio call that may upgrade into audio&video call
+            //builder.StartWithAudioCall(application);  // audio only call
+            CallIntentOptions callIntentOptions =  callIntentBuilder.With(new List<string>() { "web" });
+            callIntentOptions.WithCapabilities(capabilities); // optional
+            callIntentOptions.WithOptions(options); // optional
+            BandyerIntent bandyerCallIntent = callIntentOptions.Build();
 
             application.StartActivity(bandyerCallIntent);
         }
