@@ -4,7 +4,7 @@ msbuild /p:Configuration=Release /t:Clean /target:Build Airbnb.Paris/Airbnb.Pari
 nuget pack Airbnb.Paris/Airbnb.Paris.nuspec -Verbosity detailed
 msbuild /p:Configuration=Release /t:Clean /target:Build Badoo.AndroidWeakHandler.Android/Badoo.AndroidWeakHandler.Android.csproj
 nuget pack Badoo.AndroidWeakHandler.Android/Badoo.AndroidWeakHandler.Android.nuspec -Verbosity detailed
-msbuild /p:Configuration=Release /t:Clean /target:Build BandyerSdk.Android/BandyerSdk.Android.Android.csproj
+msbuild /p:Configuration=Release /t:Clean /target:Build BandyerSdk.Android/BandyerSdk.Android.csproj
 nuget pack BandyerSdk.Android/BandyerSdk.Android.nuspec -Verbosity detailed
 msbuild /p:Configuration=Release /t:Clean /target:Build BandyerSdk.AudioSession.Android/BandyerSdk.AudioSession.Android.csproj
 nuget pack BandyerSdk.AudioSession.Android/BandyerSdk.AudioSession.Android.nuspec -Verbosity detailed
