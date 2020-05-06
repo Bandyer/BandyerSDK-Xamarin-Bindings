@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<package >
+    <metadata>
+    <id>BandyerSdk.iOS</id>
+    <version>1.4.0</version>
+    <title>BandyerSdk.iOS</title>
+    <authors>Bandyer</authors>
+    <owners>Bandyer</owners>
+    <description>BandyerSdk.iOS</description>
+    <dependencies>
+    </dependencies>
+    </metadata>
+    <files>
+        <file src="./bin/Release/BandyerSdk.*" target="lib\Xamarin.iOS10" />
+    </files>
+</package>
