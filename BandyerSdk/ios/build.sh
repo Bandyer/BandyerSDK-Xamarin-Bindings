@@ -8,7 +8,8 @@ rm -rf Binding
 rm -rf bin
 pod repo update
 pod install
-sharpie pod bind
+
+# sharpie pod bind
 
 # cp -f Binding/Bandyer_ApiDefinitions.cs BandyerSdk.iOS/ApiDefinition.cs 
 # cp -f Binding/Bandyer_StructsAndEnums.cs BandyerSdk.iOS/Structs.cs 
