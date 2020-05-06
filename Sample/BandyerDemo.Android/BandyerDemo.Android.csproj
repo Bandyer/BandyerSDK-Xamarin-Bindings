@@ -167,6 +167,14 @@
       <Project>{E7FFB7BC-2E38-44DC-855B-8985DE816E73}</Project>
       <Name>Square.Picasso.Android</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\BandyerSdk\android\Kotlinx.CoroutinesAndroid.Android\Kotlinx.CoroutinesAndroid.Android.csproj">
+      <Project>{E9604997-5171-43C6-B244-E87009C73C24}</Project>
+      <Name>Kotlinx.CoroutinesAndroid.Android</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\BandyerSdk\android\Kotlinx.CoroutinesCore.Android\Kotlinx.CoroutinesCore.Android.csproj">
+      <Project>{722AD934-8E19-4B61-847E-9418AB87360E}</Project>
+      <Name>Kotlinx.CoroutinesCore.Android</Name>
+    </ProjectReference>
   </ItemGroup>
  <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
 </Project>
