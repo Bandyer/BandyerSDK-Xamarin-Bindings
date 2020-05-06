@@ -25,6 +25,8 @@ namespace BandyerDemoNuget.iOS
             global::Xamarin.Forms.Forms.Init();
             LoadApplication(new App());
 
+            BandyerSdkiOS.InitSdk();
+
             return base.FinishedLaunching(app, options);
         }
     }
