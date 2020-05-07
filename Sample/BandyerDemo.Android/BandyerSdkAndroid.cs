@@ -33,6 +33,7 @@ namespace BandyerDemo.Droid
         //private bool isChatModuleConnected;
         //private bool isCallModuleConnected;
 
+        #region IBandyerSDKClientObserver
         public void OnClientError(Throwable throwable)
         {
             Log.Debug(TAG, "OnClientError " + throwable);
@@ -52,7 +53,9 @@ namespace BandyerDemo.Droid
         {
             Log.Debug(TAG, "OnClientStopped");
         }
+        #endregion
 
+        #region IBandyerModuleObserver
         public void OnModuleFailed(IBandyerModule module, Throwable throwable)
         {
             Log.Debug(TAG, "OnModuleFailed " + module + " " + throwable);
@@ -80,6 +83,13 @@ namespace BandyerDemo.Droid
             //    isCallModuleConnected = true;
             //}
         }
+        #endregion
+
+        public void Dispose()
+        {
+            BandyerSDKClient.Instance.StopListening();
+            BandyerSDKClient.Instance.Dispose();
+        }
 
         public static void InitSdk(Android.App.Application application)
         {
@@ -97,6 +107,7 @@ namespace BandyerDemo.Droid
             BandyerSDK.Init(builder);
         }
 
+        #region IBandyerSdk
         public void Init(string userAlias)
         {
             BandyerSDKClient.Instance.AddObserver(this);
@@ -105,12 +116,6 @@ namespace BandyerDemo.Droid
             BandyerSDKClientOptions options = new BandyerSDKClientOptions.Builder().Build();
             BandyerSDKClient.Instance.Init(userAlias, options);
             BandyerSDKClient.Instance.StartListening();
-        }
-
-        public void Dispose()
-        {
-            BandyerSDKClient.Instance.StopListening();
-            BandyerSDKClient.Instance.Dispose();
         }
 
         public void StartCall(string userAlias)
@@ -141,6 +146,36 @@ namespace BandyerDemo.Droid
             application.StartActivity(bandyerCallIntent);
         }
 
+        public void StartChat(string userAlias)
+        {
+            CallCapabilities capabilities = new CallCapabilities();
+            capabilities.WithWhiteboard();
+            capabilities.WithFileSharing();
+            capabilities.WithChat();
+            capabilities.WithScreenSharing();
+
+            CallOptions options = new CallOptions();
+            options.WithRecordingEnabled(); // if the call started should be recorded
+            options.WithBackCameraAsDefault(); // if the call should start with back camera
+            options.WithProximitySensorDisabled(); // if the proximity sensor should be disabled during calls
+
+            BandyerIntent.Builder builder = new BandyerIntent.Builder();
+            ChatIntentBuilder chatIntentBuilder = builder.StartWithChat(application /* context */ );
+            ChatIntentOptions chatIntentOptions = chatIntentBuilder.With("web");
+            chatIntentOptions.WithAudioCallCapability(capabilities, options); // optional
+            chatIntentOptions.WithAudioUpgradableCallCapability(capabilities, options); // optionally upgradable to audio video call
+            chatIntentOptions.WithAudioVideoCallCapability(capabilities, options); // optional
+            BandyerIntent bandyerChatIntent = chatIntentOptions.Build();
+
+            application.StartActivity(bandyerChatIntent);
+        }
+
+        public void StartChatAndCall(string userAlias)
+        {
+        }
+        #endregion
+
+        #region ICallUIObserver
         public void OnActivityDestroyed(ICall call, Java.Lang.Ref.WeakReference activity)
         {
             Log.Debug(TAG, "onCallActivityDestroyed: "
@@ -163,7 +198,9 @@ namespace BandyerDemo.Droid
                + call.CallInfo.Caller + ", "
                + System.String.Join(", ", call.CallInfo.Callees));
         }
+        #endregion
 
+        #region ICallObserver
         public void OnCallCreated(ICall call)
         {
             Log.Debug(TAG, "onCallCreated: "
@@ -193,34 +230,7 @@ namespace BandyerDemo.Droid
                + call.CallInfo.Caller + ", "
                + System.String.Join(", ", call.CallInfo.Callees));
         }
-
-        public void StartChat(string userAlias)
-        {
-            CallCapabilities capabilities = new CallCapabilities();
-            capabilities.WithWhiteboard();
-            capabilities.WithFileSharing();
-            capabilities.WithChat();
-            capabilities.WithScreenSharing();
-
-            CallOptions options = new CallOptions();
-            options.WithRecordingEnabled(); // if the call started should be recorded
-            options.WithBackCameraAsDefault(); // if the call should start with back camera
-            options.WithProximitySensorDisabled(); // if the proximity sensor should be disabled during calls
-
-            BandyerIntent.Builder builder = new BandyerIntent.Builder();
-            ChatIntentBuilder chatIntentBuilder = builder.StartWithChat(application /* context */ );
-            ChatIntentOptions chatIntentOptions = chatIntentBuilder.With("web");
-            chatIntentOptions.WithAudioCallCapability(capabilities, options); // optional
-            chatIntentOptions.WithAudioUpgradableCallCapability(capabilities, options); // optionally upgradable to audio video call
-            chatIntentOptions.WithAudioVideoCallCapability(capabilities, options); // optional
-            BandyerIntent bandyerChatIntent = chatIntentOptions.Build();
-
-            application.StartActivity(bandyerChatIntent);
-        }
-
-        public void StartChatAndCall(string userAlias)
-        {
-        }
+        #endregion
 
         class BandyerSdkCallNotificationListener : Java.Lang.Object
             , ICallNotificationListener
