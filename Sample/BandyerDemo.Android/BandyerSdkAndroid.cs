@@ -8,9 +8,11 @@ using Com.Bandyer.Android_sdk;
 using Com.Bandyer.Android_sdk.Call;
 using Com.Bandyer.Android_sdk.Call.Model;
 using Com.Bandyer.Android_sdk.Call.Notification;
+using Com.Bandyer.Android_sdk.Chat;
 using Com.Bandyer.Android_sdk.Client;
 using Com.Bandyer.Android_sdk.Intent;
 using Com.Bandyer.Android_sdk.Intent.Call;
+using Com.Bandyer.Android_sdk.Intent.Chat;
 using Com.Bandyer.Android_sdk.Module;
 using Com.Bandyer.Android_sdk.Utils.Provider;
 using Java.Lang;
@@ -184,6 +186,26 @@ namespace BandyerDemo.Droid
 
         public void StartChat(string userAlias)
         {
+            CallCapabilities capabilities = new CallCapabilities();
+            capabilities.WithWhiteboard();
+            capabilities.WithFileSharing();
+            capabilities.WithChat();
+            capabilities.WithScreenSharing();
+
+            CallOptions options = new CallOptions();
+            options.WithRecordingEnabled(); // if the call started should be recorded
+            options.WithBackCameraAsDefault(); // if the call should start with back camera
+            options.WithProximitySensorDisabled(); // if the proximity sensor should be disabled during calls
+
+            BandyerIntent.Builder builder = new BandyerIntent.Builder();
+            ChatIntentBuilder chatIntentBuilder = builder.StartWithChat(application /* context */ );
+            ChatIntentOptions chatIntentOptions = chatIntentBuilder.With("web");
+            chatIntentOptions.WithAudioCallCapability(capabilities, options); // optional
+            chatIntentOptions.WithAudioUpgradableCallCapability(capabilities, options); // optionally upgradable to audio video call
+            chatIntentOptions.WithAudioVideoCallCapability(capabilities, options); // optional
+            BandyerIntent bandyerChatIntent = chatIntentOptions.Build();
+
+            application.StartActivity(bandyerChatIntent);
         }
 
         public void StartChatAndCall(string userAlias)
