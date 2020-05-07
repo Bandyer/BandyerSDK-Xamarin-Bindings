@@ -76,6 +76,7 @@
     <Compile Include="BandyerSdkAndroid.cs" />
     <Compile Include="BandyerSdkExceptionReceiver.cs" />
     <Compile Include="BandyerSdkCallEventBroadcastReceiver.cs" />
+    <Compile Include="BandyerSdkChatEventBroadcastReceiver.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
