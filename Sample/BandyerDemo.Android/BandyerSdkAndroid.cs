@@ -30,6 +30,8 @@ namespace BandyerDemo.Droid
     {
         const string TAG = "BandyerDemo";
         private static Android.App.Application application;
+        //private bool isChatModuleConnected;
+        //private bool isCallModuleConnected;
 
         public void OnClientError(Throwable throwable)
         {
@@ -69,6 +71,14 @@ namespace BandyerDemo.Droid
         public void OnModuleStatusChanged(IBandyerModule module, BandyerModuleStatus moduleStatus)
         {
             Log.Debug(TAG, "OnModuleStatusChanged " + module + " " + moduleStatus);
+            //if (module.Name == "ChatModule" && module.Status == BandyerModuleStatus.Connected)
+            //{
+            //    isChatModuleConnected = true;
+            //}
+            //if (module.Name == "CallModule" && module.Status == BandyerModuleStatus.Connected)
+            //{
+            //    isCallModuleConnected = true;
+            //}
         }
 
         public static void InitSdk(Android.App.Application application)
