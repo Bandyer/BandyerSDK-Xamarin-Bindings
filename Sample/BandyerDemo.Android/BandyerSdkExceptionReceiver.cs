@@ -12,9 +12,6 @@ namespace BandyerDemo.Droid
     public class BandyerSdkExceptionReceiver : BandyerUnhandledExceptionBroadcastReceiver
     {
         const string TAG = "BandyerSdkExceptionReceiver";
-        public BandyerSdkExceptionReceiver()
-        {
-        }
 
         public override void OnException(Throwable e)
         {
