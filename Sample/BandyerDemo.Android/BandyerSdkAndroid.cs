@@ -31,7 +31,7 @@ namespace BandyerDemo.Droid
         , IChatObserver
     {
         const string TAG = "BandyerDemo";
-        private static Android.App.Application application;
+        public static Android.App.Activity MainActivity;
         //private bool isChatModuleConnected;
         //private bool isCallModuleConnected;
 
@@ -97,8 +97,6 @@ namespace BandyerDemo.Droid
         {
             var appId = "mAppId_b78542f60f697c8a56a13e579f2e66d0378ba6b3336fa75f961c6efb0e6b";
 
-            BandyerSdkAndroid.application = application;
-
             BandyerSDK.Builder builder = new BandyerSDK.Builder(application, appId)
                 .UseSandbox()
                 .WithCallEnabled(new BandyerSdkCallNotificationListener())
@@ -137,7 +135,7 @@ namespace BandyerDemo.Droid
             options.WithProximitySensorDisabled(); // if the proximity sensor should be disabled during calls
 
             BandyerIntent.Builder builder = new BandyerIntent.Builder();
-            CallIntentBuilder callIntentBuilder = builder.StartWithAudioVideoCall(application /* context */ );
+            CallIntentBuilder callIntentBuilder = builder.StartWithAudioVideoCall(MainActivity.Application /* context */ );
             //builder.StartWithAudioUpgradableCall(application); // audio call that may upgrade into audio&video call
             //builder.StartWithAudioCall(application);  // audio only call
             CallIntentOptions callIntentOptions =  callIntentBuilder.With(new List<string>() { "web" });
@@ -145,7 +143,7 @@ namespace BandyerDemo.Droid
             callIntentOptions.WithOptions(options); // optional
             BandyerIntent bandyerCallIntent = callIntentOptions.Build();
 
-            application.StartActivity(bandyerCallIntent);
+            MainActivity.StartActivity(bandyerCallIntent);
         }
 
         public void StartChat(string userAlias)
@@ -165,14 +163,14 @@ namespace BandyerDemo.Droid
             options.WithProximitySensorDisabled(); // if the proximity sensor should be disabled during calls
 
             BandyerIntent.Builder builder = new BandyerIntent.Builder();
-            ChatIntentBuilder chatIntentBuilder = builder.StartWithChat(application /* context */ );
+            ChatIntentBuilder chatIntentBuilder = builder.StartWithChat(MainActivity.Application /* context */ );
             ChatIntentOptions chatIntentOptions = chatIntentBuilder.With("web");
             chatIntentOptions.WithAudioCallCapability(capabilities, options); // optional
             chatIntentOptions.WithAudioUpgradableCallCapability(capabilities, options); // optionally upgradable to audio video call
             chatIntentOptions.WithAudioVideoCallCapability(capabilities, options); // optional
             BandyerIntent bandyerChatIntent = chatIntentOptions.Build();
 
-            application.StartActivity(bandyerChatIntent);
+            MainActivity.StartActivity(bandyerChatIntent);
         }
 
         public void StartChatAndCall(string userAlias)
@@ -285,11 +283,11 @@ namespace BandyerDemo.Droid
                 call.WithOptions(GetDefaultIncomingCallOptions());
                 if (!isDnd || isScreenLocked)
                 {
-                    call.Show(application);
+                    call.Show(MainActivity);
                 }
                 else
                 {
-                    call.AsNotification().Show(application);
+                    call.AsNotification().Show(MainActivity);
                 }
             }
 
