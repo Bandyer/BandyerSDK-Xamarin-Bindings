@@ -27,6 +27,8 @@ namespace BandyerDemo.Droid
         , IBandyerModuleObserver
         , ICallUIObserver
         , ICallObserver
+        , IChatUIObserver
+        , IChatObserver
     {
         const string TAG = "BandyerDemo";
         private static Android.App.Application application;
@@ -148,6 +150,9 @@ namespace BandyerDemo.Droid
 
         public void StartChat(string userAlias)
         {
+            BandyerSDKClient.Instance.ChatModule.AddChatUIObserver(this);
+            BandyerSDKClient.Instance.ChatModule.AddChatObserver(this);
+
             CallCapabilities capabilities = new CallCapabilities();
             capabilities.WithWhiteboard();
             capabilities.WithFileSharing();
@@ -229,6 +234,40 @@ namespace BandyerDemo.Droid
             Log.Debug(TAG, "onCallStarted: "
                + call.CallInfo.Caller + ", "
                + System.String.Join(", ", call.CallInfo.Callees));
+        }
+        #endregion
+
+        #region IChatUIObserver
+        public void OnActivityDestroyed(IChat chat, Java.Lang.Ref.WeakReference activity)
+        {
+            Log.Debug(TAG, "onChatActivityDestroyed");
+        }
+
+        public void OnActivityError(IChat chat, Java.Lang.Ref.WeakReference activity, ChatException error)
+        {
+            Log.Debug(TAG, "onChatActivityError " + error.Message);
+        }
+
+        public void OnActivityStarted(IChat chat, Java.Lang.Ref.WeakReference activity)
+        {
+            Log.Debug(TAG, "onChatActivityStarted");
+        }
+        #endregion
+
+        #region IChatObserver
+        public void OnChatEnded()
+        {
+            Log.Debug(TAG, "OnChatEnded");
+        }
+
+        public void OnChatEndedWithError(ChatException chatException)
+        {
+            Log.Debug(TAG, "OnChatEndedWithError " + chatException.Message);
+        }
+
+        public void OnChatStarted()
+        {
+            Log.Debug(TAG, "OnChatStarted");
         }
         #endregion
 
