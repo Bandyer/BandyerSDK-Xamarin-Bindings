@@ -118,7 +118,7 @@ namespace BandyerDemo.iOS
             }
         }
 
-        void startWindowCall()
+        void initCallWindow()
         {
             if (callWindow == null)
             {
@@ -129,6 +129,11 @@ namespace BandyerDemo.iOS
                 //config.FakeCapturerFileURL = url;
                 callWindow.SetConfiguration(config);
             }
+        }
+
+        void startWindowCall()
+        {
+            initCallWindow();
             var callee = new string[] { callUserAlias };
             var intent = BDKMakeCallIntent.IntentWithCallee(callee, BDKCallType.AudioVideoCallType);
             callWindow.ShouldPresentCallViewControllerWithIntent(intent, (success) =>
@@ -164,11 +169,32 @@ namespace BandyerDemo.iOS
             return items;
         }
 
+        void handleIncomingCall()
+        {
+            initCallWindow();
+            var config = new BDKCallViewControllerConfiguration();
+            //var url = new NSUrl(NSBundle.MainBundle.PathForResource("video", "mp4"));
+            //config.FakeCapturerFileURL = url;
+            callWindow.SetConfiguration(config);
+            var intent = new BDKIncomingCallHandlingIntent();
+            callWindow.ShouldPresentCallViewControllerWithIntent(intent, (success) =>
+            {
+                Debug.Print("ShouldPresentCallViewControllerWithIntent success " + success);
+                if (!success)
+                {
+                    var alert = UIAlertController.Create("Warning", "Another call is already in progress.", UIAlertControllerStyle.Alert);
+                    alert.AddAction(UIAlertAction.Create("OK", UIAlertActionStyle.Default, null));
+                    UIApplication.SharedApplication.KeyWindow.RootViewController.PresentViewController(alert, true, null);
+                }
+            });
+        }
+
         #region IBCXCallClientObserver
         [Export("callClient:didReceiveIncomingCall:")]
-        public void CallClientDidReceiveIncomingCall(BCXCallClient client, BCXCall call)
+        public void CallClientDidReceiveIncomingCall(IBCXCallClient client, IBCXCall call)
         {
             Debug.Print("CallClientDidReceiveIncomingCall " + client + " " + call);
+            handleIncomingCall();
         }
         [Export("callClientDidPause:")]
         public void CallClientDidPause(IBCXCallClient client)
