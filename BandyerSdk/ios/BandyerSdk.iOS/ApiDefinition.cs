@@ -277,9 +277,9 @@ namespace Bandyer
     [BaseType(typeof(NSObject))]
     interface BCXCallClientObserver
     {
-        //// @optional -(void)callClient:(id<BCXCallClient> _Nonnull)client didReceiveIncomingCall:(id<BCXCall> _Nonnull)call;
-        //[Export("callClient:didReceiveIncomingCall:")]
-        //void CallClient(BCXCallClient client, BCXCall call);
+        // @optional -(void)callClient:(id<BCXCallClient> _Nonnull)client didReceiveIncomingCall:(id<BCXCall> _Nonnull)call;
+        [Export("callClient:didReceiveIncomingCall:")]
+        void CallClientDidReceiveIncomingCall(BCXCallClient client, BCXCall call);
 
         // @optional -(void)callClientWillStart:(id<BCXCallClient> _Nonnull)client;
         [Export("callClientWillStart:")]
@@ -427,325 +427,325 @@ namespace Bandyer
 
     interface IBCXCallClient { }
 
-    //// @interface BCXCallOptions : NSObject <NSCopying>
-    //[BaseType(typeof(NSObject))]
-    //interface BCXCallOptions : INSCopying
-    //{
-    //  // @property (readonly, copy, nonatomic) NSNumber * _Nullable recording;
-    //  [NullAllowed, Export("recording", ArgumentSemantic.Copy)]
-    //  NSNumber Recording { get; }
+    // @interface BCXCallOptions : NSObject <NSCopying>
+    [BaseType(typeof(NSObject))]
+    interface BCXCallOptions : INSCopying
+    {
+        // @property (readonly, copy, nonatomic) NSNumber * _Nullable recording;
+        [NullAllowed, Export("recording", ArgumentSemantic.Copy)]
+        NSNumber Recording { get; }
 
-    //  // @property (readonly, copy, nonatomic) NSNumber * _Nullable duration;
-    //  [NullAllowed, Export("duration", ArgumentSemantic.Copy)]
-    //  NSNumber Duration { get; }
+        // @property (readonly, copy, nonatomic) NSNumber * _Nullable duration;
+        [NullAllowed, Export("duration", ArgumentSemantic.Copy)]
+        NSNumber Duration { get; }
 
-    //  // @property (readonly, assign, nonatomic) BCXCallType callType;
-    //  [Export("callType", ArgumentSemantic.Assign)]
-    //  BCXCallType CallType { get; }
+        // @property (readonly, assign, nonatomic) BCXCallType callType;
+        [Export("callType", ArgumentSemantic.Assign)]
+        BCXCallType CallType { get; }
 
-    //  // -(BOOL)isAudioVideo;
-    //  [Export("isAudioVideo")]
-    //  [Verify(MethodToProperty)]
-    //  bool IsAudioVideo { get; }
+        // -(BOOL)isAudioVideo;
+        [Export("isAudioVideo")]
+        //[Verify(MethodToProperty)]
+        bool IsAudioVideo { get; }
 
-    //  // -(BOOL)isAudioUpgradable;
-    //  [Export("isAudioUpgradable")]
-    //  [Verify(MethodToProperty)]
-    //  bool IsAudioUpgradable { get; }
+        // -(BOOL)isAudioUpgradable;
+        [Export("isAudioUpgradable")]
+        //[Verify(MethodToProperty)]
+        bool IsAudioUpgradable { get; }
 
-    //  // -(BOOL)isAudioOnly;
-    //  [Export("isAudioOnly")]
-    //  [Verify(MethodToProperty)]
-    //  bool IsAudioOnly { get; }
+        // -(BOOL)isAudioOnly;
+        [Export("isAudioOnly")]
+        //[Verify(MethodToProperty)]
+        bool IsAudioOnly { get; }
 
-    //  // -(BCXCallOptions * _Nonnull)optionsWithRecording:(BOOL)recording;
-    //  [Export("optionsWithRecording:")]
-    //  BCXCallOptions OptionsWithRecording(bool recording);
+        //// -(BCXCallOptions * _Nonnull)optionsWithRecording:(BOOL)recording;
+        //[Export("optionsWithRecording:")]
+        //BCXCallOptions OptionsWithRecording(bool recording);
 
-    //  // -(BCXCallOptions * _Nonnull)optionsWithDuration:(NSUInteger)duration;
-    //  [Export("optionsWithDuration:")]
-    //  BCXCallOptions OptionsWithDuration(nuint duration);
+        //// -(BCXCallOptions * _Nonnull)optionsWithDuration:(NSUInteger)duration;
+        //[Export("optionsWithDuration:")]
+        //BCXCallOptions OptionsWithDuration(nuint duration);
 
-    //  // -(BCXCallOptions * _Nonnull)optionsWithCallType:(BCXCallType)callType;
-    //  [Export("optionsWithCallType:")]
-    //  BCXCallOptions OptionsWithCallType(BCXCallType callType);
+        //// -(BCXCallOptions * _Nonnull)optionsWithCallType:(BCXCallType)callType;
+        //[Export("optionsWithCallType:")]
+        //BCXCallOptions OptionsWithCallType(BCXCallType callType);
 
-    //  // +(instancetype _Nonnull)optionsWithRecording:(BOOL)recording;
-    //  [Static]
-    //  [Export("optionsWithRecording:")]
-    //  BCXCallOptions OptionsWithRecording(bool recording);
+        // +(instancetype _Nonnull)optionsWithRecording:(BOOL)recording;
+        [Static]
+        [Export("optionsWithRecording:")]
+        BCXCallOptions OptionsWithRecording(bool recording);
 
-    //  // +(instancetype _Nonnull)optionsWithDuration:(NSUInteger)duration;
-    //  [Static]
-    //  [Export("optionsWithDuration:")]
-    //  BCXCallOptions OptionsWithDuration(nuint duration);
+        // +(instancetype _Nonnull)optionsWithDuration:(NSUInteger)duration;
+        [Static]
+        [Export("optionsWithDuration:")]
+        BCXCallOptions OptionsWithDuration(nuint duration);
 
-    //  // +(instancetype _Nonnull)optionsWithCallType:(BCXCallType)callType;
-    //  [Static]
-    //  [Export("optionsWithCallType:")]
-    //  BCXCallOptions OptionsWithCallType(BCXCallType callType);
+        // +(instancetype _Nonnull)optionsWithCallType:(BCXCallType)callType;
+        [Static]
+        [Export("optionsWithCallType:")]
+        BCXCallOptions OptionsWithCallType(BCXCallType callType);
 
-    //  // +(instancetype _Nonnull)optionsWithRecording:(BOOL)recording duration:(NSUInteger)duration;
-    //  [Static]
-    //  [Export("optionsWithRecording:duration:")]
-    //  BCXCallOptions OptionsWithRecording(bool recording, nuint duration);
+        // +(instancetype _Nonnull)optionsWithRecording:(BOOL)recording duration:(NSUInteger)duration;
+        [Static]
+        [Export("optionsWithRecording:duration:")]
+        BCXCallOptions OptionsWithRecording(bool recording, nuint duration);
 
-    //  // +(instancetype _Nonnull)optionsWithRecording:(BOOL)recording duration:(NSUInteger)duration callType:(BCXCallType)callType;
-    //  [Static]
-    //  [Export("optionsWithRecording:duration:callType:")]
-    //  BCXCallOptions OptionsWithRecording(bool recording, nuint duration, BCXCallType callType);
+        // +(instancetype _Nonnull)optionsWithRecording:(BOOL)recording duration:(NSUInteger)duration callType:(BCXCallType)callType;
+        [Static]
+        [Export("optionsWithRecording:duration:callType:")]
+        BCXCallOptions OptionsWithRecording(bool recording, nuint duration, BCXCallType callType);
 
-    //  // +(instancetype _Nonnull)optionsFromOptions:(BCXCallOptions * _Nonnull)options withRecording:(BOOL)recording;
-    //  [Static]
-    //  [Export("optionsFromOptions:withRecording:")]
-    //  BCXCallOptions OptionsFromOptions(BCXCallOptions options, bool recording);
+        // +(instancetype _Nonnull)optionsFromOptions:(BCXCallOptions * _Nonnull)options withRecording:(BOOL)recording;
+        [Static]
+        [Export("optionsFromOptions:withRecording:")]
+        BCXCallOptions OptionsFromOptions(BCXCallOptions options, bool recording);
 
-    //  // +(instancetype _Nonnull)optionsFromOptions:(BCXCallOptions * _Nonnull)options withDuration:(NSUInteger)duration;
-    //  [Static]
-    //  [Export("optionsFromOptions:withDuration:")]
-    //  BCXCallOptions OptionsFromOptions(BCXCallOptions options, nuint duration);
+        // +(instancetype _Nonnull)optionsFromOptions:(BCXCallOptions * _Nonnull)options withDuration:(NSUInteger)duration;
+        [Static]
+        [Export("optionsFromOptions:withDuration:")]
+        BCXCallOptions OptionsFromOptions(BCXCallOptions options, nuint duration);
 
-    //  // +(instancetype _Nonnull)optionsFromOptions:(BCXCallOptions * _Nonnull)options withCallType:(BCXCallType)callType;
-    //  [Static]
-    //  [Export("optionsFromOptions:withCallType:")]
-    //  BCXCallOptions OptionsFromOptions(BCXCallOptions options, BCXCallType callType);
-    //}
+        // +(instancetype _Nonnull)optionsFromOptions:(BCXCallOptions * _Nonnull)options withCallType:(BCXCallType)callType;
+        [Static]
+        [Export("optionsFromOptions:withCallType:")]
+        BCXCallOptions OptionsFromOptions(BCXCallOptions options, BCXCallType callType);
+    }
 
-    //// @protocol BCXCallObserver <NSObject>
-    ///*
-    //  Check whether adding [Model] to this declaration is appropriate.
-    //  [Model] is used to generate a C# class that implements this protocol,
-    //  and might be useful for protocols that consumers are supposed to implement,
-    //  since consumers can subclass the generated class instead of implementing
-    //  the generated interface. If consumers are not supposed to implement this
-    //  protocol, then [Model] is redundant and will generate code that will never
-    //  be used.
-    //*/
-    //[Protocol]
-    //[BaseType(typeof(NSObject))]
-    //interface BCXCallObserver
-    //{
-    //  // @optional -(void)call:(id<BCXCall> _Nonnull)call didChangeState:(BCXCallState)state;
-    //  [Export("call:didChangeState:")]
-    //  void Call(BCXCall call, BCXCallState state);
+    // @protocol BCXCallObserver <NSObject>
+    /*
+      Check whether adding [Model] to this declaration is appropriate.
+      [Model] is used to generate a C# class that implements this protocol,
+      and might be useful for protocols that consumers are supposed to implement,
+      since consumers can subclass the generated class instead of implementing
+      the generated interface. If consumers are not supposed to implement this
+      protocol, then [Model] is redundant and will generate code that will never
+      be used.
+    */
+    [Protocol]
+    [BaseType(typeof(NSObject))]
+    interface BCXCallObserver
+    {
+        // @optional -(void)call:(id<BCXCall> _Nonnull)call didChangeState:(BCXCallState)state;
+        [Export("call:didChangeState:")]
+        void Call(BCXCall call, BCXCallState state);
 
-    //  // @optional -(void)call:(id<BCXCall> _Nonnull)call didUpdateOptions:(BCXCallOptions * _Nonnull)options;
-    //  [Export("call:didUpdateOptions:")]
-    //  void Call(BCXCall call, BCXCallOptions options);
+        // @optional -(void)call:(id<BCXCall> _Nonnull)call didUpdateOptions:(BCXCallOptions * _Nonnull)options;
+        [Export("call:didUpdateOptions:")]
+        void Call(BCXCall call, BCXCallOptions options);
 
-    //  // @optional -(void)call:(id<BCXCall> _Nonnull)call didUpdateParticipants:(id<BCXCallParticipants> _Nonnull)participants;
-    //  [Export("call:didUpdateParticipants:")]
-    //  void Call(BCXCall call, BCXCallParticipants participants);
+        // @optional -(void)call:(id<BCXCall> _Nonnull)call didUpdateParticipants:(id<BCXCallParticipants> _Nonnull)participants;
+        [Export("call:didUpdateParticipants:")]
+        void Call(BCXCall call, BCXCallParticipants participants);
 
-    //  // @optional -(void)callDidUpgradeToVideoCall:(id<BCXCall> _Nonnull)call;
-    //  [Export("callDidUpgradeToVideoCall:")]
-    //  void CallDidUpgradeToVideoCall(BCXCall call);
+        // @optional -(void)callDidUpgradeToVideoCall:(id<BCXCall> _Nonnull)call;
+        [Export("callDidUpgradeToVideoCall:")]
+        void CallDidUpgradeToVideoCall(BCXCall call);
 
-    //  // @optional -(void)callDidConnect:(id<BCXCall> _Nonnull)call;
-    //  [Export("callDidConnect:")]
-    //  void CallDidConnect(BCXCall call);
+        // @optional -(void)callDidConnect:(id<BCXCall> _Nonnull)call;
+        [Export("callDidConnect:")]
+        void CallDidConnect(BCXCall call);
 
-    //  // @optional -(void)callDidEnd:(id<BCXCall> _Nonnull)call;
-    //  [Export("callDidEnd:")]
-    //  void CallDidEnd(BCXCall call);
+        // @optional -(void)callDidEnd:(id<BCXCall> _Nonnull)call;
+        [Export("callDidEnd:")]
+        void CallDidEnd(BCXCall call);
 
-    //  // @optional -(void)call:(id<BCXCall> _Nonnull)call didFailWithError:(NSError * _Nonnull)error;
-    //  [Export("call:didFailWithError:")]
-    //  void Call(BCXCall call, NSError error);
-    //}
+        // @optional -(void)call:(id<BCXCall> _Nonnull)call didFailWithError:(NSError * _Nonnull)error;
+        [Export("call:didFailWithError:")]
+        void Call(BCXCall call, NSError error);
+    }
 
-    //// @protocol BCXCall <NSObject>
-    ///*
-    //  Check whether adding [Model] to this declaration is appropriate.
-    //  [Model] is used to generate a C# class that implements this protocol,
-    //  and might be useful for protocols that consumers are supposed to implement,
-    //  since consumers can subclass the generated class instead of implementing
-    //  the generated interface. If consumers are not supposed to implement this
-    //  protocol, then [Model] is redundant and will generate code that will never
-    //  be used.
-    //*/
-    //[Protocol]
-    //[BaseType(typeof(NSObject))]
-    //interface BCXCall
-    //{
-    //  // @required @property (readonly, nonatomic, strong) NSUUID * _Nonnull uuid;
-    //  [Abstract]
-    //  [Export("uuid", ArgumentSemantic.Strong)]
-    //  NSUuid Uuid { get; }
+    // @protocol BCXCall <NSObject>
+    /*
+      Check whether adding [Model] to this declaration is appropriate.
+      [Model] is used to generate a C# class that implements this protocol,
+      and might be useful for protocols that consumers are supposed to implement,
+      since consumers can subclass the generated class instead of implementing
+      the generated interface. If consumers are not supposed to implement this
+      protocol, then [Model] is redundant and will generate code that will never
+      be used.
+    */
+    [Protocol]
+    [BaseType(typeof(NSObject))]
+    interface BCXCall
+    {
+        // @required @property (readonly, nonatomic, strong) NSUUID * _Nonnull uuid;
+        [Abstract]
+        [Export("uuid", ArgumentSemantic.Strong)]
+        NSUuid Uuid { get; }
 
-    //  // @required @property (readonly, nonatomic, strong) NSString * _Nullable sid;
-    //  [Abstract]
-    //  [NullAllowed, Export("sid", ArgumentSemantic.Strong)]
-    //  string Sid { get; }
+        // @required @property (readonly, nonatomic, strong) NSString * _Nullable sid;
+        [Abstract]
+        [NullAllowed, Export("sid", ArgumentSemantic.Strong)]
+        string Sid { get; }
 
-    //  // @required @property (readonly, nonatomic, strong) BCXCallOptions * _Nullable options;
-    //  [Abstract]
-    //  [NullAllowed, Export("options", ArgumentSemantic.Strong)]
-    //  BCXCallOptions Options { get; }
+        // @required @property (readonly, nonatomic, strong) BCXCallOptions * _Nullable options;
+        [Abstract]
+        [NullAllowed, Export("options", ArgumentSemantic.Strong)]
+        BCXCallOptions Options { get; }
 
-    //  // @required @property (readonly, assign, nonatomic) BCXCallEndReason endReason;
-    //  [Abstract]
-    //  [Export("endReason", ArgumentSemantic.Assign)]
-    //  BCXCallEndReason EndReason { get; }
+        // @required @property (readonly, assign, nonatomic) BCXCallEndReason endReason;
+        [Abstract]
+        [Export("endReason", ArgumentSemantic.Assign)]
+        BCXCallEndReason EndReason { get; }
 
-    //  // @required @property (readonly, assign, nonatomic) BCXDeclineReason declineReason;
-    //  [Abstract]
-    //  [Export("declineReason", ArgumentSemantic.Assign)]
-    //  BCXDeclineReason DeclineReason { get; }
+        // @required @property (readonly, assign, nonatomic) BCXDeclineReason declineReason;
+        [Abstract]
+        [Export("declineReason", ArgumentSemantic.Assign)]
+        BCXDeclineReason DeclineReason { get; }
 
-    //  // @required @property (readonly, nonatomic, strong) BAVRoom * _Nullable room;
-    //  [Abstract]
-    //  [NullAllowed, Export("room", ArgumentSemantic.Strong)]
-    //  BAVRoom Room { get; }
+        //// @required @property (readonly, nonatomic, strong) BAVRoom * _Nullable room;
+        //[Abstract]
+        //[NullAllowed, Export("room", ArgumentSemantic.Strong)]
+        //BAVRoom Room { get; }
 
-    //  // @required -(void)addObserver:(id<BCXCallObserver> _Nonnull)observer __attribute__((swift_name("add(observer:)")));
-    //  [Abstract]
-    //  [Export("addObserver:")]
-    //  void AddObserver(BCXCallObserver observer);
+        // @required -(void)addObserver:(id<BCXCallObserver> _Nonnull)observer __attribute__((swift_name("add(observer:)")));
+        [Abstract]
+        [Export("addObserver:")]
+        void AddObserver(BCXCallObserver observer);
 
-    //  // @required -(void)addObserver:(id<BCXCallObserver> _Nonnull)observer queue:(dispatch_queue_t _Nullable)queue __attribute__((swift_name("add(observer:queue:)")));
-    //  [Abstract]
-    //  [Export("addObserver:queue:")]
-    //  void AddObserver(BCXCallObserver observer, [NullAllowed] DispatchQueue queue);
+        // @required -(void)addObserver:(id<BCXCallObserver> _Nonnull)observer queue:(dispatch_queue_t _Nullable)queue __attribute__((swift_name("add(observer:queue:)")));
+        [Abstract]
+        [Export("addObserver:queue:")]
+        void AddObserver(BCXCallObserver observer, [NullAllowed] DispatchQueue queue);
 
-    //  // @required -(void)removeObserver:(id<BCXCallObserver> _Nonnull)observer __attribute__((swift_name("remove(observer:)")));
-    //  [Abstract]
-    //  [Export("removeObserver:")]
-    //  void RemoveObserver(BCXCallObserver observer);
+        // @required -(void)removeObserver:(id<BCXCallObserver> _Nonnull)observer __attribute__((swift_name("remove(observer:)")));
+        [Abstract]
+        [Export("removeObserver:")]
+        void RemoveObserver(BCXCallObserver observer);
 
-    //  // @required @property (readonly, nonatomic, strong) id<BCXCallParticipants> _Nonnull participants;
-    //  [Abstract]
-    //  [Export("participants", ArgumentSemantic.Strong)]
-    //  BCXCallParticipants Participants { get; }
+        // @required @property (readonly, nonatomic, strong) id<BCXCallParticipants> _Nonnull participants;
+        [Abstract]
+        [Export("participants", ArgumentSemantic.Strong)]
+        BCXCallParticipants Participants { get; }
 
-    //  // @required -(BOOL)isGroupCall;
-    //  [Abstract]
-    //  [Export("isGroupCall")]
-    //  [Verify(MethodToProperty)]
-    //  bool IsGroupCall { get; }
+        // @required -(BOOL)isGroupCall;
+        [Abstract]
+        [Export("isGroupCall")]
+        //[Verify(MethodToProperty)]
+        bool IsGroupCall { get; }
 
-    //  // @required @property (readonly, assign, nonatomic) BCXCallDirection direction;
-    //  [Abstract]
-    //  [Export("direction", ArgumentSemantic.Assign)]
-    //  BCXCallDirection Direction { get; }
+        // @required @property (readonly, assign, nonatomic) BCXCallDirection direction;
+        [Abstract]
+        [Export("direction", ArgumentSemantic.Assign)]
+        BCXCallDirection Direction { get; }
 
-    //  // @required -(BOOL)isIncoming;
-    //  [Abstract]
-    //  [Export("isIncoming")]
-    //  [Verify(MethodToProperty)]
-    //  bool IsIncoming { get; }
+        // @required -(BOOL)isIncoming;
+        [Abstract]
+        [Export("isIncoming")]
+        //[Verify(MethodToProperty)]
+        bool IsIncoming { get; }
 
-    //  // @required -(BOOL)isOutgoing;
-    //  [Abstract]
-    //  [Export("isOutgoing")]
-    //  [Verify(MethodToProperty)]
-    //  bool IsOutgoing { get; }
+        // @required -(BOOL)isOutgoing;
+        [Abstract]
+        [Export("isOutgoing")]
+        //[Verify(MethodToProperty)]
+        bool IsOutgoing { get; }
 
-    //  // @required @property (readonly, assign, nonatomic) BCXCallType callType;
-    //  [Abstract]
-    //  [Export("callType", ArgumentSemantic.Assign)]
-    //  BCXCallType CallType { get; }
+        // @required @property (readonly, assign, nonatomic) BCXCallType callType;
+        [Abstract]
+        [Export("callType", ArgumentSemantic.Assign)]
+        BCXCallType CallType { get; }
 
-    //  // @required -(BOOL)isAudioVideo;
-    //  [Abstract]
-    //  [Export("isAudioVideo")]
-    //  [Verify(MethodToProperty)]
-    //  bool IsAudioVideo { get; }
+        // @required -(BOOL)isAudioVideo;
+        [Abstract]
+        [Export("isAudioVideo")]
+        //[Verify(MethodToProperty)]
+        bool IsAudioVideo { get; }
 
-    //  // @required -(BOOL)isAudioUpgradable;
-    //  [Abstract]
-    //  [Export("isAudioUpgradable")]
-    //  [Verify(MethodToProperty)]
-    //  bool IsAudioUpgradable { get; }
+        // @required -(BOOL)isAudioUpgradable;
+        [Abstract]
+        [Export("isAudioUpgradable")]
+        //[Verify(MethodToProperty)]
+        bool IsAudioUpgradable { get; }
 
-    //  // @required -(BOOL)isAudioOnly;
-    //  [Abstract]
-    //  [Export("isAudioOnly")]
-    //  [Verify(MethodToProperty)]
-    //  bool IsAudioOnly { get; }
+        // @required -(BOOL)isAudioOnly;
+        [Abstract]
+        [Export("isAudioOnly")]
+        //[Verify(MethodToProperty)]
+        bool IsAudioOnly { get; }
 
-    //  // @required -(BOOL)canUpgradeToVideo;
-    //  [Abstract]
-    //  [Export("canUpgradeToVideo")]
-    //  [Verify(MethodToProperty)]
-    //  bool CanUpgradeToVideo { get; }
+        // @required -(BOOL)canUpgradeToVideo;
+        [Abstract]
+        [Export("canUpgradeToVideo")]
+        //[Verify(MethodToProperty)]
+        bool CanUpgradeToVideo { get; }
 
-    //  // @required -(BOOL)didUpgradeToVideo;
-    //  [Abstract]
-    //  [Export("didUpgradeToVideo")]
-    //  [Verify(MethodToProperty)]
-    //  bool DidUpgradeToVideo { get; }
+        // @required -(BOOL)didUpgradeToVideo;
+        [Abstract]
+        [Export("didUpgradeToVideo")]
+        //[Verify(MethodToProperty)]
+        bool DidUpgradeToVideo { get; }
 
-    //  // @required @property (readonly, assign, nonatomic) BCXCallState state;
-    //  [Abstract]
-    //  [Export("state", ArgumentSemantic.Assign)]
-    //  BCXCallState State { get; }
+        // @required @property (readonly, assign, nonatomic) BCXCallState state;
+        [Abstract]
+        [Export("state", ArgumentSemantic.Assign)]
+        BCXCallState State { get; }
 
-    //  // @required -(BOOL)hasEnded;
-    //  [Abstract]
-    //  [Export("hasEnded")]
-    //  [Verify(MethodToProperty)]
-    //  bool HasEnded { get; }
+        // @required -(BOOL)hasEnded;
+        [Abstract]
+        [Export("hasEnded")]
+        //[Verify(MethodToProperty)]
+        bool HasEnded { get; }
 
-    //  // @required -(BOOL)hasFailed;
-    //  [Abstract]
-    //  [Export("hasFailed")]
-    //  [Verify(MethodToProperty)]
-    //  bool HasFailed { get; }
+        // @required -(BOOL)hasFailed;
+        [Abstract]
+        [Export("hasFailed")]
+        //[Verify(MethodToProperty)]
+        bool HasFailed { get; }
 
-    //  // @required -(BOOL)isIdle;
-    //  [Abstract]
-    //  [Export("isIdle")]
-    //  [Verify(MethodToProperty)]
-    //  bool IsIdle { get; }
+        // @required -(BOOL)isIdle;
+        [Abstract]
+        [Export("isIdle")]
+        //[Verify(MethodToProperty)]
+        bool IsIdle { get; }
 
-    //  // @required -(BOOL)isRinging;
-    //  [Abstract]
-    //  [Export("isRinging")]
-    //  [Verify(MethodToProperty)]
-    //  bool IsRinging { get; }
+        // @required -(BOOL)isRinging;
+        [Abstract]
+        [Export("isRinging")]
+        //[Verify(MethodToProperty)]
+        bool IsRinging { get; }
 
-    //  // @required -(BOOL)isDialing;
-    //  [Abstract]
-    //  [Export("isDialing")]
-    //  [Verify(MethodToProperty)]
-    //  bool IsDialing { get; }
+        // @required -(BOOL)isDialing;
+        [Abstract]
+        [Export("isDialing")]
+        //[Verify(MethodToProperty)]
+        bool IsDialing { get; }
 
-    //  // @required -(BOOL)isConnecting;
-    //  [Abstract]
-    //  [Export("isConnecting")]
-    //  [Verify(MethodToProperty)]
-    //  bool IsConnecting { get; }
+        // @required -(BOOL)isConnecting;
+        [Abstract]
+        [Export("isConnecting")]
+        //[Verify(MethodToProperty)]
+        bool IsConnecting { get; }
 
-    //  // @required -(BOOL)isConnected;
-    //  [Abstract]
-    //  [Export("isConnected")]
-    //  [Verify(MethodToProperty)]
-    //  bool IsConnected { get; }
+        // @required -(BOOL)isConnected;
+        [Abstract]
+        [Export("isConnected")]
+        //[Verify(MethodToProperty)]
+        bool IsConnected { get; }
 
-    //  // @required -(BOOL)isAnswering;
-    //  [Abstract]
-    //  [Export("isAnswering")]
-    //  [Verify(MethodToProperty)]
-    //  bool IsAnswering { get; }
+        // @required -(BOOL)isAnswering;
+        [Abstract]
+        [Export("isAnswering")]
+        //[Verify(MethodToProperty)]
+        bool IsAnswering { get; }
 
-    //  // @required -(BOOL)isDeclining;
-    //  [Abstract]
-    //  [Export("isDeclining")]
-    //  [Verify(MethodToProperty)]
-    //  bool IsDeclining { get; }
+        // @required -(BOOL)isDeclining;
+        [Abstract]
+        [Export("isDeclining")]
+        //[Verify(MethodToProperty)]
+        bool IsDeclining { get; }
 
-    //  // @required -(BOOL)isHangingUp;
-    //  [Abstract]
-    //  [Export("isHangingUp")]
-    //  [Verify(MethodToProperty)]
-    //  bool IsHangingUp { get; }
+        // @required -(BOOL)isHangingUp;
+        [Abstract]
+        [Export("isHangingUp")]
+        //[Verify(MethodToProperty)]
+        bool IsHangingUp { get; }
 
-    //  // @required @property (getter = isMuted, assign, readwrite, nonatomic) BOOL muted;
-    //  [Abstract]
-    //  [Export("muted")]
-    //  bool Muted { [Bind("isMuted")] get; set; }
-    //}
+        // @required @property (getter = isMuted, assign, readwrite, nonatomic) BOOL muted;
+        [Abstract]
+        [Export("muted")]
+        bool Muted { [Bind("isMuted")] get; set; }
+    }
 
     //// @protocol BCXCallRegistry <NSObject>
     ///*
@@ -818,314 +818,315 @@ namespace Bandyer
     //  void DidRemoveCall(BCXCallRegistry registry, BCXCall call);
     //}
 
-    //// @protocol BCXCallParticipantsObserver <NSObject>
-    ///*
-    //  Check whether adding [Model] to this declaration is appropriate.
-    //  [Model] is used to generate a C# class that implements this protocol,
-    //  and might be useful for protocols that consumers are supposed to implement,
-    //  since consumers can subclass the generated class instead of implementing
-    //  the generated interface. If consumers are not supposed to implement this
-    //  protocol, then [Model] is redundant and will generate code that will never
-    //  be used.
-    //*/
-    //[Protocol]
-    //[BaseType(typeof(NSObject))]
-    //interface BCXCallParticipantsObserver
-    //{
-    //  // @optional -(void)onCallParticipantStateChanged:(id<BCXCallParticipant> _Nonnull)participant;
-    //  [Export("onCallParticipantStateChanged:")]
-    //  void OnCallParticipantStateChanged(BCXCallParticipant participant);
+    // @protocol BCXCallParticipantsObserver <NSObject>
+    /*
+      Check whether adding [Model] to this declaration is appropriate.
+      [Model] is used to generate a C# class that implements this protocol,
+      and might be useful for protocols that consumers are supposed to implement,
+      since consumers can subclass the generated class instead of implementing
+      the generated interface. If consumers are not supposed to implement this
+      protocol, then [Model] is redundant and will generate code that will never
+      be used.
+    */
+    [Protocol]
+    [BaseType(typeof(NSObject))]
+    interface BCXCallParticipantsObserver
+    {
+        // @optional -(void)onCallParticipantStateChanged:(id<BCXCallParticipant> _Nonnull)participant;
+        [Export("onCallParticipantStateChanged:")]
+        void OnCallParticipantStateChanged(BCXCallParticipant participant);
 
-    //  // @optional -(void)onCallParticipantUpgradedToVideo:(id<BCXCallParticipant> _Nonnull)participant;
-    //  [Export("onCallParticipantUpgradedToVideo:")]
-    //  void OnCallParticipantUpgradedToVideo(BCXCallParticipant participant);
-    //}
+        // @optional -(void)onCallParticipantUpgradedToVideo:(id<BCXCallParticipant> _Nonnull)participant;
+        [Export("onCallParticipantUpgradedToVideo:")]
+        void OnCallParticipantUpgradedToVideo(BCXCallParticipant participant);
+    }
 
-    //// @protocol BDFUser <NSObject>
-    ///*
-    //  Check whether adding [Model] to this declaration is appropriate.
-    //  [Model] is used to generate a C# class that implements this protocol,
-    //  and might be useful for protocols that consumers are supposed to implement,
-    //  since consumers can subclass the generated class instead of implementing
-    //  the generated interface. If consumers are not supposed to implement this
-    //  protocol, then [Model] is redundant and will generate code that will never
-    //  be used.
-    //*/
-    //[Protocol]
-    //[BaseType(typeof(NSObject))]
-    //interface BDFUser
-    //{
-    //  // @required @property (readonly, nonatomic, strong) NSString * _Nonnull alias;
-    //  [Abstract]
-    //  [Export("alias", ArgumentSemantic.Strong)]
-    //  string Alias { get; }
+    // @protocol BDFUser <NSObject>
+    /*
+      Check whether adding [Model] to this declaration is appropriate.
+      [Model] is used to generate a C# class that implements this protocol,
+      and might be useful for protocols that consumers are supposed to implement,
+      since consumers can subclass the generated class instead of implementing
+      the generated interface. If consumers are not supposed to implement this
+      protocol, then [Model] is redundant and will generate code that will never
+      be used.
+    */
+    [Protocol]
+    [BaseType(typeof(NSObject))]
+    interface BDFUser
+    {
+        // @required @property (readonly, nonatomic, strong) NSString * _Nonnull alias;
+        [Abstract]
+        [Export("alias", ArgumentSemantic.Strong)]
+        string Alias { get; }
 
-    //  // @required @property (readonly, nonatomic, strong) NSString * _Nullable firstName;
-    //  [Abstract]
-    //  [NullAllowed, Export("firstName", ArgumentSemantic.Strong)]
-    //  string FirstName { get; }
+        // @required @property (readonly, nonatomic, strong) NSString * _Nullable firstName;
+        [Abstract]
+        [NullAllowed, Export("firstName", ArgumentSemantic.Strong)]
+        string FirstName { get; }
 
-    //  // @required @property (readonly, nonatomic, strong) NSString * _Nullable lastName;
-    //  [Abstract]
-    //  [NullAllowed, Export("lastName", ArgumentSemantic.Strong)]
-    //  string LastName { get; }
+        // @required @property (readonly, nonatomic, strong) NSString * _Nullable lastName;
+        [Abstract]
+        [NullAllowed, Export("lastName", ArgumentSemantic.Strong)]
+        string LastName { get; }
 
-    //  // @required @property (readonly, nonatomic, strong) NSString * _Nullable email;
-    //  [Abstract]
-    //  [NullAllowed, Export("email", ArgumentSemantic.Strong)]
-    //  string Email { get; }
+        // @required @property (readonly, nonatomic, strong) NSString * _Nullable email;
+        [Abstract]
+        [NullAllowed, Export("email", ArgumentSemantic.Strong)]
+        string Email { get; }
 
-    //  // @required @property (readonly, nonatomic, strong) NSString * _Nullable imageFilename;
-    //  [Abstract]
-    //  [NullAllowed, Export("imageFilename", ArgumentSemantic.Strong)]
-    //  string ImageFilename { get; }
-    //}
+        // @required @property (readonly, nonatomic, strong) NSString * _Nullable imageFilename;
+        [Abstract]
+        [NullAllowed, Export("imageFilename", ArgumentSemantic.Strong)]
+        string ImageFilename { get; }
+    }
 
-    //// @protocol BCXUser <BDFUser>
-    ///*
-    //  Check whether adding [Model] to this declaration is appropriate.
-    //  [Model] is used to generate a C# class that implements this protocol,
-    //  and might be useful for protocols that consumers are supposed to implement,
-    //  since consumers can subclass the generated class instead of implementing
-    //  the generated interface. If consumers are not supposed to implement this
-    //  protocol, then [Model] is redundant and will generate code that will never
-    //  be used.
-    //*/
-    //[Protocol]
-    //interface BCXUser : IBDFUser
-    //{
-    //  // @required @property (readonly, assign, nonatomic) BCXUserStatus status;
-    //  [Abstract]
-    //  [Export("status", ArgumentSemantic.Assign)]
-    //  BCXUserStatus Status { get; }
+    // @protocol BCXUser <BDFUser>
+    /*
+      Check whether adding [Model] to this declaration is appropriate.
+      [Model] is used to generate a C# class that implements this protocol,
+      and might be useful for protocols that consumers are supposed to implement,
+      since consumers can subclass the generated class instead of implementing
+      the generated interface. If consumers are not supposed to implement this
+      protocol, then [Model] is redundant and will generate code that will never
+      be used.
+    */
+    [Protocol]
+    [BaseType(typeof(NSObject))]
+    interface BCXUser : BDFUser
+    {
+        // @required @property (readonly, assign, nonatomic) BCXUserStatus status;
+        [Abstract]
+        [Export("status", ArgumentSemantic.Assign)]
+        BCXUserStatus Status { get; }
 
-    //  // @required -(BOOL)isBusy;
-    //  [Abstract]
-    //  [Export("isBusy")]
-    //  [Verify(MethodToProperty)]
-    //  bool IsBusy { get; }
+        // @required -(BOOL)isBusy;
+        [Abstract]
+        [Export("isBusy")]
+        //[Verify(MethodToProperty)]
+        bool IsBusy { get; }
 
-    //  // @required -(BOOL)isOnline;
-    //  [Abstract]
-    //  [Export("isOnline")]
-    //  [Verify(MethodToProperty)]
-    //  bool IsOnline { get; }
+        // @required -(BOOL)isOnline;
+        [Abstract]
+        [Export("isOnline")]
+        //[Verify(MethodToProperty)]
+        bool IsOnline { get; }
 
-    //  // @required -(BOOL)isOffline;
-    //  [Abstract]
-    //  [Export("isOffline")]
-    //  [Verify(MethodToProperty)]
-    //  bool IsOffline { get; }
+        // @required -(BOOL)isOffline;
+        [Abstract]
+        [Export("isOffline")]
+        //[Verify(MethodToProperty)]
+        bool IsOffline { get; }
 
-    //  // @required -(BOOL)canUpgradeToVideo;
-    //  [Abstract]
-    //  [Export("canUpgradeToVideo")]
-    //  [Verify(MethodToProperty)]
-    //  bool CanUpgradeToVideo { get; }
-    //}
+        // @required -(BOOL)canUpgradeToVideo;
+        [Abstract]
+        [Export("canUpgradeToVideo")]
+        //[Verify(MethodToProperty)]
+        bool CanUpgradeToVideo { get; }
+    }
 
-    //// @protocol BCXCallParticipant <NSObject>
-    ///*
-    //  Check whether adding [Model] to this declaration is appropriate.
-    //  [Model] is used to generate a C# class that implements this protocol,
-    //  and might be useful for protocols that consumers are supposed to implement,
-    //  since consumers can subclass the generated class instead of implementing
-    //  the generated interface. If consumers are not supposed to implement this
-    //  protocol, then [Model] is redundant and will generate code that will never
-    //  be used.
-    //*/
-    //[Protocol]
-    //[BaseType(typeof(NSObject))]
-    //interface BCXCallParticipant
-    //{
-    //  // @required @property (readonly, nonatomic, strong) id<BCXUser> _Nonnull user;
-    //  [Abstract]
-    //  [Export("user", ArgumentSemantic.Strong)]
-    //  BCXUser User { get; }
+    // @protocol BCXCallParticipant <NSObject>
+    /*
+      Check whether adding [Model] to this declaration is appropriate.
+      [Model] is used to generate a C# class that implements this protocol,
+      and might be useful for protocols that consumers are supposed to implement,
+      since consumers can subclass the generated class instead of implementing
+      the generated interface. If consumers are not supposed to implement this
+      protocol, then [Model] is redundant and will generate code that will never
+      be used.
+    */
+    [Protocol]
+    [BaseType(typeof(NSObject))]
+    interface BCXCallParticipant
+    {
+        // @required @property (readonly, nonatomic, strong) id<BCXUser> _Nonnull user;
+        [Abstract]
+        [Export("user", ArgumentSemantic.Strong)]
+        BCXUser User { get; }
 
-    //  // @required @property (readonly, nonatomic, strong) NSString * _Nonnull userId;
-    //  [Abstract]
-    //  [Export("userId", ArgumentSemantic.Strong)]
-    //  string UserId { get; }
+        // @required @property (readonly, nonatomic, strong) NSString * _Nonnull userId;
+        [Abstract]
+        [Export("userId", ArgumentSemantic.Strong)]
+        string UserId { get; }
 
-    //  // @required @property (readonly, assign, nonatomic) BCXCallParticipantState state;
-    //  [Abstract]
-    //  [Export("state", ArgumentSemantic.Assign)]
-    //  BCXCallParticipantState State { get; }
+        // @required @property (readonly, assign, nonatomic) BCXCallParticipantState state;
+        [Abstract]
+        [Export("state", ArgumentSemantic.Assign)]
+        BCXCallParticipantState State { get; }
 
-    //  // @required -(BOOL)hasAnswered;
-    //  [Abstract]
-    //  [Export("hasAnswered")]
-    //  [Verify(MethodToProperty)]
-    //  bool HasAnswered { get; }
+        // @required -(BOOL)hasAnswered;
+        [Abstract]
+        [Export("hasAnswered")]
+        //[Verify(MethodToProperty)]
+        bool HasAnswered { get; }
 
-    //  // @required -(BOOL)hasDeclined;
-    //  [Abstract]
-    //  [Export("hasDeclined")]
-    //  [Verify(MethodToProperty)]
-    //  bool HasDeclined { get; }
+        // @required -(BOOL)hasDeclined;
+        [Abstract]
+        [Export("hasDeclined")]
+        //[Verify(MethodToProperty)]
+        bool HasDeclined { get; }
 
-    //  // @required -(BOOL)hasDeclinedByDoNotDisturb;
-    //  [Abstract]
-    //  [Export("hasDeclinedByDoNotDisturb")]
-    //  [Verify(MethodToProperty)]
-    //  bool HasDeclinedByDoNotDisturb { get; }
+        // @required -(BOOL)hasDeclinedByDoNotDisturb;
+        [Abstract]
+        [Export("hasDeclinedByDoNotDisturb")]
+        //[Verify(MethodToProperty)]
+        bool HasDeclinedByDoNotDisturb { get; }
 
-    //  // @required -(BOOL)didNotAnswer;
-    //  [Abstract]
-    //  [Export("didNotAnswer")]
-    //  [Verify(MethodToProperty)]
-    //  bool DidNotAnswer { get; }
+        // @required -(BOOL)didNotAnswer;
+        [Abstract]
+        [Export("didNotAnswer")]
+        //[Verify(MethodToProperty)]
+        bool DidNotAnswer { get; }
 
-    //  // @required -(BOOL)hasTimedOut;
-    //  [Abstract]
-    //  [Export("hasTimedOut")]
-    //  [Verify(MethodToProperty)]
-    //  bool HasTimedOut { get; }
+        // @required -(BOOL)hasTimedOut;
+        [Abstract]
+        [Export("hasTimedOut")]
+        //[Verify(MethodToProperty)]
+        bool HasTimedOut { get; }
 
-    //  // @required -(BOOL)hasDisconnected;
-    //  [Abstract]
-    //  [Export("hasDisconnected")]
-    //  [Verify(MethodToProperty)]
-    //  bool HasDisconnected { get; }
+        // @required -(BOOL)hasDisconnected;
+        [Abstract]
+        [Export("hasDisconnected")]
+        //[Verify(MethodToProperty)]
+        bool HasDisconnected { get; }
 
-    //  // @required -(BOOL)didUpgradeToVideo;
-    //  [Abstract]
-    //  [Export("didUpgradeToVideo")]
-    //  [Verify(MethodToProperty)]
-    //  bool DidUpgradeToVideo { get; }
-    //}
+        // @required -(BOOL)didUpgradeToVideo;
+        [Abstract]
+        [Export("didUpgradeToVideo")]
+        //[Verify(MethodToProperty)]
+        bool DidUpgradeToVideo { get; }
+    }
 
-    //// @protocol BCXCallParticipants <NSObject>
-    ///*
-    //  Check whether adding [Model] to this declaration is appropriate.
-    //  [Model] is used to generate a C# class that implements this protocol,
-    //  and might be useful for protocols that consumers are supposed to implement,
-    //  since consumers can subclass the generated class instead of implementing
-    //  the generated interface. If consumers are not supposed to implement this
-    //  protocol, then [Model] is redundant and will generate code that will never
-    //  be used.
-    //*/
-    //[Protocol]
-    //[BaseType(typeof(NSObject))]
-    //interface BCXCallParticipants
-    //{
-    //  // @required @property (readonly, nonatomic, strong) id<BCXCallParticipant> _Nonnull caller;
-    //  [Abstract]
-    //  [Export("caller", ArgumentSemantic.Strong)]
-    //  BCXCallParticipant Caller { get; }
+    // @protocol BCXCallParticipants <NSObject>
+    /*
+      Check whether adding [Model] to this declaration is appropriate.
+      [Model] is used to generate a C# class that implements this protocol,
+      and might be useful for protocols that consumers are supposed to implement,
+      since consumers can subclass the generated class instead of implementing
+      the generated interface. If consumers are not supposed to implement this
+      protocol, then [Model] is redundant and will generate code that will never
+      be used.
+    */
+    [Protocol]
+    [BaseType(typeof(NSObject))]
+    interface BCXCallParticipants
+    {
+        // @required @property (readonly, nonatomic, strong) id<BCXCallParticipant> _Nonnull caller;
+        [Abstract]
+        [Export("caller", ArgumentSemantic.Strong)]
+        BCXCallParticipant Caller { get; }
 
-    //  // @required @property (readonly, nonatomic, strong) NSString * _Nonnull callerId;
-    //  [Abstract]
-    //  [Export("callerId", ArgumentSemantic.Strong)]
-    //  string CallerId { get; }
+        // @required @property (readonly, nonatomic, strong) NSString * _Nonnull callerId;
+        [Abstract]
+        [Export("callerId", ArgumentSemantic.Strong)]
+        string CallerId { get; }
 
-    //  // @required @property (readonly, nonatomic, strong) NSArray<id<BCXCallParticipant>> * _Nonnull callees;
-    //  [Abstract]
-    //  [Export("callees", ArgumentSemantic.Strong)]
-    //  BCXCallParticipant[] Callees { get; }
+        // @required @property (readonly, nonatomic, strong) NSArray<id<BCXCallParticipant>> * _Nonnull callees;
+        [Abstract]
+        [Export("callees", ArgumentSemantic.Strong)]
+        BCXCallParticipant[] Callees { get; }
 
-    //  // @required @property (readonly, nonatomic, strong) NSArray<NSString *> * _Nonnull calleeIds;
-    //  [Abstract]
-    //  [Export("calleeIds", ArgumentSemantic.Strong)]
-    //  string[] CalleeIds { get; }
+        // @required @property (readonly, nonatomic, strong) NSArray<NSString *> * _Nonnull calleeIds;
+        [Abstract]
+        [Export("calleeIds", ArgumentSemantic.Strong)]
+        string[] CalleeIds { get; }
 
-    //  // @required -(id<BCXCallParticipant> _Nullable)calleeWithIdentifier:(NSString * _Nonnull)identifier;
-    //  [Abstract]
-    //  [Export("calleeWithIdentifier:")]
-    //  [return: NullAllowed]
-    //  BCXCallParticipant CalleeWithIdentifier(string identifier);
+        // @required -(id<BCXCallParticipant> _Nullable)calleeWithIdentifier:(NSString * _Nonnull)identifier;
+        [Abstract]
+        [Export("calleeWithIdentifier:")]
+        [return: NullAllowed]
+        BCXCallParticipant CalleeWithIdentifier(string identifier);
 
-    //  // @required @property (readonly, nonatomic, strong) NSArray<id<BCXCallParticipant>> * _Nonnull allParticipants;
-    //  [Abstract]
-    //  [Export("allParticipants", ArgumentSemantic.Strong)]
-    //  BCXCallParticipant[] AllParticipants { get; }
+        // @required @property (readonly, nonatomic, strong) NSArray<id<BCXCallParticipant>> * _Nonnull allParticipants;
+        [Abstract]
+        [Export("allParticipants", ArgumentSemantic.Strong)]
+        BCXCallParticipant[] AllParticipants { get; }
 
-    //  // @required @property (readonly, nonatomic, strong) NSArray<id<BCXCallParticipant>> * _Nonnull opponents;
-    //  [Abstract]
-    //  [Export("opponents", ArgumentSemantic.Strong)]
-    //  BCXCallParticipant[] Opponents { get; }
+        // @required @property (readonly, nonatomic, strong) NSArray<id<BCXCallParticipant>> * _Nonnull opponents;
+        [Abstract]
+        [Export("opponents", ArgumentSemantic.Strong)]
+        BCXCallParticipant[] Opponents { get; }
 
-    //  // @required @property (readonly, nonatomic, strong) NSArray<NSString *> * _Nonnull participantsIds;
-    //  [Abstract]
-    //  [Export("participantsIds", ArgumentSemantic.Strong)]
-    //  string[] ParticipantsIds { get; }
+        // @required @property (readonly, nonatomic, strong) NSArray<NSString *> * _Nonnull participantsIds;
+        [Abstract]
+        [Export("participantsIds", ArgumentSemantic.Strong)]
+        string[] ParticipantsIds { get; }
 
-    //  // @required -(id<BCXCallParticipant> _Nullable)participantWithIdentifier:(NSString * _Nonnull)identifier;
-    //  [Abstract]
-    //  [Export("participantWithIdentifier:")]
-    //  [return: NullAllowed]
-    //  BCXCallParticipant ParticipantWithIdentifier(string identifier);
+        // @required -(id<BCXCallParticipant> _Nullable)participantWithIdentifier:(NSString * _Nonnull)identifier;
+        [Abstract]
+        [Export("participantWithIdentifier:")]
+        [return: NullAllowed]
+        BCXCallParticipant ParticipantWithIdentifier(string identifier);
 
-    //  // @required -(id<BCXCallParticipant> _Nullable)authenticatedUserParticipant;
-    //  [Abstract]
-    //  [NullAllowed, Export("authenticatedUserParticipant")]
-    //  [Verify(MethodToProperty)]
-    //  BCXCallParticipant AuthenticatedUserParticipant { get; }
+        // @required -(id<BCXCallParticipant> _Nullable)authenticatedUserParticipant;
+        [Abstract]
+        [NullAllowed, Export("authenticatedUserParticipant")]
+        //[Verify(MethodToProperty)]
+        BCXCallParticipant AuthenticatedUserParticipant { get; }
 
-    //  // @required -(BOOL)isAuthenticatedUserTheCaller;
-    //  [Abstract]
-    //  [Export("isAuthenticatedUserTheCaller")]
-    //  [Verify(MethodToProperty)]
-    //  bool IsAuthenticatedUserTheCaller { get; }
+        // @required -(BOOL)isAuthenticatedUserTheCaller;
+        [Abstract]
+        [Export("isAuthenticatedUserTheCaller")]
+        //[Verify(MethodToProperty)]
+        bool IsAuthenticatedUserTheCaller { get; }
 
-    //  // @required -(void)addObserver:(id<BCXCallParticipantsObserver> _Nonnull)observer __attribute__((swift_name("add(observer:)")));
-    //  [Abstract]
-    //  [Export("addObserver:")]
-    //  void AddObserver(BCXCallParticipantsObserver observer);
+        // @required -(void)addObserver:(id<BCXCallParticipantsObserver> _Nonnull)observer __attribute__((swift_name("add(observer:)")));
+        [Abstract]
+        [Export("addObserver:")]
+        void AddObserver(BCXCallParticipantsObserver observer);
 
-    //  // @required -(void)addObserver:(id<BCXCallParticipantsObserver> _Nonnull)observer queue:(dispatch_queue_t _Nullable)queue __attribute__((swift_name("add(observer:queue:)")));
-    //  [Abstract]
-    //  [Export("addObserver:queue:")]
-    //  void AddObserver(BCXCallParticipantsObserver observer, [NullAllowed] DispatchQueue queue);
+        // @required -(void)addObserver:(id<BCXCallParticipantsObserver> _Nonnull)observer queue:(dispatch_queue_t _Nullable)queue __attribute__((swift_name("add(observer:queue:)")));
+        [Abstract]
+        [Export("addObserver:queue:")]
+        void AddObserver(BCXCallParticipantsObserver observer, [NullAllowed] DispatchQueue queue);
 
-    //  // @required -(void)removeObserver:(id<BCXCallParticipantsObserver> _Nonnull)observer __attribute__((swift_name("remove(observer:)")));
-    //  [Abstract]
-    //  [Export("removeObserver:")]
-    //  void RemoveObserver(BCXCallParticipantsObserver observer);
+        // @required -(void)removeObserver:(id<BCXCallParticipantsObserver> _Nonnull)observer __attribute__((swift_name("remove(observer:)")));
+        [Abstract]
+        [Export("removeObserver:")]
+        void RemoveObserver(BCXCallParticipantsObserver observer);
 
-    //  // @required -(NSArray<id<BCXCallParticipant>> * _Nonnull)busy;
-    //  [Abstract]
-    //  [Export("busy")]
-    //  [Verify(MethodToProperty)]
-    //  BCXCallParticipant[] Busy { get; }
+        // @required -(NSArray<id<BCXCallParticipant>> * _Nonnull)busy;
+        [Abstract]
+        [Export("busy")]
+        //[Verify(MethodToProperty)]
+        BCXCallParticipant[] Busy { get; }
 
-    //  // @required -(NSArray<id<BCXCallParticipant>> * _Nonnull)online;
-    //  [Abstract]
-    //  [Export("online")]
-    //  [Verify(MethodToProperty)]
-    //  BCXCallParticipant[] Online { get; }
+        // @required -(NSArray<id<BCXCallParticipant>> * _Nonnull)online;
+        [Abstract]
+        [Export("online")]
+        //[Verify(MethodToProperty)]
+        BCXCallParticipant[] Online { get; }
 
-    //  // @required -(NSArray<id<BCXCallParticipant>> * _Nonnull)offline;
-    //  [Abstract]
-    //  [Export("offline")]
-    //  [Verify(MethodToProperty)]
-    //  BCXCallParticipant[] Offline { get; }
+        // @required -(NSArray<id<BCXCallParticipant>> * _Nonnull)offline;
+        [Abstract]
+        [Export("offline")]
+        //[Verify(MethodToProperty)]
+        BCXCallParticipant[] Offline { get; }
 
-    //  // @required -(BOOL)hasEverybodyDeclined;
-    //  [Abstract]
-    //  [Export("hasEverybodyDeclined")]
-    //  [Verify(MethodToProperty)]
-    //  bool HasEverybodyDeclined { get; }
+        // @required -(BOOL)hasEverybodyDeclined;
+        [Abstract]
+        [Export("hasEverybodyDeclined")]
+        //[Verify(MethodToProperty)]
+        bool HasEverybodyDeclined { get; }
 
-    //  // @required -(BOOL)hasAnybodyAnswered;
-    //  [Abstract]
-    //  [Export("hasAnybodyAnswered")]
-    //  [Verify(MethodToProperty)]
-    //  bool HasAnybodyAnswered { get; }
+        // @required -(BOOL)hasAnybodyAnswered;
+        [Abstract]
+        [Export("hasAnybodyAnswered")]
+        //[Verify(MethodToProperty)]
+        bool HasAnybodyAnswered { get; }
 
-    //  // @required -(BOOL)hasAnybodyUpgradedToVideo;
-    //  [Abstract]
-    //  [Export("hasAnybodyUpgradedToVideo")]
-    //  [Verify(MethodToProperty)]
-    //  bool HasAnybodyUpgradedToVideo { get; }
+        // @required -(BOOL)hasAnybodyUpgradedToVideo;
+        [Abstract]
+        [Export("hasAnybodyUpgradedToVideo")]
+        //[Verify(MethodToProperty)]
+        bool HasAnybodyUpgradedToVideo { get; }
 
-    //  // @required -(NSArray<id<BCXCallParticipant>> * _Nonnull)upgradedToVideo;
-    //  [Abstract]
-    //  [Export("upgradedToVideo")]
-    //  [Verify(MethodToProperty)]
-    //  BCXCallParticipant[] UpgradedToVideo { get; }
-    //}
+        // @required -(NSArray<id<BCXCallParticipant>> * _Nonnull)upgradedToVideo;
+        [Abstract]
+        [Export("upgradedToVideo")]
+        //[Verify(MethodToProperty)]
+        BCXCallParticipant[] UpgradedToVideo { get; }
+    }
 
     //// @protocol BCXAction <NSObject>
     ///*
@@ -1898,7 +1899,7 @@ namespace Bandyer
     //  // @required -(NSString *)createNewLogFile;
     //  [Abstract]
     //  [Export("createNewLogFile")]
-    //  [Verify(MethodToProperty)]
+    //  //[Verify(MethodToProperty)]
     //  string CreateNewLogFile { get; }
 
     //  // @optional -(void)didArchiveLogFile:(NSString *)logFilePath __attribute__((swift_name("didArchiveLogFile(atPath:)")));
@@ -2260,25 +2261,25 @@ namespace Bandyer
     //  // +(NSString * _Nullable)bcx_appId __attribute__((swift_name("Globals.appId()")));
     //  [Static]
     //  [NullAllowed, Export("bcx_appId")]
-    //  [Verify(MethodToProperty)]
+    //  //[Verify(MethodToProperty)]
     //  string Bcx_appId { get; }
 
     //  // +(BCXConfig * _Nullable)bcx_config;
     //  [Static]
     //  [NullAllowed, Export("bcx_config")]
-    //  [Verify(MethodToProperty)]
+    //  //[Verify(MethodToProperty)]
     //  BCXConfig Bcx_config { get; }
 
     //  // +(dispatch_queue_t _Nonnull)bcx_privateQueue;
     //  [Static]
     //  [Export("bcx_privateQueue")]
-    //  [Verify(MethodToProperty)]
+    //  //[Verify(MethodToProperty)]
     //  DispatchQueue Bcx_privateQueue { get; }
 
     //  // +(id<BCXUser> _Nullable)bcx_user __attribute__((swift_name("Globals.user()")));
     //  [Static]
     //  [NullAllowed, Export("bcx_user")]
-    //  [Verify(MethodToProperty)]
+    //  //[Verify(MethodToProperty)]
     //  BCXUser Bcx_user { get; }
     //}
 
@@ -2527,7 +2528,7 @@ namespace Bandyer
     //{
     //  // -(NSArray<NSLayoutConstraint *> * _Nonnull)bui_constrainToSuperview __attribute__((swift_name("constrainToSuperview()")));
     //  [Export("bui_constrainToSuperview")]
-    //  [Verify(MethodToProperty)]
+    //  //[Verify(MethodToProperty)]
     //  NSLayoutConstraint[] Bui_constrainToSuperview { get; }
 
     //  // -(NSArray<NSLayoutConstraint *> * _Nonnull)bui_constrainToSuperview:(UIEdgeInsets)insets __attribute__((swift_name("constrainToSuperview(insets:)")));

@@ -165,6 +165,11 @@ namespace BandyerDemo.iOS
         }
 
         #region IBCXCallClientObserver
+        [Export("callClient:didReceiveIncomingCall:")]
+        public void CallClientDidReceiveIncomingCall(BCXCallClient client, BCXCall call)
+        {
+            Debug.Print("CallClientDidReceiveIncomingCall " + client + " " + call);
+        }
         [Export("callClientDidPause:")]
         public void CallClientDidPause(IBCXCallClient client)
         {
