@@ -51,6 +51,7 @@ namespace BandyerDemo.iOS
             BandyerSDK.Instance().InitializeWithApplicationId(appId, config);
         }
 
+        #region IBandyerSdk
         public void Init(string userAlias)
         {
             this.currentUserAlias = userAlias;
@@ -93,6 +94,7 @@ namespace BandyerDemo.iOS
             startChat();
             startCall();
         }
+        #endregion
 
         public class BandyerSdkBDKUserInfoFetcher : NSObject, IBDKUserInfoFetcher
         {
@@ -162,6 +164,7 @@ namespace BandyerDemo.iOS
             return items;
         }
 
+        #region IBCXCallClientObserver
         [Export("callClientDidPause:")]
         public void CallClientDidPause(IBCXCallClient client)
         {
@@ -213,7 +216,9 @@ namespace BandyerDemo.iOS
         {
             Debug.Print("CallClientDidFailWithError " + client + " " + error);
         }
+        #endregion
 
+        #region IBCHChatClientObserver
         [Export("chatClientWillStart:")]
         public void ChatClientWillStart(IBCHChatClient client)
         {
@@ -261,7 +266,9 @@ namespace BandyerDemo.iOS
         {
             Debug.Print("ChatClientDidFailWithError " + client + " " + error);
         }
+        #endregion
 
+        #region IBCHChannelViewControllerDelegate
         public void ChannelViewControllerDidFinish(BCHChannelViewController controller)
         {
             Debug.Print("ChannelViewControllerDidFinish " + controller);
@@ -279,7 +286,9 @@ namespace BandyerDemo.iOS
         {
             Debug.Print("ChannelViewControllerDidTapVideoCallWith " + controller + " " + users);
         }
+        #endregion
 
+        #region IBDKCallWindowDelegate
         public void CallWindowDidFinish(BDKCallWindow window)
         {
             Debug.Print("CallWindowDidFinish " + window);
@@ -294,7 +303,9 @@ namespace BandyerDemo.iOS
             window.Hidden = true;
             startChatController(this.chatClient);
         }
+        #endregion
 
+        #region IPKPushRegistryDelegate
         public void DidUpdatePushCredentials(PKPushRegistry registry, PKPushCredentials credentials, string type)
         {
             Debug.Print("DidReceiveIncomingPush");
@@ -303,5 +314,6 @@ namespace BandyerDemo.iOS
         {
             Debug.Print("DidUpdatePushCredentials");
         }
+        #endregion
     }
 }
