@@ -30,6 +30,8 @@ namespace BandyerDemo.Droid
         , IChatUIObserver
         , IChatObserver
     {
+        public const string AppId = "mAppId_b78542f60f697c8a56a13e579f2e66d0378ba6b3336fa75f961c6efb0e6b";
+
         const string TAG = "BandyerDemo";
         public static Android.App.Activity MainActivity;
         //private bool isChatModuleConnected;
@@ -95,9 +97,7 @@ namespace BandyerDemo.Droid
 
         public static void InitSdk(Android.App.Application application)
         {
-            var appId = "mAppId_b78542f60f697c8a56a13e579f2e66d0378ba6b3336fa75f961c6efb0e6b";
-
-            BandyerSDK.Builder builder = new BandyerSDK.Builder(application, appId)
+            BandyerSDK.Builder builder = new BandyerSDK.Builder(application, AppId)
                 .UseSandbox()
                 .WithCallEnabled(new BandyerSdkCallNotificationListener())
                 .WithFileSharingEnabled()
