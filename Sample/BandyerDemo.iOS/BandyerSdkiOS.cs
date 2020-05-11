@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Net;
+using System.Text;
 using Bandyer;
 using BandyerDemo.iOS;
 using CallKit;
@@ -22,6 +24,8 @@ namespace BandyerDemo.iOS
         , IBCHChannelViewControllerDelegate
         , IPKPushRegistryDelegate
     {
+        public const string AppId = "mAppId_b78542f60f697c8a56a13e579f2e66d0378ba6b3336fa75f961c6efb0e6b";
+
         private static BandyerSdkiOS instance = null;
         public BandyerSdkiOS()
         {
@@ -41,8 +45,6 @@ namespace BandyerDemo.iOS
 
         void InitSdkInt()
         {
-            var appId = "mAppId_b78542f60f697c8a56a13e579f2e66d0378ba6b3336fa75f961c6efb0e6b";
-
             var config = new BDKConfig();
             config.NotificationPayloadKeyPath = "data";
             config.PushRegistryDelegate = this;
@@ -58,7 +60,7 @@ namespace BandyerDemo.iOS
             config.HandleProvider = new BandyerSdkBCXHandleProvider();
             // CALLKIT
 
-            BandyerSDK.Instance().InitializeWithApplicationId(appId, config);
+            BandyerSDK.Instance().InitializeWithApplicationId(AppId, config);
 
             BandyerSDK.Instance().CallClient.AddObserver(this, DispatchQueue.MainQueue);
             BandyerSDK.Instance().CallClient.Start(currentUserAlias);
@@ -352,12 +354,41 @@ namespace BandyerDemo.iOS
         #region IPKPushRegistryDelegate
         public void DidUpdatePushCredentials(PKPushRegistry registry, PKPushCredentials credentials, string type)
         {
-            Debug.Print("DidReceiveIncomingPush");
+            Debug.Print("DidUpdatePushCredentials " + registry + " " + credentials + " " + type);
+            var tokenStr = credentials.Bcx_tokenAsString();
+            registerTokenToBandyer(tokenStr);
         }
         public void DidReceiveIncomingPush(PKPushRegistry registry, PKPushPayload payload, string type)
         {
-            Debug.Print("DidUpdatePushCredentials");
+            Debug.Print("DidReceiveIncomingPush " + registry + " " + payload + " " + type);
         }
         #endregion
+
+        void registerTokenToBandyer(string token)
+        {
+            var urlStr = "https://sandbox.bandyer.com/mobile_push_notifications/rest/device";
+            var jsonStr = "{" +
+                "\"user_alias\":\"client\"" +
+                ",\"app_id\":\"" + BandyerSdkiOS.AppId + "\"" +
+                ",\"push_token\":\"" + token + "\"" +
+                ",\"push_provider\":\"\"" +
+                ",\"platform\":\"ios\"" +
+                "}";
+
+            try
+            {
+                WebClient wc = new WebClient();
+                wc.Headers.Add(HttpRequestHeader.ContentType, "application/json; charset=utf-8");
+                byte[] dataBytes = Encoding.UTF8.GetBytes(jsonStr);
+                byte[] responseBytes = wc.UploadData(new Uri(urlStr), "POST", dataBytes);
+                string responseString = Encoding.UTF8.GetString(responseBytes);
+
+                Debug.Print("UploadData " + responseString);
+            }
+            catch (Exception e)
+            {
+                Debug.Print(e.ToString());
+            }
+        }
     }
 }
