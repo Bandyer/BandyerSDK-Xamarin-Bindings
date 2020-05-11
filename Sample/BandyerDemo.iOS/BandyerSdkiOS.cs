@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using Bandyer;
 using BandyerDemo.iOS;
+using CallKit;
 using CoreFoundation;
 using Foundation;
 using ObjCRuntime;
@@ -47,7 +48,17 @@ namespace BandyerDemo.iOS
             config.NotificationPayloadKeyPath = "data";
             config.PushRegistryDelegate = this;
             config.Environment = BDKEnvironment.Sandbox;
+
+            // CALLKIT
             config.CallKitEnabled = true;
+            config.NativeUILocalizedName = "My wonderful app";
+            //config.NativeUIRingToneSound = "MyRingtoneSound";
+            UIImage callKitIconImage = UIImage.FromBundle("bandyer_logo");
+            config.NativeUITemplateIconImageData = callKitIconImage.AsPNG();
+            config.SupportedHandleTypes = new NSSet(new object[] { CXHandleType.EmailAddress, CXHandleType.Generic });
+            config.HandleProvider = new BandyerSdkBCXHandleProvider();
+            // CALLKIT
+
             BandyerSDK.Instance().InitializeWithApplicationId(appId, config);
         }
 
@@ -95,6 +106,24 @@ namespace BandyerDemo.iOS
             startCall();
         }
         #endregion
+
+        public class BandyerSdkBCXHandleProvider : NSObject, IBCXHandleProvider
+        {
+            public void Completion(string[] aliases, Action<CXHandle> completion)
+            {
+                Debug.Print("Completion " + aliases + " " + completion);
+
+                CXHandle handle = new CXHandle(CXHandleType.Generic, String.Join(", ", aliases));
+
+                completion(handle);
+            }
+
+            [return: Release]
+            public NSObject Copy(NSZone zone)
+            {
+                return new BandyerSdkBCXHandleProvider();
+            }
+        }
 
         public class BandyerSdkBDKUserInfoFetcher : NSObject, IBDKUserInfoFetcher
         {

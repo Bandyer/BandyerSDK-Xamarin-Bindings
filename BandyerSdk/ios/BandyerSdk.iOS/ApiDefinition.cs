@@ -1349,6 +1349,8 @@ namespace Bandyer
         void Completion([NullAllowed] string[] aliases, Action<CXHandle> completion);
     }
 
+    interface IBCXHandleProvider { }
+
     //// @interface BCXAdditions (PKPushCredentials)
     //[Category]
     //[BaseType(typeof(PKPushCredentials))]
@@ -2112,7 +2114,7 @@ namespace Bandyer
         // @property (copy, nonatomic) NSSet<NSNumber *> * _Nonnull supportedHandleTypes __attribute__((availability(ios, introduced=10.0)));
         [iOS(10, 0)]
         [Export("supportedHandleTypes", ArgumentSemantic.Copy)]
-        NSSet<NSNumber> SupportedHandleTypes { get; set; }
+        NSSet SupportedHandleTypes { get; set; }
 
         // @property (copy, nonatomic) NSString * _Nonnull nativeUILocalizedName __attribute__((availability(ios, introduced=10.0)));
         [iOS(10, 0)]
@@ -2129,10 +2131,10 @@ namespace Bandyer
         [NullAllowed, Export("nativeUITemplateIconImageData", ArgumentSemantic.Copy)]
         NSData NativeUITemplateIconImageData { get; set; }
 
-        //// @property (nonatomic, strong) id<BCXHandleProvider> _Null_unspecified handleProvider __attribute__((availability(ios, introduced=10.0)));
-        //[iOS(10, 0)]
-        //[Export("handleProvider", ArgumentSemantic.Strong)]
-        //BCXHandleProvider HandleProvider { get; set; }
+        // @property (nonatomic, strong) id<BCXHandleProvider> _Null_unspecified handleProvider __attribute__((availability(ios, introduced=10.0)));
+        [iOS(10, 0)]
+        [Export("handleProvider", ArgumentSemantic.Strong)]
+        IBCXHandleProvider HandleProvider { get; set; }
 
         // @property (copy, nonatomic) NSString * _Nonnull notificationPayloadKeyPath;
         [Export("notificationPayloadKeyPath")]

@@ -114,6 +114,8 @@
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon20.png">
       <Visible>false</Visible>
     </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\bandyer_logo.imageset\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\bandyer_logo.imageset\bandyer_logo_blue_bg_smaller.png" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -139,6 +141,9 @@
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\video.mp4" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Assets.xcassets\bandyer_logo.imageset\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
 </Project>
