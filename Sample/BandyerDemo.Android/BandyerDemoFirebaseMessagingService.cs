@@ -34,7 +34,7 @@ namespace BandyerDemo.Droid
         {
             var urlStr = "https://sandbox.bandyer.com/mobile_push_notifications/rest/device";
             var jsonStr = "{" +
-                "\"user_alias\":\"user\"" +
+                "\"user_alias\":\"client\"" +
                 ",\"app_id\":\"" + BandyerSdkAndroid.AppId + "\"" +
                 ",\"push_token\":\"" + token + "\"" +
                 ",\"push_provider\":\"firebase\"" +
