@@ -172,10 +172,6 @@ namespace BandyerDemo.Droid
 
             MainActivity.StartActivity(bandyerChatIntent);
         }
-
-        public void StartChatAndCall(string userAlias)
-        {
-        }
         #endregion
 
         #region ICallUIObserver

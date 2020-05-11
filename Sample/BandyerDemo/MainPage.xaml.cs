@@ -16,8 +16,20 @@ namespace BandyerDemo
         {
             InitializeComponent();
             bandyerSdk = DependencyService.Get<IBandyerSdk>();
+            bandyerSdk.ChatReadyEvent += ChatReadyEvent;
+            bandyerSdk.CallReadyEvent += CallReadyEvent;
             var userAlias = "client";
             bandyerSdk.Init(userAlias);
+        }
+
+        void ChatReadyEvent()
+        {
+            ButtonStartChat.IsEnabled = true;
+        }
+
+        void CallReadyEvent()
+        {
+            ButtonStartCall.IsEnabled = true;
         }
 
         void Button_StartCall(System.Object sender, System.EventArgs e)
@@ -28,11 +40,6 @@ namespace BandyerDemo
         void Button_StartChat(System.Object sender, System.EventArgs e)
         {
             bandyerSdk.StartChat("web");
-        }
-
-        void Button_StartChatAndCall(System.Object sender, System.EventArgs e)
-        {
-            bandyerSdk.StartChatAndCall("web");
         }
     }
 }

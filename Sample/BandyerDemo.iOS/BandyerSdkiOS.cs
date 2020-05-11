@@ -43,7 +43,6 @@ namespace BandyerDemo.iOS
         {
             var appId = "mAppId_b78542f60f697c8a56a13e579f2e66d0378ba6b3336fa75f961c6efb0e6b";
 
-            BDKConfig.LogLevel = BDFDDLogLevel.Verbose;
             var config = new BDKConfig();
             config.NotificationPayloadKeyPath = "data";
             config.PushRegistryDelegate = this;
@@ -60,9 +59,18 @@ namespace BandyerDemo.iOS
             // CALLKIT
 
             BandyerSDK.Instance().InitializeWithApplicationId(appId, config);
+
+            BandyerSDK.Instance().CallClient.AddObserver(this, DispatchQueue.MainQueue);
+            BandyerSDK.Instance().CallClient.Start(currentUserAlias);
+
+            BandyerSDK.Instance().ChatClient.AddObserver(this, DispatchQueue.MainQueue);
+            BandyerSDK.Instance().ChatClient.Start(currentUserAlias);
         }
 
         #region IBandyerSdk
+        public event Action CallReadyEvent;
+        public event Action ChatReadyEvent;
+
         public void Init(string userAlias)
         {
             this.currentUserAlias = userAlias;
@@ -71,39 +79,13 @@ namespace BandyerDemo.iOS
         public void StartCall(string userAlias)
         {
             this.callUserAlias = userAlias;
-            startCall();
-        }
-
-        void startCall()
-        {
-            BandyerSDK.Instance().CallClient.AddObserver(this, DispatchQueue.MainQueue);
-            BandyerSDK.Instance().CallClient.Start(currentUserAlias);
+            startWindowCall();
         }
 
         public void StartChat(string userAlias)
         {
             this.chatUserAlias = userAlias;
-            startChat();
-        }
-
-        void startChat()
-        {
-            BandyerSDK.Instance().ChatClient.AddObserver(this, DispatchQueue.MainQueue);
-            BandyerSDK.Instance().ChatClient.Start(currentUserAlias);
-        }
-
-        public void StartChatAndCall(string userAlias)
-        {
-            this.callUserAlias = userAlias;
-            this.chatUserAlias = userAlias;
-            startChat();
-            startCall();
-        }
-
-        void startChatAndCall()
-        {
-            startChat();
-            startCall();
+            startChatController(this.chatClient);
         }
         #endregion
 
@@ -111,7 +93,7 @@ namespace BandyerDemo.iOS
         {
             public void Completion(string[] aliases, Action<CXHandle> completion)
             {
-                Debug.Print("Completion " + aliases + " " + completion);
+                Debug.Print("IBCXHandleProvider Completion " + aliases + " " + completion);
 
                 CXHandle handle = new CXHandle(CXHandleType.Generic, String.Join(", ", aliases));
 
@@ -142,6 +124,8 @@ namespace BandyerDemo.iOS
 
             public void FetchUsersCompletion(string[] aliases, Action<NSArray<BDKUserInfoDisplayItem>> completion)
             {
+                Debug.Print("IBDKUserInfoFetcher FetchUsersCompletion " + aliases + " " + completion);
+
                 var arr = NSArray<BDKUserInfoDisplayItem>.FromNSObjects(Items.ToArray());
                 completion(arr);
             }
@@ -239,7 +223,7 @@ namespace BandyerDemo.iOS
         public void CallClientDidStart(IBCXCallClient client)
         {
             Debug.Print("CallClientDidStart " + client);
-            startWindowCall();
+            CallReadyEvent();
         }
         [Export("callClientDidStartReconnecting:")]
         public void CallClientDidStartReconnecting(IBCXCallClient client)
@@ -289,7 +273,7 @@ namespace BandyerDemo.iOS
         {
             Debug.Print("ChatClientDidStart " + client);
             this.chatClient = client;
-            startChatController(this.chatClient);
+            ChatReadyEvent();
         }
         [Export("chatClientWillPause:")]
         public void ChatClientWillPause(IBCHChatClient client)
