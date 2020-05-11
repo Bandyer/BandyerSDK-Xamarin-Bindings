@@ -15,15 +15,15 @@ namespace Bandyer
     }
 
 	//[Native]
-	//public enum BCXCallClientState : long
-	//{
-	//  Stopped = 0,
-	//  Starting,
-	//  Running,
-	//  Resuming,
-	//  Paused,
-	//  Reconnecting
-	//}
+	public enum BCXCallClientState : long
+	{
+		Stopped = 0,
+		Starting,
+		Running,
+		Resuming,
+		Paused,
+		Reconnecting
+	}
 
 	//static class CFunctions
 	//{
