@@ -124,7 +124,7 @@ namespace Bandyer
         // +(instancetype _Nonnull)intentWithURL:(NSURL * _Nonnull)url;
         [Static]
         [Export("intentWithURL:")]
-        BDKJoinURLIntent IntentWithURL(NSUrl url);
+        IBDKIntent IntentWithURL(NSUrl url);
     }
 
     // @interface BDKIncomingCallHandlingIntent : NSObject <BDKIntent>

@@ -77,10 +77,25 @@ namespace BandyerDemo.iOS
 
         bool ContinueUserActivityInt(NSUserActivity userActivity)
         {
+            if (userActivity.ActivityType == NSUserActivityType.BrowsingWeb)
+            {
+                var url = userActivity.WebPageUrl;
+                var intent = BDKJoinURLIntent.IntentWithURL(url);
+                initCallWindow();
+                callWindow.ShouldPresentCallViewControllerWithIntent(intent, (success) =>
+                {
+                    if (!success)
+                    {
+                        var alert = UIAlertController.Create("Warning", "Another call is already in progress.", UIAlertControllerStyle.Alert);
+                        alert.AddAction(UIAlertAction.Create("OK", UIAlertActionStyle.Default, null));
+                        UIApplication.SharedApplication.KeyWindow.RootViewController.PresentViewController(alert, true, null);
+                    }
+                });
+            }
             if (UIDevice.CurrentDevice.CheckSystemVersion(13, 0))
             {
                 INIntent intent = userActivity.GetInteraction()?.Intent;
-                if (intent.GetType() == typeof(INStartCallIntent)){
+                if (intent != null && intent.GetType() == typeof(INStartCallIntent)){
                     initCallWindow();
                     callWindow.HandleINStartCallIntent((INStartCallIntent)intent);
                     return true;
@@ -89,7 +104,7 @@ namespace BandyerDemo.iOS
             else if (UIDevice.CurrentDevice.CheckSystemVersion(13, 0))
             {
                 INIntent intent = userActivity.GetInteraction()?.Intent;
-                if (intent.GetType() == typeof(INStartVideoCallIntent))
+                if (intent != null && intent.GetType() == typeof(INStartVideoCallIntent))
                 {
                     initCallWindow();
                     callWindow.HandleINStartVideoCallIntent((INStartVideoCallIntent)intent);
