@@ -42,6 +42,9 @@ namespace BandyerDemo.iOS
         private IBCHChatClient chatClient;
         private BCHMessageNotificationController messageNotificationController;
         private BDKCallBannerController callBannerController;
+        private NSUrl webPageUrl;
+        private bool callClientReady = false;
+        private bool shouldStartWindowCallFromWebPageUrl = false;
 
         public static void InitSdk()
         {
@@ -77,19 +80,15 @@ namespace BandyerDemo.iOS
         {
             if (userActivity.ActivityType == NSUserActivityType.BrowsingWeb)
             {
-                var url = userActivity.WebPageUrl;
-                var intent = BDKJoinURLIntent.IntentWithURL(url);
-                initCallWindow();
-                callWindow.ShouldPresentCallViewControllerWithIntent(intent, (success) =>
+                this.webPageUrl = userActivity.WebPageUrl;
+                if (callClientReady)
                 {
-                    if (!success)
-                    {
-                        var alert = UIAlertController.Create("Warning", "Another call is already in progress.", UIAlertControllerStyle.Alert);
-                        alert.AddAction(UIAlertAction.Create("OK", UIAlertActionStyle.Default, null));
-                        UIApplication.SharedApplication.KeyWindow.RootViewController.PresentViewController(alert, true, null);
-                    }
-                });
-
+                    startWindowCallFromWebPageUrl(webPageUrl);
+                }
+                else
+                {
+                    shouldStartWindowCallFromWebPageUrl = true;
+                }
                 return true;
             } else if (UIDevice.CurrentDevice.CheckSystemVersion(10, 0) && userActivity.GetInteraction()?.Intent != null)
             {
@@ -97,6 +96,22 @@ namespace BandyerDemo.iOS
             }
 
             return false;
+        }
+
+        void startWindowCallFromWebPageUrl(NSUrl url)
+        {
+            shouldStartWindowCallFromWebPageUrl = false;
+            var intent = BDKJoinURLIntent.IntentWithURL(url);
+            initCallWindow();
+            callWindow.ShouldPresentCallViewControllerWithIntent(intent, (success) =>
+            {
+                if (!success)
+                {
+                    var alert = UIAlertController.Create("Warning", "Another call is already in progress.", UIAlertControllerStyle.Alert);
+                    alert.AddAction(UIAlertAction.Create("OK", UIAlertActionStyle.Default, null));
+                    UIApplication.SharedApplication.KeyWindow.RootViewController.PresentViewController(alert, true, null);
+                }
+            });
         }
 
         [Introduced(PlatformName.iOS, 10, 0, PlatformArchitecture.All, null)]
@@ -322,7 +337,15 @@ namespace BandyerDemo.iOS
         public void CallClientDidStart(IBCXCallClient client)
         {
             Debug.Print("CallClientDidStart " + client);
-            CallReadyEvent();
+            if (client.IsRunning)
+            {
+                callClientReady = true;
+                CallReadyEvent();
+                if (shouldStartWindowCallFromWebPageUrl)
+                {
+                    startWindowCallFromWebPageUrl(this.webPageUrl);
+                }
+            }
         }
         [Export("callClientDidStartReconnecting:")]
         public void CallClientDidStartReconnecting(IBCXCallClient client)
