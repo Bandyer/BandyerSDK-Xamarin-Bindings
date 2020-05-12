@@ -25,5 +25,11 @@ namespace BandyerDemo.iOS
 
             return base.FinishedLaunching(app, options);
         }
+
+        [Export("application:continueUserActivity:restorationHandler:")]
+        public bool ContinueUserActivity(UIApplication application, NSUserActivity userActivity, UIApplicationRestorationHandler completionHandler)
+        {
+            return BandyerSdkiOS.ContinueUserActivity(userActivity);
+        }
     }
 }

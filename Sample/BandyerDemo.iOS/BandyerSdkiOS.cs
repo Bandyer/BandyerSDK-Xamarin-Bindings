@@ -12,6 +12,7 @@ using ObjCRuntime;
 using PushKit;
 using UIKit;
 using Xamarin.Forms;
+using Intents;
 
 [assembly: Dependency(typeof(BandyerSdkiOS))]
 namespace BandyerDemo.iOS
@@ -43,6 +44,11 @@ namespace BandyerDemo.iOS
             instance.InitSdkInt();
         }
 
+        public static bool ContinueUserActivity(NSUserActivity userActivity)
+        {
+            return instance.ContinueUserActivityInt(userActivity);
+        }
+
         void InitSdkInt()
         {
             var config = new BDKConfig();
@@ -67,6 +73,30 @@ namespace BandyerDemo.iOS
 
             BandyerSDK.Instance().ChatClient.AddObserver(this, DispatchQueue.MainQueue);
             BandyerSDK.Instance().ChatClient.Start(currentUserAlias);
+        }
+
+        bool ContinueUserActivityInt(NSUserActivity userActivity)
+        {
+            if (UIDevice.CurrentDevice.CheckSystemVersion(13, 0))
+            {
+                INIntent intent = userActivity.GetInteraction()?.Intent;
+                if (intent.GetType() == typeof(INStartCallIntent)){
+                    initCallWindow();
+                    callWindow.HandleINStartCallIntent((INStartCallIntent)intent);
+                    return true;
+                }
+            }
+            else if (UIDevice.CurrentDevice.CheckSystemVersion(13, 0))
+            {
+                INIntent intent = userActivity.GetInteraction()?.Intent;
+                if (intent.GetType() == typeof(INStartVideoCallIntent))
+                {
+                    initCallWindow();
+                    callWindow.HandleINStartVideoCallIntent((INStartVideoCallIntent)intent);
+                    return true;
+                }
+            }
+            return false;
         }
 
         #region IBandyerSdk
