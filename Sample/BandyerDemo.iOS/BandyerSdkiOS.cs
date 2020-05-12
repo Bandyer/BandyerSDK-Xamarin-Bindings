@@ -183,7 +183,15 @@ namespace BandyerDemo.iOS
             {
                 Debug.Print("IBCXHandleProvider Completion " + aliases + " " + completion);
 
-                CXHandle handle = new CXHandle(CXHandleType.Generic, String.Join(", ", aliases));
+                CXHandle handle;
+                if (aliases != null)
+                {
+                    handle = new CXHandle(CXHandleType.Generic, String.Join(", ", aliases));
+                }
+                else
+                {
+                    handle = new CXHandle(CXHandleType.Generic, "unknown");
+                }
 
                 completion(handle);
             }
