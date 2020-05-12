@@ -11,6 +11,7 @@ namespace BandyerDemo
     public partial class MainPage : ContentPage
     {
         private IBandyerSdk bandyerSdk;
+        private bool sdkInitialized = false;
 
         public MainPage()
         {
@@ -18,8 +19,16 @@ namespace BandyerDemo
             bandyerSdk = DependencyService.Get<IBandyerSdk>();
             bandyerSdk.ChatReadyEvent += ChatReadyEvent;
             bandyerSdk.CallReadyEvent += CallReadyEvent;
-            var userAlias = "client";
-            bandyerSdk.Init(userAlias);
+        }
+
+        protected override void OnAppearing()
+        {
+            if (!sdkInitialized)
+            {
+                sdkInitialized = true;
+                var userAlias = "client";
+                bandyerSdk.Init(userAlias);
+            }
         }
 
         void ChatReadyEvent()

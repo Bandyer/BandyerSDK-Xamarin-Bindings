@@ -71,20 +71,6 @@ namespace BandyerDemo.iOS
             // CALLKIT
 
             BandyerSDK.Instance().InitializeWithApplicationId(AppId, config);
-
-            BandyerSDK.Instance().CallClient.AddObserver(this, DispatchQueue.MainQueue);
-            BandyerSDK.Instance().CallClient.Start(currentUserAlias);
-
-            BandyerSDK.Instance().ChatClient.AddObserver(this, DispatchQueue.MainQueue);
-            BandyerSDK.Instance().ChatClient.Start(currentUserAlias);
-
-            messageNotificationController = new BCHMessageNotificationController();
-            messageNotificationController.Delegate = this;
-            messageNotificationController.ParentViewController = UIApplication.SharedApplication.KeyWindow.RootViewController;
-
-            callBannerController = new BDKCallBannerController();
-            callBannerController.Delegate = this;
-            callBannerController.ParentViewController = UIApplication.SharedApplication.KeyWindow.RootViewController;
         }
 
         bool ContinueUserActivityInt(NSUserActivity userActivity)
@@ -162,6 +148,20 @@ namespace BandyerDemo.iOS
         public void Init(string userAlias)
         {
             this.currentUserAlias = userAlias;
+
+            BandyerSDK.Instance().CallClient.AddObserver(this, DispatchQueue.MainQueue);
+            BandyerSDK.Instance().CallClient.Start(currentUserAlias);
+
+            BandyerSDK.Instance().ChatClient.AddObserver(this, DispatchQueue.MainQueue);
+            BandyerSDK.Instance().ChatClient.Start(currentUserAlias);
+
+            messageNotificationController = new BCHMessageNotificationController();
+            messageNotificationController.Delegate = this;
+            messageNotificationController.ParentViewController = UIApplication.SharedApplication.KeyWindow.RootViewController;
+
+            callBannerController = new BDKCallBannerController();
+            callBannerController.Delegate = this;
+            callBannerController.ParentViewController = UIApplication.SharedApplication.KeyWindow.RootViewController;
         }
 
         public void StartCall(string userAlias)
