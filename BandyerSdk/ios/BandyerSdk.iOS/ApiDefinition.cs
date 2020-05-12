@@ -2606,7 +2606,7 @@ namespace Bandyer
     {
         [Wrap("WeakDelegate")]
         [NullAllowed]
-        BDKCallBannerControllerDelegate Delegate { get; set; }
+        IBDKCallBannerControllerDelegate Delegate { get; set; }
 
         // @property (nonatomic, weak) id<BDKCallBannerControllerDelegate> _Nullable delegate;
         [NullAllowed, Export("delegate", ArgumentSemantic.Weak)]
@@ -2647,6 +2647,8 @@ namespace Bandyer
         [Export("callBannerController:willHide:")]
         void WillHide(BDKCallBannerController controller, BDKCallBannerView banner);
     }
+
+    interface IBDKCallBannerControllerDelegate { }
 
     // @interface BDKCallBannerView : UIView
     [BaseType(typeof(UIView))]

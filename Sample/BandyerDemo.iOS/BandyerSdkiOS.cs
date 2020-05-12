@@ -25,6 +25,7 @@ namespace BandyerDemo.iOS
         , IBCHChannelViewControllerDelegate
         , IPKPushRegistryDelegate
         , IBCHMessageNotificationControllerDelegate
+        , IBDKCallBannerControllerDelegate
     {
         public const string AppId = "mAppId_b78542f60f697c8a56a13e579f2e66d0378ba6b3336fa75f961c6efb0e6b";
 
@@ -40,6 +41,7 @@ namespace BandyerDemo.iOS
         private string currentUserAlias;
         private IBCHChatClient chatClient;
         private BCHMessageNotificationController messageNotificationController;
+        private BDKCallBannerController callBannerController;
 
         public static void InitSdk()
         {
@@ -79,6 +81,10 @@ namespace BandyerDemo.iOS
             messageNotificationController = new BCHMessageNotificationController();
             messageNotificationController.Delegate = this;
             messageNotificationController.ParentViewController = UIApplication.SharedApplication.KeyWindow.RootViewController;
+
+            callBannerController = new BDKCallBannerController();
+            callBannerController.Delegate = this;
+            callBannerController.ParentViewController = UIApplication.SharedApplication.KeyWindow.RootViewController;
         }
 
         bool ContinueUserActivityInt(NSUserActivity userActivity)
@@ -477,7 +483,25 @@ namespace BandyerDemo.iOS
         #region IBCHMessageNotificationControllerDelegate
         public void DidTouch(BCHMessageNotificationController controller, BCHChatNotification notification)
         {
+            Debug.Print("IBCHMessageNotificationControllerDelegate DidTouch " + controller + " " + notification);
             startChatController(null);
+        }
+        #endregion
+
+        #region IBDKCallBannerControllerDelegate
+        public void DidTouch(BDKCallBannerController controller, BDKCallBannerView banner)
+        {
+            Debug.Print("IBDKCallBannerControllerDelegate DidTouch " + controller + " " + banner);
+        }
+        [Export("callBannerController:willHide:")]
+        public void WillHide(BDKCallBannerController controller, BDKCallBannerView banner)
+        {
+            Debug.Print("IBDKCallBannerControllerDelegate WillHide " + controller + " " + banner);
+        }
+        [Export("callBannerController:willShow:")]
+        public void WillShow(BDKCallBannerController controller, BDKCallBannerView banner)
+        {
+            Debug.Print("IBDKCallBannerControllerDelegate WillShow " + controller + " " + banner);
         }
         #endregion
     }
