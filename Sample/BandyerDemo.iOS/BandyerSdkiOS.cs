@@ -97,27 +97,56 @@ namespace BandyerDemo.iOS
                         UIApplication.SharedApplication.KeyWindow.RootViewController.PresentViewController(alert, true, null);
                     }
                 });
+
+                return true;
+            } else if (UIDevice.CurrentDevice.CheckSystemVersion(10, 0) && userActivity.GetInteraction()?.Intent != null)
+            {
+                return HandleINIntent(userActivity.GetInteraction()?.Intent); 
             }
+
+            return false;
+        }
+
+        [Introduced(PlatformName.iOS, 10, 0, PlatformArchitecture.All, null)]
+        private bool HandleINIntent(INIntent intent)
+        {
             if (UIDevice.CurrentDevice.CheckSystemVersion(13, 0))
             {
-                INIntent intent = userActivity.GetInteraction()?.Intent;
-                if (intent != null && intent.GetType() == typeof(INStartCallIntent)){
-                    initCallWindow();
-                    callWindow.HandleINStartCallIntent((INStartCallIntent)intent);
-                    return true;
-                }
-            }
-            else if (UIDevice.CurrentDevice.CheckSystemVersion(13, 0))
-            {
-                INIntent intent = userActivity.GetInteraction()?.Intent;
-                if (intent != null && intent.GetType() == typeof(INStartVideoCallIntent))
+                if (intent.GetType() == typeof(INStartCallIntent))
                 {
-                    initCallWindow();
-                    callWindow.HandleINStartVideoCallIntent((INStartVideoCallIntent)intent);
+                    HandleINStartCallIntent((INStartCallIntent)intent);
+                    return true;
+                }
+                else if (intent.GetType() == typeof(INStartVideoCallIntent))
+                {
+                    HandleINStartVideoCallIntent((INStartVideoCallIntent)intent);
                     return true;
                 }
             }
+            else
+            {
+                if (intent.GetType() == typeof(INStartVideoCallIntent))
+                {
+                    HandleINStartVideoCallIntent((INStartVideoCallIntent)intent);
+                    return true;
+                }
+            }
+
             return false;
+        }
+
+        [Introduced(PlatformName.iOS, 10, 0, PlatformArchitecture.All, null)]
+        private void HandleINStartVideoCallIntent(INStartVideoCallIntent intent)
+        {
+            initCallWindow();
+            callWindow.HandleINStartVideoCallIntent(intent);
+        }
+
+        [Introduced(PlatformName.iOS, 13, 0, PlatformArchitecture.All, null)]
+        private void HandleINStartCallIntent(INStartCallIntent intent)
+        {
+            initCallWindow();
+            callWindow.HandleINStartCallIntent((INStartCallIntent)intent);
         }
 
         #region IBandyerSdk
