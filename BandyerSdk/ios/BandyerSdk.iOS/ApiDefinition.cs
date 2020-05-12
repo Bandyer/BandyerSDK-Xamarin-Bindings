@@ -2710,6 +2710,8 @@ namespace Bandyer
         void DidTouch(BCHMessageNotificationController controller, BCHChatNotification notification);
     }
 
+    interface IBCHMessageNotificationControllerDelegate { }
+
     //// @interface Bandyer_Swift_1640 (BDKCallWindow) <BCHMessageNotificationControllerDelegate>
     //[Category]
     //[BaseType(typeof(BDKCallWindow))]
@@ -2970,7 +2972,7 @@ namespace Bandyer
     {
         [Wrap("WeakDelegate")]
         [NullAllowed]
-        BCHMessageNotificationControllerDelegate Delegate { get; set; }
+        IBCHMessageNotificationControllerDelegate Delegate { get; set; }
 
         // @property (nonatomic, weak) id<BCHMessageNotificationControllerDelegate> _Nullable delegate;
         [NullAllowed, Export("delegate", ArgumentSemantic.Weak)]

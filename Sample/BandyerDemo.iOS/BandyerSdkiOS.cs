@@ -24,6 +24,7 @@ namespace BandyerDemo.iOS
         , IBCHChatClientObserver
         , IBCHChannelViewControllerDelegate
         , IPKPushRegistryDelegate
+        , IBCHMessageNotificationControllerDelegate
     {
         public const string AppId = "mAppId_b78542f60f697c8a56a13e579f2e66d0378ba6b3336fa75f961c6efb0e6b";
 
@@ -38,6 +39,7 @@ namespace BandyerDemo.iOS
         private string chatUserAlias;
         private string currentUserAlias;
         private IBCHChatClient chatClient;
+        private BCHMessageNotificationController messageNotificationController;
 
         public static void InitSdk()
         {
@@ -73,6 +75,10 @@ namespace BandyerDemo.iOS
 
             BandyerSDK.Instance().ChatClient.AddObserver(this, DispatchQueue.MainQueue);
             BandyerSDK.Instance().ChatClient.Start(currentUserAlias);
+
+            messageNotificationController = new BCHMessageNotificationController();
+            messageNotificationController.Delegate = this;
+            messageNotificationController.ParentViewController = UIApplication.SharedApplication.KeyWindow.RootViewController;
         }
 
         bool ContinueUserActivityInt(NSUserActivity userActivity)
@@ -204,7 +210,10 @@ namespace BandyerDemo.iOS
 
         void startChatController(IBCHChatClient client)
         {
-            client.Start(chatUserAlias);
+            if (client != null)
+            {
+                client.Start(chatUserAlias);
+            }
             var intent = BCHOpenChatIntent.OpenChatWith(chatUserAlias);
             var rootVC = UIApplication.SharedApplication.KeyWindow.RootViewController;
             var items = userInfoFetcherItems();
@@ -435,5 +444,12 @@ namespace BandyerDemo.iOS
                 Debug.Print(e.ToString());
             }
         }
+
+        #region IBCHMessageNotificationControllerDelegate
+        public void DidTouch(BCHMessageNotificationController controller, BCHChatNotification notification)
+        {
+            startChatController(null);
+        }
+        #endregion
     }
 }
