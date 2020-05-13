@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Android.App;
+using Android.Content;
 using Android.Util;
 using BandyerDemo.Droid;
 using Com.Bandyer.Android_sdk;
@@ -34,9 +35,11 @@ namespace BandyerDemo.Droid
 
         const string TAG = "BandyerDemo";
         public static Android.App.Activity MainActivity;
-        private bool isChatModuleConnected;
-        private bool isCallModuleConnected;
+        private static bool isChatModuleConnected;
+        private static bool isCallModuleConnected;
         private bool isSdkInitialized = false;
+        private static string joinUrlFromIntent;
+        private static bool shouldStartCall = false;
 
         #region IBandyerSDKClientObserver
         public void OnClientError(Throwable throwable)
@@ -88,6 +91,11 @@ namespace BandyerDemo.Droid
             {
                 isCallModuleConnected = true;
                 CallReadyEvent();
+                if (shouldStartCall)
+                {
+                    shouldStartCall = false;
+                    startCallFromJoinUrl(joinUrlFromIntent);
+                }
             }
         }
         #endregion
@@ -108,6 +116,21 @@ namespace BandyerDemo.Droid
                 .WithChatEnabled()
                 .WithUserDetailsProvider(new BandyerSdkUserDetailsProvider());
             BandyerSDK.Init(builder);
+        }
+
+        public static void SetIntent(Intent intent)
+        {
+            if (intent == null || intent.Data == null)
+            {
+                return;
+            }
+            Log.Debug(TAG, "SetIntent " + intent.Data);
+            var url = intent.Data.ToString();
+            if (url == "https://sandbox.bandyer.com/connect/rest-call-handler/")
+            {
+                joinUrlFromIntent = url;
+                shouldStartCall = true;
+            }
         }
 
         #region IBandyerSdk
@@ -136,6 +159,11 @@ namespace BandyerDemo.Droid
 
         public void StartCall(string userAlias)
         {
+            startCallWithUserAlias(userAlias);
+        }
+
+        void startCallWithUserAlias(string userAlias)
+        {
             CallCapabilities capabilities = new CallCapabilities();
             capabilities.WithWhiteboard();
             capabilities.WithFileSharing();
@@ -151,7 +179,29 @@ namespace BandyerDemo.Droid
             CallIntentBuilder callIntentBuilder = builder.StartWithAudioVideoCall(MainActivity.Application /* context */ );
             //builder.StartWithAudioUpgradableCall(application); // audio call that may upgrade into audio&video call
             //builder.StartWithAudioCall(application);  // audio only call
-            CallIntentOptions callIntentOptions =  callIntentBuilder.With(new List<string>() { "web" });
+            CallIntentOptions callIntentOptions = callIntentBuilder.With(new List<string>() { userAlias });
+            callIntentOptions.WithCapabilities(capabilities); // optional
+            callIntentOptions.WithOptions(options); // optional
+            BandyerIntent bandyerCallIntent = callIntentOptions.Build();
+
+            MainActivity.StartActivity(bandyerCallIntent);
+        }
+
+        void startCallFromJoinUrl(string joinUrl)
+        {
+            CallCapabilities capabilities = new CallCapabilities();
+            capabilities.WithWhiteboard();
+            capabilities.WithFileSharing();
+            capabilities.WithChat();
+            capabilities.WithScreenSharing();
+
+            CallOptions options = new CallOptions();
+            options.WithRecordingEnabled(); // if the call started should be recorded
+            options.WithBackCameraAsDefault(); // if the call should start with back camera
+            options.WithProximitySensorDisabled(); // if the proximity sensor should be disabled during calls
+
+            BandyerIntent.Builder builder = new BandyerIntent.Builder();
+            CallIntentOptions callIntentOptions = builder.StartFromJoinCallUrl(MainActivity.Application, joinUrl);
             callIntentOptions.WithCapabilities(capabilities); // optional
             callIntentOptions.WithOptions(options); // optional
             BandyerIntent bandyerCallIntent = callIntentOptions.Build();
@@ -174,7 +224,7 @@ namespace BandyerDemo.Droid
 
             BandyerIntent.Builder builder = new BandyerIntent.Builder();
             ChatIntentBuilder chatIntentBuilder = builder.StartWithChat(MainActivity.Application /* context */ );
-            ChatIntentOptions chatIntentOptions = chatIntentBuilder.With("web");
+            ChatIntentOptions chatIntentOptions = chatIntentBuilder.With(userAlias);
             chatIntentOptions.WithAudioCallCapability(capabilities, options); // optional
             chatIntentOptions.WithAudioUpgradableCallCapability(capabilities, options); // optionally upgradable to audio video call
             chatIntentOptions.WithAudioVideoCallCapability(capabilities, options); // optional

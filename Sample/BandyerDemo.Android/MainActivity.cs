@@ -1,22 +1,19 @@
-﻿using System;
-
+﻿
 using Android.App;
 using Android.Content.PM;
 using Android.Runtime;
-using Android.Views;
-using Android.Widget;
 using Android.OS;
-using Com.Bandyer.Android_sdk.Client;
-using Java.Lang;
 using Android.Util;
-using Com.Bandyer.Android_sdk.Module;
-using Com.Bandyer.Android_sdk.Intent.Call;
-using Com.Bandyer.Android_sdk.Intent;
-using System.Collections.Generic;
 using Android.Gms.Common;
 
 namespace BandyerDemo.Droid
 {
+    [IntentFilter(new[] { Android.Content.Intent.ActionView },
+                  Categories = new[] { Android.Content.Intent.CategoryDefault, Android.Content.Intent.CategoryBrowsable },
+                  DataScheme = "https",
+                  DataHost = "sandbox.bandyer.com",
+                  DataPathPrefix = "/connect/rest-call-handler/",
+                  AutoVerify = true)]
     [Activity(Label = "BandyerDemo", Icon = "@mipmap/icon", Theme = "@style/MainTheme", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
     public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity
     {
@@ -29,6 +26,7 @@ namespace BandyerDemo.Droid
             base.OnCreate(savedInstanceState);
 
             BandyerSdkAndroid.MainActivity = this;
+            BandyerSdkAndroid.SetIntent(Intent);
 
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
