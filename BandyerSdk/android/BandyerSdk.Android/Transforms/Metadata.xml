@@ -1,8 +1,6 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <metadata>
-    <remove-node path="/api/package[@name='com.bandyer.android_sdk.utils']/class[@name='BandyerSDKLogger']" />
     
-    <attr path="/api/package[@name='com.bandyer.android_sdk']/class[@name='EnvironmentImpl']/method[@name='getChatEnvironment' and count(parameter)=0]" name="managedReturn">Com.Bandyer.Android_chat_sdk.Networking.Environment</attr>
     
 <!--    <remove-node path="/api/package[@name='com.bandyer.android_sdk.call.model']/interface[@name='CallInfo']/method[@name='getCallees' and count(parameter)=0]" />-->
     
@@ -18,6 +16,50 @@
     <remove-node path="/api/package[@name='com.bandyer.core_av.utils.gson']/class[@name='AbstractSignalingMessageSerializer']" />    
     <remove-node path="/api/package[@name='com.bandyer.core_av.utils.gson']/class[@name='AbstractSignalingMessageDeserializer']" />    
     
-    <attr path="/api/package[@name='com.bandyer.android_sdk']/class[@name='EnvironmentImpl']/method[@name='getCallEnvironment' and count(parameter)=0]" name="managedReturn">Com.Bandyer.Communication_center.Environment</attr>
-
+    
+    <attr path="/api/package[@name='com.bandyer.android_sdk.file_sharing.file_sharing_center']/class[@name='Environment.Configuration']/method[@name='production' and count(parameter)=0]" name="managedReturn">
+        Com.Bandyer.Android_sdk.File_sharing.File_sharing_center.Environment
+    </attr>
+    <attr path="/api/package[@name='com.bandyer.android_sdk.file_sharing.file_sharing_center']/class[@name='Environment.Configuration']/method[@name='sandbox' and count(parameter)=0]" name="managedReturn">
+        Com.Bandyer.Android_sdk.File_sharing.File_sharing_center.Environment
+    </attr>
+    <attr path="/api/package[@name='com.bandyer.android_sdk']/interface[@name='Environment']/method[@name='getFileSharingEnvironment' and count(parameter)=0]" name="managedReturn">
+        Com.Bandyer.Android_sdk.File_sharing.File_sharing_center.Environment
+    </attr>
+    <attr path="/api/package[@name='com.bandyer.android_sdk']/class[@name='Environment.DefaultImpls']/method[@name='getFileSharingEnvironment' and count(parameter)=1 and parameter[1][@type='com.bandyer.android_sdk.Environment']]" name="managedReturn">
+         Com.Bandyer.Android_sdk.File_sharing.File_sharing_center.Environment
+    </attr>
+    <attr path="/api/package[@name='com.bandyer.android_sdk']/class[@name='EnvironmentImpl']/method[@name='getFileSharingEnvironment' and count(parameter)=0]" name="managedReturn">
+         Com.Bandyer.Android_sdk.File_sharing.File_sharing_center.Environment
+    </attr>
+    <attr path="/api/package[@name='com.bandyer.android_sdk.screen_sharing.screen_sharing_center']/class[@name='Environment.Configuration']/method[@name='production' and count(parameter)=0]" name="managedReturn">
+        Com.Bandyer.Android_sdk.Screen_sharing.Screen_sharing_center.Environment
+    </attr>
+     <attr path="/api/package[@name='com.bandyer.android_sdk.screen_sharing.screen_sharing_center']/class[@name='Environment.Configuration']/method[@name='sandbox' and count(parameter)=0]" name="managedReturn">
+        Com.Bandyer.Android_sdk.Screen_sharing.Screen_sharing_center.Environment
+    </attr>
+    <attr path="/api/package[@name='com.bandyer.android_sdk']/interface[@name='Environment']/method[@name='getScreenSharingEnvironment' and count(parameter)=0]" name="managedReturn">
+        Com.Bandyer.Android_sdk.Screen_sharing.Screen_sharing_center.Environment
+    </attr>
+       <attr path="/api/package[@name='com.bandyer.android_sdk']/class[@name='Environment.DefaultImpls']/method[@name='getScreenSharingEnvironment' and count(parameter)=1 and parameter[1][@type='com.bandyer.android_sdk.Environment']]" name="managedReturn">
+         Com.Bandyer.Android_sdk.Screen_sharing.Screen_sharing_center.Environment
+    </attr>
+      <attr path="/api/package[@name='com.bandyer.android_sdk']/class[@name='EnvironmentImpl']/method[@name='getScreenSharingEnvironment' and count(parameter)=0]" name="managedReturn">
+          Com.Bandyer.Android_sdk.Screen_sharing.Screen_sharing_center.Environment
+    </attr>
+     <attr path="/api/package[@name='com.bandyer.android_sdk.whiteboard.collaboration_center']/class[@name='Environment.Configuration']/method[@name='production' and count(parameter)=0]" name="managedReturn">
+        Com.Bandyer.Android_sdk.Whiteboard.Collaboration_center.Environment
+    </attr>
+     <attr path="/api/package[@name='com.bandyer.android_sdk.whiteboard.collaboration_center']/class[@name='Environment.Configuration']/method[@name='sandbox' and count(parameter)=0]" name="managedReturn">
+        Com.Bandyer.Android_sdk.Whiteboard.Collaboration_center.Environment
+    </attr>
+    <attr path="/api/package[@name='com.bandyer.android_sdk']/interface[@name='Environment']/method[@name='getWhiteboardEnvironment' and count(parameter)=0]" name="managedReturn">
+        Com.Bandyer.Android_sdk.Whiteboard.Collaboration_center.Environment
+    </attr> 
+      <attr path="/api/package[@name='com.bandyer.android_sdk']/class[@name='Environment.DefaultImpls']/method[@name='getWhiteboardEnvironment' and count(parameter)=1 and parameter[1][@type='com.bandyer.android_sdk.Environment']]" name="managedReturn">
+          Com.Bandyer.Android_sdk.Whiteboard.Collaboration_center.Environment
+    </attr>
+      <attr path="/api/package[@name='com.bandyer.android_sdk']/class[@name='EnvironmentImpl']/method[@name='getWhiteboardEnvironment' and count(parameter)=0]" name="managedReturn">
+          Com.Bandyer.Android_sdk.Whiteboard.Collaboration_center.Environment
+    </attr>
 </metadata>

@@ -56,7 +56,7 @@
     <TransformFile Include="Transforms\EnumMethods.xml" />
   </ItemGroup>
   <ItemGroup>
-    <LibraryProjectZip Include="Jars\core_av-1.5.13.aar" />
+    <LibraryProjectZip Include="Jars\core_av-1.5.15.aar" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BandyerSdk.Common.Android\BandyerSdk.Common.Android.csproj">

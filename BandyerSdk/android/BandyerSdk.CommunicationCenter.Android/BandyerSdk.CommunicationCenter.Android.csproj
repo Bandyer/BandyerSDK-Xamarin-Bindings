@@ -56,7 +56,7 @@
     <TransformFile Include="Transforms\EnumMethods.xml" />
   </ItemGroup>
   <ItemGroup>
-    <LibraryProjectZip Include="Jars\communication_center-1.2.8.aar" />
+    <LibraryProjectZip Include="Jars\communication_center-1.2.9.aar" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BandyerSdk.CoreAV.Android\BandyerSdk.CoreAV.Android.csproj">

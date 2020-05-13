@@ -18,6 +18,7 @@ using Com.Bandyer.Android_sdk.Module;
 using Com.Bandyer.Android_sdk.Utils.Provider;
 using Java.Lang;
 using Xamarin.Forms;
+using Environment = Com.Bandyer.Android_sdk.Environment;
 
 [assembly: Dependency(typeof(BandyerSdkAndroid))]
 namespace BandyerDemo.Droid
@@ -110,7 +111,7 @@ namespace BandyerDemo.Droid
         {
             Application = application;
             BandyerSDK.Builder builder = new BandyerSDK.Builder(application, AppId)
-                .UseSandbox()
+                .SetEnvironment(Environment.Configuration.Sandbox())
                 .WithCallEnabled(new BandyerSdkCallNotificationListener())
                 .WithFileSharingEnabled()
                 .WithWhiteboardEnabled()
