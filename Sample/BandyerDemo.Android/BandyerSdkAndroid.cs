@@ -37,7 +37,6 @@ namespace BandyerDemo.Droid
         public static Android.App.Activity MainActivity;
         private static bool isChatModuleConnected;
         private static bool isCallModuleConnected;
-        private bool isSdkInitialized = false;
         private static string joinUrlFromIntent;
         private static bool shouldStartCall = false;
 
@@ -126,7 +125,7 @@ namespace BandyerDemo.Droid
             }
             Log.Debug(TAG, "SetIntent " + intent.Data);
             var url = intent.Data.ToString();
-            if (url == "https://sandbox.bandyer.com/connect/rest-call-handler/")
+            if (url.StartsWith("https://sandbox.bandyer.com/connect/rest-call-handler/"))
             {
                 joinUrlFromIntent = url;
                 shouldStartCall = true;
@@ -139,9 +138,10 @@ namespace BandyerDemo.Droid
 
         public void Init(string userAlias)
         {
-            if (!isSdkInitialized)
+            if (BandyerSDKClient.Instance.State == BandyerSDKClientState.Uninitialized)
             {
-                isSdkInitialized = true;
+                Log.Debug(TAG, "IBandyerSdk Init " + userAlias);
+
                 BandyerSDKClient.Instance.AddObserver(this);
                 BandyerSDKClient.Instance.AddModuleObserver(this);
 
