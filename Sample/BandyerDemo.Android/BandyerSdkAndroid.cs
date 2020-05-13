@@ -108,6 +108,9 @@ namespace BandyerDemo.Droid
         }
 
         #region IBandyerSdk
+        public event Action CallReadyEvent;
+        public event Action ChatReadyEvent;
+
         public void Init(string userAlias)
         {
             BandyerSDKClient.Instance.AddObserver(this);
@@ -171,6 +174,14 @@ namespace BandyerDemo.Droid
             BandyerIntent bandyerChatIntent = chatIntentOptions.Build();
 
             MainActivity.StartActivity(bandyerChatIntent);
+        }
+
+        public void OnPageAppearing()
+        {
+        }
+
+        public void OnPageDisappearing()
+        {
         }
         #endregion
 
