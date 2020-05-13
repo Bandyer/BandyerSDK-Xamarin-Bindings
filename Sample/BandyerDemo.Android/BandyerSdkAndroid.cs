@@ -121,13 +121,16 @@ namespace BandyerDemo.Droid
             BandyerSDKClientOptions options = new BandyerSDKClientOptions.Builder().Build();
             BandyerSDKClient.Instance.Init(userAlias, options);
             BandyerSDKClient.Instance.StartListening();
+
+            BandyerSDKClient.Instance.ChatModule.AddChatUIObserver(this);
+            BandyerSDKClient.Instance.ChatModule.AddChatObserver(this);
+
+            BandyerSDKClient.Instance.CallModule.AddCallUIObserver(this);
+            BandyerSDKClient.Instance.CallModule.AddCallObserver(this);
         }
 
         public void StartCall(string userAlias)
         {
-            BandyerSDKClient.Instance.CallModule.AddCallUIObserver(this);
-            BandyerSDKClient.Instance.CallModule.AddCallObserver(this);
-
             CallCapabilities capabilities = new CallCapabilities();
             capabilities.WithWhiteboard();
             capabilities.WithFileSharing();
@@ -153,9 +156,6 @@ namespace BandyerDemo.Droid
 
         public void StartChat(string userAlias)
         {
-            BandyerSDKClient.Instance.ChatModule.AddChatUIObserver(this);
-            BandyerSDKClient.Instance.ChatModule.AddChatObserver(this);
-
             CallCapabilities capabilities = new CallCapabilities();
             capabilities.WithWhiteboard();
             capabilities.WithFileSharing();
