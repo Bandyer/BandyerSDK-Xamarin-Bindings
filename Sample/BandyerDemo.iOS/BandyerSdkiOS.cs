@@ -39,7 +39,6 @@ namespace BandyerDemo.iOS
         private string callUserAlias;
         private string chatUserAlias;
         private string currentUserAlias;
-        private IBCHChatClient chatClient;
         private BCHMessageNotificationController messageNotificationController;
         private BDKCallBannerController callBannerController;
         private NSUrl webPageUrl;
@@ -187,7 +186,7 @@ namespace BandyerDemo.iOS
         public void StartChat(string userAlias)
         {
             this.chatUserAlias = userAlias;
-            startChatController(this.chatClient);
+            startChatController();
         }
         #endregion
 
@@ -265,12 +264,8 @@ namespace BandyerDemo.iOS
             });
         }
 
-        void startChatController(IBCHChatClient client)
+        void startChatController()
         {
-            if (client != null)
-            {
-                client.Start(chatUserAlias);
-            }
             var intent = BCHOpenChatIntent.OpenChatWith(chatUserAlias);
             var rootVC = UIApplication.SharedApplication.KeyWindow.RootViewController;
             var items = userInfoFetcherItems();
@@ -413,7 +408,6 @@ namespace BandyerDemo.iOS
         public void ChatClientDidStart(IBCHChatClient client)
         {
             Debug.Print("ChatClientDidStart " + client);
-            this.chatClient = client;
             ChatReadyEvent();
         }
 
@@ -493,7 +487,7 @@ namespace BandyerDemo.iOS
             Debug.Print("CallWindowOpenChatWith " + window + " " + intent);
             window.DismissCallViewControllerWithCompletion(() => { });
             window.Hidden = true;
-            startChatController(this.chatClient);
+            startChatController();
         }
         #endregion
 
@@ -541,7 +535,7 @@ namespace BandyerDemo.iOS
         public void DidTouch(BCHMessageNotificationController controller, BCHChatNotification notification)
         {
             Debug.Print("IBCHMessageNotificationControllerDelegate DidTouch " + controller + " " + notification);
-            startChatController(null);
+            startChatController();
         }
         #endregion
 
