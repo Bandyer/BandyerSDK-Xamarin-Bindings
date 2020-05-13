@@ -39,8 +39,8 @@ namespace BandyerDemo.iOS
         private string callUserAlias;
         private string chatUserAlias;
         private string currentUserAlias;
-        private BCHMessageNotificationController messageNotificationController;
-        private BDKCallBannerController callBannerController;
+        private BCHMessageNotificationController messageNotificationController = null;
+        private BDKCallBannerController callBannerController = null;
         private NSUrl webPageUrl;
         private bool shouldStartWindowCallFromWebPageUrl = false;
 
@@ -167,14 +167,6 @@ namespace BandyerDemo.iOS
 
             BandyerSDK.Instance().ChatClient.AddObserver(this, DispatchQueue.MainQueue);
             BandyerSDK.Instance().ChatClient.Start(currentUserAlias);
-
-            messageNotificationController = new BCHMessageNotificationController();
-            messageNotificationController.Delegate = this;
-            messageNotificationController.ParentViewController = UIApplication.SharedApplication.KeyWindow.RootViewController;
-
-            callBannerController = new BDKCallBannerController();
-            callBannerController.Delegate = this;
-            callBannerController.ParentViewController = UIApplication.SharedApplication.KeyWindow.RootViewController;
         }
 
         public void StartCall(string userAlias)
@@ -187,6 +179,31 @@ namespace BandyerDemo.iOS
         {
             this.chatUserAlias = userAlias;
             startChatController();
+        }
+
+        public void OnPageAppearing()
+        {
+            if (messageNotificationController == null)
+            {
+                messageNotificationController = new BCHMessageNotificationController();
+                messageNotificationController.Delegate = this;
+                messageNotificationController.ParentViewController = UIApplication.SharedApplication.KeyWindow.RootViewController;
+            }
+            messageNotificationController.Show();
+
+            if (callBannerController == null)
+            {
+                callBannerController = new BDKCallBannerController();
+                callBannerController.Delegate = this;
+                callBannerController.ParentViewController = UIApplication.SharedApplication.KeyWindow.RootViewController;
+            }
+            callBannerController.Show();
+        }
+
+        public void OnPageDisappearing()
+        {
+            messageNotificationController.Hide();
+            callBannerController.Hide();
         }
         #endregion
 

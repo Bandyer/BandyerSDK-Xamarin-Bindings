@@ -23,12 +23,20 @@ namespace BandyerDemo
 
         protected override void OnAppearing()
         {
+            base.OnAppearing();
+            var userAlias = "client";
             if (!sdkInitialized)
             {
                 sdkInitialized = true;
-                var userAlias = "client";
                 bandyerSdk.Init(userAlias);
             }
+            bandyerSdk.OnPageAppearing();
+        }
+
+        protected override void OnDisappearing()
+        {
+            base.OnDisappearing();
+            bandyerSdk.OnPageDisappearing();
         }
 
         void ChatReadyEvent()
