@@ -8,7 +8,7 @@
 	<true/>
 	<key>com.apple.developer.associated-domains</key>
 	<array>
-		<string>sandbox.bandyer.com</string>
+		<string>applinks:*.bandyer.com</string>
 	</array>
 </dict>
 </plist>

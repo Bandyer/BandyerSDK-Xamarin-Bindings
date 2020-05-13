@@ -43,7 +43,6 @@ namespace BandyerDemo.iOS
         private BCHMessageNotificationController messageNotificationController;
         private BDKCallBannerController callBannerController;
         private NSUrl webPageUrl;
-        private bool callClientReady = false;
         private bool shouldStartWindowCallFromWebPageUrl = false;
 
         public static void InitSdk()
@@ -81,7 +80,7 @@ namespace BandyerDemo.iOS
             if (userActivity.ActivityType == NSUserActivityType.BrowsingWeb)
             {
                 this.webPageUrl = userActivity.WebPageUrl;
-                if (callClientReady)
+                if (BandyerSDK.Instance().CallClient.IsRunning)
                 {
                     startWindowCallFromWebPageUrl(webPageUrl);
                 }
@@ -317,29 +316,26 @@ namespace BandyerDemo.iOS
         }
 
         #region IBCXCallClientObserver
+
         [Export("callClient:didReceiveIncomingCall:")]
         public void CallClientDidReceiveIncomingCall(IBCXCallClient client, IBCXCall call)
         {
             Debug.Print("CallClientDidReceiveIncomingCall " + client + " " + call);
             handleIncomingCall();
         }
+
         [Export("callClientDidPause:")]
         public void CallClientDidPause(IBCXCallClient client)
         {
             Debug.Print("CallClientDidPause " + client);
         }
+
         [Export("callClientDidResume:")]
         public void CallClientDidResume(IBCXCallClient client)
         {
             Debug.Print("CallClientDidResume " + client);
-        }
-        [Export("callClientDidStart:")]
-        public void CallClientDidStart(IBCXCallClient client)
-        {
-            Debug.Print("CallClientDidStart " + client);
             if (client.IsRunning)
             {
-                callClientReady = true;
                 CallReadyEvent();
                 if (shouldStartWindowCallFromWebPageUrl)
                 {
@@ -347,41 +343,63 @@ namespace BandyerDemo.iOS
                 }
             }
         }
+
+        [Export("callClientDidStart:")]
+        public void CallClientDidStart(IBCXCallClient client)
+        {
+            Debug.Print("CallClientDidStart " + client);
+            if (client.IsRunning)
+            {
+                CallReadyEvent();
+                if (shouldStartWindowCallFromWebPageUrl)
+                {
+                    startWindowCallFromWebPageUrl(this.webPageUrl);
+                }
+            }
+        }
+
         [Export("callClientDidStartReconnecting:")]
         public void CallClientDidStartReconnecting(IBCXCallClient client)
         {
             Debug.Print("CallClientDidStartReconnecting " + client);
         }
+
         [Export("callClientDidStop:")]
         public void CallClientDidStop(IBCXCallClient client)
         {
             Debug.Print("CallClientDidStop " + client);
         }
+
         [Export("callClientWillPause:")]
         public void CallClientWillPause(IBCXCallClient client)
         {
             Debug.Print("CallClientWillPause " + client);
         }
+
         [Export("callClientWillResume:")]
         public void CallClientWillResume(IBCXCallClient client)
         {
             Debug.Print("CallClientWillResume " + client);
         }
+
         [Export("callClientWillStart:")]
         public void CallClientWillStart(IBCXCallClient client)
         {
             Debug.Print("CallClientWillStart " + client);
         }
+
         [Export("callClientWillStop:")]
         public void CallClientWillStop(IBCXCallClient client)
         {
             Debug.Print("CallClientWillStop " + client);
         }
+
         [Export("callClient:didFailWithError:")]
         public void CallClientDidFailWithError(IBCXCallClient client, NSError error)
         {
             Debug.Print("CallClientDidFailWithError " + client + " " + error);
         }
+
         #endregion
 
         #region IBCHChatClientObserver
@@ -390,6 +408,7 @@ namespace BandyerDemo.iOS
         {
             Debug.Print("ChatClientWillStart " + client);
         }
+
         [Export("chatClientDidStart:")]
         public void ChatClientDidStart(IBCHChatClient client)
         {
@@ -397,36 +416,43 @@ namespace BandyerDemo.iOS
             this.chatClient = client;
             ChatReadyEvent();
         }
+
         [Export("chatClientWillPause:")]
         public void ChatClientWillPause(IBCHChatClient client)
         {
             Debug.Print("ChatClientWillPause " + client);
         }
+
         [Export("chatClientDidPause:")]
         public void ChatClientDidPause(IBCHChatClient client)
         {
             Debug.Print("ChatClientDidPause " + client);
         }
+
         [Export("chatClientWillStop:")]
         public void ChatClientWillStop(IBCHChatClient client)
         {
             Debug.Print("ChatClientWillStop " + client);
         }
+
         [Export("chatClientDidStop:")]
         public void ChatClientDidStop(IBCHChatClient client)
         {
             Debug.Print("ChatClientDidStop " + client);
         }
+
         [Export("chatClientWillResume:")]
         public void ChatClientWillResume(IBCHChatClient client)
         {
             Debug.Print("ChatClientWillResume " + client);
         }
+
         [Export("chatClientDidResume:")]
         public void ChatClientDidResume(IBCHChatClient client)
         {
             Debug.Print("ChatClientDidResume " + client);
         }
+
         [Export("chatClient:didFailWithError:")]
         public void ChatClientDidFailWithError(IBCHChatClient client, NSError error)
         {
