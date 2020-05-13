@@ -480,10 +480,30 @@ namespace BandyerDemo.iOS
         public void ChannelViewControllerDidTapAudioCallWith(BCHChannelViewController controller, string[] users)
         {
             Debug.Print("ChannelViewControllerDidTapAudioCallWith " + controller + " " + users);
+            BDKMakeCallIntent intent;
+            if (users != null)
+            {
+                intent = BDKMakeCallIntent.IntentWithCallee(users, BDKCallType.AudioOnlyCallType);
+            }
+            else
+            {
+                intent = BDKMakeCallIntent.IntentWithCallee(new string[] { "unknown" }, BDKCallType.AudioOnlyCallType);
+            }
+            startWindowCall(intent);
         }
         public void ChannelViewControllerDidTapVideoCallWith(BCHChannelViewController controller, string[] users)
         {
             Debug.Print("ChannelViewControllerDidTapVideoCallWith " + controller + " " + users);
+            BDKMakeCallIntent intent;
+            if (users != null)
+            {
+                intent = BDKMakeCallIntent.IntentWithCallee(users, BDKCallType.AudioVideoCallType);
+            }
+            else
+            {
+                intent = BDKMakeCallIntent.IntentWithCallee(new string[] { "unknown" }, BDKCallType.AudioVideoCallType);
+            }
+            startWindowCall(intent);
         }
         #endregion
 
