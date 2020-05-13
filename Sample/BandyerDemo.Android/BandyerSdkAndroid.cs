@@ -36,6 +36,7 @@ namespace BandyerDemo.Droid
         public static Android.App.Activity MainActivity;
         private bool isChatModuleConnected;
         private bool isCallModuleConnected;
+        private bool isSdkInitialized = false;
 
         #region IBandyerSDKClientObserver
         public void OnClientError(Throwable throwable)
@@ -115,18 +116,22 @@ namespace BandyerDemo.Droid
 
         public void Init(string userAlias)
         {
-            BandyerSDKClient.Instance.AddObserver(this);
-            BandyerSDKClient.Instance.AddModuleObserver(this);
+            if (!isSdkInitialized)
+            {
+                isSdkInitialized = true;
+                BandyerSDKClient.Instance.AddObserver(this);
+                BandyerSDKClient.Instance.AddModuleObserver(this);
 
-            BandyerSDKClientOptions options = new BandyerSDKClientOptions.Builder().Build();
-            BandyerSDKClient.Instance.Init(userAlias, options);
-            BandyerSDKClient.Instance.StartListening();
+                BandyerSDKClientOptions options = new BandyerSDKClientOptions.Builder().Build();
+                BandyerSDKClient.Instance.Init(userAlias, options);
+                BandyerSDKClient.Instance.StartListening();
 
-            BandyerSDKClient.Instance.ChatModule.AddChatUIObserver(this);
-            BandyerSDKClient.Instance.ChatModule.AddChatObserver(this);
+                BandyerSDKClient.Instance.ChatModule.AddChatUIObserver(this);
+                BandyerSDKClient.Instance.ChatModule.AddChatObserver(this);
 
-            BandyerSDKClient.Instance.CallModule.AddCallUIObserver(this);
-            BandyerSDKClient.Instance.CallModule.AddCallObserver(this);
+                BandyerSDKClient.Instance.CallModule.AddCallUIObserver(this);
+                BandyerSDKClient.Instance.CallModule.AddCallObserver(this);
+            }
         }
 
         public void StartCall(string userAlias)

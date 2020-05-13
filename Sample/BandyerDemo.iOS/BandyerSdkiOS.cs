@@ -41,6 +41,7 @@ namespace BandyerDemo.iOS
         private BDKCallBannerController callBannerController = null;
         private NSUrl webPageUrl;
         private bool shouldStartWindowCallFromWebPageUrl = false;
+        private bool isSdkInitialized = false;
 
         public static void InitSdk()
         {
@@ -54,22 +55,26 @@ namespace BandyerDemo.iOS
 
         void InitSdkInt()
         {
-            var config = new BDKConfig();
-            config.NotificationPayloadKeyPath = "data";
-            config.PushRegistryDelegate = this;
-            config.Environment = BDKEnvironment.Sandbox;
+            if (!isSdkInitialized)
+            {
+                isSdkInitialized = true;
+                var config = new BDKConfig();
+                config.NotificationPayloadKeyPath = "data";
+                config.PushRegistryDelegate = this;
+                config.Environment = BDKEnvironment.Sandbox;
 
-            // CALLKIT
-            config.CallKitEnabled = true;
-            config.NativeUILocalizedName = "My wonderful app";
-            //config.NativeUIRingToneSound = "MyRingtoneSound";
-            UIImage callKitIconImage = UIImage.FromBundle("bandyer_logo");
-            config.NativeUITemplateIconImageData = callKitIconImage.AsPNG();
-            config.SupportedHandleTypes = new NSSet(new object[] { CXHandleType.EmailAddress, CXHandleType.Generic });
-            config.HandleProvider = new BandyerSdkBCXHandleProvider();
-            // CALLKIT
+                // CALLKIT
+                config.CallKitEnabled = true;
+                config.NativeUILocalizedName = "My wonderful app";
+                //config.NativeUIRingToneSound = "MyRingtoneSound";
+                UIImage callKitIconImage = UIImage.FromBundle("bandyer_logo");
+                config.NativeUITemplateIconImageData = callKitIconImage.AsPNG();
+                config.SupportedHandleTypes = new NSSet(new object[] { CXHandleType.EmailAddress, CXHandleType.Generic });
+                config.HandleProvider = new BandyerSdkBCXHandleProvider();
+                // CALLKIT
 
-            BandyerSDK.Instance().InitializeWithApplicationId(AppId, config);
+                BandyerSDK.Instance().InitializeWithApplicationId(AppId, config);
+            }
         }
 
         bool ContinueUserActivityInt(NSUserActivity userActivity)

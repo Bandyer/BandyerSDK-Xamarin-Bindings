@@ -11,7 +11,6 @@ namespace BandyerDemo
     public partial class MainPage : ContentPage
     {
         private IBandyerSdk bandyerSdk;
-        private bool sdkInitialized = false;
 
         public MainPage()
         {
@@ -25,11 +24,7 @@ namespace BandyerDemo
         {
             base.OnAppearing();
             var userAlias = "client";
-            if (!sdkInitialized)
-            {
-                sdkInitialized = true;
-                bandyerSdk.Init(userAlias);
-            }
+            bandyerSdk.Init(userAlias);
             bandyerSdk.OnPageAppearing();
         }
 
