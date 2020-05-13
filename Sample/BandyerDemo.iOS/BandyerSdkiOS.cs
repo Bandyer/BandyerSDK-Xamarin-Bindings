@@ -36,7 +36,6 @@ namespace BandyerDemo.iOS
         }
 
         private BDKCallWindow callWindow = null;
-        private string callUserAlias;
         private string currentUserAlias;
         private BCHMessageNotificationController messageNotificationController = null;
         private BDKCallBannerController callBannerController = null;
@@ -170,8 +169,9 @@ namespace BandyerDemo.iOS
 
         public void StartCall(string userAlias)
         {
-            this.callUserAlias = userAlias;
-            startWindowCall();
+            var callee = new string[] { userAlias };
+            var intent = BDKMakeCallIntent.IntentWithCallee(callee, BDKCallType.AudioVideoCallType);
+            startWindowCall(intent);
         }
 
         public void StartChat(string userAlias)
@@ -269,11 +269,9 @@ namespace BandyerDemo.iOS
             }
         }
 
-        void startWindowCall()
+        void startWindowCall(BDKMakeCallIntent intent)
         {
             initCallWindow();
-            var callee = new string[] { callUserAlias };
-            var intent = BDKMakeCallIntent.IntentWithCallee(callee, BDKCallType.AudioVideoCallType);
             callWindow.ShouldPresentCallViewControllerWithIntent(intent, (success) =>
             {
                 Debug.Print("ShouldPresentCallViewControllerWithIntent success " + success);
