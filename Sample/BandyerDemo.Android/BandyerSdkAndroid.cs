@@ -35,6 +35,7 @@ namespace BandyerDemo.Droid
 
         const string TAG = "BandyerDemo";
         public static Android.App.Activity MainActivity;
+        public static Android.App.Application Application;
         private static bool isChatModuleConnected;
         private static bool isCallModuleConnected;
         private static string joinUrlFromIntent;
@@ -107,6 +108,7 @@ namespace BandyerDemo.Droid
 
         public static void InitSdk(Android.App.Application application)
         {
+            Application = application;
             BandyerSDK.Builder builder = new BandyerSDK.Builder(application, AppId)
                 .UseSandbox()
                 .WithCallEnabled(new BandyerSdkCallNotificationListener())
@@ -347,11 +349,11 @@ namespace BandyerDemo.Droid
                 call.WithOptions(GetDefaultIncomingCallOptions());
                 if (!isDnd || isScreenLocked)
                 {
-                    call.Show(MainActivity);
+                    call.Show(Application);
                 }
                 else
                 {
-                    call.AsNotification().Show(MainActivity);
+                    call.AsNotification().Show(Application);
                 }
             }
 
