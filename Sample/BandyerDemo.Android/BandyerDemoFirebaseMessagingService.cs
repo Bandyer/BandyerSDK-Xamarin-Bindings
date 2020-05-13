@@ -19,7 +19,7 @@ namespace BandyerDemo.Droid
             base.OnNewToken(token);
             Log.Debug(TAG, "OnNewToken " + token);
 
-            registerTokenToBandyer(token);
+            RegisterTokenToBandyer(token);
         }
 
         public override void OnMessageReceived(RemoteMessage remoteMessage)
@@ -27,10 +27,10 @@ namespace BandyerDemo.Droid
             base.OnMessageReceived(remoteMessage);
             Log.Debug(TAG, "OnMessageReceived " + remoteMessage);
 
-            BandyerSDKClient.Instance.HandleNotification(ApplicationContext, remoteMessage.GetNotification().Body);
+            BandyerSDKClient.Instance.HandleNotification(ApplicationContext, remoteMessage.Data["message"]);
         }
 
-        void registerTokenToBandyer(string token)
+        public static void RegisterTokenToBandyer(string token)
         {
             var urlStr = "https://sandbox.bandyer.com/mobile_push_notifications/rest/device";
             var jsonStr = "{" +
