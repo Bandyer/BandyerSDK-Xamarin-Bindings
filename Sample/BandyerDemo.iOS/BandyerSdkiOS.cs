@@ -37,7 +37,6 @@ namespace BandyerDemo.iOS
 
         private BDKCallWindow callWindow = null;
         private string callUserAlias;
-        private string chatUserAlias;
         private string currentUserAlias;
         private BCHMessageNotificationController messageNotificationController = null;
         private BDKCallBannerController callBannerController = null;
@@ -177,8 +176,8 @@ namespace BandyerDemo.iOS
 
         public void StartChat(string userAlias)
         {
-            this.chatUserAlias = userAlias;
-            startChatController();
+            var intent = BCHOpenChatIntent.OpenChatWith(userAlias);
+            startChatController(intent);
         }
 
         public void OnPageAppearing()
@@ -281,9 +280,8 @@ namespace BandyerDemo.iOS
             });
         }
 
-        void startChatController()
+        void startChatController(BCHOpenChatIntent intent)
         {
-            var intent = BCHOpenChatIntent.OpenChatWith(chatUserAlias);
             var rootVC = UIApplication.SharedApplication.KeyWindow.RootViewController;
             var items = userInfoFetcherItems();
             var userInfoFetcher = new BandyerSdkBDKUserInfoFetcher(items);
@@ -504,7 +502,7 @@ namespace BandyerDemo.iOS
             Debug.Print("CallWindowOpenChatWith " + window + " " + intent);
             window.DismissCallViewControllerWithCompletion(() => { });
             window.Hidden = true;
-            startChatController();
+            startChatController(intent);
         }
         #endregion
 
@@ -552,7 +550,8 @@ namespace BandyerDemo.iOS
         public void DidTouch(BCHMessageNotificationController controller, BCHChatNotification notification)
         {
             Debug.Print("IBCHMessageNotificationControllerDelegate DidTouch " + controller + " " + notification);
-            startChatController();
+            var intent = BCHOpenChatIntent.OpenChatFrom(notification);
+            startChatController(intent);
         }
         #endregion
 
