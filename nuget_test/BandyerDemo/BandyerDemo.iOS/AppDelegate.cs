@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-
-using Foundation;
+﻿using Foundation;
 using UIKit;
 
 namespace BandyerDemo.iOS
@@ -25,7 +21,15 @@ namespace BandyerDemo.iOS
             global::Xamarin.Forms.Forms.Init();
             LoadApplication(new App());
 
+            BandyerSdkiOS.InitSdk();
+
             return base.FinishedLaunching(app, options);
+        }
+
+        [Export("application:continueUserActivity:restorationHandler:")]
+        public bool ContinueUserActivity(UIApplication application, NSUserActivity userActivity, UIApplicationRestorationHandler completionHandler)
+        {
+            return BandyerSdkiOS.ContinueUserActivity(userActivity);
         }
     }
 }
