@@ -3,9 +3,17 @@
     <metadata>
     <id>BandyerSdk.Common.Android</id>
     <version>1.0.10</version>
-    <title>BandyerSdk.Common.Android</title>
+    <title>BandyerSdk.Common.Android for Xamarin</title>
     <authors>Bandyer</authors>
     <owners>Bandyer</owners>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <tags>bandyer,common,utilities,xamarin</tags>
+    <license type="expression">Apache-2.0</license>
+    <description>Common utilities</description>
+    <summary>Common utilities</summary>
+    <copyright>Copyright © Bandyer</copyright>
+    <iconUrl>https://bandyer.com/assets/favicon/favicon.png</iconUrl>
+    <projectUrl>https://github.com/Bandyer/Bandyer-Android-Common-Xamarin-Binding</projectUrl>
     <description>BandyerSdk.Common.Android</description>
     <dependencies>
         <group targetFramework="MonoAndroid">
