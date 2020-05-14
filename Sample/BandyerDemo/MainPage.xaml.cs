@@ -16,8 +16,8 @@ namespace BandyerDemo
         {
             InitializeComponent();
             bandyerSdk = DependencyService.Get<IBandyerSdk>();
-            bandyerSdk.ChatReadyEvent += ChatReadyEvent;
-            bandyerSdk.CallReadyEvent += CallReadyEvent;
+            bandyerSdk.ChatStatus += ChatStatus;
+            bandyerSdk.CallStatus  += CallStatus;
         }
 
         protected override void OnAppearing()
@@ -34,14 +34,14 @@ namespace BandyerDemo
             bandyerSdk.OnPageDisappearing();
         }
 
-        void ChatReadyEvent()
+        void ChatStatus(bool isReady)
         {
-            ButtonStartChat.IsEnabled = true;
+            ButtonStartChat.IsEnabled = isReady;
         }
 
-        void CallReadyEvent()
+        void CallStatus(bool isReady)
         {
-            ButtonStartCall.IsEnabled = true;
+            ButtonStartCall.IsEnabled = isReady;
         }
 
         void Button_StartCall(System.Object sender, System.EventArgs e)

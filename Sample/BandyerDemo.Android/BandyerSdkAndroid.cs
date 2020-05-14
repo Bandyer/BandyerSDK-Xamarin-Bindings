@@ -35,10 +35,9 @@ namespace BandyerDemo.Droid
         public const string AppId = "mAppId_b78542f60f697c8a56a13e579f2e66d0378ba6b3336fa75f961c6efb0e6b";
 
         const string TAG = "BandyerDemo";
-        public static Android.App.Activity MainActivity;
         public static Android.App.Application Application;
-        private static bool isChatModuleConnected;
-        private static bool isCallModuleConnected;
+        public static Android.App.Activity MainActivity;
+        private bool isSdkInitialized = false;
         private static string joinUrlFromIntent;
         private static bool shouldStartCall = false;
 
@@ -83,15 +82,35 @@ namespace BandyerDemo.Droid
         public void OnModuleStatusChanged(IBandyerModule module, BandyerModuleStatus moduleStatus)
         {
             Log.Debug(TAG, "OnModuleStatusChanged " + module + " " + moduleStatus);
-            if (module.Name == "ChatModule" && module.Status == BandyerModuleStatus.Ready)
+
+            if (module.Name == "ChatModule" && (
+                module.Status == BandyerModuleStatus.Disconnected
+                || module.Status == BandyerModuleStatus.Reconnecting
+                || module.Status == BandyerModuleStatus.Ready
+                || module.Status == BandyerModuleStatus.Connected
+                ))
             {
-                isChatModuleConnected = true;
-                ChatReadyEvent();
+                ChatStatus(true);
             }
-            if (module.Name == "CallModule" && module.Status == BandyerModuleStatus.Ready)
+            else if (module.Name == "ChatModule")
             {
-                isCallModuleConnected = true;
-                CallReadyEvent();
+                ChatStatus(false);
+            }
+
+            if (module.Name == "CallModule" && (
+                module.Status == BandyerModuleStatus.Ready
+                || module.Status == BandyerModuleStatus.Connected
+                ))
+            {
+                CallStatus(true);
+            }
+            else if (module.Name == "CallModule")
+            {
+                CallStatus(false);
+            }
+
+            if (module.Name == "CallModule" && module.Status == BandyerModuleStatus.Connected)
+            {
                 if (shouldStartCall)
                 {
                     shouldStartCall = false;
@@ -136,8 +155,8 @@ namespace BandyerDemo.Droid
         }
 
         #region IBandyerSdk
-        public event Action CallReadyEvent;
-        public event Action ChatReadyEvent;
+        public event Action<bool> CallStatus;
+        public event Action<bool> ChatStatus;
 
         public void Init(string userAlias)
         {
