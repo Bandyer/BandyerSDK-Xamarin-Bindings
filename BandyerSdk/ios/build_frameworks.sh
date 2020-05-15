@@ -14,8 +14,8 @@ lipo -remove i386 TwilioChatClient -o TwilioChatClient
 lipo -remove x86_64 TwilioChatClient -o TwilioChatClient
 cd -
 
-xcodebuild -quiet -workspace Pods/Pods.xcodeproj -scheme Starscream-framework -configuration Release -sdk iphoneos clean build
-xcodebuild -quiet -workspace Pods/Pods.xcodeproj -scheme Socket.IO-Client-Swift -configuration Release -sdk iphoneos clean build
+xcodebuild -quiet -project Pods/Pods.xcodeproj -scheme Starscream-framework -configuration Release -sdk iphoneos clean build
+xcodebuild -quiet -project Pods/Pods.xcodeproj -scheme Socket.IO-Client-Swift-framework -configuration Release -sdk iphoneos clean build
 
 mkdir -p frameworks/
 cp -r Pods/Bandyer/Bandyer.framework frameworks/
