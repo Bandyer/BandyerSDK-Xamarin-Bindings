@@ -1,4 +1,7 @@
-﻿using System;
+﻿// Copyright © 2020 Bandyer. All rights reserved.
+// See LICENSE for licensing information
+
+using System;
 namespace BandyerDemo
 {
     public interface IBandyerSdk
