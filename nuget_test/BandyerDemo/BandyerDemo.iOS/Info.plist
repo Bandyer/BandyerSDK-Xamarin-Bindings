@@ -25,7 +25,7 @@
 	<key>CFBundleDisplayName</key>
 	<string>BandyerDemo</string>
 	<key>CFBundleIdentifier</key>
-	<string>it.kalpa.BandyerDemo</string>
+	<string>com.bandyer.BandyerDemo</string>
 	<key>CFBundleVersion</key>
 	<string>1.0</string>
 	<key>UILaunchStoryboardName</key>
