@@ -67,10 +67,6 @@
       <Project>{41B9F262-1C9E-4968-8502-B8CD39C11B54}</Project>
       <Name>BandyerSdk.Design.Android</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Conscrypt.ConscryptAndroid.Android\Conscrypt.ConscryptAndroid.Android.csproj">
-      <Project>{BA6DA432-D640-4F63-A280-9D21CF6C8BE4}</Project>
-      <Name>Conscrypt.ConscryptAndroid.Android</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Karamunting.Kotlin.Android.Extensions.Runtime">
@@ -123,6 +119,9 @@
     </PackageReference>
     <PackageReference Include="Karamunting.KotlinX.Coroutines.Android">
       <Version>1.3.3</Version>
+    </PackageReference>
+    <PackageReference Include="Conscrypt.Conscrypt.Android">
+      <Version>2.2.1</Version>
     </PackageReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.Bindings.targets" />
