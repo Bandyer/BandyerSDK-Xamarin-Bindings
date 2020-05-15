@@ -1,16 +1,16 @@
-﻿using System.Reflection;
+﻿// Copyright © 2020 Bandyer. All rights reserved.
+// See LICENSE for licensing information
+
+using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
-// General Information about an assembly is controlled through the following 
-// set of attributes. Change these attribute values to modify the information
-// associated with an assembly.
 [assembly: AssemblyTitle("BandyerDemo.iOS")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("A demo app showcasing BandyerSDK capabilities")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("Bandyer S.r.l.")]
 [assembly: AssemblyProduct("BandyerDemo.iOS")]
-[assembly: AssemblyCopyright("Copyright ©  2014")]
+[assembly: AssemblyCopyright("Copyright © 2020 Bandyer. All rights reserved.")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

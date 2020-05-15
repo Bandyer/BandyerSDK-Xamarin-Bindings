@@ -1,4 +1,7 @@
-﻿using Foundation;
+﻿// Copyright © 2020 Bandyer. All rights reserved.
+// See LICENSE for licensing information
+
+using Foundation;
 using UIKit;
 
 namespace BandyerDemo.iOS

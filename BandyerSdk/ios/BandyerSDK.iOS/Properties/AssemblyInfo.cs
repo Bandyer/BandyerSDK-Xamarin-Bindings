@@ -1,4 +1,7 @@
-﻿using System.Reflection;
+﻿// Copyright © 2020 Bandyer. All rights reserved.
+// See LICENSE for licensing information
+
+using System.Reflection;
 using Foundation;
 
 [assembly: LinkerSafe]

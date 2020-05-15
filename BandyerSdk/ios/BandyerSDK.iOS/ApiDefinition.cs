@@ -1,3 +1,6 @@
+// Copyright © 2020 Bandyer. All rights reserved.
+// See LICENSE for licensing information
+
 using System;
 using CoreFoundation;
 using CoreGraphics;
