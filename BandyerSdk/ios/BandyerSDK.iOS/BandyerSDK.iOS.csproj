@@ -9,7 +9,7 @@
     <OutputType>Library</OutputType>
     <RootNamespace>Bandyer</RootNamespace>
     <IPhoneResourcePrefix>Resources</IPhoneResourcePrefix>
-    <AssemblyName>BandyerSdk</AssemblyName>
+    <AssemblyName>BandyerSDK</AssemblyName>
     <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
     <ReleaseVersion>1.4.0</ReleaseVersion>
     <SynchReleaseVersion>false</SynchReleaseVersion>

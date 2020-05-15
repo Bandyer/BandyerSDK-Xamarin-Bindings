@@ -59,7 +59,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mikepenz.FastAdapterExtensi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Square.Picasso.Android", "BandyerSdk\android\Square.Picasso.Android\Square.Picasso.Android.csproj", "{E7FFB7BC-2E38-44DC-855B-8985DE816E73}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BandyerSdk.iOS", "BandyerSdk\ios\BandyerSdk.iOS\BandyerSdk.iOS.csproj", "{D0448F8C-C62A-4103-B166-45C364ACD42E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BandyerSDK.iOS", "BandyerSdk\ios\BandyerSdk.iOS\BandyerSdk.iOS.csproj", "{D0448F8C-C62A-4103-B166-45C364ACD42E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kotlinx.CoroutinesCore.Android", "BandyerSdk\android\Kotlinx.CoroutinesCore.Android\Kotlinx.CoroutinesCore.Android.csproj", "{722AD934-8E19-4B61-847E-9418AB87360E}"
 EndProject
