@@ -39,10 +39,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BandyerSdk.Matisse.Android"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BandyerSdk.SocketIOClient.Android", "BandyerSdk\android\BandyerSdk.SocketIOClient.Android\BandyerSdk.SocketIOClient.Android.csproj", "{DE5E77BF-B28D-4671-86D0-35A7D05F8DB7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PermissionDispatcher.PermissionDispatcher.Android", "BandyerSdk\android\PermissionDispatcher.PermissionDispatcher.Android\PermissionDispatcher.PermissionDispatcher.Android.csproj", "{EF904CD8-1B6A-4687-8740-2AD44B079E5A}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PermissionDispatcher.PermissionDispatcherAnnotation.Android", "BandyerSdk\android\PermissionDispatcher.PermissionDispatcherAnnotation.Android\PermissionDispatcher.PermissionDispatcherAnnotation.Android.csproj", "{8B95E7CA-4ECE-4072-BA10-FB4C076DF9B8}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Iceteck.Silicompressorr.Android", "BandyerSdk\android\Iceteck.Silicompressorr.Android\Iceteck.Silicompressorr.Android.csproj", "{84249426-3C2E-43B2-81AF-1715DCC69FF8}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Twilio.ChatAndroid.Android", "BandyerSdk\android\Twilio.ChatAndroid.Android\Twilio.ChatAndroid.Android.csproj", "{84545376-40FF-488D-9CA2-7C5DAD834572}"
