@@ -142,6 +142,8 @@
   <ItemGroup>
     <BundleResource Include="Resources\video.mp4" />
     <BundleResource Include="Resources\launcher_logo.png" />
+    <BundleResource Include="Resources\answer.png" />
+    <BundleResource Include="Resources\chat.png" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Assets.xcassets\bandyer_logo.imageset\" />

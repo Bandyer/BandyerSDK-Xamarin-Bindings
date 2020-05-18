@@ -6,11 +6,17 @@ namespace BandyerDemo
 {
     public partial class App : Application
     {
+        public static IBandyerSdk BandyerSdk { get; private set; }
+
         public App()
         {
             InitializeComponent();
+            BandyerSdk = DependencyService.Get<IBandyerSdk>();
 
-            MainPage = new MainPage();
+            var navPage = new NavigationPage(new ChooseCallerPage());
+            navPage.BarTextColor = Color.White;
+            navPage.BarBackgroundColor = Color.FromHex("#004c8c");
+            MainPage = navPage;
         }
 
         protected override void OnStart()
