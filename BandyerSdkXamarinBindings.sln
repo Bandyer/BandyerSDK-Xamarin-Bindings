@@ -15,10 +15,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Android", "Android", "{4F15
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "iOS", "iOS", "{116DCDDE-3127-4978-87B6-7A4B153B21B4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Airbnb.Paris", "BandyerSdk\android\Airbnb.Paris\Airbnb.Paris.csproj", "{E291FCCD-4635-4400-A586-F1E66027724E}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Airbnb.ParisAnnotation", "BandyerSdk\android\Airbnb.ParisAnnotation\Airbnb.ParisAnnotation.csproj", "{56DD3BD5-37CB-4970-A1E4-C0C1ED426B11}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BandyerSdk.Android", "BandyerSdk\android\BandyerSdk.Android\BandyerSdk.Android.csproj", "{FD685247-E1AB-4CB6-AE68-52DBF5025DD8}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BandyerSdk.AudioSession.Android", "BandyerSdk\android\BandyerSdk.AudioSession.Android\BandyerSdk.AudioSession.Android.csproj", "{EB926D6C-DD92-4EBF-BBDC-99C64114E825}"
