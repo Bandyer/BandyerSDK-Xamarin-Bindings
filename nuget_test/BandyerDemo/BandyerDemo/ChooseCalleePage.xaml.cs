@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using BandyerDemo.Models;
 using Xamarin.Forms;
 
@@ -7,21 +8,10 @@ namespace BandyerDemo
 {
     public partial class ChooseCalleePage : ContentPage
     {
-        private List<User> users = new List<User>() {
-            new User()
-            {
-                Name = "client",
-            },
-            new User()
-            {
-                Name = "web",
-            },
-        };
-
         public ChooseCalleePage(User user)
         {
             InitializeComponent();
-            userList.ItemsSource = users;
+            userList.ItemsSource = App.Callee;
 
             App.BandyerSdk.ChatStatus += ChatStatus;
             App.BandyerSdk.CallStatus += CallStatus;
@@ -31,6 +21,7 @@ namespace BandyerDemo
         {
             base.OnAppearing();
             var userAlias = "client";
+            App.BandyerSdk.SetUserDetails(App.Callers.Concat(App.Callee).ToList());
             App.BandyerSdk.Init(userAlias);
             App.BandyerSdk.OnPageAppearing();
         }
@@ -69,25 +60,47 @@ namespace BandyerDemo
             }
         }
 
-        void Button_StartCall(System.Object sender, System.EventArgs e)
+        async void Button_StartCall(System.Object sender, System.EventArgs e)
         {
-            App.BandyerSdk.StartCall("web");
+            var users = getSelectedUsersNames();
+            if (users.Count == 0)
+            {
+                await DisplayAlert(null, "Select at least 1 user", "OK");
+                return;
+            }
+            App.BandyerSdk.StartCall(users);
         }
 
-        void Button_StartChat(System.Object sender, System.EventArgs e)
+        async void Button_StartChat(System.Object sender, System.EventArgs e)
         {
-            App.BandyerSdk.StartChat("web");
+            var users = getSelectedUsersNames();
+            if (users.Count == 0)
+            {
+                await DisplayAlert(null, "Select at least 1 user", "OK");
+                return;
+            }
+            if (users.Count > 1)
+            {
+                await DisplayAlert(null, "Group chats are not yet supported", "OK");
+                return;
+            }
+            App.BandyerSdk.StartChat(users[0]);
         }
 
-        async void ListView_ItemTapped(System.Object sender, Xamarin.Forms.ItemTappedEventArgs e)
+        void ListView_ItemTapped(System.Object sender, Xamarin.Forms.ItemTappedEventArgs e)
         {
             var obj = e.Item as User;
             if (obj == null)
                 return;
-            var index = users.IndexOf(obj);
-            users[index].Selected = !users[index].Selected;
+            var index = App.Callee.IndexOf(obj);
+            App.Callee[index].Selected = !App.Callee[index].Selected;
             userList.ItemsSource = null;
-            userList.ItemsSource = users;
+            userList.ItemsSource = App.Callee;
+        }
+
+        List<String> getSelectedUsersNames()
+        {
+            return App.Callee.Where(u => u.Selected).Select(u => u.Alias).ToList();
         }
     }
 }

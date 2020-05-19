@@ -13,6 +13,7 @@ using PushKit;
 using UIKit;
 using Xamarin.Forms;
 using Intents;
+using BandyerDemo.Models;
 
 [assembly: Dependency(typeof(BandyerSdkiOS))]
 namespace BandyerDemo.iOS
@@ -42,6 +43,7 @@ namespace BandyerDemo.iOS
         private NSUrl webPageUrl;
         private bool shouldStartWindowCallFromWebPageUrl = false;
         private bool isSdkInitialized = false;
+        private List<User> usersDetails;
 
         public static void InitSdk()
         {
@@ -172,9 +174,14 @@ namespace BandyerDemo.iOS
             BandyerSDK.Instance().ChatClient.Start(currentUserAlias);
         }
 
-        public void StartCall(string userAlias)
+        public void SetUserDetails(List<User> usersDetails)
         {
-            var callee = new string[] { userAlias };
+            this.usersDetails = usersDetails;
+        }
+
+        public void StartCall(List<string> userAliases)
+        {
+            var callee = userAliases.ToArray();
             var intent = BDKMakeCallIntent.IntentWithCallee(callee, BDKCallType.AudioVideoCallType);
             startWindowCall(intent);
         }
@@ -299,12 +306,15 @@ namespace BandyerDemo.iOS
         List<BDKUserInfoDisplayItem> userInfoFetcherItems()
         {
             var items = new List<BDKUserInfoDisplayItem>();
-            var item = new BDKUserInfoDisplayItem("alias");
-            item.FirstName = "firstName";
-            item.LastName = "lastName";
-            item.Email = "email@email.com";
-            item.ImageURL = new NSUrl("https://static.bandyer.com/corporate/logos/logo_bandyer_only_name.png");
-            items.Add(item);
+            foreach (var userDetail in usersDetails)
+            {
+                var item = new BDKUserInfoDisplayItem(userDetail.Alias);
+                item.FirstName = userDetail.FirstName;
+                item.LastName = userDetail.LastName;
+                item.Email = userDetail.Email;
+                item.ImageURL = new NSUrl(userDetail.ImageUri);
+                items.Add(item);
+            }
             return items;
         }
 

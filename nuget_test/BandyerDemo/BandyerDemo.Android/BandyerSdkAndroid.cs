@@ -5,6 +5,7 @@ using Android.App;
 using Android.Content;
 using Android.Util;
 using BandyerDemo.Droid;
+using BandyerDemo.Models;
 using Com.Bandyer.Android_sdk;
 using Com.Bandyer.Android_sdk.Call;
 using Com.Bandyer.Android_sdk.Call.Model;
@@ -35,8 +36,8 @@ namespace BandyerDemo.Droid
 
         const string TAG = "BandyerDemo";
         public static Android.App.Application Application;
+        private static BandyerSdkUserDetailsProvider userDetailsProvider;
         public static Android.App.Activity MainActivity;
-        private bool isSdkInitialized = false;
         private static string joinUrlFromIntent;
         private static bool shouldStartCall = false;
 
@@ -128,13 +129,14 @@ namespace BandyerDemo.Droid
         public static void InitSdk(Android.App.Application application)
         {
             Application = application;
+            userDetailsProvider = new BandyerSdkUserDetailsProvider();
             BandyerSDK.Builder builder = new BandyerSDK.Builder(application, AppId)
                 .SetEnvironment(Com.Bandyer.Android_sdk.Environment.Configuration.Sandbox())
                 .WithCallEnabled(new BandyerSdkCallNotificationListener())
                 .WithFileSharingEnabled()
                 .WithWhiteboardEnabled()
                 .WithChatEnabled()
-                .WithUserDetailsProvider(new BandyerSdkUserDetailsProvider());
+                .WithUserDetailsProvider(userDetailsProvider);
             BandyerSDK.Init(builder);
         }
 
@@ -178,12 +180,12 @@ namespace BandyerDemo.Droid
             }
         }
 
-        public void StartCall(string userAlias)
+        public void StartCall(List<string> userAliases)
         {
-            startCallWithUserAlias(userAlias);
+            startCallWithUserAliases(userAliases);
         }
 
-        void startCallWithUserAlias(string userAlias)
+        void startCallWithUserAliases(List<string> userAliases)
         {
             CallCapabilities capabilities = new CallCapabilities();
             capabilities.WithWhiteboard();
@@ -200,7 +202,7 @@ namespace BandyerDemo.Droid
             CallIntentBuilder callIntentBuilder = builder.StartWithAudioVideoCall(MainActivity.Application /* context */ );
             //builder.StartWithAudioUpgradableCall(application); // audio call that may upgrade into audio&video call
             //builder.StartWithAudioCall(application);  // audio only call
-            CallIntentOptions callIntentOptions = callIntentBuilder.With(new List<string>() { userAlias });
+            CallIntentOptions callIntentOptions = callIntentBuilder.With(userAliases);
             callIntentOptions.WithCapabilities(capabilities); // optional
             callIntentOptions.WithOptions(options); // optional
             BandyerIntent bandyerCallIntent = callIntentOptions.Build();
@@ -260,6 +262,11 @@ namespace BandyerDemo.Droid
 
         public void OnPageDisappearing()
         {
+        }
+
+        public void SetUserDetails(List<User> usersDetails)
+        {
+            userDetailsProvider.usersDetails = usersDetails;
         }
         #endregion
 
@@ -393,17 +400,20 @@ namespace BandyerDemo.Droid
         class BandyerSdkUserDetailsProvider : Java.Lang.Object
             , IUserDetailsProvider
         {
+            internal List<User> usersDetails;
+
             public void OnUserDetailsRequested(IList<string> userAliases, IOnUserDetailsListener onUserDetailsListener)
             {
                 Java.Util.ArrayList details = new Java.Util.ArrayList();
                 foreach (string userAlias in userAliases)
                 {
+                    var userByAlias = usersDetails.Find(u => u.Alias == userAlias);
                     details.Add(new UserDetails.Builder(userAlias)
-                      .WithNickName("nickname")
-                      .WithFirstName("name")
-                      .WithLastName("last name")
-                      .WithEmail("email@email.com")
-                      .WithImageUri(Android.Net.Uri.Parse("https://static.bandyer.com/corporate/logos/logo_bandyer_only_name.png"))
+                      .WithNickName(userByAlias.NickName)
+                      .WithFirstName(userByAlias.FirstName)
+                      .WithLastName(userByAlias.LastName)
+                      .WithEmail(userByAlias.Email)
+                      .WithImageUri(Android.Net.Uri.Parse(userByAlias.ImageUri))
                       .Build());
                 }
                 onUserDetailsListener.Provide(details);

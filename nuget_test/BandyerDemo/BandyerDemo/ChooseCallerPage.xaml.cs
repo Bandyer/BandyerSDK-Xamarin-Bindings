@@ -7,21 +7,10 @@ namespace BandyerDemo
 {
     public partial class ChooseCallerPage : ContentPage
     {
-        private List<User> users = new List<User>() {
-            new User()
-            {
-                Name = "client",
-            },
-            new User()
-            {
-                Name = "web",
-            },
-        };
-
         public ChooseCallerPage()
         {
             InitializeComponent();
-            userList.ItemsSource = users;
+            userList.ItemsSource = App.Callers;
         }
 
         async void ListView_ItemTapped(System.Object sender, Xamarin.Forms.ItemTappedEventArgs e)

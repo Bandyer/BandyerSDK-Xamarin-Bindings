@@ -19,7 +19,7 @@
                             <StackLayout
                                 Spacing="0"
                                 Orientation="Vertical">
-                                <Label Margin="10" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" Text="{Binding Name}" />
+                                <Label Margin="10" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" Text="{Binding Alias}" />
                             </StackLayout>
                         </ViewCell>
                     </DataTemplate>
