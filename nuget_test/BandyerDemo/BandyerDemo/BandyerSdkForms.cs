@@ -143,12 +143,11 @@ namespace BandyerDemo
         public static void RegisterTokenToBandyer(string callPlatform)
         {
             var user_alias = Preferences.Get("bandyer_user_alias", "");
-            if (String.IsNullOrEmpty(user_alias))
+            var push_token = Preferences.Get("bandyer_push_token", "");
+            if (String.IsNullOrEmpty(user_alias) || String.IsNullOrEmpty(push_token))
             {
                 return;
             }
-
-            var push_token = Preferences.Get("bandyer_push_token", "");
 
             var push_provider = "";
             var platform = "";

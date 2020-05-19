@@ -13,13 +13,12 @@ using PushKit;
 using UIKit;
 using Xamarin.Forms;
 using Intents;
-using BandyerDemo.Models;
 
 [assembly: Dependency(typeof(BandyerSdkiOS))]
 namespace BandyerDemo.iOS
 {
     public class BandyerSdkiOS : NSObject
-        , IBandyerSdk
+        , BandyerSdkForms.IBandyerSdk
         , IBCXCallClientObserver
         , IBDKCallWindowDelegate
         , IBCHChatClientObserver
@@ -28,8 +27,6 @@ namespace BandyerDemo.iOS
         , IBCHMessageNotificationControllerDelegate
         , IBDKCallBannerControllerDelegate
     {
-        public const string AppId = "mAppId_b78542f60f697c8a56a13e579f2e66d0378ba6b3336fa75f961c6efb0e6b";
-
         private static BandyerSdkiOS instance = null;
         public BandyerSdkiOS()
         {
@@ -43,7 +40,7 @@ namespace BandyerDemo.iOS
         private NSUrl webPageUrl;
         private bool shouldStartWindowCallFromWebPageUrl = false;
         private bool isSdkInitialized = false;
-        private List<User> usersDetails;
+        private List<BandyerSdkForms.User> usersDetails;
 
         public static void InitSdk()
         {
@@ -67,7 +64,7 @@ namespace BandyerDemo.iOS
 
                 // CALLKIT
                 config.CallKitEnabled = true;
-                config.NativeUILocalizedName = "My wonderful app";
+                config.NativeUILocalizedName = "BanyerDemo App";
                 //config.NativeUIRingToneSound = "MyRingtoneSound";
                 UIImage callKitIconImage = UIImage.FromBundle("bandyer_logo");
                 config.NativeUITemplateIconImageData = callKitIconImage.AsPNG();
@@ -75,7 +72,7 @@ namespace BandyerDemo.iOS
                 config.HandleProvider = new BandyerSdkBCXHandleProvider();
                 // CALLKIT
 
-                BandyerSDK.Instance().InitializeWithApplicationId(AppId, config);
+                BandyerSDK.Instance().InitializeWithApplicationId(BandyerSdkForms.AppId, config);
             }
         }
 
@@ -174,7 +171,7 @@ namespace BandyerDemo.iOS
             BandyerSDK.Instance().ChatClient.Start(currentUserAlias);
         }
 
-        public void SetUserDetails(List<User> usersDetails)
+        public void SetUserDetails(List<BandyerSdkForms.User> usersDetails)
         {
             this.usersDetails = usersDetails;
         }
@@ -213,8 +210,23 @@ namespace BandyerDemo.iOS
 
         public void OnPageDisappearing()
         {
-            messageNotificationController.Hide();
-            callBannerController.Hide();
+            if (messageNotificationController != null)
+            {
+                messageNotificationController.Hide();
+            }
+            if (callBannerController != null)
+            {
+                callBannerController.Hide();
+            }
+        }
+
+        public void Stop()
+        {
+            BandyerSDK.Instance().CallClient.Stop();
+            BandyerSDK.Instance().ChatClient.Stop();
+            messageNotificationController = null;
+            callBannerController = null;
+            isSdkInitialized = false;
         }
         #endregion
 
@@ -582,40 +594,14 @@ namespace BandyerDemo.iOS
         {
             Debug.Print("DidUpdatePushCredentials " + registry + " " + credentials + " " + type);
             var tokenStr = credentials.Bcx_tokenAsString();
-            registerTokenToBandyer(tokenStr);
+            BandyerSdkForms.SetPushToken(tokenStr);
+            BandyerSdkForms.RegisterTokenToBandyerIos();
         }
         public void DidReceiveIncomingPush(PKPushRegistry registry, PKPushPayload payload, string type)
         {
             Debug.Print("DidReceiveIncomingPush " + registry + " " + payload + " " + type);
         }
         #endregion
-
-        void registerTokenToBandyer(string token)
-        {
-            var urlStr = "https://sandbox.bandyer.com/mobile_push_notifications/rest/device";
-            var jsonStr = "{" +
-                "\"user_alias\":\"client\"" +
-                ",\"app_id\":\"" + BandyerSdkiOS.AppId + "\"" +
-                ",\"push_token\":\"" + token + "\"" +
-                ",\"push_provider\":\"\"" +
-                ",\"platform\":\"ios\"" +
-                "}";
-
-            try
-            {
-                WebClient wc = new WebClient();
-                wc.Headers.Add(HttpRequestHeader.ContentType, "application/json; charset=utf-8");
-                byte[] dataBytes = Encoding.UTF8.GetBytes(jsonStr);
-                byte[] responseBytes = wc.UploadData(new Uri(urlStr), "POST", dataBytes);
-                string responseString = Encoding.UTF8.GetString(responseBytes);
-
-                Debug.Print("UploadData " + responseString);
-            }
-            catch (Exception e)
-            {
-                Debug.Print(e.ToString());
-            }
-        }
 
         #region IBCHMessageNotificationControllerDelegate
         public void DidTouch(BCHMessageNotificationController controller, BCHChatNotification notification)
