@@ -14,7 +14,6 @@
     <copyright>Copyright © Bandyer</copyright>
     <iconUrl>https://bandyer.com/assets/favicon/favicon.png</iconUrl>
     <projectUrl>https://github.com/Bandyer/Bandyer-Android-Common-Xamarin-Binding</projectUrl>
-    <description>BandyerSdk.Common.Android</description>
     <dependencies>
         <group targetFramework="MonoAndroid">
             <dependency id="Badoo.AndroidWeakHandler.Android" version="1.1" />
