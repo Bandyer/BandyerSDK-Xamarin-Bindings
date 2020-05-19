@@ -11,7 +11,7 @@
                 AbsoluteLayout.LayoutBounds="0,0,1,1"
                 AbsoluteLayout.LayoutFlags="All"
                 Orientation="Vertical">
-                <Label Margin="10" Text="Who do you want to call or chat with?"></Label>
+                <Label x:Name="mainLabel" Margin="10"></Label>
                 <ListView
                     x:Name="userList"
                     SeparatorColor="#CCCCCC"

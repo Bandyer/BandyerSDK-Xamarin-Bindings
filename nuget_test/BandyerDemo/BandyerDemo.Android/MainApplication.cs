@@ -24,7 +24,8 @@ namespace BandyerDemo.Droid
         public void OnSuccess(Java.Lang.Object result)
         {
             var token = result.Class.GetMethod("getToken").Invoke(result).ToString();
-            BandyerDemoFirebaseMessagingService.RegisterTokenToBandyer(token);
+            BandyerSdkForms.SetPushToken(token);
+            BandyerSdkForms.RegisterTokenToBandyerAndroid();
         }
     }
 }

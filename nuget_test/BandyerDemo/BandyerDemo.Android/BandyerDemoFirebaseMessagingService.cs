@@ -5,6 +5,7 @@ using Android.App;
 using Android.Util;
 using Com.Bandyer.Android_sdk.Client;
 using Firebase.Messaging;
+using Xamarin.Essentials;
 
 namespace BandyerDemo.Droid
 {
@@ -19,7 +20,8 @@ namespace BandyerDemo.Droid
             base.OnNewToken(token);
             Log.Debug(TAG, "OnNewToken " + token);
 
-            RegisterTokenToBandyer(token);
+            BandyerSdkForms.SetPushToken(token);
+            BandyerSdkForms.RegisterTokenToBandyerAndroid();
         }
 
         public override void OnMessageReceived(RemoteMessage remoteMessage)
@@ -30,31 +32,5 @@ namespace BandyerDemo.Droid
             BandyerSDKClient.Instance.HandleNotification(ApplicationContext, remoteMessage.Data["message"]);
         }
 
-        public static void RegisterTokenToBandyer(string token)
-        {
-            var urlStr = "https://sandbox.bandyer.com/mobile_push_notifications/rest/device";
-            var jsonStr = "{" +
-                "\"user_alias\":\"client\"" +
-                ",\"app_id\":\"" + BandyerSdkAndroid.AppId + "\"" +
-                ",\"push_token\":\"" + token + "\"" +
-                ",\"push_provider\":\"firebase\"" +
-                ",\"platform\":\"android\"" +
-                "}";
-
-            try
-            {
-                WebClient wc = new WebClient();
-                wc.Headers.Add(HttpRequestHeader.ContentType, "application/json; charset=utf-8");
-                byte[] dataBytes = Encoding.UTF8.GetBytes(jsonStr);
-                byte[] responseBytes = wc.UploadData(new Uri(urlStr), "POST", dataBytes);
-                string responseString = Encoding.UTF8.GetString(responseBytes);
-
-                Log.Debug(TAG, "UploadData " + responseString);
-            }
-            catch (Exception e)
-            {
-                Log.Debug(TAG, e.ToString());
-            }
-        }
     }
 }

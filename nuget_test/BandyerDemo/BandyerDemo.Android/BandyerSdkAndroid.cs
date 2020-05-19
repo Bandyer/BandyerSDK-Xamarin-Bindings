@@ -5,7 +5,6 @@ using Android.App;
 using Android.Content;
 using Android.Util;
 using BandyerDemo.Droid;
-using BandyerDemo.Models;
 using Com.Bandyer.Android_sdk;
 using Com.Bandyer.Android_sdk.Call;
 using Com.Bandyer.Android_sdk.Call.Model;
@@ -24,7 +23,7 @@ using Xamarin.Forms;
 namespace BandyerDemo.Droid
 {
     public class BandyerSdkAndroid : Java.Lang.Object
-        , IBandyerSdk
+        , BandyerSdkForms.IBandyerSdk
         , IBandyerSDKClientObserver
         , IBandyerModuleObserver
         , ICallUIObserver
@@ -32,8 +31,6 @@ namespace BandyerDemo.Droid
         , IChatUIObserver
         , IChatObserver
     {
-        public const string AppId = "mAppId_b78542f60f697c8a56a13e579f2e66d0378ba6b3336fa75f961c6efb0e6b";
-
         const string TAG = "BandyerDemo";
         public static Android.App.Application Application;
         private static BandyerSdkUserDetailsProvider userDetailsProvider;
@@ -120,17 +117,11 @@ namespace BandyerDemo.Droid
         }
         #endregion
 
-        public void Dispose()
-        {
-            BandyerSDKClient.Instance.StopListening();
-            BandyerSDKClient.Instance.Dispose();
-        }
-
         public static void InitSdk(Android.App.Application application)
         {
             Application = application;
             userDetailsProvider = new BandyerSdkUserDetailsProvider();
-            BandyerSDK.Builder builder = new BandyerSDK.Builder(application, AppId)
+            BandyerSDK.Builder builder = new BandyerSDK.Builder(application, BandyerSdkForms.AppId)
                 .SetEnvironment(Com.Bandyer.Android_sdk.Environment.Configuration.Sandbox())
                 .WithCallEnabled(new BandyerSdkCallNotificationListener())
                 .WithFileSharingEnabled()
@@ -264,9 +255,16 @@ namespace BandyerDemo.Droid
         {
         }
 
-        public void SetUserDetails(List<User> usersDetails)
+        public void SetUserDetails(List<BandyerSdkForms.User> usersDetails)
         {
             userDetailsProvider.usersDetails = usersDetails;
+        }
+
+        public void Stop()
+        {
+            BandyerSDKClient.Instance.StopListening();
+            BandyerSDKClient.Instance.ClearUserCache();
+            BandyerSDKClient.Instance.Dispose();
         }
         #endregion
 
@@ -400,7 +398,7 @@ namespace BandyerDemo.Droid
         class BandyerSdkUserDetailsProvider : Java.Lang.Object
             , IUserDetailsProvider
         {
-            internal List<User> usersDetails;
+            internal List<BandyerSdkForms.User> usersDetails;
 
             public void OnUserDetailsRequested(IList<string> userAliases, IOnUserDetailsListener onUserDetailsListener)
             {

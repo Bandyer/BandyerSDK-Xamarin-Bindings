@@ -1,35 +1,70 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using BandyerDemo.Models;
 using Xamarin.Forms;
 
 namespace BandyerDemo
 {
     public partial class ChooseCalleePage : ContentPage
     {
-        public ChooseCalleePage(User user)
+        private List<BandyerSdkForms.User> callee;
+
+        public ChooseCalleePage()
         {
             InitializeComponent();
-            userList.ItemsSource = App.Callee;
+            this.callee = BandyerSdkForms.Instance.Callee;
+            BandyerSdkForms.Instance.BandyerSdk.ChatStatus += ChatStatus;
+            BandyerSdkForms.Instance.BandyerSdk.CallStatus += CallStatus;
 
-            App.BandyerSdk.ChatStatus += ChatStatus;
-            App.BandyerSdk.CallStatus += CallStatus;
+            ToolbarItems.Add(new ToolbarItem()
+            {
+                Text = "Logout",
+                Command = new Command(Logout),
+            });
+
+            var loggedUserAlias = BandyerSdkForms.GetLoggedUserAlias();
+            mainLabel.Text = "Logged as: " + loggedUserAlias + ". Who do you want to call or chat with?";
+            userList.ItemsSource = callee;
+        }
+
+        async void Logout()
+        {
+            var result = await this.DisplayAlert(null, "Logout current user?", "Yes", "No");
+            if (result)
+            {
+                BandyerSdkForms.SetLoggedUserAlias("");
+                BandyerSdkForms.Instance.BandyerSdk.Stop();
+                App.Instance.ResetMainPage();
+            }
         }
 
         protected override void OnAppearing()
         {
             base.OnAppearing();
-            var userAlias = "client";
-            App.BandyerSdk.SetUserDetails(App.Callers.Concat(App.Callee).ToList());
-            App.BandyerSdk.Init(userAlias);
-            App.BandyerSdk.OnPageAppearing();
+            registerTokenToBandyer();
+            var loggedUserAlias = BandyerSdkForms.GetLoggedUserAlias();
+            var allUsersDetails = BandyerSdkForms.Instance.Callers.Concat(BandyerSdkForms.Instance.Callee).ToList();
+            BandyerSdkForms.Instance.BandyerSdk.SetUserDetails(allUsersDetails);
+            BandyerSdkForms.Instance.BandyerSdk.Init(loggedUserAlias);
+            BandyerSdkForms.Instance.BandyerSdk.OnPageAppearing();
+        }
+
+        private void registerTokenToBandyer()
+        {
+            if (Device.RuntimePlatform == Device.iOS)
+            {
+                BandyerSdkForms.RegisterTokenToBandyerIos();
+            }
+            else if (Device.RuntimePlatform == Device.Android)
+            {
+                BandyerSdkForms.RegisterTokenToBandyerAndroid();
+            }
         }
 
         protected override void OnDisappearing()
         {
             base.OnDisappearing();
-            App.BandyerSdk.OnPageDisappearing();
+            BandyerSdkForms.Instance.BandyerSdk.OnPageDisappearing();
         }
 
         void ChatStatus(bool isReady)
@@ -68,7 +103,7 @@ namespace BandyerDemo
                 await DisplayAlert(null, "Select at least 1 user", "OK");
                 return;
             }
-            App.BandyerSdk.StartCall(users);
+            BandyerSdkForms.Instance.BandyerSdk.StartCall(users);
         }
 
         async void Button_StartChat(System.Object sender, System.EventArgs e)
@@ -84,23 +119,23 @@ namespace BandyerDemo
                 await DisplayAlert(null, "Group chats are not yet supported", "OK");
                 return;
             }
-            App.BandyerSdk.StartChat(users[0]);
+            BandyerSdkForms.Instance.BandyerSdk.StartChat(users[0]);
         }
 
         void ListView_ItemTapped(System.Object sender, Xamarin.Forms.ItemTappedEventArgs e)
         {
-            var obj = e.Item as User;
+            var obj = e.Item as BandyerSdkForms.User;
             if (obj == null)
                 return;
-            var index = App.Callee.IndexOf(obj);
-            App.Callee[index].Selected = !App.Callee[index].Selected;
+            var index = callee.IndexOf(obj);
+            callee[index].Selected = !callee[index].Selected;
             userList.ItemsSource = null;
-            userList.ItemsSource = App.Callee;
+            userList.ItemsSource = callee;
         }
 
         List<String> getSelectedUsersNames()
         {
-            return App.Callee.Where(u => u.Selected).Select(u => u.Alias).ToList();
+            return callee.Where(u => u.Selected).Select(u => u.Alias).ToList();
         }
     }
 }

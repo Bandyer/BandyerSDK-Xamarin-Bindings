@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using BandyerDemo.Models;
 using Xamarin.Forms;
 
 namespace BandyerDemo
@@ -10,15 +9,16 @@ namespace BandyerDemo
         public ChooseCallerPage()
         {
             InitializeComponent();
-            userList.ItemsSource = App.Callers;
+            userList.ItemsSource = BandyerSdkForms.Instance.Callers;
         }
 
-        async void ListView_ItemTapped(System.Object sender, Xamarin.Forms.ItemTappedEventArgs e)
+        void ListView_ItemTapped(System.Object sender, Xamarin.Forms.ItemTappedEventArgs e)
         {
-            var obj = e.Item as User;
+            var obj = e.Item as BandyerSdkForms.User;
             if (obj == null)
                 return;
-            await Navigation.PushAsync(new ChooseCalleePage(obj));
+            BandyerSdkForms.SetLoggedUserAlias(obj.Alias);
+            App.Instance.ResetMainPage();
         }
     }
 }
