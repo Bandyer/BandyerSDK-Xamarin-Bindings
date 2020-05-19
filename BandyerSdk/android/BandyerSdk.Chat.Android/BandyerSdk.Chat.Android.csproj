@@ -123,6 +123,9 @@
     <PackageReference Include="Conscrypt.Conscrypt.Android">
       <Version>2.2.1</Version>
     </PackageReference>
+    <PackageReference Include="Xamarin.Twilio.Chat.Android">
+      <Version>4.2.9</Version>
+    </PackageReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.Bindings.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -35,8 +35,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BandyerSdk.SocketIOClient.A
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Iceteck.Silicompressorr.Android", "BandyerSdk\android\Iceteck.Silicompressorr.Android\Iceteck.Silicompressorr.Android.csproj", "{84249426-3C2E-43B2-81AF-1715DCC69FF8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Twilio.ChatAndroid.Android", "BandyerSdk\android\Twilio.ChatAndroid.Android\Twilio.ChatAndroid.Android.csproj", "{84545376-40FF-488D-9CA2-7C5DAD834572}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mikepenz.FastAdapter.Android", "BandyerSdk\android\Mikepenz.FastAdapter.Android\Mikepenz.FastAdapter.Android.csproj", "{8893CFF1-DD69-4FA2-9B65-9B1DFBE6EA30}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mikepenz.FastAdapterExtensionsDiff.Android", "BandyerSdk\android\Mikepenz.FastAdapterExtensionsDiff.Android\Mikepenz.FastAdapterExtensionsDiff.Android.csproj", "{08B5EE2D-C396-4B5E-B86B-EBD43F90E6F1}"
