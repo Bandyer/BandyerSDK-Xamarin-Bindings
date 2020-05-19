@@ -74,10 +74,6 @@
       <Project>{EB926D6C-DD92-4EBF-BBDC-99C64114E825}</Project>
       <Name>BandyerSdk.AudioSession.Android</Name>
     </ProjectReference>
-    <ProjectReference Include="BandyerSdk.Matisse.Android\BandyerSdk.Matisse.Android.csproj">
-      <Project>{59C9C3DE-D536-4BF3-B09A-CA209E28A176}</Project>
-      <Name>BandyerSdk.Matisse.Android</Name>
-    </ProjectReference>
     <ProjectReference Include="BandyerSdk.CommunicationCenter.Android\BandyerSdk.CommunicationCenter.Android.csproj">
       <Project>{5B1C48DF-2460-42CC-92CF-B2FEDCD53462}</Project>
       <Name>BandyerSdk.CommunicationCenter.Android</Name>
@@ -131,6 +127,9 @@
     </PackageReference>
     <PackageReference Include="Bandyer.FireCrasher">
       <Version>1.0.2</Version>
+    </PackageReference>
+    <PackageReference Include="Bandyer.Matisse">
+      <Version>0.0.1</Version>
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
