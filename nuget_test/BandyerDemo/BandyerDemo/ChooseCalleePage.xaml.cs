@@ -32,6 +32,7 @@ namespace BandyerDemo
             var result = await this.DisplayAlert(null, "Logout current user?", "Yes", "No");
             if (result)
             {
+                BandyerSdkForms.UnregisterTokenToBandyer();
                 BandyerSdkForms.SetLoggedUserAlias("");
                 BandyerSdkForms.Instance.BandyerSdk.Stop();
                 App.Instance.ResetMainPage();
