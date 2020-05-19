@@ -31,8 +31,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BandyerSdk.Design.Android",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BandyerSdk.Matisse.Android", "BandyerSdk\android\BandyerSdk.Matisse.Android\BandyerSdk.Matisse.Android.csproj", "{59C9C3DE-D536-4BF3-B09A-CA209E28A176}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BandyerSdk.SocketIOClient.Android", "BandyerSdk\android\BandyerSdk.SocketIOClient.Android\BandyerSdk.SocketIOClient.Android.csproj", "{DE5E77BF-B28D-4671-86D0-35A7D05F8DB7}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Iceteck.Silicompressorr.Android", "BandyerSdk\android\Iceteck.Silicompressorr.Android\Iceteck.Silicompressorr.Android.csproj", "{84249426-3C2E-43B2-81AF-1715DCC69FF8}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mikepenz.FastAdapter.Android", "BandyerSdk\android\Mikepenz.FastAdapter.Android\Mikepenz.FastAdapter.Android.csproj", "{8893CFF1-DD69-4FA2-9B65-9B1DFBE6EA30}"
