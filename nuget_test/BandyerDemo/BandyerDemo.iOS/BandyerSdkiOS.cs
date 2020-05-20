@@ -176,17 +176,33 @@ namespace BandyerDemo.iOS
             this.usersDetails = usersDetails;
         }
 
-        public void StartCall(List<string> userAliases)
+        public void StartCall(List<string> userAliases, List<BandyerSdkForms.CallCapability> callCapabilities, List<BandyerSdkForms.InCallCapability> inCallCapabilities, List<BandyerSdkForms.InCallOptions> inCallOptions)
         {
             var callee = userAliases.ToArray();
-            var intent = BDKMakeCallIntent.IntentWithCallee(callee, BDKCallType.AudioVideoCallType);
+            BDKMakeCallIntent intent;
+            if (callCapabilities.Contains(BandyerSdkForms.CallCapability.AudioVideo))
+            {
+                intent = BDKMakeCallIntent.IntentWithCallee(callee, BDKCallType.AudioVideoCallType);
+            }
+            else if (callCapabilities.Contains(BandyerSdkForms.CallCapability.AudioUpgradable))
+            {
+                intent = BDKMakeCallIntent.IntentWithCallee(callee, BDKCallType.AudioUpgradableCallType);
+            }
+            else if (callCapabilities.Contains(BandyerSdkForms.CallCapability.AudioOnly))
+            {
+                intent = BDKMakeCallIntent.IntentWithCallee(callee, BDKCallType.AudioOnlyCallType);
+            }
+            else
+            {
+                intent = BDKMakeCallIntent.IntentWithCallee(callee, BDKCallType.AudioVideoCallType);
+            }
             startWindowCall(intent);
         }
 
-        public void StartChat(string userAlias)
+        public void StartChat(string userAlias, List<BandyerSdkForms.ChatWithCallCapability> callCapabilities, List<BandyerSdkForms.InCallCapability> inCallCapabilities, List<BandyerSdkForms.InCallOptions> inCallOptions)
         {
             var intent = BCHOpenChatIntent.OpenChatWith(userAlias);
-            startChatController(intent);
+            startChatController(intent, callCapabilities);
         }
 
         public void OnPageAppearing()
@@ -302,12 +318,28 @@ namespace BandyerDemo.iOS
             });
         }
 
-        void startChatController(BCHOpenChatIntent intent)
+        void startChatController(BCHOpenChatIntent intent, List<BandyerSdkForms.ChatWithCallCapability> callCapabilities)
         {
             var rootVC = UIApplication.SharedApplication.KeyWindow.RootViewController;
             var items = userInfoFetcherItems();
             var userInfoFetcher = new BandyerSdkBDKUserInfoFetcher(items);
-            var configuration = new BCHChannelViewControllerConfiguration(audioButton: true, videoButton: true, userInfoFetcher: userInfoFetcher);
+            BCHChannelViewControllerConfiguration configuration;
+            if (callCapabilities.Contains(BandyerSdkForms.ChatWithCallCapability.AudioVideo))
+            {
+                configuration = new BCHChannelViewControllerConfiguration(audioButton: true, videoButton: true, userInfoFetcher: userInfoFetcher);
+            }
+            else if (callCapabilities.Contains(BandyerSdkForms.ChatWithCallCapability.AudioUpgradable))
+            {
+                configuration = new BCHChannelViewControllerConfiguration(audioButton: true, videoButton: false, userInfoFetcher: userInfoFetcher);
+            }
+            else if (callCapabilities.Contains(BandyerSdkForms.ChatWithCallCapability.AudioOnly))
+            {
+                configuration = new BCHChannelViewControllerConfiguration(audioButton: true, videoButton: false, userInfoFetcher: userInfoFetcher);
+            }
+            else
+            {
+                configuration = new BCHChannelViewControllerConfiguration(audioButton: false, videoButton: false, userInfoFetcher: userInfoFetcher);
+            }
             var channelVC = new BCHChannelViewController();
             channelVC.Delegate = this;
             channelVC.Configuration = configuration;
@@ -585,7 +617,7 @@ namespace BandyerDemo.iOS
             Debug.Print("CallWindowOpenChatWith " + window + " " + intent);
             window.DismissCallViewControllerWithCompletion(() => { });
             window.Hidden = true;
-            startChatController(intent);
+            startChatController(intent, new List<BandyerSdkForms.ChatWithCallCapability>() { BandyerSdkForms.ChatWithCallCapability.AudioVideo });
         }
         #endregion
 
@@ -608,7 +640,7 @@ namespace BandyerDemo.iOS
         {
             Debug.Print("IBCHMessageNotificationControllerDelegate DidTouch " + controller + " " + notification);
             var intent = BCHOpenChatIntent.OpenChatFrom(notification);
-            startChatController(intent);
+            startChatController(intent, new List<BandyerSdkForms.ChatWithCallCapability>() { BandyerSdkForms.ChatWithCallCapability.AudioVideo });
         }
         #endregion
 

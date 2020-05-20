@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 using System.Net;
 using System.Text;
 using Xamarin.Essentials;
@@ -11,6 +12,35 @@ namespace BandyerDemo
     public class BandyerSdkForms
     {
         public const string AppId = "mAppId_b78542f60f697c8a56a13e579f2e66d0378ba6b3336fa75f961c6efb0e6b";
+
+        public enum CallCapability
+        {
+            AudioOnly,
+            AudioUpgradable,
+            AudioVideo,
+        }
+
+        public enum ChatWithCallCapability
+        {
+            AudioOnly,
+            AudioUpgradable,
+            AudioVideo,
+        }
+
+        public enum InCallCapability
+        {
+            Whiteboard,
+            FileSharing,
+            Chat,
+            ScreenSharing,
+        }
+
+        public enum InCallOptions
+        {
+            CallRecording,
+            BackCameraAsDefault,
+            DisableProximitySensor,
+        }
 
         public class User
         {
@@ -29,8 +59,8 @@ namespace BandyerDemo
             event Action<bool> ChatStatus;
             void Init(string userAlias);
             void SetUserDetails(List<User> usersDetails);
-            void StartCall(List<string> userAliases);
-            void StartChat(string userAlias);
+            void StartCall(List<string> userAliases, List<BandyerSdkForms.CallCapability> callCapabilities, List<BandyerSdkForms.InCallCapability> inCallCapabilities, List<BandyerSdkForms.InCallOptions> inCallOptions);
+            void StartChat(string userAlias, List<BandyerSdkForms.ChatWithCallCapability> callCapabilities, List<BandyerSdkForms.InCallCapability> inCallCapabilities, List<BandyerSdkForms.InCallOptions> inCallOptions);
             void OnPageAppearing();
             void OnPageDisappearing();
             void Stop();
@@ -114,6 +144,11 @@ namespace BandyerDemo
                 ImageUri = "https://github.com/Bandyer/Bandyer-iOS-SDK-Samples/raw/master/Basic-Example/BasicExample/Resources/Men/man_5.jpg",
             },
         };
+
+        public List<String> GetSelectedUsersNames()
+        {
+            return Callee.Where(u => u.Selected).Select(u => u.Alias).ToList();
+        }
 
         public static void SetPushToken(string pushToken)
         {

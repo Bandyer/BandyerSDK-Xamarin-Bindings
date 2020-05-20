@@ -171,28 +171,63 @@ namespace BandyerDemo.Droid
             }
         }
 
-        public void StartCall(List<string> userAliases)
+        public void StartCall(List<string> userAliases, List<BandyerSdkForms.CallCapability> callCapabilities, List<BandyerSdkForms.InCallCapability> inCallCapabilities, List<BandyerSdkForms.InCallOptions> inCallOptions)
         {
-            startCallWithUserAliases(userAliases);
+            startCallWithUserAliases(userAliases, callCapabilities, inCallCapabilities, inCallOptions);
         }
 
-        void startCallWithUserAliases(List<string> userAliases)
+        void startCallWithUserAliases(List<string> userAliases, List<BandyerSdkForms.CallCapability> callCapabilities, List<BandyerSdkForms.InCallCapability> inCallCapabilities, List<BandyerSdkForms.InCallOptions> inCallOptions)
         {
             CallCapabilities capabilities = new CallCapabilities();
-            capabilities.WithWhiteboard();
-            capabilities.WithFileSharing();
-            capabilities.WithChat();
-            capabilities.WithScreenSharing();
+            if (inCallCapabilities.Contains(BandyerSdkForms.InCallCapability.Whiteboard))
+            {
+                capabilities.WithWhiteboard();
+            }
+            if (inCallCapabilities.Contains(BandyerSdkForms.InCallCapability.FileSharing))
+            {
+                capabilities.WithFileSharing();
+            }
+            if (inCallCapabilities.Contains(BandyerSdkForms.InCallCapability.Chat))
+            {
+                capabilities.WithChat();
+            }
+            if (inCallCapabilities.Contains(BandyerSdkForms.InCallCapability.ScreenSharing))
+            {
+                capabilities.WithScreenSharing();
+            }
 
             CallOptions options = new CallOptions();
-            options.WithRecordingEnabled(); // if the call started should be recorded
-            options.WithBackCameraAsDefault(); // if the call should start with back camera
-            options.WithProximitySensorDisabled(); // if the proximity sensor should be disabled during calls
+            if (inCallOptions.Contains(BandyerSdkForms.InCallOptions.CallRecording))
+            {
+                options.WithRecordingEnabled(); // if the call started should be recorded
+            }
+            if (inCallOptions.Contains(BandyerSdkForms.InCallOptions.BackCameraAsDefault))
+            {
+                options.WithBackCameraAsDefault(); // if the call should start with back camera
+            }
+            if (inCallOptions.Contains(BandyerSdkForms.InCallOptions.DisableProximitySensor))
+            {
+                options.WithProximitySensorDisabled(); // if the proximity sensor should be disabled during calls
+            }
 
             BandyerIntent.Builder builder = new BandyerIntent.Builder();
-            CallIntentBuilder callIntentBuilder = builder.StartWithAudioVideoCall(MainActivity.Application /* context */ );
-            //builder.StartWithAudioUpgradableCall(application); // audio call that may upgrade into audio&video call
-            //builder.StartWithAudioCall(application);  // audio only call
+            CallIntentBuilder callIntentBuilder;
+            if (callCapabilities.Contains(BandyerSdkForms.CallCapability.AudioVideo))
+            {
+                callIntentBuilder = builder.StartWithAudioVideoCall(MainActivity.Application /* context */ );
+            }
+            else if (callCapabilities.Contains(BandyerSdkForms.CallCapability.AudioUpgradable))
+            {
+                callIntentBuilder = builder.StartWithAudioUpgradableCall(MainActivity.Application); // audio call that may upgrade into audio&video call
+            }
+            else if (callCapabilities.Contains(BandyerSdkForms.CallCapability.AudioOnly))
+            {
+                callIntentBuilder = builder.StartWithAudioCall(MainActivity.Application);  // audio only call
+            }
+            else
+            {
+                callIntentBuilder = builder.StartWithAudioVideoCall(MainActivity.Application /* context */ );
+            }
             CallIntentOptions callIntentOptions = callIntentBuilder.With(userAliases);
             callIntentOptions.WithCapabilities(capabilities); // optional
             callIntentOptions.WithOptions(options); // optional
@@ -223,25 +258,55 @@ namespace BandyerDemo.Droid
             MainActivity.StartActivity(bandyerCallIntent);
         }
 
-        public void StartChat(string userAlias)
+        public void StartChat(string userAlias, List<BandyerSdkForms.ChatWithCallCapability> callCapabilities, List<BandyerSdkForms.InCallCapability> inCallCapabilities, List<BandyerSdkForms.InCallOptions> inCallOptions)
         {
             CallCapabilities capabilities = new CallCapabilities();
-            capabilities.WithWhiteboard();
-            capabilities.WithFileSharing();
-            capabilities.WithChat();
-            capabilities.WithScreenSharing();
+            if (inCallCapabilities.Contains(BandyerSdkForms.InCallCapability.Whiteboard))
+            {
+                capabilities.WithWhiteboard();
+            }
+            if (inCallCapabilities.Contains(BandyerSdkForms.InCallCapability.FileSharing))
+            {
+                capabilities.WithFileSharing();
+            }
+            if (inCallCapabilities.Contains(BandyerSdkForms.InCallCapability.Chat))
+            {
+                capabilities.WithChat();
+            }
+            if (inCallCapabilities.Contains(BandyerSdkForms.InCallCapability.ScreenSharing))
+            {
+                capabilities.WithScreenSharing();
+            }
 
             CallOptions options = new CallOptions();
-            options.WithRecordingEnabled(); // if the call started should be recorded
-            options.WithBackCameraAsDefault(); // if the call should start with back camera
-            options.WithProximitySensorDisabled(); // if the proximity sensor should be disabled during calls
+            if (inCallOptions.Contains(BandyerSdkForms.InCallOptions.CallRecording))
+            {
+                options.WithRecordingEnabled(); // if the call started should be recorded
+            }
+            if (inCallOptions.Contains(BandyerSdkForms.InCallOptions.BackCameraAsDefault))
+            {
+                options.WithBackCameraAsDefault(); // if the call should start with back camera
+            }
+            if (inCallOptions.Contains(BandyerSdkForms.InCallOptions.DisableProximitySensor))
+            {
+                options.WithProximitySensorDisabled(); // if the proximity sensor should be disabled during calls
+            }
 
             BandyerIntent.Builder builder = new BandyerIntent.Builder();
             ChatIntentBuilder chatIntentBuilder = builder.StartWithChat(MainActivity.Application /* context */ );
             ChatIntentOptions chatIntentOptions = chatIntentBuilder.With(userAlias);
-            chatIntentOptions.WithAudioCallCapability(capabilities, options); // optional
-            chatIntentOptions.WithAudioUpgradableCallCapability(capabilities, options); // optionally upgradable to audio video call
-            chatIntentOptions.WithAudioVideoCallCapability(capabilities, options); // optional
+            if (callCapabilities.Contains(BandyerSdkForms.ChatWithCallCapability.AudioOnly))
+            {
+                chatIntentOptions.WithAudioCallCapability(capabilities, options); // optional
+            }
+            if (callCapabilities.Contains(BandyerSdkForms.ChatWithCallCapability.AudioUpgradable))
+            {
+                chatIntentOptions.WithAudioUpgradableCallCapability(capabilities, options); // optionally upgradable to audio video call
+            }
+            if (callCapabilities.Contains(BandyerSdkForms.ChatWithCallCapability.AudioVideo))
+            {
+                chatIntentOptions.WithAudioVideoCallCapability(capabilities, options); // optional
+            }
             BandyerIntent bandyerChatIntent = chatIntentOptions.Build();
 
             MainActivity.StartActivity(bandyerChatIntent);
