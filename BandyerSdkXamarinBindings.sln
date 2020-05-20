@@ -3,11 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Sample", "Sample", "{478218E3-FFA9-496B-B670-DB647348BD22}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BandyerSdk", "BandyerSdk", "{1CA51B75-0178-4BCC-99A8-6F682486D7AD}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BandyerSDK", "BandyerSDK", "{1CA51B75-0178-4BCC-99A8-6F682486D7AD}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BandyerDemo.Android", "Sample\BandyerDemo.Android\BandyerDemo.Android.csproj", "{EC4FE49D-AB40-421D-BEF4-E1421A16E81E}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BandyerDemo.iOS", "Sample\BandyerDemo.iOS\BandyerDemo.iOS.csproj", "{8624ECFF-CEAB-47FF-9AC2-C4A51E3C7D4E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BandyerDemo", "Sample\BandyerDemo\BandyerDemo.csproj", "{A3A6F8D5-5415-47F6-AC97-A43A57D58C07}"
 EndProject
@@ -15,22 +13,23 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Android", "Android", "{4F15
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "iOS", "iOS", "{116DCDDE-3127-4978-87B6-7A4B153B21B4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BandyerSdk.Android", "BandyerSdk\android\BandyerSdk.Android\BandyerSdk.Android.csproj", "{FD685247-E1AB-4CB6-AE68-52DBF5025DD8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bandyer.SDK.Android", "BandyerSDK\Android\Bandyer.SDK.Android\Bandyer.SDK.Android.csproj", "{FD685247-E1AB-4CB6-AE68-52DBF5025DD8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BandyerSdk.AudioSession.Android", "BandyerSdk\android\BandyerSdk.AudioSession.Android\BandyerSdk.AudioSession.Android.csproj", "{EB926D6C-DD92-4EBF-BBDC-99C64114E825}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bandyer.AudioSession.Android", "BandyerSDK\Android\Bandyer.AudioSession.Android\Bandyer.AudioSession.Android.csproj", "{EB926D6C-DD92-4EBF-BBDC-99C64114E825}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BandyerSdk.Chat.Android", "BandyerSdk\android\BandyerSdk.Chat.Android\BandyerSdk.Chat.Android.csproj", "{E8F4F724-09AA-4683-8740-D242215EFBF8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bandyer.Chat.Android", "BandyerSDK\Android\Bandyer.Chat.Android\Bandyer.Chat.Android.csproj", "{E8F4F724-09AA-4683-8740-D242215EFBF8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BandyerSdk.Common.Android", "BandyerSdk\android\BandyerSdk.Common.Android\BandyerSdk.Common.Android.csproj", "{5904DC1A-3B98-455F-A49A-D4E6FBD24F4C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bandyer.Common.Android", "BandyerSDK\Android\Bandyer.Common.Android\Bandyer.Common.Android.csproj", "{5904DC1A-3B98-455F-A49A-D4E6FBD24F4C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BandyerSdk.CommunicationCenter.Android", "BandyerSdk\android\BandyerSdk.CommunicationCenter.Android\BandyerSdk.CommunicationCenter.Android.csproj", "{5B1C48DF-2460-42CC-92CF-B2FEDCD53462}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bandyer.CommunicationCenter.Android", "BandyerSDK\Android\Bandyer.CommunicationCenter.Android\Bandyer.CommunicationCenter.Android.csproj", "{5B1C48DF-2460-42CC-92CF-B2FEDCD53462}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BandyerSdk.CoreAV.Android", "BandyerSdk\android\BandyerSdk.CoreAV.Android\BandyerSdk.CoreAV.Android.csproj", "{BC59CE10-301E-4A14-AC86-E2275BC9C5DE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bandyer.CoreAV.Android", "BandyerSDK\Android\Bandyer.CoreAV.Android\Bandyer.CoreAV.Android.csproj", "{BC59CE10-301E-4A14-AC86-E2275BC9C5DE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BandyerSdk.Design.Android", "BandyerSdk\android\BandyerSdk.Design.Android\BandyerSdk.Design.Android.csproj", "{41B9F262-1C9E-4968-8502-B8CD39C11B54}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bandyer.Design.Android", "BandyerSDK\Android\Bandyer.Design.Android\Bandyer.Design.Android.csproj", "{41B9F262-1C9E-4968-8502-B8CD39C11B54}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bandyer.SDK.iOS", "BandyerSDK\iOS\Bandyer.SDK.iOS\Bandyer.SDK.iOS.csproj", "{D0448F8C-C62A-4103-B166-45C364ACD42E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BandyerSDK.iOS", "BandyerSdk\ios\BandyerSdk.iOS\BandyerSdk.iOS.csproj", "{D0448F8C-C62A-4103-B166-45C364ACD42E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BandyerDemo.iOS", "Sample\BandyerDemo.iOS\BandyerDemo.iOS.csproj", "{8624ECFF-CEAB-47FF-9AC2-C4A51E3C7D4E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -54,18 +53,6 @@ Global
 		{EC4FE49D-AB40-421D-BEF4-E1421A16E81E}.Debug|iPhone.Build.0 = Debug|Any CPU
 		{EC4FE49D-AB40-421D-BEF4-E1421A16E81E}.Release|iPhone.ActiveCfg = Release|Any CPU
 		{EC4FE49D-AB40-421D-BEF4-E1421A16E81E}.Release|iPhone.Build.0 = Release|Any CPU
-		{8624ECFF-CEAB-47FF-9AC2-C4A51E3C7D4E}.Debug|Any CPU.ActiveCfg = Debug|iPhoneSimulator
-		{8624ECFF-CEAB-47FF-9AC2-C4A51E3C7D4E}.Debug|Any CPU.Build.0 = Debug|iPhoneSimulator
-		{8624ECFF-CEAB-47FF-9AC2-C4A51E3C7D4E}.Release|Any CPU.ActiveCfg = Release|iPhoneSimulator
-		{8624ECFF-CEAB-47FF-9AC2-C4A51E3C7D4E}.Release|Any CPU.Build.0 = Release|iPhoneSimulator
-		{8624ECFF-CEAB-47FF-9AC2-C4A51E3C7D4E}.Debug|iPhoneSimulator.ActiveCfg = Debug|iPhoneSimulator
-		{8624ECFF-CEAB-47FF-9AC2-C4A51E3C7D4E}.Debug|iPhoneSimulator.Build.0 = Debug|iPhoneSimulator
-		{8624ECFF-CEAB-47FF-9AC2-C4A51E3C7D4E}.Release|iPhoneSimulator.ActiveCfg = Release|iPhoneSimulator
-		{8624ECFF-CEAB-47FF-9AC2-C4A51E3C7D4E}.Release|iPhoneSimulator.Build.0 = Release|iPhoneSimulator
-		{8624ECFF-CEAB-47FF-9AC2-C4A51E3C7D4E}.Debug|iPhone.ActiveCfg = Debug|iPhone
-		{8624ECFF-CEAB-47FF-9AC2-C4A51E3C7D4E}.Debug|iPhone.Build.0 = Debug|iPhone
-		{8624ECFF-CEAB-47FF-9AC2-C4A51E3C7D4E}.Release|iPhone.ActiveCfg = Release|iPhone
-		{8624ECFF-CEAB-47FF-9AC2-C4A51E3C7D4E}.Release|iPhone.Build.0 = Release|iPhone
 		{A3A6F8D5-5415-47F6-AC97-A43A57D58C07}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{A3A6F8D5-5415-47F6-AC97-A43A57D58C07}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A3A6F8D5-5415-47F6-AC97-A43A57D58C07}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -306,10 +293,21 @@ Global
 		{D0448F8C-C62A-4103-B166-45C364ACD42E}.Debug|iPhone.Build.0 = Debug|Any CPU
 		{D0448F8C-C62A-4103-B166-45C364ACD42E}.Release|iPhone.ActiveCfg = Release|Any CPU
 		{D0448F8C-C62A-4103-B166-45C364ACD42E}.Release|iPhone.Build.0 = Release|Any CPU
+		{8624ECFF-CEAB-47FF-9AC2-C4A51E3C7D4E}.Debug|Any CPU.ActiveCfg = Debug|iPhoneSimulator
+		{8624ECFF-CEAB-47FF-9AC2-C4A51E3C7D4E}.Debug|Any CPU.Build.0 = Debug|iPhoneSimulator
+		{8624ECFF-CEAB-47FF-9AC2-C4A51E3C7D4E}.Release|Any CPU.ActiveCfg = Release|iPhoneSimulator
+		{8624ECFF-CEAB-47FF-9AC2-C4A51E3C7D4E}.Release|Any CPU.Build.0 = Release|iPhoneSimulator
+		{8624ECFF-CEAB-47FF-9AC2-C4A51E3C7D4E}.Debug|iPhoneSimulator.ActiveCfg = Debug|iPhoneSimulator
+		{8624ECFF-CEAB-47FF-9AC2-C4A51E3C7D4E}.Debug|iPhoneSimulator.Build.0 = Debug|iPhoneSimulator
+		{8624ECFF-CEAB-47FF-9AC2-C4A51E3C7D4E}.Release|iPhoneSimulator.ActiveCfg = Release|iPhoneSimulator
+		{8624ECFF-CEAB-47FF-9AC2-C4A51E3C7D4E}.Release|iPhoneSimulator.Build.0 = Release|iPhoneSimulator
+		{8624ECFF-CEAB-47FF-9AC2-C4A51E3C7D4E}.Debug|iPhone.ActiveCfg = Debug|iPhone
+		{8624ECFF-CEAB-47FF-9AC2-C4A51E3C7D4E}.Debug|iPhone.Build.0 = Debug|iPhone
+		{8624ECFF-CEAB-47FF-9AC2-C4A51E3C7D4E}.Release|iPhone.ActiveCfg = Release|iPhone
+		{8624ECFF-CEAB-47FF-9AC2-C4A51E3C7D4E}.Release|iPhone.Build.0 = Release|iPhone
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{EC4FE49D-AB40-421D-BEF4-E1421A16E81E} = {478218E3-FFA9-496B-B670-DB647348BD22}
-		{8624ECFF-CEAB-47FF-9AC2-C4A51E3C7D4E} = {478218E3-FFA9-496B-B670-DB647348BD22}
 		{A3A6F8D5-5415-47F6-AC97-A43A57D58C07} = {478218E3-FFA9-496B-B670-DB647348BD22}
 		{4F152E7D-4101-4CF1-8B6D-49EA83083BEF} = {1CA51B75-0178-4BCC-99A8-6F682486D7AD}
 		{116DCDDE-3127-4978-87B6-7A4B153B21B4} = {1CA51B75-0178-4BCC-99A8-6F682486D7AD}
@@ -332,5 +330,6 @@ Global
 		{8893CFF1-DD69-4FA2-9B65-9B1DFBE6EA30} = {4F152E7D-4101-4CF1-8B6D-49EA83083BEF}
 		{08B5EE2D-C396-4B5E-B86B-EBD43F90E6F1} = {4F152E7D-4101-4CF1-8B6D-49EA83083BEF}
 		{D0448F8C-C62A-4103-B166-45C364ACD42E} = {116DCDDE-3127-4978-87B6-7A4B153B21B4}
+		{8624ECFF-CEAB-47FF-9AC2-C4A51E3C7D4E} = {478218E3-FFA9-496B-B670-DB647348BD22}
 	EndGlobalSection
 EndGlobal

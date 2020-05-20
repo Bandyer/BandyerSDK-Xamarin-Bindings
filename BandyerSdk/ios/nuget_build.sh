@@ -12,6 +12,6 @@
 command -v nuget >/dev/null 2>&1 || { echo >&2 "error: Could not find nuget. Aborting."; exit 1; }
 command -v msbuild >/dev/null 2>&1 || { echo >&2 "error: Could not find msbuild. Aborting."; exit 1; }
 
-nuget restore BandyerSDK.iOS/BandyerSDK.iOS.csproj
-msbuild /p:Configuration=Release /t:Clean /target:Build BandyerSDK.iOS/BandyerSDK.iOS.csproj
-nuget pack BandyerSDK.iOS/BandyerSDK.iOS.nuspec -Verbosity detailed
+nuget restore Bandyer.SDK.iOS/Bandyer.SDK.iOS.csproj
+msbuild /p:Configuration=Release /t:Clean /target:Build Bandyer.SDK.iOS/Bandyer.SDK.iOS.csproj
+nuget pack Bandyer.SDK.iOS/Bandyer.SDK.iOS.nuspec -Verbosity detailed

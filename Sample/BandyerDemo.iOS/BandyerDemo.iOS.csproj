@@ -136,7 +136,7 @@
     </ProjectReference>
     <ProjectReference Include="..\..\BandyerSdk\ios\BandyerSdk.iOS\BandyerSdk.iOS.csproj">
       <Project>{D0448F8C-C62A-4103-B166-45C364ACD42E}</Project>
-      <Name>BandyerSDK.iOS</Name>
+      <Name>Bandyer.SDK.iOS</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

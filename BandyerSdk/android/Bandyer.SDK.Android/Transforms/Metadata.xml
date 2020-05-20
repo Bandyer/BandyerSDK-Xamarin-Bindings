@@ -1,0 +1,80 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<metadata>
+    <!--    <remove-node path="/api/package[@name='com.bandyer.android_sdk.call.model']/interface[@name='CallInfo']/method[@name='getCallees' and count(parameter)=0]" />-->
+    <!--<attr path="/api/package[@name='com.bandyer.android_sdk.call.model']/class[@name='CallInfoImpl']/method[@name='getCallees' and count(parameter)=0]" name="managedReturn">Java.Lang.IIterable</attr>-->
+    <!--    <remove-node path="/api/package[@name='com.bandyer.android_sdk.call.model']/class[@name='CallInfoImpl']/method[@name='getCallees' and count(parameter)=0]" />-->
+    <attr path="/api/package[@name='com.bandyer.android_sdk.call']/class[@name='CallModuleImpl']/method[@name='getOngoingCall' and count(parameter)=0]" name="managedReturn">Com.Bandyer.Android_sdk.Intent.Call.ICall</attr>
+    <remove-node path="/api/package[@name='com.bandyer.android_sdk.call']/class[@name='CallModuleImpl']/method[@name='setReconnectionAttempts' and count(parameter)=1 and parameter[1][@type='int']]" />
+    <remove-node path="/api/package[@name='com.bandyer.android_sdk.chat']/class[@name='ChatModuleImpl']/method[@name='setReconnectionAttempts' and count(parameter)=1 and parameter[1][@type='int']]" />
+    <remove-node path="/api/package[@name='com.bandyer.android_sdk.notification']/class[@name='BandyerNotificator']" />
+    <remove-node path="/api/package[@name='com.bandyer.core_av.utils.gson']/class[@name='AbstractSignalingMessageSerializer']" />
+    <remove-node path="/api/package[@name='com.bandyer.core_av.utils.gson']/class[@name='AbstractSignalingMessageDeserializer']" />
+    <attr path="/api/package[@name='com.bandyer.android_sdk.file_sharing.file_sharing_center']/class[@name='Environment.Configuration']/method[@name='production' and count(parameter)=0]" name="managedReturn">
+        Com.Bandyer.Android_sdk.File_sharing.File_sharing_center.Environment
+    </attr>
+    <attr path="/api/package[@name='com.bandyer.android_sdk.file_sharing.file_sharing_center']/class[@name='Environment.Configuration']/method[@name='sandbox' and count(parameter)=0]" name="managedReturn">
+        Com.Bandyer.Android_sdk.File_sharing.File_sharing_center.Environment
+    </attr>
+    <attr path="/api/package[@name='com.bandyer.android_sdk']/interface[@name='Environment']/method[@name='getFileSharingEnvironment' and count(parameter)=0]" name="managedReturn">
+        Com.Bandyer.Android_sdk.File_sharing.File_sharing_center.Environment
+    </attr>
+    <attr path="/api/package[@name='com.bandyer.android_sdk']/class[@name='Environment.DefaultImpls']/method[@name='getFileSharingEnvironment' and count(parameter)=1 and parameter[1][@type='com.bandyer.android_sdk.Environment']]" name="managedReturn">
+         Com.Bandyer.Android_sdk.File_sharing.File_sharing_center.Environment
+    </attr>
+    <attr path="/api/package[@name='com.bandyer.android_sdk']/class[@name='EnvironmentImpl']/method[@name='getFileSharingEnvironment' and count(parameter)=0]" name="managedReturn">
+         Com.Bandyer.Android_sdk.File_sharing.File_sharing_center.Environment
+    </attr>
+    <attr path="/api/package[@name='com.bandyer.android_sdk.screen_sharing.screen_sharing_center']/class[@name='Environment.Configuration']/method[@name='production' and count(parameter)=0]" name="managedReturn">
+        Com.Bandyer.Android_sdk.Screen_sharing.Screen_sharing_center.Environment
+    </attr>
+    <attr path="/api/package[@name='com.bandyer.android_sdk.screen_sharing.screen_sharing_center']/class[@name='Environment.Configuration']/method[@name='sandbox' and count(parameter)=0]" name="managedReturn">
+        Com.Bandyer.Android_sdk.Screen_sharing.Screen_sharing_center.Environment
+    </attr>
+    <attr path="/api/package[@name='com.bandyer.android_sdk']/interface[@name='Environment']/method[@name='getScreenSharingEnvironment' and count(parameter)=0]" name="managedReturn">
+        Com.Bandyer.Android_sdk.Screen_sharing.Screen_sharing_center.Environment
+    </attr>
+    <attr path="/api/package[@name='com.bandyer.android_sdk']/class[@name='Environment.DefaultImpls']/method[@name='getScreenSharingEnvironment' and count(parameter)=1 and parameter[1][@type='com.bandyer.android_sdk.Environment']]" name="managedReturn">
+         Com.Bandyer.Android_sdk.Screen_sharing.Screen_sharing_center.Environment
+    </attr>
+    <attr path="/api/package[@name='com.bandyer.android_sdk']/class[@name='EnvironmentImpl']/method[@name='getScreenSharingEnvironment' and count(parameter)=0]" name="managedReturn">
+          Com.Bandyer.Android_sdk.Screen_sharing.Screen_sharing_center.Environment
+    </attr>
+    <attr path="/api/package[@name='com.bandyer.android_sdk.whiteboard.collaboration_center']/class[@name='Environment.Configuration']/method[@name='production' and count(parameter)=0]" name="managedReturn">
+        Com.Bandyer.Android_sdk.Whiteboard.Collaboration_center.Environment
+    </attr>
+    <attr path="/api/package[@name='com.bandyer.android_sdk.whiteboard.collaboration_center']/class[@name='Environment.Configuration']/method[@name='sandbox' and count(parameter)=0]" name="managedReturn">
+        Com.Bandyer.Android_sdk.Whiteboard.Collaboration_center.Environment
+    </attr>
+    <attr path="/api/package[@name='com.bandyer.android_sdk']/interface[@name='Environment']/method[@name='getWhiteboardEnvironment' and count(parameter)=0]" name="managedReturn">
+        Com.Bandyer.Android_sdk.Whiteboard.Collaboration_center.Environment
+    </attr>
+    <attr path="/api/package[@name='com.bandyer.android_sdk']/class[@name='Environment.DefaultImpls']/method[@name='getWhiteboardEnvironment' and count(parameter)=1 and parameter[1][@type='com.bandyer.android_sdk.Environment']]" name="managedReturn">
+          Com.Bandyer.Android_sdk.Whiteboard.Collaboration_center.Environment
+    </attr>
+    <attr path="/api/package[@name='com.bandyer.android_sdk']/class[@name='EnvironmentImpl']/method[@name='getWhiteboardEnvironment' and count(parameter)=0]" name="managedReturn">
+          Com.Bandyer.Android_sdk.Whiteboard.Collaboration_center.Environment
+    </attr>
+    <attr path="/api/package[@name='com.bandyer.android_sdk']/class[@name='Environment.DefaultImpls']/method[@name='getChatEnvironment' and count(parameter)=1 and parameter[1][@type='com.bandyer.android_sdk.Environment']]" name="managedReturn">Com.Bandyer.Android_sdk.IEnvironment</attr>
+    <attr path="/api/package[@name='com.bandyer.android_sdk']/interface[@name='Environment']/method[@name='getChatEnvironment' and count(parameter)=0]" name="managedReturn">Com.Bandyer.Android_sdk.IEnvironment</attr>
+    <attr path="/api/package[@name='com.bandyer.android_sdk']/class[@name='EnvironmentImpl']/method[@name='getChatEnvironment' and count(parameter)=0]" name="managedReturn">Com.Bandyer.Android_sdk.IEnvironment</attr>
+    <remove-node path="/api/package[@name='com.bandyer.android_sdk.file_sharing.file_sharing_center.utils']/class[@name='FileSharingCenterLogger']/method[@name='info' and count(parameter)=2 and parameter[1][@type='java.lang.String'] and parameter[2][@type='java.lang.String']]" />
+    <remove-node path="/api/package[@name='com.bandyer.android_sdk.file_sharing.file_sharing_center.utils']/class[@name='FileSharingCenterLogger']/method[@name='warn' and count(parameter)=2 and parameter[1][@type='java.lang.String'] and parameter[2][@type='java.lang.String']]" />
+    <remove-node path="/api/package[@name='com.bandyer.android_sdk.file_sharing.file_sharing_center.utils']/class[@name='FileSharingCenterLogger']/method[@name='verbose' and count(parameter)=2 and parameter[1][@type='java.lang.String'] and parameter[2][@type='java.lang.String']]" />
+    <remove-node path="/api/package[@name='com.bandyer.android_sdk.file_sharing.file_sharing_center.utils']/class[@name='FileSharingCenterLogger']/method[@name='debug' and count(parameter)=2 and parameter[1][@type='java.lang.String'] and parameter[2][@type='java.lang.String']]" />
+    <remove-node path="/api/package[@name='com.bandyer.android_sdk.file_sharing.file_sharing_center.utils']/class[@name='FileSharingCenterLogger']/method[@name='error' and count(parameter)=2 and parameter[1][@type='java.lang.String'] and parameter[2][@type='java.lang.String']]" />
+    <remove-node path="/api/package[@name='com.bandyer.android_sdk.utils']/class[@name='BandyerSDKLogger']/method[@name='debug' and count(parameter)=2 and parameter[1][@type='java.lang.String'] and parameter[2][@type='java.lang.String']]" />
+    <remove-node path="/api/package[@name='com.bandyer.android_sdk.utils']/class[@name='BandyerSDKLogger']/method[@name='info' and count(parameter)=2 and parameter[1][@type='java.lang.String'] and parameter[2][@type='java.lang.String']]" />
+    <remove-node path="/api/package[@name='com.bandyer.android_sdk.utils']/class[@name='BandyerSDKLogger']/method[@name='warn' and count(parameter)=2 and parameter[1][@type='java.lang.String'] and parameter[2][@type='java.lang.String']]" />
+    <remove-node path="/api/package[@name='com.bandyer.android_sdk.utils']/class[@name='BandyerSDKLogger']/method[@name='verbose' and count(parameter)=2 and parameter[1][@type='java.lang.String'] and parameter[2][@type='java.lang.String']]" />
+    <remove-node path="/api/package[@name='com.bandyer.android_sdk.utils']/class[@name='BandyerSDKLogger']/method[@name='error' and count(parameter)=2 and parameter[1][@type='java.lang.String'] and parameter[2][@type='java.lang.String']]" />
+    <remove-node path="/api/package[@name='com.bandyer.android_sdk.whiteboard.collaboration_center.utils']/class[@name='CollabCenterLogger']/method[@name='debug' and count(parameter)=2 and parameter[1][@type='java.lang.String'] and parameter[2][@type='java.lang.String']]" />
+    <remove-node path="/api/package[@name='com.bandyer.android_sdk.whiteboard.collaboration_center.utils']/class[@name='CollabCenterLogger']/method[@name='info' and count(parameter)=2 and parameter[1][@type='java.lang.String'] and parameter[2][@type='java.lang.String']]" />
+    <remove-node path="/api/package[@name='com.bandyer.android_sdk.whiteboard.collaboration_center.utils']/class[@name='CollabCenterLogger']/method[@name='warn' and count(parameter)=2 and parameter[1][@type='java.lang.String'] and parameter[2][@type='java.lang.String']]" />
+    <remove-node path="/api/package[@name='com.bandyer.android_sdk.whiteboard.collaboration_center.utils']/class[@name='CollabCenterLogger']/method[@name='verbose' and count(parameter)=2 and parameter[1][@type='java.lang.String'] and parameter[2][@type='java.lang.String']]" />
+    <remove-node path="/api/package[@name='com.bandyer.android_sdk.whiteboard.collaboration_center.utils']/class[@name='CollabCenterLogger']/method[@name='error' and count(parameter)=2 and parameter[1][@type='java.lang.String'] and parameter[2][@type='java.lang.String']]" />
+    <remove-node path="/api/package[@name='com.bandyer.android_sdk.screen_sharing.screen_sharing_center.utils']/class[@name='ScreenSharingCenterLogger']/method[@name='info' and count(parameter)=2 and parameter[1][@type='java.lang.String'] and parameter[2][@type='java.lang.String']]" />
+    <remove-node path="/api/package[@name='com.bandyer.android_sdk.screen_sharing.screen_sharing_center.utils']/class[@name='ScreenSharingCenterLogger']/method[@name='warn' and count(parameter)=2 and parameter[1][@type='java.lang.String'] and parameter[2][@type='java.lang.String']]" />
+    <remove-node path="/api/package[@name='com.bandyer.android_sdk.screen_sharing.screen_sharing_center.utils']/class[@name='ScreenSharingCenterLogger']/method[@name='error' and count(parameter)=2 and parameter[1][@type='java.lang.String'] and parameter[2][@type='java.lang.String']]" />
+    <remove-node path="/api/package[@name='com.bandyer.android_sdk.screen_sharing.screen_sharing_center.utils']/class[@name='ScreenSharingCenterLogger']/method[@name='verbose' and count(parameter)=2 and parameter[1][@type='java.lang.String'] and parameter[2][@type='java.lang.String']]" />
+    <remove-node path="/api/package[@name='com.bandyer.android_sdk.screen_sharing.screen_sharing_center.utils']/class[@name='ScreenSharingCenterLogger']/method[@name='debug' and count(parameter)=2 and parameter[1][@type='java.lang.String'] and parameter[2][@type='java.lang.String']]" />
+</metadata>
