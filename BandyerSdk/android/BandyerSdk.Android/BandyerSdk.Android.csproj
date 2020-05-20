@@ -74,10 +74,6 @@
             <Project>{BC59CE10-301E-4A14-AC86-E2275BC9C5DE}</Project>
             <Name>BandyerSdk.CoreAV.Android</Name>
         </ProjectReference>
-        <ProjectReference Include="..\Mikepenz.FastAdapter.Android\Mikepenz.FastAdapter.Android.csproj">
-            <Project>{8893CFF1-DD69-4FA2-9B65-9B1DFBE6EA30}</Project>
-            <Name>Mikepenz.FastAdapter.Android</Name>
-        </ProjectReference>
         <ProjectReference Include="..\BandyerSdk.CommunicationCenter.Android\BandyerSdk.CommunicationCenter.Android.csproj">
           <Project>{5B1C48DF-2460-42CC-92CF-B2FEDCD53462}</Project>
           <Name>BandyerSdk.CommunicationCenter.Android</Name>
