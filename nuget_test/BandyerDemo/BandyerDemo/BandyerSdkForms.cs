@@ -193,7 +193,7 @@ namespace BandyerDemo
             }
             else if (callPlatform == "android")
             {
-                push_provider = "firebase";
+                push_provider = "";
                 platform = "android";
             }
 
