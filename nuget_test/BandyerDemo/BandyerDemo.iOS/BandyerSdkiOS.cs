@@ -621,11 +621,13 @@ namespace BandyerDemo.iOS
         public void WillHide(BDKCallBannerController controller, BDKCallBannerView banner)
         {
             Debug.Print("IBDKCallBannerControllerDelegate WillHide " + controller + " " + banner);
+            UIApplication.SharedApplication.StatusBarHidden = false;
         }
         [Export("callBannerController:willShow:")]
         public void WillShow(BDKCallBannerController controller, BDKCallBannerView banner)
         {
             Debug.Print("IBDKCallBannerControllerDelegate WillShow " + controller + " " + banner);
+            UIApplication.SharedApplication.StatusBarHidden = true;
         }
         #endregion
     }
