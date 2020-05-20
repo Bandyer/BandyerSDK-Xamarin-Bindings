@@ -30,7 +30,7 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BandyerSdk.Design.Android", "BandyerSdk\android\BandyerSdk.Design.Android\BandyerSdk.Design.Android.csproj", "{41B9F262-1C9E-4968-8502-B8CD39C11B54}"
 EndProject
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BandyerSdk.iOS", "BandyerSdk\ios\BandyerSdk.iOS\BandyerSdk.iOS.csproj", "{D0448F8C-C62A-4103-B166-45C364ACD42E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BandyerSDK.iOS", "BandyerSdk\ios\BandyerSdk.iOS\BandyerSdk.iOS.csproj", "{D0448F8C-C62A-4103-B166-45C364ACD42E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

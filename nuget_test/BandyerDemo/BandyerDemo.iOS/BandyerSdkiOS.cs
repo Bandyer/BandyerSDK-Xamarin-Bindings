@@ -18,7 +18,7 @@ using Intents;
 namespace BandyerDemo.iOS
 {
     public class BandyerSdkiOS : NSObject
-        , IBandyerSdk
+        , BandyerSdkForms.IBandyerSdk
         , IBCXCallClientObserver
         , IBDKCallWindowDelegate
         , IBCHChatClientObserver
@@ -27,8 +27,6 @@ namespace BandyerDemo.iOS
         , IBCHMessageNotificationControllerDelegate
         , IBDKCallBannerControllerDelegate
     {
-        public const string AppId = "mAppId_b78542f60f697c8a56a13e579f2e66d0378ba6b3336fa75f961c6efb0e6b";
-
         private static BandyerSdkiOS instance = null;
         public BandyerSdkiOS()
         {
@@ -42,6 +40,7 @@ namespace BandyerDemo.iOS
         private NSUrl webPageUrl;
         private bool shouldStartWindowCallFromWebPageUrl = false;
         private bool isSdkInitialized = false;
+        private List<BandyerSdkForms.User> usersDetails;
 
         public static void InitSdk()
         {
@@ -65,7 +64,7 @@ namespace BandyerDemo.iOS
 
                 // CALLKIT
                 config.CallKitEnabled = true;
-                config.NativeUILocalizedName = "My wonderful app";
+                config.NativeUILocalizedName = "BanyerDemo App";
                 //config.NativeUIRingToneSound = "MyRingtoneSound";
                 UIImage callKitIconImage = UIImage.FromBundle("bandyer_logo");
                 config.NativeUITemplateIconImageData = callKitIconImage.AsPNG();
@@ -73,7 +72,7 @@ namespace BandyerDemo.iOS
                 config.HandleProvider = new BandyerSdkBCXHandleProvider();
                 // CALLKIT
 
-                BandyerSDK.Instance().InitializeWithApplicationId(AppId, config);
+                BandyerSDK.Instance().InitializeWithApplicationId(BandyerSdkForms.AppId, config);
             }
         }
 
@@ -172,17 +171,38 @@ namespace BandyerDemo.iOS
             BandyerSDK.Instance().ChatClient.Start(currentUserAlias);
         }
 
-        public void StartCall(string userAlias)
+        public void SetUserDetails(List<BandyerSdkForms.User> usersDetails)
         {
-            var callee = new string[] { userAlias };
-            var intent = BDKMakeCallIntent.IntentWithCallee(callee, BDKCallType.AudioVideoCallType);
+            this.usersDetails = usersDetails;
+        }
+
+        public void StartCall(List<string> userAliases, List<BandyerSdkForms.CallCapability> callCapabilities, List<BandyerSdkForms.InCallCapability> inCallCapabilities, List<BandyerSdkForms.InCallOptions> inCallOptions)
+        {
+            var callee = userAliases.ToArray();
+            BDKMakeCallIntent intent;
+            if (callCapabilities.Contains(BandyerSdkForms.CallCapability.AudioVideo))
+            {
+                intent = BDKMakeCallIntent.IntentWithCallee(callee, BDKCallType.AudioVideoCallType);
+            }
+            else if (callCapabilities.Contains(BandyerSdkForms.CallCapability.AudioUpgradable))
+            {
+                intent = BDKMakeCallIntent.IntentWithCallee(callee, BDKCallType.AudioUpgradableCallType);
+            }
+            else if (callCapabilities.Contains(BandyerSdkForms.CallCapability.AudioOnly))
+            {
+                intent = BDKMakeCallIntent.IntentWithCallee(callee, BDKCallType.AudioOnlyCallType);
+            }
+            else
+            {
+                intent = BDKMakeCallIntent.IntentWithCallee(callee, BDKCallType.AudioVideoCallType);
+            }
             startWindowCall(intent);
         }
 
-        public void StartChat(string userAlias)
+        public void StartChat(string userAlias, List<BandyerSdkForms.ChatWithCallCapability> callCapabilities, List<BandyerSdkForms.InCallCapability> inCallCapabilities, List<BandyerSdkForms.InCallOptions> inCallOptions)
         {
             var intent = BCHOpenChatIntent.OpenChatWith(userAlias);
-            startChatController(intent);
+            startChatController(intent, callCapabilities);
         }
 
         public void OnPageAppearing()
@@ -206,8 +226,23 @@ namespace BandyerDemo.iOS
 
         public void OnPageDisappearing()
         {
-            messageNotificationController.Hide();
-            callBannerController.Hide();
+            if (messageNotificationController != null)
+            {
+                messageNotificationController.Hide();
+            }
+            if (callBannerController != null)
+            {
+                callBannerController.Hide();
+            }
+        }
+
+        public void Stop()
+        {
+            BandyerSDK.Instance().CallClient.Stop();
+            BandyerSDK.Instance().ChatClient.Stop();
+            messageNotificationController = null;
+            callBannerController = null;
+            isSdkInitialized = false;
         }
         #endregion
 
@@ -283,12 +318,28 @@ namespace BandyerDemo.iOS
             });
         }
 
-        void startChatController(BCHOpenChatIntent intent)
+        void startChatController(BCHOpenChatIntent intent, List<BandyerSdkForms.ChatWithCallCapability> callCapabilities)
         {
             var rootVC = UIApplication.SharedApplication.KeyWindow.RootViewController;
             var items = userInfoFetcherItems();
             var userInfoFetcher = new BandyerSdkBDKUserInfoFetcher(items);
-            var configuration = new BCHChannelViewControllerConfiguration(audioButton: true, videoButton: true, userInfoFetcher: userInfoFetcher);
+            BCHChannelViewControllerConfiguration configuration;
+            if (callCapabilities.Contains(BandyerSdkForms.ChatWithCallCapability.AudioVideo))
+            {
+                configuration = new BCHChannelViewControllerConfiguration(audioButton: true, videoButton: true, userInfoFetcher: userInfoFetcher);
+            }
+            else if (callCapabilities.Contains(BandyerSdkForms.ChatWithCallCapability.AudioUpgradable))
+            {
+                configuration = new BCHChannelViewControllerConfiguration(audioButton: true, videoButton: false, userInfoFetcher: userInfoFetcher);
+            }
+            else if (callCapabilities.Contains(BandyerSdkForms.ChatWithCallCapability.AudioOnly))
+            {
+                configuration = new BCHChannelViewControllerConfiguration(audioButton: true, videoButton: false, userInfoFetcher: userInfoFetcher);
+            }
+            else
+            {
+                configuration = new BCHChannelViewControllerConfiguration(audioButton: false, videoButton: false, userInfoFetcher: userInfoFetcher);
+            }
             var channelVC = new BCHChannelViewController();
             channelVC.Delegate = this;
             channelVC.Configuration = configuration;
@@ -299,12 +350,15 @@ namespace BandyerDemo.iOS
         List<BDKUserInfoDisplayItem> userInfoFetcherItems()
         {
             var items = new List<BDKUserInfoDisplayItem>();
-            var item = new BDKUserInfoDisplayItem("alias");
-            item.FirstName = "firstName";
-            item.LastName = "lastName";
-            item.Email = "email@email.com";
-            item.ImageURL = new NSUrl("https://static.bandyer.com/corporate/logos/logo_bandyer_only_name.png");
-            items.Add(item);
+            foreach (var userDetail in usersDetails)
+            {
+                var item = new BDKUserInfoDisplayItem(userDetail.Alias);
+                item.FirstName = userDetail.FirstName;
+                item.LastName = userDetail.LastName;
+                item.Email = userDetail.Email;
+                item.ImageURL = new NSUrl(userDetail.ImageUri);
+                items.Add(item);
+            }
             return items;
         }
 
@@ -563,7 +617,7 @@ namespace BandyerDemo.iOS
             Debug.Print("CallWindowOpenChatWith " + window + " " + intent);
             window.DismissCallViewControllerWithCompletion(() => { });
             window.Hidden = true;
-            startChatController(intent);
+            startChatController(intent, new List<BandyerSdkForms.ChatWithCallCapability>() { BandyerSdkForms.ChatWithCallCapability.AudioVideo });
         }
         #endregion
 
@@ -572,7 +626,8 @@ namespace BandyerDemo.iOS
         {
             Debug.Print("DidUpdatePushCredentials " + registry + " " + credentials + " " + type);
             var tokenStr = credentials.Bcx_tokenAsString();
-            registerTokenToBandyer(tokenStr);
+            BandyerSdkForms.SetPushToken(tokenStr);
+            BandyerSdkForms.RegisterTokenToBandyerIos();
         }
         public void DidReceiveIncomingPush(PKPushRegistry registry, PKPushPayload payload, string type)
         {
@@ -580,39 +635,12 @@ namespace BandyerDemo.iOS
         }
         #endregion
 
-        void registerTokenToBandyer(string token)
-        {
-            var urlStr = "https://sandbox.bandyer.com/mobile_push_notifications/rest/device";
-            var jsonStr = "{" +
-                "\"user_alias\":\"client\"" +
-                ",\"app_id\":\"" + BandyerSdkiOS.AppId + "\"" +
-                ",\"push_token\":\"" + token + "\"" +
-                ",\"push_provider\":\"\"" +
-                ",\"platform\":\"ios\"" +
-                "}";
-
-            try
-            {
-                WebClient wc = new WebClient();
-                wc.Headers.Add(HttpRequestHeader.ContentType, "application/json; charset=utf-8");
-                byte[] dataBytes = Encoding.UTF8.GetBytes(jsonStr);
-                byte[] responseBytes = wc.UploadData(new Uri(urlStr), "POST", dataBytes);
-                string responseString = Encoding.UTF8.GetString(responseBytes);
-
-                Debug.Print("UploadData " + responseString);
-            }
-            catch (Exception e)
-            {
-                Debug.Print(e.ToString());
-            }
-        }
-
         #region IBCHMessageNotificationControllerDelegate
         public void DidTouch(BCHMessageNotificationController controller, BCHChatNotification notification)
         {
             Debug.Print("IBCHMessageNotificationControllerDelegate DidTouch " + controller + " " + notification);
             var intent = BCHOpenChatIntent.OpenChatFrom(notification);
-            startChatController(intent);
+            startChatController(intent, new List<BandyerSdkForms.ChatWithCallCapability>() { BandyerSdkForms.ChatWithCallCapability.AudioVideo });
         }
         #endregion
 
@@ -625,11 +653,13 @@ namespace BandyerDemo.iOS
         public void WillHide(BDKCallBannerController controller, BDKCallBannerView banner)
         {
             Debug.Print("IBDKCallBannerControllerDelegate WillHide " + controller + " " + banner);
+            UIApplication.SharedApplication.StatusBarHidden = false;
         }
         [Export("callBannerController:willShow:")]
         public void WillShow(BDKCallBannerController controller, BDKCallBannerView banner)
         {
             Debug.Print("IBDKCallBannerControllerDelegate WillShow " + controller + " " + banner);
+            UIApplication.SharedApplication.StatusBarHidden = true;
         }
         #endregion
     }

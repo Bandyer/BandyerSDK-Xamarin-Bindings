@@ -1,3 +1,17 @@
-nuget restore BandyerSdk.iOS/BandyerSdk.iOS.csproj
-msbuild /p:Configuration=Release /t:Clean /target:Build BandyerSdk.iOS/BandyerSdk.iOS.csproj
-nuget pack BandyerSdk.iOS/BandyerSdk.iOS.nuspec -Verbosity detailed
+#!/usr/bin/env sh
+##########################################################################################
+# Copyright © 2020 Bandyer S.r.l. All Rights Reserved
+# See LICENSE.txt for licensing information
+#
+# Usage: nuget_build.sh 
+#
+# This script creates the NuGet packet for the BandyerSDK iOS binding
+#
+###########################################################################################
+
+command -v nuget >/dev/null 2>&1 || { echo >&2 "error: Could not find nuget. Aborting."; exit 1; }
+command -v msbuild >/dev/null 2>&1 || { echo >&2 "error: Could not find msbuild. Aborting."; exit 1; }
+
+nuget restore BandyerSDK.iOS/BandyerSDK.iOS.csproj
+msbuild /p:Configuration=Release /t:Clean /target:Build BandyerSDK.iOS/BandyerSDK.iOS.csproj
+nuget pack BandyerSDK.iOS/BandyerSDK.iOS.nuspec -Verbosity detailed
