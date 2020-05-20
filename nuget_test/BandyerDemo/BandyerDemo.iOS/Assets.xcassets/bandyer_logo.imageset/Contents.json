@@ -4,7 +4,7 @@
       "idiom": "universal"
     },
     {
-      "filename": "bandyer_logo_blue_bg_smaller.png",
+      "filename": "Bandyer_SplashScreen.png",
       "scale": "1x",
       "idiom": "universal"
     },
@@ -96,6 +96,7 @@
       "idiom": "universal"
     },
     {
+      "filename": "Bandyer_SplashScreen_W.png",
       "appearances": [
         {
           "appearance": "luminosity",
