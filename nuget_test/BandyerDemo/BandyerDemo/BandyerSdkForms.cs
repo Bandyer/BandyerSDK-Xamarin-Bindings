@@ -94,7 +94,16 @@ namespace BandyerDemo
                 FirstName = "John",
                 LastName = "Liu",
                 Email = "client@client.com",
-                ImageUri = "https://github.com/Bandyer/Bandyer-iOS-SDK-Samples/raw/master/Basic-Example/BasicExample/Resources/Men/man_0.jpg",
+                ImageUri = "man_0.jpg",
+            },
+            new User()
+            {
+                Alias = "client2",
+                NickName = "Client2User",
+                FirstName = "Mark",
+                LastName = "Mendoza",
+                Email = "client2@client.com",
+                ImageUri = "man_1.jpg",
             },
             new User()
             {
@@ -103,19 +112,10 @@ namespace BandyerDemo
                 FirstName = "Jack",
                 LastName = "Beck",
                 Email = "web@web.com",
-                ImageUri = "https://github.com/Bandyer/Bandyer-iOS-SDK-Samples/raw/master/Basic-Example/BasicExample/Resources/Men/man_1.jpg",
+                ImageUri = "man_2.jpg",
             },
         };
         public List<User> Callee = new List<User>() {
-            new User()
-            {
-                Alias = "client2",
-                NickName = "Client2User",
-                FirstName = "Mark",
-                LastName = "Mendoza",
-                Email = "client2@client.com",
-                ImageUri = "https://github.com/Bandyer/Bandyer-iOS-SDK-Samples/raw/master/Basic-Example/BasicExample/Resources/Men/man_2.jpg",
-            },
             new User()
             {
                 Alias = "client3",
@@ -123,7 +123,7 @@ namespace BandyerDemo
                 FirstName = "Paul",
                 LastName = "Milner",
                 Email = "client3@client.com",
-                ImageUri = "https://github.com/Bandyer/Bandyer-iOS-SDK-Samples/raw/master/Basic-Example/BasicExample/Resources/Men/man_3.jpg",
+                ImageUri = "man_3.jpg",
             },
             new User()
             {
@@ -132,7 +132,7 @@ namespace BandyerDemo
                 FirstName = "Herbert",
                 LastName = "Sanchez",
                 Email = "web2@web.com",
-                ImageUri = "https://github.com/Bandyer/Bandyer-iOS-SDK-Samples/raw/master/Basic-Example/BasicExample/Resources/Men/man_4.jpg",
+                ImageUri = "man_4.jpg",
             },
             new User()
             {
@@ -141,7 +141,7 @@ namespace BandyerDemo
                 FirstName = "Phil",
                 LastName = "Wiley",
                 Email = "web3@web.com",
-                ImageUri = "https://github.com/Bandyer/Bandyer-iOS-SDK-Samples/raw/master/Basic-Example/BasicExample/Resources/Men/man_5.jpg",
+                ImageUri = "man_5.jpg",
             },
         };
 

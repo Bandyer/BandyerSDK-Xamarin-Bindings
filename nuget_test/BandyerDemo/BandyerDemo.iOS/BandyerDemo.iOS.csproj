@@ -145,7 +145,7 @@
     <PackageReference Include="Xamarin.Forms" Version="4.6.0.800" />
     <PackageReference Include="Xamarin.Essentials" Version="1.5.3.2" />
     <PackageReference Include="Bandyer.SDK.iOS">
-      <Version>1.4.0</Version>
+      <Version>1.4.0.1</Version>
     </PackageReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
@@ -160,6 +160,16 @@
     <BundleResource Include="Resources\launcher_logo.png" />
     <BundleResource Include="Resources\answer.png" />
     <BundleResource Include="Resources\chat.png" />
+    <BundleResource Include="Resources\man_0.jpg" />
+    <BundleResource Include="Resources\man_1.jpg" />
+    <BundleResource Include="Resources\man_2.jpg" />
+    <BundleResource Include="Resources\man_3.jpg" />
+    <BundleResource Include="Resources\man_4.jpg" />
+    <BundleResource Include="Resources\man_5.jpg" />
+    <BundleResource Include="Resources\man_6.jpg" />
+    <BundleResource Include="Resources\man_7.jpg" />
+    <BundleResource Include="Resources\man_8.jpg" />
+    <BundleResource Include="Resources\man_9.jpg" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Assets.xcassets\bandyer_logo.imageset\" />

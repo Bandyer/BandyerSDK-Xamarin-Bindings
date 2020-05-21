@@ -13,6 +13,8 @@ using PushKit;
 using UIKit;
 using Xamarin.Forms;
 using Intents;
+using System.Linq;
+using System.IO;
 
 [assembly: Dependency(typeof(BandyerSdkiOS))]
 namespace BandyerDemo.iOS
@@ -291,7 +293,9 @@ namespace BandyerDemo.iOS
             {
                 Debug.Print("IBDKUserInfoFetcher FetchUsersCompletion " + aliases + " " + completion);
 
-                var arr = NSArray<BDKUserInfoDisplayItem>.FromNSObjects(Items.ToArray());
+                var _items = Items.Where(i => aliases.Contains(i.Alias)).ToList();
+
+                var arr = NSArray<BDKUserInfoDisplayItem>.FromNSObjects(_items.ToArray());
                 completion(arr);
             }
         }
@@ -303,6 +307,9 @@ namespace BandyerDemo.iOS
                 callWindow = new BDKCallWindow();
                 callWindow.CallDelegate = this;
                 var config = new BDKCallViewControllerConfiguration();
+                var items = userInfoFetcherItems();
+                var userInfoFetcher = new BandyerSdkBDKUserInfoFetcher(items);
+                config.UserInfoFetcher = userInfoFetcher;
                 //var url = new NSUrl(NSBundle.MainBundle.PathForResource("video", "mp4"));
                 //config.FakeCapturerFileURL = url;
                 callWindow.SetConfiguration(config);
@@ -356,7 +363,12 @@ namespace BandyerDemo.iOS
                 item.FirstName = userDetail.FirstName;
                 item.LastName = userDetail.LastName;
                 item.Email = userDetail.Email;
-                item.ImageURL = new NSUrl(userDetail.ImageUri);
+                if (!String.IsNullOrEmpty(userDetail.ImageUri))
+                {
+                    var fileExt = Path.GetExtension(userDetail.ImageUri);
+                    var fileName = userDetail.ImageUri.Substring(0, userDetail.ImageUri.Length - fileExt.Length);
+                    item.ImageURL = new NSUrl(NSBundle.PathForResourceAbsolute(fileName, fileExt, NSBundle.MainBundle.ResourcePath));
+                }
                 items.Add(item);
             }
             return items;
