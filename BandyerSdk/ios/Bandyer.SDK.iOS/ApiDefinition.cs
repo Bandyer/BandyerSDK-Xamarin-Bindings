@@ -195,7 +195,7 @@ namespace Bandyer
     {
         // @property (copy, nonatomic) id<BDKUserInfoFetcher> _Null_unspecified userInfoFetcher;
         [Export("userInfoFetcher", ArgumentSemantic.Copy)]
-        BDKUserInfoFetcher UserInfoFetcher { get; set; }
+        IBDKUserInfoFetcher UserInfoFetcher { get; set; }
 
         // @property (copy, nonatomic) NSFormatter * _Null_unspecified callInfoTitleFormatter;
         [Export("callInfoTitleFormatter", ArgumentSemantic.Copy)]
