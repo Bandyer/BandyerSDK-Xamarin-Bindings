@@ -20,7 +20,7 @@ namespace BandyerDemo.iOS
         {
             Rg.Plugins.Popup.Popup.Init();
 
-            Xamarin.Forms.Forms.SetFlags(new string[] { "RadioButton_Experimental" });
+            Xamarin.Forms.Forms.SetFlags(new string[] { "RadioButton_Experimental" , "AppTheme_Experimental" });
             global::Xamarin.Forms.Forms.Init();
             LoadApplication(new App());
 

@@ -31,7 +31,7 @@ namespace BandyerDemo.Droid
             Rg.Plugins.Popup.Popup.Init(this, savedInstanceState);
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
 
-            Xamarin.Forms.Forms.SetFlags(new string[] { "RadioButton_Experimental" });
+            Xamarin.Forms.Forms.SetFlags(new string[] { "RadioButton_Experimental", "AppTheme_Experimental" });
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
             LoadApplication(new App());
 
