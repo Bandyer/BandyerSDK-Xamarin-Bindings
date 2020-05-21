@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using Android.App;
 using Android.Content;
+using Android.Content.Res;
 using Android.Util;
 using BandyerDemo.Droid;
 using Com.Bandyer.Android_sdk;
@@ -471,13 +473,24 @@ namespace BandyerDemo.Droid
                 foreach (string userAlias in userAliases)
                 {
                     var userByAlias = usersDetails.Find(u => u.Alias == userAlias);
-                    details.Add(new UserDetails.Builder(userAlias)
-                      .WithNickName(userByAlias.NickName)
-                      .WithFirstName(userByAlias.FirstName)
-                      .WithLastName(userByAlias.LastName)
-                      .WithEmail(userByAlias.Email)
-                      .WithImageUri(Android.Net.Uri.Parse(userByAlias.ImageUri))
-                      .Build());
+                    var builder = new UserDetails.Builder(userAlias);
+                    builder.WithNickName(userByAlias.NickName);
+                    builder.WithFirstName(userByAlias.FirstName);
+                    builder.WithLastName(userByAlias.LastName);
+                    builder.WithEmail(userByAlias.Email);
+                    if (!System.String.IsNullOrEmpty(userByAlias.ImageUri))
+                    {
+                        var fileExt = Path.GetExtension(userByAlias.ImageUri);
+                        var fileName = userByAlias.ImageUri.Substring(0, userByAlias.ImageUri.Length - fileExt.Length);
+                        var resId = (int)typeof(Resource.Drawable).GetField(fileName).GetValue(null);
+                        builder.WithImageUri(
+                            Android.Net.Uri.Parse(
+                                ContentResolver.SchemeAndroidResource
+                                + "://" + Application.Resources.GetResourcePackageName(resId)
+                                + "/" + Application.Resources.GetResourceTypeName(resId)
+                                + "/" + Application.Resources.GetResourceEntryName(resId)));
+                    }
+                    details.Add(builder.Build());
                 }
                 onUserDetailsListener.Provide(details);
             }
