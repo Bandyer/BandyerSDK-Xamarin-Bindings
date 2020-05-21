@@ -367,7 +367,7 @@ namespace BandyerDemo.iOS
                 {
                     var fileExt = Path.GetExtension(userDetail.ImageUri);
                     var fileName = userDetail.ImageUri.Substring(0, userDetail.ImageUri.Length - fileExt.Length);
-                    item.ImageURL = new NSUrl(NSBundle.PathForResourceAbsolute(fileName, fileExt, NSBundle.MainBundle.ResourcePath));
+                    item.ImageURL = NSBundle.MainBundle.GetUrlForResource(fileName, fileExt);
                 }
                 items.Add(item);
             }
