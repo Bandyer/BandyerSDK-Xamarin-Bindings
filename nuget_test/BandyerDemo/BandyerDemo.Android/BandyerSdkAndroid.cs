@@ -247,9 +247,9 @@ namespace BandyerDemo.Droid
             capabilities.WithScreenSharing();
 
             CallOptions options = new CallOptions();
-            options.WithRecordingEnabled(); // if the call started should be recorded
-            options.WithBackCameraAsDefault(); // if the call should start with back camera
-            options.WithProximitySensorDisabled(); // if the proximity sensor should be disabled during calls
+            //options.WithRecordingEnabled(); // if the call started should be recorded
+            //options.WithBackCameraAsDefault(); // if the call should start with back camera
+            //options.WithProximitySensorDisabled(); // if the proximity sensor should be disabled during calls
 
             BandyerIntent.Builder builder = new BandyerIntent.Builder();
             CallIntentOptions callIntentOptions = builder.StartFromJoinCallUrl(MainActivity.Application, joinUrl);
