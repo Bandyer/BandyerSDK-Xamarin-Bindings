@@ -21,6 +21,8 @@ namespace BandyerDemo
                 checkboxCallRecording.IsEnabled = false;
                 checkboxBackCamera.IsEnabled = false;
                 checkboxDisableProximitySensor.IsEnabled = false;
+                layoutBackCamera.IsVisible = false;
+                layoutDisableProximitySensor.IsVisible = false;
                 labelIos.IsVisible = true;
             }
         }

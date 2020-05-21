@@ -45,15 +45,15 @@
             </StackLayout>
             <Label Text="Select in-call options:"></Label>
             <StackLayout Orientation="Horizontal">
-                <CheckBox VerticalOptions="Center" x:Name="checkboxCallRecording" IsChecked="True"></CheckBox>
+                <CheckBox VerticalOptions="Center" x:Name="checkboxCallRecording" IsChecked="False"></CheckBox>
                 <Label VerticalOptions="Center" Text="Call recording"></Label>
             </StackLayout>
-            <StackLayout Orientation="Horizontal">
-                <CheckBox VerticalOptions="Center" x:Name="checkboxBackCamera" IsChecked="True"></CheckBox>
+            <StackLayout x:Name="layoutBackCamera" Orientation="Horizontal">
+                <CheckBox VerticalOptions="Center" x:Name="checkboxBackCamera" IsChecked="False"></CheckBox>
                 <Label VerticalOptions="Center" Text="Back camera as default (if available)"></Label>
             </StackLayout>
-            <StackLayout Orientation="Horizontal">
-                <CheckBox VerticalOptions="Center" x:Name="checkboxDisableProximitySensor" IsChecked="True"></CheckBox>
+            <StackLayout x:Name="layoutDisableProximitySensor" Orientation="Horizontal">
+                <CheckBox VerticalOptions="Center" x:Name="checkboxDisableProximitySensor" IsChecked="False"></CheckBox>
                 <Label VerticalOptions="Center" Text="Disable proximity sensor"></Label>
             </StackLayout>
             <StackLayout Orientation="Horizontal">
