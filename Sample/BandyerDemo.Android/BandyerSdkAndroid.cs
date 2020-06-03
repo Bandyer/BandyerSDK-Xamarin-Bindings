@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using Android.App;
 using Android.Content;
+using Android.Content.Res;
 using Android.Util;
 using BandyerDemo.Droid;
 using Com.Bandyer.Android_sdk;
@@ -23,7 +25,7 @@ using Xamarin.Forms;
 namespace BandyerDemo.Droid
 {
     public class BandyerSdkAndroid : Java.Lang.Object
-        , IBandyerSdk
+        , BandyerSdkForms.IBandyerSdk
         , IBandyerSDKClientObserver
         , IBandyerModuleObserver
         , ICallUIObserver
@@ -31,12 +33,10 @@ namespace BandyerDemo.Droid
         , IChatUIObserver
         , IChatObserver
     {
-        public const string AppId = "mAppId_b78542f60f697c8a56a13e579f2e66d0378ba6b3336fa75f961c6efb0e6b";
-
         const string TAG = "BandyerDemo";
         public static Android.App.Application Application;
+        private static BandyerSdkUserDetailsProvider userDetailsProvider;
         public static Android.App.Activity MainActivity;
-        private bool isSdkInitialized = false;
         private static string joinUrlFromIntent;
         private static bool shouldStartCall = false;
 
@@ -119,22 +119,17 @@ namespace BandyerDemo.Droid
         }
         #endregion
 
-        public void Dispose()
-        {
-            BandyerSDKClient.Instance.StopListening();
-            BandyerSDKClient.Instance.Dispose();
-        }
-
         public static void InitSdk(Android.App.Application application)
         {
             Application = application;
-            BandyerSDK.Builder builder = new BandyerSDK.Builder(application, AppId)
+            userDetailsProvider = new BandyerSdkUserDetailsProvider();
+            BandyerSDK.Builder builder = new BandyerSDK.Builder(application, BandyerSdkForms.AppId)
                 .SetEnvironment(Com.Bandyer.Android_sdk.Environment.Configuration.Sandbox())
                 .WithCallEnabled(new BandyerSdkCallNotificationListener())
                 .WithFileSharingEnabled()
                 .WithWhiteboardEnabled()
                 .WithChatEnabled()
-                .WithUserDetailsProvider(new BandyerSdkUserDetailsProvider());
+                .WithUserDetailsProvider(userDetailsProvider);
             BandyerSDK.Init(builder);
         }
 
@@ -178,29 +173,64 @@ namespace BandyerDemo.Droid
             }
         }
 
-        public void StartCall(string userAlias)
+        public void StartCall(List<string> userAliases, List<BandyerSdkForms.CallCapability> callCapabilities, List<BandyerSdkForms.InCallCapability> inCallCapabilities, List<BandyerSdkForms.InCallOptions> inCallOptions)
         {
-            startCallWithUserAlias(userAlias);
+            startCallWithUserAliases(userAliases, callCapabilities, inCallCapabilities, inCallOptions);
         }
 
-        void startCallWithUserAlias(string userAlias)
+        void startCallWithUserAliases(List<string> userAliases, List<BandyerSdkForms.CallCapability> callCapabilities, List<BandyerSdkForms.InCallCapability> inCallCapabilities, List<BandyerSdkForms.InCallOptions> inCallOptions)
         {
             CallCapabilities capabilities = new CallCapabilities();
-            capabilities.WithWhiteboard();
-            capabilities.WithFileSharing();
-            capabilities.WithChat();
-            capabilities.WithScreenSharing();
+            if (inCallCapabilities.Contains(BandyerSdkForms.InCallCapability.Whiteboard))
+            {
+                capabilities.WithWhiteboard();
+            }
+            if (inCallCapabilities.Contains(BandyerSdkForms.InCallCapability.FileSharing))
+            {
+                capabilities.WithFileSharing();
+            }
+            if (inCallCapabilities.Contains(BandyerSdkForms.InCallCapability.Chat))
+            {
+                capabilities.WithChat();
+            }
+            if (inCallCapabilities.Contains(BandyerSdkForms.InCallCapability.ScreenSharing))
+            {
+                capabilities.WithScreenSharing();
+            }
 
             CallOptions options = new CallOptions();
-            options.WithRecordingEnabled(); // if the call started should be recorded
-            options.WithBackCameraAsDefault(); // if the call should start with back camera
-            options.WithProximitySensorDisabled(); // if the proximity sensor should be disabled during calls
+            if (inCallOptions.Contains(BandyerSdkForms.InCallOptions.CallRecording))
+            {
+                options.WithRecordingEnabled(); // if the call started should be recorded
+            }
+            if (inCallOptions.Contains(BandyerSdkForms.InCallOptions.BackCameraAsDefault))
+            {
+                options.WithBackCameraAsDefault(); // if the call should start with back camera
+            }
+            if (inCallOptions.Contains(BandyerSdkForms.InCallOptions.DisableProximitySensor))
+            {
+                options.WithProximitySensorDisabled(); // if the proximity sensor should be disabled during calls
+            }
 
             BandyerIntent.Builder builder = new BandyerIntent.Builder();
-            CallIntentBuilder callIntentBuilder = builder.StartWithAudioVideoCall(MainActivity.Application /* context */ );
-            //builder.StartWithAudioUpgradableCall(application); // audio call that may upgrade into audio&video call
-            //builder.StartWithAudioCall(application);  // audio only call
-            CallIntentOptions callIntentOptions = callIntentBuilder.With(new List<string>() { userAlias });
+            CallIntentBuilder callIntentBuilder;
+            if (callCapabilities.Contains(BandyerSdkForms.CallCapability.AudioVideo))
+            {
+                callIntentBuilder = builder.StartWithAudioVideoCall(MainActivity.Application /* context */ );
+            }
+            else if (callCapabilities.Contains(BandyerSdkForms.CallCapability.AudioUpgradable))
+            {
+                callIntentBuilder = builder.StartWithAudioUpgradableCall(MainActivity.Application); // audio call that may upgrade into audio&video call
+            }
+            else if (callCapabilities.Contains(BandyerSdkForms.CallCapability.AudioOnly))
+            {
+                callIntentBuilder = builder.StartWithAudioCall(MainActivity.Application);  // audio only call
+            }
+            else
+            {
+                callIntentBuilder = builder.StartWithAudioVideoCall(MainActivity.Application /* context */ );
+            }
+            CallIntentOptions callIntentOptions = callIntentBuilder.With(userAliases);
             callIntentOptions.WithCapabilities(capabilities); // optional
             callIntentOptions.WithOptions(options); // optional
             BandyerIntent bandyerCallIntent = callIntentOptions.Build();
@@ -217,9 +247,9 @@ namespace BandyerDemo.Droid
             capabilities.WithScreenSharing();
 
             CallOptions options = new CallOptions();
-            options.WithRecordingEnabled(); // if the call started should be recorded
-            options.WithBackCameraAsDefault(); // if the call should start with back camera
-            options.WithProximitySensorDisabled(); // if the proximity sensor should be disabled during calls
+            //options.WithRecordingEnabled(); // if the call started should be recorded
+            //options.WithBackCameraAsDefault(); // if the call should start with back camera
+            //options.WithProximitySensorDisabled(); // if the proximity sensor should be disabled during calls
 
             BandyerIntent.Builder builder = new BandyerIntent.Builder();
             CallIntentOptions callIntentOptions = builder.StartFromJoinCallUrl(MainActivity.Application, joinUrl);
@@ -230,25 +260,55 @@ namespace BandyerDemo.Droid
             MainActivity.StartActivity(bandyerCallIntent);
         }
 
-        public void StartChat(string userAlias)
+        public void StartChat(string userAlias, List<BandyerSdkForms.ChatWithCallCapability> callCapabilities, List<BandyerSdkForms.InCallCapability> inCallCapabilities, List<BandyerSdkForms.InCallOptions> inCallOptions)
         {
             CallCapabilities capabilities = new CallCapabilities();
-            capabilities.WithWhiteboard();
-            capabilities.WithFileSharing();
-            capabilities.WithChat();
-            capabilities.WithScreenSharing();
+            if (inCallCapabilities.Contains(BandyerSdkForms.InCallCapability.Whiteboard))
+            {
+                capabilities.WithWhiteboard();
+            }
+            if (inCallCapabilities.Contains(BandyerSdkForms.InCallCapability.FileSharing))
+            {
+                capabilities.WithFileSharing();
+            }
+            if (inCallCapabilities.Contains(BandyerSdkForms.InCallCapability.Chat))
+            {
+                capabilities.WithChat();
+            }
+            if (inCallCapabilities.Contains(BandyerSdkForms.InCallCapability.ScreenSharing))
+            {
+                capabilities.WithScreenSharing();
+            }
 
             CallOptions options = new CallOptions();
-            options.WithRecordingEnabled(); // if the call started should be recorded
-            options.WithBackCameraAsDefault(); // if the call should start with back camera
-            options.WithProximitySensorDisabled(); // if the proximity sensor should be disabled during calls
+            if (inCallOptions.Contains(BandyerSdkForms.InCallOptions.CallRecording))
+            {
+                options.WithRecordingEnabled(); // if the call started should be recorded
+            }
+            if (inCallOptions.Contains(BandyerSdkForms.InCallOptions.BackCameraAsDefault))
+            {
+                options.WithBackCameraAsDefault(); // if the call should start with back camera
+            }
+            if (inCallOptions.Contains(BandyerSdkForms.InCallOptions.DisableProximitySensor))
+            {
+                options.WithProximitySensorDisabled(); // if the proximity sensor should be disabled during calls
+            }
 
             BandyerIntent.Builder builder = new BandyerIntent.Builder();
             ChatIntentBuilder chatIntentBuilder = builder.StartWithChat(MainActivity.Application /* context */ );
             ChatIntentOptions chatIntentOptions = chatIntentBuilder.With(userAlias);
-            chatIntentOptions.WithAudioCallCapability(capabilities, options); // optional
-            chatIntentOptions.WithAudioUpgradableCallCapability(capabilities, options); // optionally upgradable to audio video call
-            chatIntentOptions.WithAudioVideoCallCapability(capabilities, options); // optional
+            if (callCapabilities.Contains(BandyerSdkForms.ChatWithCallCapability.AudioOnly))
+            {
+                chatIntentOptions.WithAudioCallCapability(capabilities, options); // optional
+            }
+            if (callCapabilities.Contains(BandyerSdkForms.ChatWithCallCapability.AudioUpgradable))
+            {
+                chatIntentOptions.WithAudioUpgradableCallCapability(capabilities, options); // optionally upgradable to audio video call
+            }
+            if (callCapabilities.Contains(BandyerSdkForms.ChatWithCallCapability.AudioVideo))
+            {
+                chatIntentOptions.WithAudioVideoCallCapability(capabilities, options); // optional
+            }
             BandyerIntent bandyerChatIntent = chatIntentOptions.Build();
 
             MainActivity.StartActivity(bandyerChatIntent);
@@ -260,6 +320,18 @@ namespace BandyerDemo.Droid
 
         public void OnPageDisappearing()
         {
+        }
+
+        public void SetUserDetails(List<BandyerSdkForms.User> usersDetails)
+        {
+            userDetailsProvider.usersDetails = usersDetails;
+        }
+
+        public void Stop()
+        {
+            BandyerSDKClient.Instance.StopListening();
+            BandyerSDKClient.Instance.ClearUserCache();
+            BandyerSDKClient.Instance.Dispose();
         }
         #endregion
 
@@ -393,18 +465,32 @@ namespace BandyerDemo.Droid
         class BandyerSdkUserDetailsProvider : Java.Lang.Object
             , IUserDetailsProvider
         {
+            internal List<BandyerSdkForms.User> usersDetails;
+
             public void OnUserDetailsRequested(IList<string> userAliases, IOnUserDetailsListener onUserDetailsListener)
             {
                 Java.Util.ArrayList details = new Java.Util.ArrayList();
                 foreach (string userAlias in userAliases)
                 {
-                    details.Add(new UserDetails.Builder(userAlias)
-                      .WithNickName("nickname")
-                      .WithFirstName("name")
-                      .WithLastName("last name")
-                      .WithEmail("email@email.com")
-                      .WithImageUri(Android.Net.Uri.Parse("https://static.bandyer.com/corporate/logos/logo_bandyer_only_name.png"))
-                      .Build());
+                    var userByAlias = usersDetails.Find(u => u.Alias == userAlias);
+                    var builder = new UserDetails.Builder(userAlias);
+                    builder.WithNickName(userByAlias.NickName);
+                    builder.WithFirstName(userByAlias.FirstName);
+                    builder.WithLastName(userByAlias.LastName);
+                    builder.WithEmail(userByAlias.Email);
+                    if (!System.String.IsNullOrEmpty(userByAlias.ImageUri))
+                    {
+                        var fileExt = Path.GetExtension(userByAlias.ImageUri);
+                        var fileName = userByAlias.ImageUri.Substring(0, userByAlias.ImageUri.Length - fileExt.Length);
+                        var resId = (int)typeof(Resource.Drawable).GetField(fileName).GetValue(null);
+                        builder.WithImageUri(
+                            Android.Net.Uri.Parse(
+                                ContentResolver.SchemeAndroidResource
+                                + "://" + Application.Resources.GetResourcePackageName(resId)
+                                + "/" + Application.Resources.GetResourceTypeName(resId)
+                                + "/" + Application.Resources.GetResourceEntryName(resId)));
+                    }
+                    details.Add(builder.Build());
                 }
                 onUserDetailsListener.Provide(details);
             }

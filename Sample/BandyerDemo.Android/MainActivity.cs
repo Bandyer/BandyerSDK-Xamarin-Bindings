@@ -14,7 +14,7 @@ namespace BandyerDemo.Droid
                   DataHost = "sandbox.bandyer.com",
                   DataPathPrefix = "/connect/rest-call-handler/",
                   AutoVerify = true)]
-    [Activity(Label = "BandyerDemo", Icon = "@mipmap/icon", Theme = "@style/MainTheme", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
+    [Activity(Label = "BandyerDemo", Icon = "@mipmap/icon", Theme = "@style/MainTheme", MainLauncher = false, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
     public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity
     {
         const string TAG = "MainActivity";
@@ -28,7 +28,10 @@ namespace BandyerDemo.Droid
             BandyerSdkAndroid.MainActivity = this;
             BandyerSdkAndroid.SetIntent(Intent);
 
+            Rg.Plugins.Popup.Popup.Init(this, savedInstanceState);
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
+
+            Xamarin.Forms.Forms.SetFlags(new string[] { "RadioButton_Experimental", "AppTheme_Experimental" });
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
             LoadApplication(new App());
 

@@ -1,7 +1,4 @@
-﻿// Copyright © 2020 Bandyer. All rights reserved.
-// See LICENSE for licensing information
-
-using Foundation;
+﻿using Foundation;
 using UIKit;
 
 namespace BandyerDemo.iOS
@@ -21,6 +18,9 @@ namespace BandyerDemo.iOS
         //
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
+            Rg.Plugins.Popup.Popup.Init();
+
+            Xamarin.Forms.Forms.SetFlags(new string[] { "RadioButton_Experimental" , "AppTheme_Experimental" });
             global::Xamarin.Forms.Forms.Init();
             LoadApplication(new App());
 

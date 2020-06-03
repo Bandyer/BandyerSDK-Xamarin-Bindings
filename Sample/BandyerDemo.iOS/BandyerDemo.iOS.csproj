@@ -5,7 +5,7 @@
     <Platform Condition=" '$(Platform)' == '' ">iPhoneSimulator</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{8624ECFF-CEAB-47FF-9AC2-C4A51E3C7D4E}</ProjectGuid>
+    <ProjectGuid>{1CE16016-8AEF-426F-B162-D0E083593906}</ProjectGuid>
     <ProjectTypeGuids>{FEACFBD2-3405-455C-9665-78FE426C6842};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <TemplateGuid>{6143fdea-f3c2-4a09-aafa-6e230626515e}</TemplateGuid>
     <OutputType>Exe</OutputType>
@@ -72,50 +72,66 @@
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="Resources\LaunchScreen.storyboard" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Bandyer-white-Notification~iphone%402x.png">
+        <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Bandyer-white-60~iphone%403x.png">
+        <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Bandyer-white-60~iphone%402x.png">
+        <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Bandyer-white-Small~ipad.png">
+        <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Bandyer-white-Notification~iphone%403x.png">
+        <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Bandyer-white-76.png">
+        <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Bandyer-white-Notification~ipad.png">
+        <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Bandyer-white-Small~iphone%403x.png">
+        <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Bandyer-white-76%402x.png">
+        <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Bandyer-white-Small-40~ipad%402x.png">
+        <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Bandyer-white-Small-40~iphone%402x.png">
+        <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Bandyer-white-Small~ipad%402x.png">
+        <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Bandyer-white-1024.png">
+        <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Bandyer-white-83.5%402x.png">
+        <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Bandyer-white-Small-40~iphone%403x.png">
+        <Visible>false</Visible>
+    </ImageAsset>
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Contents.json">
-      <Visible>false</Visible>
+        <Visible>false</Visible>
     </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon1024.png">
-      <Visible>false</Visible>
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Bandyer-white-Notification~ipad%402x.png">
+        <Visible>false</Visible>
     </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon180.png">
-      <Visible>false</Visible>
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Bandyer-white-Small~iphone%402x.png">
+        <Visible>false</Visible>
     </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon167.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon152.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon120.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon87.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon80.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon76.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon60.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon58.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon40.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon29.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon20.png">
-      <Visible>false</Visible>
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Bandyer-white-Small-40~ipad.png">
+        <Visible>false</Visible>
     </ImageAsset>
     <ImageAsset Include="Assets.xcassets\bandyer_logo.imageset\Contents.json" />
-    <ImageAsset Include="Assets.xcassets\bandyer_logo.imageset\bandyer_logo_blue_bg_smaller.png" />
+    <ImageAsset Include="Assets.xcassets\bandyer_logo.imageset\Bandyer_SplashScreen_W.png" />
+    <ImageAsset Include="Assets.xcassets\bandyer_logo.imageset\Bandyer_SplashScreen.png" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -126,24 +142,36 @@
     <Reference Include="System.Numerics.Vectors" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Xamarin.Forms" Version="4.4.0.991265" />
-    <PackageReference Include="Xamarin.Essentials" Version="1.3.1" />
+    <PackageReference Include="Xamarin.Forms" Version="4.6.0.800" />
+    <PackageReference Include="Xamarin.Essentials" Version="1.5.3.2" />
+    <PackageReference Include="Bandyer.SDK.iOS">
+      <Version>1.4.0.1</Version>
+    </PackageReference>
   </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <ItemGroup>
     <ProjectReference Include="..\BandyerDemo\BandyerDemo.csproj">
       <Project>{A3A6F8D5-5415-47F6-AC97-A43A57D58C07}</Project>
       <Name>BandyerDemo</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\BandyerSdk\ios\BandyerSdk.iOS\BandyerSdk.iOS.csproj">
-      <Project>{D0448F8C-C62A-4103-B166-45C364ACD42E}</Project>
-      <Name>Bandyer.SDK.iOS</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\video.mp4" />
+    <BundleResource Include="Resources\launcher_logo.png" />
+    <BundleResource Include="Resources\answer.png" />
+    <BundleResource Include="Resources\chat.png" />
+    <BundleResource Include="Resources\man_0.jpg" />
+    <BundleResource Include="Resources\man_1.jpg" />
+    <BundleResource Include="Resources\man_2.jpg" />
+    <BundleResource Include="Resources\man_3.jpg" />
+    <BundleResource Include="Resources\man_4.jpg" />
+    <BundleResource Include="Resources\man_5.jpg" />
+    <BundleResource Include="Resources\man_6.jpg" />
+    <BundleResource Include="Resources\man_7.jpg" />
+    <BundleResource Include="Resources\man_8.jpg" />
+    <BundleResource Include="Resources\man_9.jpg" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Assets.xcassets\bandyer_logo.imageset\" />
   </ItemGroup>
-  <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
 </Project>
