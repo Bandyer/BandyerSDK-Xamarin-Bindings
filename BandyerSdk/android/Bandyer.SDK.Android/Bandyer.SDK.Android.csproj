@@ -118,7 +118,7 @@
         </PackageReference>
     </ItemGroup>
     <ItemGroup>
-        <LibraryProjectZip Include="Jars\bandyer-android-sdk-1.5.4.aar" />
+      <LibraryProjectZip Include="Jars\bandyer-android-sdk-1.5.5.aar" />
     </ItemGroup>
     <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.Bindings.targets" />
 </Project>

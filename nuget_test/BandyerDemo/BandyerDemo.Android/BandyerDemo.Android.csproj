@@ -73,21 +73,6 @@
     <PackageReference Include="Bandyer.SDK.Android">
       <Version>1.5.4</Version>
     </PackageReference>
-    <PackageReference Include="Bandyer.Chat.Android">
-      <Version>0.0.22</Version>
-    </PackageReference>
-    <PackageReference Include="Bandyer.CoreAV.Android">
-      <Version>1.5.15</Version>
-    </PackageReference>
-    <PackageReference Include="Bandyer.Design.Android">
-      <Version>0.0.42</Version>
-    </PackageReference>
-    <PackageReference Include="Bandyer.CommunicationCenter.Android">
-      <Version>1.2.8</Version>
-    </PackageReference>
-    <PackageReference Include="Bandyer.AudioSession.Android">
-      <Version>1.0.6</Version>
-    </PackageReference>
     <PackageReference Include="Bandyer.Common.Android">
       <Version>1.0.10.2</Version>
     </PackageReference>

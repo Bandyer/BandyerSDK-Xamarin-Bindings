@@ -101,7 +101,7 @@
         </PackageReference>
     </ItemGroup>
     <ItemGroup>
-        <LibraryProjectZip Include="Jars\bandyer-android-design-0.0.42.aar" />
+      <LibraryProjectZip Include="Jars\bandyer-android-design-0.0.43.aar" />
     </ItemGroup>
     <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.Bindings.targets" />
     <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
