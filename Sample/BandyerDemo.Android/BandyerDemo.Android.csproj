@@ -70,11 +70,11 @@
     <PackageReference Include="Xamarin.Firebase.Messaging">
       <Version>71.1740.1</Version>
     </PackageReference>
-    <PackageReference Include="Bandyer.SDK.Android">
-      <Version>1.5.4</Version>
-    </PackageReference>
     <PackageReference Include="Bandyer.Common.Android">
       <Version>1.0.10.2</Version>
+    </PackageReference>
+    <PackageReference Include="Bandyer.SDK.Android">
+      <Version>1.5.5</Version>
     </PackageReference>
   </ItemGroup>
   <ItemGroup>

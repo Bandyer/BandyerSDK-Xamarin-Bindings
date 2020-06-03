@@ -99,19 +99,19 @@
             <Version>3.12.1</Version>
         </PackageReference>
         <PackageReference Include="Bandyer.Design.Android">
-            <Version>0.0.42</Version>
+            <Version>0.0.43</Version>
         </PackageReference>
         <PackageReference Include="Bandyer.CoreAV.Android">
             <Version>1.5.15</Version>
         </PackageReference>
         <PackageReference Include="Bandyer.CommunicationCenter.Android">
-            <Version>1.2.8</Version>
+            <Version>1.2.10</Version>
         </PackageReference>
         <PackageReference Include="Bandyer.Chat.Android">
-            <Version>0.0.22</Version>
+            <Version>0.0.24</Version>
         </PackageReference>
         <PackageReference Include="Bandyer.Common.Android">
-            <Version>1.0.10.1</Version>
+            <Version>1.0.10.2</Version>
         </PackageReference>
         <PackageReference Include="Bandyer.AudioSession.Android">
             <Version>1.0.6</Version>

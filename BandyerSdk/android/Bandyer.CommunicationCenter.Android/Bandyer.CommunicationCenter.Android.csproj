@@ -67,7 +67,7 @@
             <Version>1.5.15</Version>
         </PackageReference>
         <PackageReference Include="Bandyer.Common.Android">
-            <Version>1.0.10.1</Version>
+            <Version>1.0.10.2</Version>
         </PackageReference>
     </ItemGroup>
     <ItemGroup>

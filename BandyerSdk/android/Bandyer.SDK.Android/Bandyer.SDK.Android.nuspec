@@ -26,10 +26,10 @@
         <dependency id="Bandyer.Matisse" version="0.0.1" />
         <dependency id="Karamunting.Android.TourenathanG5organisation.SiliCompressor" version="2.2.2" />
         <dependency id="Karamunting.Android.Square.OkHttp" version="3.12.1" />
-        <dependency id="Bandyer.Design.Android" version="0.0.42" />
+        <dependency id="Bandyer.Design.Android" version="0.0.43" />
         <dependency id="Bandyer.CoreAV.Android" version="1.5.15" />
-        <dependency id="Bandyer.CommunicationCenter.Android" version="1.2.8" />
-        <dependency id="Bandyer.Chat.Android" version="0.0.22" />
+        <dependency id="Bandyer.CommunicationCenter.Android" version="1.2.10" />
+        <dependency id="Bandyer.Chat.Android" version="0.0.24" />
         <dependency id="Bandyer.Common.Android" version="1.0.10.2" />
         <dependency id="Bandyer.AudioSession.Android" version="1.0.6" />
       </group>
