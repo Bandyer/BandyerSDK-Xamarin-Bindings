@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<metadata>
+    <attr path="/api/package[@name='com.bandyer.communication_center']/class[@name='Environment.Configuration']/method[@name='production' and count(parameter)=0]" name="managedReturn">Com.Bandyer.Communication_center.Environment</attr>
+    <attr path="/api/package[@name='com.bandyer.communication_center']/class[@name='Environment.Configuration']/method[@name='sandbox' and count(parameter)=0]" name="managedReturn">Com.Bandyer.Communication_center.Environment</attr>
+    <attr path="/api/package[@name='com.bandyer.communication_center.call_client']/class[@name='CallClient']/field[@name='_']" name="managedName">Underscore</attr>
+    <attr path="/api/package[@name='com.bandyer.communication_center.call_client']/class[@name='CallClient']/method[@name='addIncomingCallObserver' and count(parameter)=1 and parameter[1][@type='com.bandyer.communication_center.call_client.OnIncomingCallObserver']]" name="managedReturn">ICallClientInstance</attr>
+    <attr path="/api/package[@name='com.bandyer.communication_center.call_client']/class[@name='CallClient']/method[@name='removeIncomingCallObserver' and count(parameter)=1 and parameter[1][@type='com.bandyer.communication_center.call_client.OnIncomingCallObserver']]" name="managedReturn">ICallClientInstance</attr>
+</metadata>

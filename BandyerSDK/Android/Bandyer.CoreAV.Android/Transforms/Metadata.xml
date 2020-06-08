@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<metadata>
+    <remove-node path="/api/package[@name='com.bandyer.core_av.peerconnection.bandwidthThrottling']/class[@name='FixedBandwidthThrottlingStrategy']" />
+    <remove-node path="/api/package[starts-with(@name, 'org.webrtc')]" />
+    <remove-node path="/api/package[@name='com.bandyer.core_av.utils.logging']/class[@name='CoreLogger']" />
+    <remove-node path="/api/package[@name='com.bandyer.core_av.utils.gson']/class[@name='AbstractSignalingMessageDeserializer']" />
+    <remove-node path="/api/package[@name='com.bandyer.core_av.utils.gson']/class[@name='AbstractSignalingMessageSerializer']" />
+</metadata>

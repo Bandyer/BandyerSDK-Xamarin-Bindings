@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<package >
+    <metadata>
+        <id>Bandyer.SDK.iOS</id>
+        <version>1.4.0.1</version>
+        <title>Bandyer.SDK.iOS</title>
+        <authors>Bandyer</authors>
+        <owners>Bandyer</owners>
+        <description>Bandyer is an in-cloud collaborative solution for corporates, featuring a rich set of tools for enabling videoconferencing in your product. The BandyerSDK makes it easy to embed one to one, many to many high-quality voice and video calls into your mobile app, with a seamless integration with the iOS operating system. It features a fully fledged set of collaborative tools comprehensive of messaging, screen sharing, remote snapshot, collaborative interactive board and call recording capabilities. This package provides a Xamarin binding to the BandyerSDK iOS native framework</description>
+        <license type="expression">LGPL-3.0-or-later</license>
+        <copyright>Copyright © 2020 Bandyer. All rights reserved.</copyright>
+        <tags>bandyer video-call video-call voip videoconferencing chat whiteboard filesharing</tags>
+        <icon>images\icon.png</icon>
+        <iconUrl>https://static.bandyer.com/corporate/NuGet/Bandyer-logo-128.png</iconUrl>
+    <dependencies>
+        <group targetFramework="Xamarin.iOS">
+        </group>
+    </dependencies>  
+    </metadata>
+    <files>
+        <file src="./bin/Release/Bandyer.SDK.*" target="lib/Xamarin.iOS" />
+        <file src="../images/icon.png" target="images\" />
+    </files>
+</package>
