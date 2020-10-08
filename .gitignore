@@ -78,5 +78,6 @@ Podfile.lock
 
 BandyerSdk/ios/Binding
 BandyerSdk/ios/build
+BandyerSdk/ios/Carthage/
 
 BandyerSdk/ios/frameworks

@@ -1,0 +1,5 @@
+binary "https://static.bandyer.com/corporate/iOS/releases/carthage/Bandyer.json" "1.7.0"
+github "bandyer/bandyer-ios-sdk" "1.7.0"
+github "daltoniam/Starscream" "3.1.1"
+github "socketio/socket.io-client-swift" "v15.2.0"
+github "twilio/twilio-chat-ios" "v2.6.6"

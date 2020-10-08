@@ -1,0 +1,3 @@
+# Deps
+
+github "bandyer/bandyer-ios-sdk" ~> 1.6.0
