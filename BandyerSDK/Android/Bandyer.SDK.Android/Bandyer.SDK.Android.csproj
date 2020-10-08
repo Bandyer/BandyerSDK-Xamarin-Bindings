@@ -98,27 +98,27 @@
         <PackageReference Include="Karamunting.Android.Square.OkHttp">
             <Version>3.12.1</Version>
         </PackageReference>
-        <PackageReference Include="Bandyer.Design.Android">
-            <Version>0.0.43</Version>
-        </PackageReference>
-        <PackageReference Include="Bandyer.CoreAV.Android">
-            <Version>1.5.15</Version>
-        </PackageReference>
-        <PackageReference Include="Bandyer.CommunicationCenter.Android">
-            <Version>1.2.10</Version>
-        </PackageReference>
-        <PackageReference Include="Bandyer.Chat.Android">
-            <Version>0.0.24</Version>
-        </PackageReference>
         <PackageReference Include="Bandyer.Common.Android">
             <Version>1.0.10.2</Version>
         </PackageReference>
         <PackageReference Include="Bandyer.AudioSession.Android">
             <Version>1.0.6</Version>
         </PackageReference>
+        <PackageReference Include="Bandyer.CommunicationCenter.Android">
+          <Version>1.2.12</Version>
+        </PackageReference>
+        <PackageReference Include="Bandyer.Design.Android">
+          <Version>0.0.45</Version>
+        </PackageReference>
+        <PackageReference Include="Bandyer.Chat.Android">
+          <Version>0.0.27</Version>
+        </PackageReference>
+        <PackageReference Include="Bandyer.CoreAV.Android">
+          <Version>1.5.18</Version>
+        </PackageReference>
     </ItemGroup>
     <ItemGroup>
-      <LibraryProjectZip Include="Jars\bandyer-android-sdk-1.5.5.aar" />
+      <LibraryProjectZip Include="Jars\bandyer-android-sdk-1.5.8.aar" />
     </ItemGroup>
     <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.Bindings.targets" />
 </Project>

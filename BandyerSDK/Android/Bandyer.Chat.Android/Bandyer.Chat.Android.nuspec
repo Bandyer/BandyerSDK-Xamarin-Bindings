@@ -2,7 +2,7 @@
 <package>
   <metadata>
     <id>Bandyer.Chat.Android</id>
-    <version>0.0.24</version>
+    <version>0.0.27</version>
     <title>Bandyer.Chat.Android</title>
     <authors>Bandyer</authors>
     <owners>Bandyer</owners>
@@ -29,7 +29,7 @@
           <dependency id="Xamarin.Twilio.Chat.Android" version="4.2.9" />
           <dependency id="Karamunting.Android.Square.OkHttp" version="3.12.1" />
           <dependency id="Bandyer.Common.Android" version="1.0.10.2" />
-          <dependency id="Bandyer.Design.Android" version="0.0.43" />
+          <dependency id="Bandyer.Design.Android" version="0.0.45" />
       </group>
     </dependencies>
     <icon>images\icon.png</icon>

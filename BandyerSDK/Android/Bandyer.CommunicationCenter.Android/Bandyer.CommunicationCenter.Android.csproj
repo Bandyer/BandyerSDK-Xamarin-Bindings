@@ -63,15 +63,18 @@
         <PackageReference Include="Bandyer.Socket.IO.Client">
             <Version>1.0.9.1</Version>
         </PackageReference>
-        <PackageReference Include="Bandyer.CoreAV.Android">
-            <Version>1.5.15</Version>
-        </PackageReference>
         <PackageReference Include="Bandyer.Common.Android">
             <Version>1.0.10.2</Version>
         </PackageReference>
+        <PackageReference Include="GoogleGson">
+          <Version>2.8.5</Version>
+        </PackageReference>
+        <PackageReference Include="Bandyer.CoreAV.Android">
+          <Version>1.5.18</Version>
+        </PackageReference>
     </ItemGroup>
     <ItemGroup>
-      <LibraryProjectZip Include="Jars\communication_center-1.2.10.aar" />
+      <LibraryProjectZip Include="Jars\communication_center-1.2.12.aar" />
     </ItemGroup>
     <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.Bindings.targets" />
     <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

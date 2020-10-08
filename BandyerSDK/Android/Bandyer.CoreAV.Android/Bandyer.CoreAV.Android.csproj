@@ -54,9 +54,6 @@
         <TransformFile Include="Transforms\EnumMethods.xml" />
     </ItemGroup>
     <ItemGroup>
-        <LibraryProjectZip Include="Jars\core_av-1.5.15.aar" />
-    </ItemGroup>
-    <ItemGroup>
         <PackageReference Include="GoogleGson">
             <Version>2.8.5</Version>
         </PackageReference>
@@ -78,6 +75,9 @@
         <PackageReference Include="Conscrypt.Conscrypt.Android">
             <Version>2.2.1</Version>
         </PackageReference>
+    </ItemGroup>
+    <ItemGroup>
+      <LibraryProjectZip Include="Jars\core_av-1.5.18.aar" />
     </ItemGroup>
     <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.Bindings.targets" />
     <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
